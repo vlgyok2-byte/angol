@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Karaoke English Story - Daily Routine</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 40px;
+    background-color: #ffffff;
+}
+
+/* A gombok stílusa a kép alapján */
+button {
+    background-color: #e8e8ed;
+    border: 1px solid #999bb3;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Távolság az ikon és a szöveg között */
+}
+
+button:hover {
+    background-color: #dcdce1;
+}
+
+#subtitle-en {
+    font-size: 24px;
+    color: darkgreen;
+    margin-top: 30px;
+    min-height: 1.5em;
+}
+
+#subtitle-hu {
+    font-size: 20px;
+    color: darkblue;
+    margin-top: 10px;
+    min-height: 1.5em;
+}
+
+/* Jelölőnégyzet stílusa */
+.checkbox-container {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.word {
+    padding: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.active-word {
+    background-color: yellow;
+    border-radius: 4px;
+}
+
+.word:hover::after {
+    content: attr(data-hu);
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: black;
+    color: white;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+#vocab, #quiz {
+    margin-top: 30px;
+    text-align: left;
+    display: inline-block;
+}
+
+.correct { color: green; font-weight: bold; }
+.wrong { color: red; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<h2>Karaoke English: My Daily Routine</h2>
+
+<div id="controls">
+    <button onclick="playAll()">▶️ Lejátszás</button>
+    <button onclick="stop()">⏹️ Stop</button>
+    <button onclick="generateVocab()">📊 Szókincs lista</button>
+    <button onclick="downloadJSON()">💾 JSON letöltés</button>
+    <button onclick="generateQuiz()">🧠 Teszt</button>
+</div>
+
+<div class="checkbox-container">
+    <label>
+        <input type="checkbox" id="toggleHu" checked>
+        Magyar felirat mutatása
+    </label>
+</div>
+
+<div id="subtitle-en"></div>
+<div id="subtitle-hu"></div>
+
+<div id="vocab"></div>
+<div id="quiz"></div>
+
+<script>
+const story = [
+    { en: "Sarah wakes up at seven o'clock every morning.", hu: "Sarah minden reggel hét órakor kel fel." },
+    { en: "She drinks a cup of hot coffee and eats breakfast.", hu: "Iszik egy csésze forró kávét és megreggelizik." },
+    { en: "She usually goes to work by bus at eight.", hu: "Általában busszal megy dolgozni nyolckor." },
+    { en: "For lunch she has a healthy salad with chicken.", hu: "Ebédre egy egészséges salátát eszik csirkével." },
+    { en: "In the evening she relaxes and reads a book.", hu: "Este pihen és egy könyvet olvas." }
+];
+
+const dictionary = {
+    "sarah": "Sarah",
+    "wakes": "ébred",
+    "up": "fel",
+    "at": "-kor",
+    "seven": "hét",
+    "o'clock": "óra",
+    "every": "minden",
+    "morning": "reggel",
+    "she": "ő",
+    "drinks": "iszik",
+    "a": "egy",
+    "cup": "csésze",
+    "of": "valaminek a",
+    "hot": "forró",
+    "coffee": "kávé",
+    "and": "és",
+    "eats": "eszik",
+    "breakfast": "reggeli",
+    "usually": "általában",
+    "goes": "megy",
+    "to": "valahova",
+    "work": "munka",
+    "by": "valamivel (busszal)",
+    "bus": "busz",
+    "eight": "nyolc",
+    "for": "valaminek",
+    "lunch": "ebéd",
+    "has": "eszik/birtokol",
+    "healthy": "egészséges",
+    "salad": "saláta",
+    "with": "valamivel",
+    "chicken": "csirke",
+    "in": "valamiben",
+    "the": "a/az",
+    "evening": "este",
+    "relaxes": "pihen",
+    "reads": "olvas",
+    "book": "könyv"
+};
+
+let vocabSet = new Set();
+let vocabList = [];
+let index = 0;
+let playing = false;
+
+function clean(word) {
+    return word.toLowerCase().replace(/[.,!?'"]/g, "");
+}
+
+function displaySentence(sentence) {
+    let words = sentence.split(" ");
+    let html = "";
+    words.forEach((word) => {
+        let cleanWord = clean(word);
+        let translation = dictionary[cleanWord] || "";
+        vocabSet.add(cleanWord);
+        html += `<span class="word" data-hu="${translation}">${word}</span> `;
+    });
+    document.getElementById("subtitle-en").innerHTML = html;
+}
+
+function highlightWord(i) {
+    let words = document.querySelectorAll(".word");
+    words.forEach(w => w.classList.remove("active-word"));
+    if (words[i]) words[i].classList.add("active-word");
+}
+
+function updateHungarian(text) {
+    document.getElementById("subtitle-hu").innerText =
+        document.getElementById("toggleHu").checked ? text : "";
+}
+
+function speakSentence(text, callback) {
+    let utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "en-US";
+    utter.rate = 0.8;
+
+    let words = text.split(" ");
+    let i = 0;
+
+    displaySentence(text);
+
+    let interval = setInterval(() => {
+        highlightWord(i++);
+        if (i >= words.length) clearInterval(interval);
+    }, 500);
+
+    utter.onend = () => {
+        clearInterval(interval);
+        callback();
+    };
+    speechSynthesis.speak(utter);
+}
+
+function playAll() {
+    if (playing) return;
+    playing = true;
+    index = 0;
+    playNext();
+}
+
+function playNext() {
+    if (!playing || index >= story.length) {
+        playing = false;
+        return;
+    }
+    updateHungarian(story[index].hu);
+    speakSentence(story[index].en, () => {
+        index++;
+        setTimeout(playNext, 800);
+    });
+}
+
+function stop() {
+    playing = false;
+    speechSynthesis.cancel();
+}
+
+function generateVocab() {
+    vocabList = [];
+    vocabSet.forEach(word => {
+        if (word) {
+            vocabList.push({
+                eng: word,
+                hun: dictionary[word] || "???",
+            });
+        }
+    });
+    vocabList.sort((a, b) => a.eng.localeCompare(b.eng));
+
+    let html = "<h3>Szókincs lista</h3><ul style='columns: 2;'>";
+    vocabList.forEach(w => {
+        html += `<li><strong>${w.eng}</strong>: ${w.hun}</li>`;
+    });
+    html += "</ul>";
+    document.getElementById("vocab").innerHTML = html;
+}
+
+function downloadJSON() {
+    if (vocabList.length === 0) {
+        alert("Előbb generáld a szókincs listát!");
+        return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," +
+        encodeURIComponent(JSON.stringify(vocabList, null, 2));
+    const dl = document.createElement("a");
+    dl.href = dataStr;
+    dl.download = "routine_vocabulary.json";
+    dl.click();
+}
+
+const quizData = [
+    { q: "What time does Sarah wake up?", a: "seven" },
+    { q: "What does she drink?", a: "coffee" },
+    { q: "How does she go to work?", a: "bus" },
+    { q: "What does she eat for lunch?", a: "salad" }
+];
+
+function generateQuiz() {
+    let html = "<h3>Teszt</h3>";
+    quizData.forEach((item, i) => {
+        html += `<p>${i+1}. ${item.q}<br><input type="text" id="q${i}"></p>`;
+    });
+    html += `<button onclick="checkQuiz()">✔️ Ellenőrzés</button><div id="result"></div>`;
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function checkQuiz() {
+    let score = 0;
+    let resultHTML = "";
+    quizData.forEach((item, i) => {
+        let user = document.getElementById("q"+i).value.toLowerCase().trim();
+        if (user.includes(item.a)) {
+            score++;
+            resultHTML += `<p class="correct">${i+1}. ✔️</p>`;
+        } else {
+            resultHTML += `<p class="wrong">${i+1}. ❌ (Helyes: ${item.a})</p>`;
+        }
+    });
+    document.getElementById("result").innerHTML = resultHTML + `<h4>Eredmény: ${score}/${quizData.length}</h4>`;
+}
+
+document.getElementById("toggleHu").addEventListener("change", () => {
+    if (playing && index < story.length) {
+        updateHungarian(story[index].hu);
+    } else {
+        updateHungarian("");
+    }
+});
+</script>
+
+</body>
+</html>

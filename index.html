@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Story Trainer</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f4f6f8;
+    margin: 10px;
+}
+
+h1 { margin-bottom: 10px; }
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+    padding: 8px;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.story {
+    background: #fafafa;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+button {
+    padding: 6px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.level {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: white;
+}
+
+.easy { background: green; }
+.medium { background: orange; }
+.hard { background: crimson; }
+
+.score {
+    font-size: 13px;
+    color: gray;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+td, th {
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: gray;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 English Story Trainer<br>
+Angol gyakorló központ</h1>
+
+<div class="container">
+   
+    <!-- 📖 STORYK -->
+    <div class="section">
+        <h3>Történetek</h3>
+
+        <div class="story">
+            Story 01 – Tom and the Dog
+            <span class="level easy">könnyű</span><br>
+            <button onclick="openStory('story01.html')">📖 Megnyitás</button>
+            <div class="score" id="score1"></div>
+        </div>
+
+        <div class="story">
+            Story 02 – Anna's Morning
+            <span class="level easy">könnyű</span><br>
+            <button onclick="openStory('story02.html')">📖 Megnyitás</button>
+            <div class="score" id="score2"></div>
+        </div>
+
+        <div class="story">
+            Story 03 – Shopping After Work
+            <span class="level medium">közepes</span><br>
+            <button onclick="openStory('story03.html')">📖 Megnyitás</button>
+            <div class="score" id="score3"></div>
+        </div>
+
+        <div class="story">
+            Story 04 – The Bus Ride
+            <span class="level medium">közepes</span><br>
+            <button onclick="openStory('story04.html')">📖 Megnyitás</button>
+            <div class="score" id="score4"></div>
+        </div>
+
+        <div class="story">
+            Story 05 – At the Library
+            <span class="level hard">nehezebb</span><br>
+            <button onclick="openStory('story05.html')">📖 Megnyitás</button>
+            <div class="score" id="score5"></div>
+        </div>
+
+
+        <div class="story">
+            Story 06 – Traveling by Plane
+            <span class="level hard">nehezebb</span><br>
+            <button onclick="openStory('story06.html')">📖 Megnyitás</button>
+            <div class="score" id="score5"></div>
+        </div>
+
+        <div class="story">
+            Story 07 – Daily Routine
+            <span class="level medium">közepes</span><br>
+            <button onclick="openStory('story07.html')">📖 Megnyitás</button>
+            <div class="score" id="score5"></div>
+        </div>
+    </div> 
+</div>
+
+<script>
+
+// 📖 STORY MEGNYITÁS
+function openStory(file) {
+    window.location.href = file;
+}
+
+</script>
+
+</body>
+</html>

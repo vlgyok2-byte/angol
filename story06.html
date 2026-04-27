@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Karaoke English Story - Travel</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#subtitle-en {
+    font-size: 24px;
+    color: darkgreen;
+}
+
+#subtitle-hu {
+    font-size: 20px;
+    color: darkblue;
+    margin-top: 10px;
+}
+
+.word {
+    padding: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.active-word {
+    background-color: yellow;
+    border-radius: 4px;
+}
+
+.word:hover::after {
+    content: attr(data-hu);
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    background: black;
+    color: white;
+    padding: 4px 6px;
+    font-size: 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+#vocab, #quiz {
+    margin-top: 30px;
+    text-align: left;
+    display: inline-block;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.correct { color: green; }
+.wrong { color: red; }
+</style>
+</head>
+
+<body>
+
+<h2>Karaoke English: Traveling by Plane</h2>
+
+<button onclick="playAll()">▶️ Lejátszás</button>
+<button onclick="stop()">⏹️ Stop</button>
+<button onclick="generateVocab()">📊 Szókincs lista</button>
+<button onclick="downloadJSON()">💾 JSON letöltés</button>
+<button onclick="generateQuiz()">🧠 Teszt</button>
+
+<br><br>
+
+<label>
+    <input type="checkbox" id="toggleHu" checked>
+    Magyar felirat mutatása
+</label>
+
+<div id="subtitle-en"></div>
+<div id="subtitle-hu"></div>
+
+<div id="vocab"></div>
+<div id="quiz"></div>
+
+<script>
+const story = [
+    { en: "Tom arrived at the airport early in the morning.", hu: "Tom korán reggel érkezett meg a repülőtérre." },
+    { en: "He showed his passport and checked his suitcase.", hu: "Megmutatta az útlevelét és feladta a bőröndjét." },
+    { en: "Then he waited for his flight at the gate.", hu: "Azután a kapunál várt a járatára." },
+    { en: "The plane took off on time and the weather was clear.", hu: "A repülő időben szállt fel, és az időjárás tiszta volt." },
+    { en: "He arrived in London two hours later.", hu: "Két órával később megérkezett Londonba." }
+];
+
+const dictionary = {
+    "tom": "Tom",
+    "arrived": "megérkezett",
+    "at": "-nál/-nél",
+    "the": "a/az",
+    "airport": "repülőtér",
+    "early": "korán",
+    "in": "vmi-ben",
+    "morning": "reggel",
+    "he": "ő (férfi)",
+    "showed": "megmutatta",
+    "his": "az ő (valamije)",
+    "passport": "útlevél",
+    "and": "és",
+    "checked": "ellenőrizte/feladta",
+    "suitcase": "bőrönd",
+    "then": "azután",
+    "waited": "várt",
+    "for": "valamire",
+    "flight": "repülőjárat",
+    "gate": "kapu (reptéri)",
+    "plane": "repülő",
+    "took": "vett (itt: felszállt)",
+    "off": "le (took off: felszállt)",
+    "on": "-on/-en",
+    "time": "idő",
+    "weather": "időjárás",
+    "was": "volt",
+    "clear": "tiszta/derült",
+    "london": "London",
+    "two": "két",
+    "hours": "óra (időtartam)",
+    "later": "később"
+};
+
+let vocabSet = new Set();
+let vocabList = [];
+let index = 0;
+let playing = false;
+
+function clean(word) {
+    return word.toLowerCase().replace(/[.,!?]/g, "");
+}
+
+function displaySentence(sentence) {
+    let words = sentence.split(" ");
+    let html = "";
+    words.forEach((word) => {
+        let cleanWord = clean(word);
+        let translation = dictionary[cleanWord] || "";
+        vocabSet.add(cleanWord);
+        html += `<span class="word" data-hu="${translation}">${word}</span> `;
+    });
+    document.getElementById("subtitle-en").innerHTML = html;
+}
+
+function highlightWord(i) {
+    let words = document.querySelectorAll(".word");
+    words.forEach(w => w.classList.remove("active-word"));
+    if (words[i]) words[i].classList.add("active-word");
+}
+
+function updateHungarian(text) {
+    document.getElementById("subtitle-hu").innerText =
+        document.getElementById("toggleHu").checked ? text : "";
+}
+
+function speakSentence(text, callback) {
+    let utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "en-US";
+    utter.rate = 0.8;
+
+    let words = text.split(" ");
+    let i = 0;
+
+    displaySentence(text);
+
+    let interval = setInterval(() => {
+        highlightWord(i++);
+        if (i >= words.length) clearInterval(interval);
+    }, 450);
+
+    utter.onend = () => {
+        clearInterval(interval);
+        callback();
+    };
+    speechSynthesis.speak(utter);
+}
+
+function playAll() {
+    if (playing) return;
+    playing = true;
+    index = 0;
+    playNext();
+}
+
+function playNext() {
+    if (!playing || index >= story.length) {
+        playing = false;
+        return;
+    }
+    updateHungarian(story[index].hu);
+    speakSentence(story[index].en, () => {
+        index++;
+        setTimeout(playNext, 600);
+    });
+}
+
+function stop() {
+    playing = false;
+    speechSynthesis.cancel();
+}
+
+function generateVocab() {
+    vocabList = [];
+    vocabSet.forEach(word => {
+        if (word) {
+            vocabList.push({
+                eng: word,
+                hun: dictionary[word] || "???",
+                stats: { correct: 0, wrong: 0 }
+            });
+        }
+    });
+    vocabList.sort((a, b) => a.eng.localeCompare(b.eng));
+
+    let html = "<h3>Szókincs lista</h3><ul style='columns: 2;'>";
+    vocabList.forEach(w => {
+        html += `<li><strong>${w.eng}</strong>: ${w.hun}</li>`;
+    });
+    html += "</ul>";
+    document.getElementById("vocab").innerHTML = html;
+}
+
+function downloadJSON() {
+    if (vocabList.length === 0) {
+        alert("Előbb generáld a szókincs listát!");
+        return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," +
+        encodeURIComponent(JSON.stringify(vocabList, null, 2));
+    const dl = document.createElement("a");
+    dl.href = dataStr;
+    dl.download = "travel_vocabulary.json";
+    dl.click();
+}
+
+const quizData = [
+    { q: "Where did Tom go?", a: "airport" },
+    { q: "What did he show to the officer?", a: "passport" },
+    { q: "What was he waiting for at the gate?", a: "flight" },
+    { q: "Was the plane late or on time?", a: "on time" },
+    { q: "Which city did he travel to?", a: "london" }
+];
+
+function generateQuiz() {
+    let html = "<h3>Teszt - Utazás</h3>";
+    quizData.forEach((item, i) => {
+        html += `<p>${i+1}. ${item.q}<br>
+        <input type="text" id="q${i}" placeholder="Válasz angolul..."></p>`;
+    });
+    html += `<button onclick="checkQuiz()">✔️ Ellenőrzés</button>
+             <div id="result"></div>`;
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function checkQuiz() {
+    let score = 0;
+    let resultHTML = "";
+    quizData.forEach((item, i) => {
+        let user = document.getElementById("q"+i).value.toLowerCase().trim();
+        if (user.includes(item.a)) {
+            score++;
+            resultHTML += `<p class="correct">${i+1}. ✔️ (Helyes: ${item.a})</p>`;
+        } else {
+            resultHTML += `<p class="wrong">${i+1}. ❌ (A helyes válasz: ${item.a})</p>`;
+        }
+    });
+    let percent = Math.round((score / quizData.length) * 100);
+    resultHTML += `<h3>Eredmény: ${score} / ${quizData.length} (${percent}%)</h3>`;
+    document.getElementById("result").innerHTML = resultHTML;
+}
+
+document.getElementById("toggleHu").addEventListener("change", () => {
+    if (playing && index < story.length) {
+        updateHungarian(story[index].hu);
+    } else {
+        updateHungarian("");
+    }
+});
+</script>
+
+</body>
+</html>

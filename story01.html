@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Karaoke English Story</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#subtitle-en {
+    font-size: 24px;
+    color: darkgreen;
+}
+
+#subtitle-hu {
+    font-size: 20px;
+    color: darkblue;
+    margin-top: 10px;
+}
+
+.word {
+    padding: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.active-word {
+    background-color: yellow;
+    border-radius: 4px;
+}
+
+.word:hover::after {
+    content: attr(data-hu);
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    background: black;
+    color: white;
+    padding: 4px 6px;
+    font-size: 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+#vocab, #quiz {
+    margin-top: 30px;
+    text-align: left;
+    display: inline-block;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+}
+
+.correct { color: green; }
+.wrong { color: red; }
+</style>
+</head>
+
+<body>
+
+<h2>Karaoke English Story</h2>
+
+<button onclick="playAll()">▶️ Lejátszás</button>
+<button onclick="stop()">⏹️ Stop</button>
+<button onclick="generateVocab()">📊 Szókincs lista</button>
+<button onclick="downloadJSON()">💾 JSON letöltés</button>
+<button onclick="generateQuiz()">🧠 Teszt</button>
+
+<br><br>
+
+<label>
+    <input type="checkbox" id="toggleHu" checked>
+    Magyar felirat
+</label>
+
+<div id="subtitle-en"></div>
+<div id="subtitle-hu"></div>
+
+<div id="vocab"></div>
+<div id="quiz"></div>
+
+<script>
+const story = [
+    { en: "Tom has a small dog.", hu: "Tomnak van egy kis kutyája." },
+    { en: "The dog likes to play in the park.", hu: "A kutya szeret a parkban játszani." },
+    { en: "One day, the dog runs away.", hu: "Egy nap a kutya elszalad." },
+    { en: "Tom is very sad.", hu: "Tom nagyon szomorú." },
+    { en: "But the dog comes back home.", hu: "De a kutya hazatér." }
+];
+
+const dictionary = {
+    "tom": "Tom",
+    "has": "van",
+    "a": "egy",
+    "small": "kicsi",
+    "dog": "kutya",
+    "the": "a/az",
+    "likes": "szeret",
+    "to": "-ni",
+    "play": "játszani",
+    "in": "ben",
+    "park": "park",
+    "one": "egy",
+    "day": "nap",
+    "runs": "fut",
+    "away": "el",
+    "is": "van",
+    "very": "nagyon",
+    "sad": "szomorú",
+    "but": "de",
+    "comes": "jön",
+    "back": "vissza",
+    "home": "haza"
+};
+
+let vocabSet = new Set();
+let vocabList = [];
+
+let index = 0;
+let playing = false;
+
+function clean(word) {
+    return word.toLowerCase().replace(/[.,!?]/g, "");
+}
+
+function displaySentence(sentence) {
+    let words = sentence.split(" ");
+    let html = "";
+
+    words.forEach((word) => {
+        let cleanWord = clean(word);
+        let translation = dictionary[cleanWord] || "";
+
+        vocabSet.add(cleanWord);
+
+        html += `<span class="word" data-hu="${translation}">${word}</span> `;
+    });
+
+    document.getElementById("subtitle-en").innerHTML = html;
+}
+
+function highlightWord(i) {
+    let words = document.querySelectorAll(".word");
+    words.forEach(w => w.classList.remove("active-word"));
+    if (words[i]) words[i].classList.add("active-word");
+}
+
+function updateHungarian(text) {
+    document.getElementById("subtitle-hu").innerText =
+        document.getElementById("toggleHu").checked ? text : "";
+}
+
+function speakSentence(text, callback) {
+    let utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "en-US";
+    utter.rate = 0.8;
+
+    let words = text.split(" ");
+    let i = 0;
+
+    displaySentence(text);
+
+    let interval = setInterval(() => {
+        highlightWord(i++);
+        if (i >= words.length) clearInterval(interval);
+    }, 400);
+
+    utter.onend = () => {
+        clearInterval(interval);
+        callback();
+    };
+
+    speechSynthesis.speak(utter);
+}
+
+function playAll() {
+    if (playing) return;
+    playing = true;
+    index = 0;
+    playNext();
+}
+
+function playNext() {
+    if (!playing || index >= story.length) {
+        playing = false;
+        return;
+    }
+
+    updateHungarian(story[index].hu);
+
+    speakSentence(story[index].en, () => {
+        index++;
+        setTimeout(playNext, 500);
+    });
+}
+
+function stop() {
+    playing = false;
+    speechSynthesis.cancel();
+}
+
+function generateVocab() {
+    vocabList = [];
+
+    vocabSet.forEach(word => {
+        vocabList.push({
+            eng: word,
+            hun: dictionary[word] || "",
+            stats: { correct: 0, wrong: 0 }
+        });
+    });
+
+    vocabList.sort((a, b) => a.eng.localeCompare(b.eng));
+
+    let html = "<h3>Szókincs lista</h3><ul>";
+    vocabList.forEach(w => {
+        html += `<li>${w.eng} – ${w.hun}</li>`;
+    });
+    html += "</ul>";
+
+    document.getElementById("vocab").innerHTML = html;
+}
+
+function downloadJSON() {
+    if (vocabList.length === 0) {
+        alert("Előbb generáld a szókincs listát!");
+        return;
+    }
+
+    const dataStr = "data:text/json;charset=utf-8," +
+        encodeURIComponent(JSON.stringify(vocabList, null, 2));
+
+    const dl = document.createElement("a");
+    dl.href = dataStr;
+    dl.download = "vocabulary.json";
+    dl.click();
+}
+
+// 🧠 TESZT
+const quizData = [
+    { q: "Who has a dog?", a: "tom" },
+    { q: "What animal does Tom have?", a: "dog" },
+    { q: "Where does the dog play?", a: "park" },
+    { q: "How does Tom feel?", a: "sad" },
+    { q: "What does the dog do at the end?", a: "comes back" }
+];
+
+function generateQuiz() {
+    let html = "<h3>Teszt</h3>";
+
+    quizData.forEach((item, i) => {
+        html += `<p>${i+1}. ${item.q}<br>
+        <input type="text" id="q${i}"></p>`;
+    });
+
+    html += `<button onclick="checkQuiz()">✔️ Ellenőrzés</button>
+             <div id="result"></div>`;
+
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function checkQuiz() {
+    let score = 0;
+    let resultHTML = "";
+
+    quizData.forEach((item, i) => {
+        let user = document.getElementById("q"+i).value.toLowerCase().trim();
+
+        if (user.includes(item.a)) {
+            score++;
+            resultHTML += `<p class="correct">${i+1}. ✔️</p>`;
+        } else {
+            resultHTML += `<p class="wrong">${i+1}. ❌ (helyes: ${item.a})</p>`;
+        }
+    });
+
+    let percent = Math.round((score / quizData.length) * 100);
+
+    resultHTML += `<h3>Eredmény: ${score} / ${quizData.length} (${percent}%)</h3>`;
+
+    document.getElementById("result").innerHTML = resultHTML;
+
+    // ✅ EREDMÉNY MENTÉS
+    const name = localStorage.getItem("studentName") || "ismeretlen";
+
+    let results = JSON.parse(localStorage.getItem("results") || "[]");
+
+    results.push({
+        name: name,
+        story: 1,
+        score: percent
+    });
+
+    localStorage.setItem("results", JSON.stringify(results));
+}
+
+document.getElementById("toggleHu").addEventListener("change", () => {
+    if (playing && index < story.length) {
+        updateHungarian(story[index].hu);
+    } else {
+        updateHungarian("");
+    }
+});
+</script>
+
+</body>
+</html>
