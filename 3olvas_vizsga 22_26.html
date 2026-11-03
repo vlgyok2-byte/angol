@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Felkészítő Olvasókönyv (22-26. Téma)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .controls { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between; }
+        select, button, input { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background-color: #3498db; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button.stop { background-color: #e74c3c; }
+        button.pause { background-color: #f39c12; }
+        .story-container { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1.8; font-size: 18px; }
+        .english-text { font-weight: 500; margin-bottom: 8px; cursor: pointer; transition: color 0.2s; }
+        .english-text:hover { color: #3498db; }
+        .hungarian-text { color: #7f8c8d; font-size: 16px; border-top: 1px dashed #ddd; padding-top: 8px; margin-bottom: 25px; }
+        .highlight { background-color: #ffeaa7; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Angol Szóbeli Felkészítő (A2 szint - 22-26. Téma)</h1>
+
+    <div class="controls">
+        <div>
+            <label for="topicSelect">Válassz témakört: </label>
+            <select id="topicSelect" onchange="loadTopic()">
+                <option value="0">22. Technológia és a modern világ (Technology and Modern Life)</option>
+                <option value="1">23. Utazási élmények és kihívások (Travel Experiences and Challenges)</option>
+                <option value="2">24. Hagyományok és ünnepek (Traditions and Customs)</option>
+                <option value="3">25. Környezetvédelem és fenntarthatóság (Environment and Sustainability)</option>
+                <option value="4">26. Különleges szabadidős élmények (Free Time and Extreme Experiences)</option>
+            </select>
+        </div>
+        <div>
+            <label for="speedRange">Sebesség: <span id="speedValue">0.9</span>x</label>
+            <input type="range" id="speedRange" min="0.5" max="1.5" step="0.1" value="0.9" oninput="updateSpeed()">
+        </div>
+        <div>
+            <button id="playBtn" onclick="toggleSpeech()">▶ Indítás</button>
+            <button id="pauseBtn" onclick="togglePause()" style="display:none;" class="pause">⏸ Szünet</button>
+        </div>
+    </div>
+
+    <div class="story-container" id="storyContent"></div>
+
+    <script>
+        const topics = [
+            {
+                title: "22. Technológia és a modern világ (Technology and Modern Life)",
+                paragraphs: [
+                    { en: "Modern technology has completely changed how I live, study, and work every day.", hu: "A modern technológia teljesen megváltoztatta azt, ahogyan mindennap élek, tanulok és dolgozom." },
+                    { en: "My smartphone is a very useful tool for me because I use it for navigation, reading, and taking photos.", hu: "Az okostelefonom nagyon hasznos eszköz számomra, mert navigációra, olvasásra és fotózásra használom." },
+                    { en: "Social media helps me stay in touch with my friends, but I know spending too much time online is unhealthy.", hu: "A közösségi média segít kapcsolatban maradni a barátaimmal, de tudom, hogy a túl sok online töltött idő egészségtelen." },
+                    { en: "I also use artificial intelligence and smart appliances to save time during household work.", hu: "Mesterséges intelligenciát és okosgépeket is használok, hogy időt takarítsak meg a házimunka során." },
+                    { en: "Using technology wisely makes my daily routine easier, but real personal relationships are still the most important for me.", hu: "A technológia okos használata megkönnyíti a napi rutinomat, de az igazi személyes kapcsolatok továbbra is a legfontosabbak számomra." }
+                ]
+            },
+            {
+                title: "23. Utazási élmények és kihívások (Travel Experiences and Challenges)",
+                paragraphs: [
+                    { en: "Traveling abroad is exciting for me, but unexpected problems can sometimes happen during my trips.", hu: "A külföldi utazás izgalmas számomra, de az utazásaim során néha váratlan problémák is adódhatnak." },
+                    { en: "Sometimes my flights are delayed, or I worry about losing my luggage at the airport.", hu: "Néha a repülőjárataim késnek, vagy aggódom a csomagjaim elveszítése miatt a repülőtéren." },
+                    { en: "Knowing basic English helps me solve difficult situations, like asking for directions or calling a doctor.", hu: "Az alapvető angol tudás segít a nehéz helyzetek megoldásában, mint például az útbaigazítás kérése vagy orvos hívása." },
+                    { en: "I think camping in nature is cheap and adventurous, while staying in a luxury hotel is comfortable and relaxing.", hu: "Úgy gondolom, a természetben való kempingezés olcsó és kalandos, míg egy luxusszállodában megszállni kényelmes és pihentető." },
+                    { en: "Every travel experience helps me learn about new cultures and makes me more open-minded.", hu: "Minden utazási élmény segít megismerni új kultúrákat, és nyitottabbá tesz engem." }
+                ]
+            },
+            {
+                title: "24. Hagyományok és ünnepek (Traditions and Customs)",
+                paragraphs: [
+                    { en: "I love exploring how different countries have unique traditions and traditional foods for national holidays.", hu: "Szeretem felfedezni, ahogy a különböző országoknak egyedi hagyományaik és tradicionális ételeik vannak a nemzeti ünnepekre." },
+                    { en: "For example, in my family in Hungary, we eat delicious fish soup and stuffed cabbage at Christmas.", hu: "Például a családomban Magyarországon finom halászlevet és töltött káposztát eszünk Karácsonykor." },
+                    { en: "I know that in English-speaking countries, roast turkey and Christmas pudding are traditional festive meals.", hu: "Tudom, hogy az angol nyelvű országokban a sült pulyka és a karácsonyi puding a hagyományos ünnepi ételek." },
+                    { en: "I celebrate Easter with painted eggs, while in autumn I enjoy Halloween pumpkin decorations.", hu: "A Húsvétot festett tojásokkal ünnepelem, míg ősszel élvezem a Halloween tökdekorációkat." },
+                    { en: "Preserving our customs helps my family stay connected and respect our cultural heritage.", hu: "A szokásaink megőrzése segít a családomnak kapcsolatban maradni és tisztelni a kulturális örökségünket." }
+                ]
+            },
+            {
+                title: "25. Környezetvédelem és fenntarthatóság (Environment and Sustainability)",
+                paragraphs: [
+                    { en: "Protecting the environment is essential for me because climate change affects my everyday life.", hu: "A környezet védelme elengedhetetlen számomra, mert a klímaváltozás hatással van a mindennapi életemre." },
+                    { en: "I always save energy at home by turning off electric devices when I do not use them.", hu: "Mindig energiát takarítok meg otthon az elektromos eszközök kikapcsolásával, amikor nem használom őket." },
+                    { en: "Saving water while brushing my teeth and showering is also a helpful habit I follow.", hu: "A vízmegtakarítás fogmosás és zuhanyzás közben szintén egy hasznos szokás, amit követek." },
+                    { en: "I try to approach a zero-waste lifestyle by avoiding single-use plastic bags and recycling everything possible.", hu: "Megpróbálok megközelíteni egy hulladékmentes életmódot az egyszer használatos műanyag zacskók elkerülésével és az újrahasznosítással." },
+                    { en: "I believe if I make small daily changes, I can help protect our planet for the future.", hu: "Hiszem, ha kis mindennapi változtatásokat teszek, segíthetek megvédeni a bolygónkat a jövő számára." }
+                ]
+            },
+            {
+                title: "26. Különleges szabadidős élmények (Free Time and Extreme Experiences)",
+                paragraphs: [
+                    { en: "While some people prefer quiet hobbies, I sometimes look for adventurous and active experiences.", hu: "Míg néhány ember a csendes hobbikat szereti, én néha kalandos és aktív élményeket keresek." },
+                    { en: "I think extreme sports like scuba diving, rock climbing, or skydiving provide an exciting adrenaline rush.", hu: "Úgy gondolom, az olyan extrém sportok, mint a búvárkodás, a sziklamászás vagy az ejtőernyőzés izgalmas adrenalinlöketet adnak." },
+                    { en: "I also find volunteering at animal shelters or local charity organizations a meaningful free time activity.", hu: "Az állatmenhelyeken vagy helyi jótékonysági szervezeteknél végzett önkéntes munkát is értelmes szabadidős tevékenységnek találom." },
+                    { en: "Helping other people or animals brings me great joy and builds a strong local community.", hu: "Más emberek vagy állatok megsegítése nagy örömet okoz nekem és erős helyi közösséget épít." },
+                    { en: "Having active and purposeful hobbies makes my life full of happiness and good memories.", hu: "Az aktív és céltudatos hobbik boldogsággal és jó emlékekkel teszik teljessé az életemet." }
+                ]
+            }
+        ];
+
+        let synth = window.speechSynthesis, utterance = null, isPlaying = false, isPaused = false;
+
+        function loadTopic() {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let html = `<h2>${topic.title}</h2>`;
+            topic.paragraphs.forEach((p, i) => {
+                html += `<div id="p-${i}"><div class="english-text" onclick="playSingleSentence(${i})" title="Kattints ide a mondat felolvasásához!">${p.en}</div><div class="hungarian-text">${p.hu}</div></div>`;
+            });
+            document.getElementById("storyContent").innerHTML = html;
+        }
+
+        function updateSpeed() {
+            const speed = document.getElementById("speedRange").value;
+            document.getElementById("speedValue").innerText = speed;
+        }
+
+        function stopSpeech() {
+            synth.cancel(); 
+            isPlaying = false; 
+            isPaused = false;
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "▶ Indítás"; 
+            btn.className = "";
+            pauseBtn.style.display = "none";
+            pauseBtn.innerText = "⏸ Szünet";
+            document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+        }
+
+        function toggleSpeech() {
+            if (isPaused) {
+                synth.resume();
+                isPaused = false;
+                document.getElementById("pauseBtn").innerText = "⏸ Szünet";
+                return;
+            }
+            if (isPlaying) { 
+                stopSpeech(); 
+                return; 
+            }
+            
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            isPlaying = true;
+            isPaused = false;
+            
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "⏹ Leállítás"; 
+            btn.className = "stop";
+            pauseBtn.style.display = "inline-block";
+            pauseBtn.innerText = "⏸ Szünet";
+
+            let fullText = topic.paragraphs.map(p => p.en).join("  ");
+            utterance = new SpeechSynthesisUtterance(fullText);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') { highlightWord(fullText, event.charIndex, event.charLength); }
+            };
+            utterance.onend = stopSpeech;
+            synth.speak(utterance);
+        }
+
+        function togglePause() {
+            if (!isPlaying) return;
+            
+            const pauseBtn = document.getElementById("pauseBtn");
+            if (!isPaused) {
+                synth.pause();
+                isPaused = true;
+                pauseBtn.innerText = "▶ Folytatás";
+            } else {
+                synth.resume();
+                isPaused = false;
+                pauseBtn.innerText = "⏸ Szünet";
+            }
+        }
+
+        function playSingleSentence(pIdx) {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const p = topics[index].paragraphs[pIdx];
+            
+            utterance = new SpeechSynthesisUtterance(p.en);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+            
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') {
+                    const localCharIndex = event.charIndex;
+                    const charLength = event.charLength;
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+            };
+            
+            utterance.onend = function() {
+                textNode.innerHTML = p.en;
+            };
+
+            synth.speak(utterance);
+        }
+
+        function highlightWord(fullText, charIndex, charLength) {
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let textCounter = 0;
+            topic.paragraphs.forEach((p, pIdx) => {
+                const startOfPara = textCounter;
+                const endOfPara = startOfPara + p.en.length;
+                if (charIndex >= startOfPara && charIndex <= endOfPara) {
+                    const localCharIndex = charIndex - startOfPara;
+                    const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+                textCounter += p.en.length + 2;
+            });
+        }
+        loadTopic();
+    </script>
+</body>
+</html>

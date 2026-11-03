@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Felkészítő Olvasókönyv (1-5. Téma)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .controls { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between; }
+        select, button, input { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background-color: #3498db; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button.stop { background-color: #e74c3c; }
+        button.pause { background-color: #f39c12; }
+        .story-container { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1.8; font-size: 18px; }
+        .english-text { font-weight: 500; margin-bottom: 8px; cursor: pointer; transition: color 0.2s; }
+        .english-text:hover { color: #3498db; }
+        .hungarian-text { color: #7f8c8d; font-size: 16px; border-top: 1px dashed #ddd; padding-top: 8px; margin-bottom: 25px; }
+        .highlight { background-color: #ffeaa7; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Angol Szóbeli Felkészítő (A2 szint - 1-5. Téma)</h1>
+
+    <div class="controls">
+        <div>
+            <label for="topicSelect">Válassz témakört: </label>
+            <select id="topicSelect" onchange="loadTopic()">
+                <option value="0">1. Az egyén tulajdonságai (Személyiség és külső)</option>
+                <option value="1">2. Az egyén megjelenése (Öltözködés)</option>
+                <option value="2">3. Emberi kapcsolatok (Barátok és kollégák)</option>
+                <option value="3">4. Család és házimunka (Generációk együttélése)</option>
+                <option value="4">5. Lakás és lakókörnyezet (Bútorok és gépek)</option>
+            </select>
+        </div>
+        <div>
+            <label for="speedRange">Sebesség: <span id="speedValue">0.9</span>x</label>
+            <input type="range" id="speedRange" min="0.5" max="1.5" step="0.1" value="0.9" oninput="updateSpeed()">
+        </div>
+        <div>
+            <button id="playBtn" onclick="toggleSpeech()">▶ Indítás</button>
+            <button id="pauseBtn" onclick="togglePause()" style="display:none;" class="pause">⏸ Szünet</button>
+        </div>
+    </div>
+
+    <div class="story-container" id="storyContent"></div>
+
+    <script>
+        const topics = [
+            {
+                title: "1. Az egyén tulajdonságai (Személyiség és külső)",
+                paragraphs: [
+                    { en: "Let me tell you about myself.", hu: "Hadd meséljek magamról." },
+                    { en: "I am a tall and slim person in my early twenties.", hu: "Magas és vékony ember vagyok a húszas éveim elején." },
+                    { en: "I have short, wavy brown hair and bright green eyes.", hu: "Rövid, hullámos barna hajam és élénkzöld szemem van." },
+                    { en: "I usually wear a happy smile on my face, which makes people feel comfortable.", hu: "Általában boldog mosolyt viselek az arcomon, amitől az emberek jól érzik magukat." },
+                    { en: "As for my personality, I am a very kind, honest, and helpful person.", hu: "Ami a személyiségemet illeti, nagyon kedves, őszinte és segítőkész ember vagyok." },
+                    { en: "I always speak politely to others and try to help people in need.", hu: "Mindig udvariasan beszélek másokkal, és próbálok segíteni a rászorulóknak." },
+                    { en: "I am also hard-working, so I spend a lot of time studying for my exams.", hu: "Emellett szorgalmas is vagyok, így rengeteg időt töltök a vizsgáimra való tanulással." },
+                    { en: "On the other hand, I can be a bit quiet and shy when meeting new people.", hu: "Másrészről viszont kissé csendes és szégyenlős lehetek, amikor új emberekkel találkozom." },
+                    { en: "Sometimes I am impatient when things do not happen quickly enough.", hu: "Néha türelmetlen vagyok, amikor a dolgok nem történnek elég gyorsan." },
+                    { en: "However, I have a great sense of humour and can make people laugh.", hu: "Azonban nagyszerű humorérzékem van, és meg tudom nevettetni az embereket." },
+                    { en: "I respect other people's opinions.", hu: "Tisztelem más emberek véleményét." },
+                    { en: "I am happy to be a reliable and friendly person.", hu: "Boldog vagyok, hogy egy megbízható és barátságos ember lehetek." }
+                ]
+            },
+            {
+                title: "2. Az egyén megjelenése (Öltözködés)",
+                paragraphs: [
+                    { en: "My clothing choices always depend on the weather and the specific occasion.", hu: "Az öltözködési választásaim mindig az időjárástól és az adott alkalomtól függenek." },
+                    { en: "On weekdays, I prefer simple and casual clothes because comfort is the most important thing for me.", hu: "Hétköznapokon az egyszerű és hétköznapi ruhákat szeretem, mert számomra a kényelem a legfontosabb." },
+                    { en: "I usually wear blue jeans, a soft cotton T-shirt, and comfortable sneakers.", hu: "Általában kék farmert, puha pamutpólót és kényelmes tornacipőt viselek." },
+                    { en: "When the weather is cold in winter, I add a warm woolen sweater and a thick winter coat.", hu: "Amikor télen hideg az idő, kiegészítem egy meleg gyapjúpulóverrel és egy vastag télikabáttal." },
+                    { en: "I also wear a scarf, gloves, and a hat to protect myself from the freezing wind.", hu: "Sálat, kesztyűt és sapkát is hordok, hogy megvédjem magam a fagyos széltől." },
+                    { en: "In summer, I prefer light clothes like shorts, light shirts, and sandals.", hu: "Nyáron a könnyű ruhákat részesítem előnyben, mint a rövidnadrág, a könnyű ingek és a szandál." },
+                    { en: "When I go to a formal event, like a family celebration or a job interview, I change my style.", hu: "Amikor hivatalos eseményre megyek, például családi ünnepségre vagy állásinterjúra, változtatok a stílusomon." },
+                    { en: "On these occasions, I wear an elegant dark suit with a smart white shirt and leather shoes.", hu: "Ilyen alkalmakkor elegáns sötét öltönyt viselek elegáns fehér inggel és bőrcipővel." },
+                    { en: "I do not follow the latest fashion trends closely because I think buying expensive brands is a waste of money.", hu: "Nem követem szorosan a legújabb divatdiktátumokat, mert szerintem a drága márkák vásárlása pénzpocsékolás." },
+                    { en: "I prefer shopping for clothes during seasonal sales when prices are much lower.", hu: "Inkább a szezonális leárazások idején vásárolok ruhákat, amikor az árak sokkal alacsonyabbak." },
+                    { en: "The most important rule for me is to wear clothes that are clean, neat, and suit my personality.", hu: "A legfontosabb szabály számomra az, hogy olyan ruhákat viseljek, amelyek tiszták, ápoltak és illenek a személyiségemhez." }
+                ]
+            },
+            {
+                title: "3. Barátság, partneri kapcsolatok",
+                paragraphs: [
+                    { en: "Good relationships with other people make my daily life much happier and less stressful.", hu: "A más emberekkel való jó kapcsolatok sokkal boldogabbá és kevésbé stresszessé teszik a mindennapjaimat." },
+                    { en: "In my opinion, true friendship is based on trust, honesty, and mutual support.", hu: "Véleményem szerint az igaz barátság a bizalmon, az őszinteségen és a kölcsönös támogatáson alapul." },
+                    { en: "I have a small group of close friends whom I can always count on.", hu: "Van egy kis csoportnyi közeli barátom, akikre mindig számíthatok." },
+                    { en: "We love spending our free time together, going to the cinema, or just walking in the park.", hu: "Szeretjük együtt tölteni a szabadidőnket, moziba járni, vagy csak sétálni a parkban." },
+                    { en: "Besides friends, student and workplace relationships are also very significant for me.", hu: "A barátokon kívül a diák- és munkahelyi kapcsolatok is nagyon jelentősek számomra." },
+                    { en: "At school or at work, I always try to cooperate well with classmates and colleagues.", hu: "Az iskolában vagy a munkahelyen mindig próbálok jól együttműködni az osztálytársakkal és a kollégákkal." },
+                    { en: "I know that a good team can solve difficult problems much faster than a single person.", hu: "Tudom, hogy egy jó csapat sokkal gyorsabban képes megoldani a nehéz problémákat, mint egyetlen ember." },
+                    { en: "I always try to be polite, helpful, and respectful with my coworkers.", hu: "Mindig próbálok udvarias, segítőkész és tisztelettudó lenni a munkatársaimmal." },
+                    { en: "Romantic partnerships are also a key part of my life.", hu: "A romantikus párkapcsolatok szintén kulcsfontosságú részét képezik az életemnek." },
+                    { en: "I think a good partner understands your feelings, listens to you, and shares your goals.", hu: "Úgy gondolom, egy jó partner megérti az érzéseidet, meghallgat téged, és osztozik a céljaidban." },
+                    { en: "I believe it is important to talk openly about problems to keep a relationship strong.", hu: "Hitem szerint fontos nyíltan beszélni a problémákról, hogy a kapcsolat erős maradjon." },
+                    { en: "All in all, human connections are the most valuable things I have.", hu: "Mindent összevetve, az emberi kapcsolatok a legértékesebb dolgok, amikkel rendelkezem." }
+                ]
+            },
+            {
+                title: "4. Család és házimunka",
+                paragraphs: [
+                    { en: "I live in a loving family, and we try to support each other every day.", hu: "Szerető családban élek, és igyekszünk minden nap támogatni egymást." },
+                    { en: "In our household, sharing the daily chores is very important for us.", hu: "A mi háztartásunkban a napi feladatok megosztása nagyon fontos számunkra." },
+                    { en: "In my family, there are no strict rules about who is a housewife or a househusband.", hu: "Nálunk nincsenek szigorú szabályok arról, hogy ki háziasszony vagy háziférfi." },
+                    { en: "My mother works full-time, but she also enjoys cooking delicious dinners for us.", hu: "Édesanyám teljes munkaidőben dolgozik, de szeret finom vacsorákat is főzni nekünk." },
+                    { en: "My father is very helpful; he usually washes the dishes, vacuums the carpets, and does the shopping.", hu: "Édesapám nagyon segítőkész; általában elmosogat, kiporszívózza a szőnyegeket és bevásárol." },
+                    { en: "My main responsibility is to keep my own bedroom tidy and clean.", hu: "Az én fő felelősségem az, hogy a saját hálószobámat rendben és tisztán tartsam." },
+                    { en: "I also take out the rubbish every evening and water the plants in the garden.", hu: "Minden este kiviszem a szemetet is, és megöntözöm a növényeket a kertben." },
+                    { en: "I think living with different generations can be very beneficial.", hu: "Szerintem a különböző generációkkal való együttélés nagyon hasznos lehet." },
+                    { en: "In many families, grandparents live with their children and grandchildren.", hu: "Sok családban a nagyszülők együtt élnek a gyermekeikkel és az unokáikkal." },
+                    { en: "I find this situation helpful because the elderly can look after the children.", hu: "Hasznosnak találom ezt a helyzetet, mert az idősek tudnak vigyázni a gyerekekre." },
+                    { en: "They can also share their life experience and historical stories with us.", hu: "Meg tudják osztani az élettapasztalatukat és a történelmi történeteiket is velünk." },
+                    { en: "However, it requires patience because older and younger people sometimes have different habits.", hu: "Azonban ez türelmet igényel, mert az idősebb és fiatalabb embereknek néha eltérőek a szokásaik." },
+                    { en: "I always respect and care for the elderly members of my family.", hu: "Mindig tisztelem és gondozom a családom idős tagjait." }
+                ]
+            },
+            {
+                title: "5. Lakás és lakókörnyezet",
+                paragraphs: [
+                    { en: "I live in a beautiful, modern two-story house in a peaceful neighborhood.", hu: "Egy szép, modern kétszintes házban élek egy csendes környéken." },
+                    { en: "Our house has a green front garden with lovely flowers and a big tree.", hu: "A házunknak van egy zöld előkertje kedves virágokkal és egy nagy fával." },
+                    { en: "Inside, the rooms are bright and fully furnished with modern pieces.", hu: "Belül a szobák világosak és teljesen be vannak rendezve modern darabokkal." },
+                    { en: "Our living room is the coziest place, featuring a comfortable gray sofa and a wooden coffee table.", hu: "A nappalink a leghangulatosabb hely, ahol egy kényelmes szürke kanapé és egy fa dohányzóasztal található." },
+                    { en: "There is also a large flat-screen television on the wall where we watch movies together.", hu: "A falon van egy nagy síkképernyős televízió is, ahol együtt nézünk filmeket." },
+                    { en: "My bedroom has a single bed, a wardrobe for my clothes, and a study desk next to the window.", hu: "A hálószobámban egy egyszemélyes ágy, egy ruhásszekrény és az ablak mellett egy íróasztal van." },
+                    { en: "Modern household appliances make my daily life much easier and save a lot of time.", hu: "A modern háztartási gépek sokkal könnyebbé teszik a mindennapi életemet, és rengeteg időt spórolnak meg." },
+                    { en: "For example, I use the dishwasher every day after lunch and dinner.", hu: "Például minden nap használom a mosogatógépet ebéd és vacsora után." },
+                    { en: "The washing machine and the microwave oven are also essential in my daily routine.", hu: "A mosógép és a mikrohullámú sütő szintén elengedhetetlenek a napi rutinomban." },
+                    { en: "We also have a smart vacuum cleaner that cleans the floors automatically.", hu: "Van egy okos porszívónk is, amely automatikusan tisztítja a padlót." },
+                    { en: "Taking care of our big house requires a lot of hard work and regular maintenance.", hu: "A nagy házunk gondozása sok kemény munkát és rendszeres karbantartást igényel." },
+                    { en: "However, I really enjoy spending time at home because it is my favourite place to relax.", hu: "Azonban nagyon szeretek otthon időt tölteni, mert ez a kedvenc helyem a pihenésre." }
+                ]
+            }
+        ];
+
+        let synth = window.speechSynthesis, utterance = null, isPlaying = false, isPaused = false;
+
+        function loadTopic() {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let html = `<h2>${topic.title}</h2>`;
+            topic.paragraphs.forEach((p, i) => {
+                html += `<div id="p-${i}"><div class="english-text" onclick="playSingleSentence(${i})" title="Kattints ide a mondat felolvasásához!">${p.en}</div><div class="hungarian-text">${p.hu}</div></div>`;
+            });
+            document.getElementById("storyContent").innerHTML = html;
+        }
+
+        function updateSpeed() {
+            const speed = document.getElementById("speedRange").value;
+            document.getElementById("speedValue").innerText = speed;
+        }
+
+        function stopSpeech() {
+            synth.cancel(); 
+            isPlaying = false; 
+            isPaused = false;
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "▶ Indítás"; 
+            btn.className = "";
+            pauseBtn.style.display = "none";
+            pauseBtn.innerText = "⏸ Szünet";
+            document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+        }
+
+        function toggleSpeech() {
+            if (isPaused) {
+                synth.resume();
+                isPaused = false;
+                document.getElementById("pauseBtn").innerText = "⏸ Szünet";
+                return;
+            }
+            if (isPlaying) { 
+                stopSpeech(); 
+                return; 
+            }
+            
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            isPlaying = true;
+            isPaused = false;
+            
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "⏹ Leállítás"; 
+            btn.className = "stop";
+            pauseBtn.style.display = "inline-block";
+            pauseBtn.innerText = "⏸ Szünet";
+
+            let fullText = topic.paragraphs.map(p => p.en).join("  ");
+            utterance = new SpeechSynthesisUtterance(fullText);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') { highlightWord(fullText, event.charIndex, event.charLength); }
+            };
+            utterance.onend = stopSpeech;
+            synth.speak(utterance);
+        }
+
+        function togglePause() {
+            if (!isPlaying) return;
+            
+            const pauseBtn = document.getElementById("pauseBtn");
+            if (!isPaused) {
+                synth.pause();
+                isPaused = true;
+                pauseBtn.innerText = "▶ Folytatás";
+            } else {
+                synth.resume();
+                isPaused = false;
+                pauseBtn.innerText = "⏸ Szünet";
+            }
+        }
+
+        function playSingleSentence(pIdx) {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const p = topics[index].paragraphs[pIdx];
+            
+            utterance = new SpeechSynthesisUtterance(p.en);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+            
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') {
+                    const localCharIndex = event.charIndex;
+                    const charLength = event.charLength;
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+            };
+            
+            utterance.onend = function() {
+                textNode.innerHTML = p.en;
+            };
+
+            synth.speak(utterance);
+        }
+
+        function highlightWord(fullText, charIndex, charLength) {
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let textCounter = 0;
+            topic.paragraphs.forEach((p, pIdx) => {
+                const startOfPara = textCounter;
+                const endOfPara = startOfPara + p.en.length;
+                if (charIndex >= startOfPara && charIndex <= endOfPara) {
+                    const localCharIndex = charIndex - startOfPara;
+                    const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+                textCounter += p.en.length + 2;
+            });
+        }
+        loadTopic();
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Felkészítő Olvasókönyv (11-15. Téma)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .controls { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between; }
+        select, button, input { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background-color: #3498db; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button.stop { background-color: #e74c3c; }
+        button.pause { background-color: #f39c12; }
+        .story-container { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1.8; font-size: 18px; }
+        .english-text { font-weight: 500; margin-bottom: 8px; cursor: pointer; transition: color 0.2s; }
+        .english-text:hover { color: #3498db; }
+        .hungarian-text { color: #7f8c8d; font-size: 16px; border-top: 1px dashed #ddd; padding-top: 8px; margin-bottom: 25px; }
+        .highlight { background-color: #ffeaa7; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Angol Szóbeli Felkészítő (A2 szint - 11-15. Téma)</h1>
+
+    <div class="controls">
+        <div>
+            <label for="topicSelect">Válassz témakört: </label>
+            <select id="topicSelect" onchange="loadTopic()">
+                <option value="0">11. Munka (Work and Jobs)</option>
+                <option value="1">12. Sport (Sports)</option>
+                <option value="2">13. Egészség (Health and Medicine)</option>
+                <option value="3">14. Szolgáltatások (Services and Catering)</option>
+                <option value="4">15. Vásárlás (Shopping)</option>
+            </select>
+        </div>
+        <div>
+            <label for="speedRange">Sebesség: <span id="speedValue">0.9</span>x</label>
+            <input type="range" id="speedRange" min="0.5" max="1.5" step="0.1" value="0.9" oninput="updateSpeed()">
+        </div>
+        <div>
+            <button id="playBtn" onclick="toggleSpeech()">▶ Indítás</button>
+            <button id="pauseBtn" onclick="togglePause()" style="display:none;" class="pause">⏸ Szünet</button>
+        </div>
+    </div>
+
+    <div class="story-container" id="storyContent"></div>
+
+    <script>
+        const topics = [
+            {
+                title: "11. Munka (Work and Jobs)",
+                paragraphs: [
+                    { en: "Work is an essential part of my daily life and financial stability.", hu: "A munka mindennapi életem és pénzügyi stabilitásom elengedhetetlen része." },
+                    { en: "Currently, I work as an office administrator in a small local company.", hu: "Jelenleg irodai adminisztrátorként dolgozom egy kis helyi vállalatnál." },
+                    { en: "My main daily duties include answering phone calls, writing emails, and organizing documents.", hu: "Fő napi feladataim közé tartozik a telefonhívások fogadása, e-mailek írása és dokumentumok rendszerezése." },
+                    { en: "My workplace is very comfortable, and my colleagues are friendly and supportive.", hu: "A munkahelyem nagyon kényelmes, a kollégáim pedig barátságosak és segítőkészek." },
+                    { en: "In my surrounding environment, my acquaintances have different professions such as teachers, engineers, and nurses.", hu: "A környezetemben az ismerőseimnek különféle hivatásuk van, mint például tanárok, mérnökök és ápolók." },
+                    { en: "My best friend works as an IT specialist at a modern technology firm.", hu: "A legjobb barátom IT specialistaként dolgozik egy modern technológiai cégnél." },
+                    { en: "When I look for a new job, I use several effective methods.", hu: "Amikor új állást keresek, számos hatékony módszert használok." },
+                    { en: "My favourite method is searching on job websites and professional social networks online.", hu: "A kedvenc módszerem az online álláskereső weboldalakon és szakmai közösségi hálózatokon való keresés." },
+                    { en: "I also regularly update my CV and send it directly to local companies.", hu: "Rendszeresen frissítem az önéletrajzomat is, és közvetlenül elküldöm a helyi vállalatoknak." },
+                    { en: "Sometimes I read job advertisements or ask my friends for recommendations.", hu: "Néha elolvasom az álláshirdetéseket, vagy ajánlásokat kérek a barátaimtól." },
+                    { en: "Finding a suitable job requires time, patience, and good preparation from me.", hu: "A megfelelő állás megtalálása időt, türelmet és jó felkészülést igényel tőlem." }
+                ]
+            },
+            {
+                title: "12. Sport (Sports)",
+                paragraphs: [
+                    { en: "Doing sports regularly is very important for me to stay fit, healthy, and energized.", hu: "A rendszeres sportolás nagyon fontos számomra ahhoz, hogy fitt, egészséges és energikus maradjak." },
+                    { en: "Regarding my sports activities, I go jogging in the park three times a week.", hu: "Ami a sporttevékenységeimet illeti, hetente háromszor járok kocogni a parkba." },
+                    { en: "I also like riding my bicycle on weekends when the weather is warm and sunny.", hu: "A hétvégéken biciklizni is szeretek, amikor meleg és napos az idő." },
+                    { en: "In winter, I prefer swimming in an indoor pool or doing light exercises at home.", hu: "Télen jobban szeretek fedett uszodában úszni, vagy könnyű gyakorlatokat végezni otthon." },
+                    { en: "My favourite team sport is football because I find it dynamic and exciting.", hu: "A kedvenc csapatsportom a labdarúgás, mert dinamikusnak és izgalmasnak találom." },
+                    { en: "I enjoy watching big football matches on television with my family.", hu: "Élvezem, amikor a televízióban nagy focimeccseket nézek a családommal." },
+                    { en: "I also like tennis because it improves my concentration and physical endurance.", hu: "A teniszt is szeretem, mert fejleszti a koncentrációmat és a fizikai állóképességemet." },
+                    { en: "Extreme sports like rock climbing look interesting, but I think they are too dangerous for me.", hu: "Az olyan extrém sportok, mint a sziklamászás, érdekesnek tűnnek, de úgy gondolom, túl veszélyesek számomra." },
+                    { en: "For me, doing sports with friends is always more enjoyable and motivating than exercising alone.", hu: "Számomra a barátokkal való sportolás mindig élvezetesebb és motiválóbb, mint egyedül edzeni." },
+                    { en: "It helps me reduce stress after a long working day.", hu: "Segít csökkenteni a stresszt egy hosszú munkanap után." }
+                ]
+            },
+            {
+                title: "13. Egészség (Health and Medicine)",
+                paragraphs: [
+                    { en: "Maintaining my good health requires a balanced diet, exercise, and enough sleep.", hu: "A jó egészségem megőrzése kiegyensúlyozott táplálkozást, testmozgást és elegendő alvást igényel tőlem." },
+                    { en: "For me, healthy eating means consuming fresh vegetables, fruits, fish, and drinking plenty of water.", hu: "Számomra az egészséges táplálkozás friss zöldségek, gyümölcsök, halak fogyasztását és sok víz ivását jelenti." },
+                    { en: "I try to avoid unhealthy food such as fast food, salty snacks, sugary drinks, and processed meals.", hu: "Igyekszem elkerülni az egészségtelen ételeket, mint a gyorsételek, sós rágcsálnivalók, cukros italok és feldolgozott ételek." },
+                    { en: "I know that eating too much junk food can lead to health problems and low energy.", hu: "Tudom, hogy a túl sok gyorskaja fogyasztása egészségügyi problémákhoz és alacsony energiaszinthez vezethet." },
+                    { en: "My healthy lifestyle also includes regular exercise, fresh air, and avoiding smoking.", hu: "Az egészséges életmódom része a rendszeres mozgás, a friss levegő és a dohányzás elkerülése is." },
+                    { en: "When I catch common illnesses like colds or headaches, I try to rest.", hu: "Amikor olyan elterjedt betegségeket kapok el, mint a megfázás vagy fejfájás, megpróbálok pihenni." },
+                    { en: "When I feel truly ill, I visit my doctor at the local medical clinic.", hu: "Amikor valóban betegnek érzem magam, meglátogatom az orvosomat a helyi orvosi rendelőben." },
+                    { en: "My doctor examines me, takes my temperature, and prescribes suitable medication.", hu: "Az orvosom megvizsgál, megméri a hőmérsékletemet, és megfelelő gyógyszert ír fel." },
+                    { en: "Then I go to the pharmacy to buy the prescribed pills and vitamins.", hu: "Ezután elmegyek a gyógyszertárba, hogy megvegyem a felírt tablettákat és vitaminokat." },
+                    { en: "I also visit my dentist once a year for a regular check-up.", hu: "Évente egyszer a fogorvosomhoz is ellátogatok rendszeres ellenőrzésre." },
+                    { en: "I believe taking care of my teeth prevents painful problems in the future.", hu: "Hiszem, hogy a fogaim ápolása megelőzi a fájdalmas problémákat a jövőben." }
+                ]
+            },
+            {
+                title: "14. Szolgáltatások (Services and Catering)",
+                paragraphs: [
+                    { en: "I like visiting catering establishments because they offer different types of food and pleasant atmospheres.", hu: "Szeretek vendéglátóipari egységekbe járni, mert különféle ételeket és kellemes hangulatot kínálnak." },
+                    { en: "For me, restaurants are great places for dinner on special family occasions.", hu: "Számomra az éttermek nagyszerű helyek a vacsorához különleges családi alkalmakkor." },
+                    { en: "When I go to an elegant restaurant, waiters bring the menu and serve hot meals.", hu: "Amikor egy elegáns étterembe megyek, a pincérek kihozzák az étlapot, és meleg ételeket szolgálnak fel." },
+                    { en: "Sometimes I visit fast-food places when I need a quick and cheap meal.", hu: "Néha meglátogatom a gyorséttermeket, amikor gyors és olcsó ételre van szükségem." },
+                    { en: "Coffee houses and cafés are ideal for me to meet my friends and drink delicious coffee.", hu: "A kávézók ideálisak számomra a barátaimmal való találkozásra és egy finom kávé elfogyasztására." },
+                    { en: "In the mornings, I often stop at a local bakery for fresh bread, pastries, or sandwiches.", hu: "Reggelente gyakran beugrom egy helyi pékségbe friss kenyérért, péksüteményért vagy szendvicsért." },
+                    { en: "I also use self-service canteens during my lunch breaks at work.", hu: "A munkahelyi ebédidőmben önkiszolgáló kifőzdéket is igénybe veszek." },
+                    { en: "For me, good service and a clean environment are key factors in every place I visit.", hu: "Számomra a jó kiszolgálás és a tiszta környezet kulcsfontosságú tényezők minden meglátogatott helyen." }
+                ]
+            },
+            {
+                title: "15. Vásárlás (Shopping)",
+                paragraphs: [
+                    { en: "Daily shopping is a necessary routine for me to buy groceries and household items.", hu: "A napi bevásárlás elengedhetetlen rutin számomra az élelmiszerek és háztartási cikkek vásárlásához." },
+                    { en: "I usually buy fresh milk, bread, butter, cheese, and eggs every few days.", hu: "Néhány naponta általában friss tejet, kenyeret, vajat, sajtot és tojást veszek." },
+                    { en: "Depending on my needs, I choose different places to go shopping.", hu: "A szükségleteimtől függően különböző helyeket választok a vásárláshoz." },
+                    { en: "I often visit shopping malls because they have many clothes shops, cinemas, and restaurants together.", hu: "Gyakran látogatok el bevásárlóközpontokba, mert ott sok ruházati üzlet, mozi és étterem található egy helyen." },
+                    { en: "The corner shop near my home is small, but very convenient when I need quick shopping.", hu: "Az otthonomhoz közeli sarki kisbolt kicsi, de nagyon kényelmes, ha gyors bevásárlásra van szükségem." },
+                    { en: "I love going to local markets to buy fresh fruits, vegetables, and honey directly from farmers.", hu: "Imádok helyi piacokra járni, hogy friss gyümölcsöket, zöldségeket és mézet vegyek közvetlenül a gazdáktól." },
+                    { en: "I also shop at supermarkets and hypermarkets for a wide range of products at low prices.", hu: "Szupermarketekben és hipermarketekben is vásárolok a termékek széles választéka és az alacsony árak miatt." },
+                    { en: "Occasionally, I use cash-and-carry stores when buying items in larger quantities.", hu: "Al alkalmanként raktáráruházakat is használok, amikor nagyobb tételben vásárolok." },
+                    { en: "Online shopping has become my regular habit in recent years.", hu: "Az online vásárlás a rendszeres szokásommá vált az elmúlt években." },
+                    { en: "I think buying online is fast and easy because products are delivered directly to my home.", hu: "Úgy gondolom, az online vásárlás gyors és egyszerű, mert a termékeket közvetlenül az otthonomba szállítják." }
+                ]
+            }
+        ];
+
+        let synth = window.speechSynthesis, utterance = null, isPlaying = false, isPaused = false;
+
+        function loadTopic() {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let html = `<h2>${topic.title}</h2>`;
+            topic.paragraphs.forEach((p, i) => {
+                html += `<div id="p-${i}"><div class="english-text" onclick="playSingleSentence(${i})" title="Kattints ide a mondat felolvasásához!">${p.en}</div><div class="hungarian-text">${p.hu}</div></div>`;
+            });
+            document.getElementById("storyContent").innerHTML = html;
+        }
+
+        function updateSpeed() {
+            const speed = document.getElementById("speedRange").value;
+            document.getElementById("speedValue").innerText = speed;
+        }
+
+        function stopSpeech() {
+            synth.cancel(); 
+            isPlaying = false; 
+            isPaused = false;
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "▶ Indítás"; 
+            btn.className = "";
+            pauseBtn.style.display = "none";
+            pauseBtn.innerText = "⏸ Szünet";
+            document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+        }
+
+        function toggleSpeech() {
+            if (isPaused) {
+                synth.resume();
+                isPaused = false;
+                document.getElementById("pauseBtn").innerText = "⏸ Szünet";
+                return;
+            }
+            if (isPlaying) { 
+                stopSpeech(); 
+                return; 
+            }
+            
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            isPlaying = true;
+            isPaused = false;
+            
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "⏹ Leállítás"; 
+            btn.className = "stop";
+            pauseBtn.style.display = "inline-block";
+            pauseBtn.innerText = "⏸ Szünet";
+
+            let fullText = topic.paragraphs.map(p => p.en).join("  ");
+            utterance = new SpeechSynthesisUtterance(fullText);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') { highlightWord(fullText, event.charIndex, event.charLength); }
+            };
+            utterance.onend = stopSpeech;
+            synth.speak(utterance);
+        }
+
+        function togglePause() {
+            if (!isPlaying) return;
+            
+            const pauseBtn = document.getElementById("pauseBtn");
+            if (!isPaused) {
+                synth.pause();
+                isPaused = true;
+                pauseBtn.innerText = "▶ Folytatás";
+            } else {
+                synth.resume();
+                isPaused = false;
+                pauseBtn.innerText = "⏸ Szünet";
+            }
+        }
+
+        function playSingleSentence(pIdx) {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const p = topics[index].paragraphs[pIdx];
+            
+            utterance = new SpeechSynthesisUtterance(p.en);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+            
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') {
+                    const localCharIndex = event.charIndex;
+                    const charLength = event.charLength;
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+            };
+            
+            utterance.onend = function() {
+                textNode.innerHTML = p.en;
+            };
+
+            synth.speak(utterance);
+        }
+
+        function highlightWord(fullText, charIndex, charLength) {
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let textCounter = 0;
+            topic.paragraphs.forEach((p, pIdx) => {
+                const startOfPara = textCounter;
+                const endOfPara = startOfPara + p.en.length;
+                if (charIndex >= startOfPara && charIndex <= endOfPara) {
+                    const localCharIndex = charIndex - startOfPara;
+                    const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+                textCounter += p.en.length + 2;
+            });
+        }
+        loadTopic();
+    </script>
+</body>
+</html>

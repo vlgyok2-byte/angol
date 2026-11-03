@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Felkészítő Olvasókönyv (6-10. Téma)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .controls { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between; }
+        select, button, input { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background-color: #3498db; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button.stop { background-color: #e74c3c; }
+        button.pause { background-color: #f39c12; }
+        .story-container { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1.8; font-size: 18px; }
+        .english-text { font-weight: 500; margin-bottom: 8px; cursor: pointer; transition: color 0.2s; }
+        .english-text:hover { color: #3498db; }
+        .hungarian-text { color: #7f8c8d; font-size: 16px; border-top: 1px dashed #ddd; padding-top: 8px; margin-bottom: 25px; }
+        .highlight { background-color: #ffeaa7; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Angol Szóbeli Felkészítő (A2 szint - 6-10. Téma)</h1>
+
+    <div class="controls">
+        <div>
+            <label for="topicSelect">Válassz témakört: </label>
+            <select id="topicSelect" onchange="loadTopic()">
+                <option value="0">6. Ünnepek és ünnepnapok (Holidays and Celebrations)</option>
+                <option value="1">7. Olvasás, televízió, mozi (Media and Entertainment)</option>
+                <option value="2">8. Művelődés (Culture and Art)</option>
+                <option value="3">9. Hobbik és szabadidő (Hobbies and Free Time)</option>
+                <option value="4">10. Tanulás, oktatás, iskolarendszer (Education and Languages)</option>
+            </select>
+        </div>
+        <div>
+            <label for="speedRange">Sebesség: <span id="speedValue">0.9</span>x</label>
+            <input type="range" id="speedRange" min="0.5" max="1.5" step="0.1" value="0.9" oninput="updateSpeed()">
+        </div>
+        <div>
+            <button id="playBtn" onclick="toggleSpeech()">▶ Indítás</button>
+            <button id="pauseBtn" onclick="togglePause()" style="display:none;" class="pause">⏸ Szünet</button>
+        </div>
+    </div>
+
+    <div class="story-container" id="storyContent"></div>
+
+    <script>
+        const topics = [
+            {
+                title: "6. Ünnepek és ünnepnapok (Holidays and Celebrations)",
+                paragraphs: [
+                    { en: "Celebrations play a very important role in my personal life and for society.", hu: "Az ünnepek nagyon fontos szerepet játszanak a magánéletemben és a társadalomban." },
+                    { en: "In my private life, my favourite family celebration is Christmas.", hu: "A magánéletemben a kedvenc családi ünnepem a karácsony." },
+                    { en: "We decorate a beautiful green tree and eat traditional dinner together.", hu: "Gusztusos zöld fát díszítünk, és közösen fogyasztjuk el a hagyományos vacsorát." },
+                    { en: "I also enjoy celebrating my birthday and name day with my close friends.", hu: "A születésnapom és a névnapom megünneplését is élvezem a közeli barátaimmal." },
+                    { en: "Usually, we organize a small party with cake, music, and nice presents.", hu: "Általában egy kis bulit szervezünk tortával, zenével és szép ajándékokkal." },
+                    { en: "Besides family holidays, I also respect our national holidays.", hu: "A családi ünnepek mellett a nemzeti ünnepeinket is tisztelem." },
+                    { en: "For me, March fifteenth is a very important national holiday.", hu: "Számomra március tizenötödike egy nagyon fontos nemzeti ünnep." },
+                    { en: "On this day, I wear a small ribbon called kokárda and remember the revolution.", hu: "Ezen a napon kis kokárdát viselek, és a forradalomra emlékezem." },
+                    { en: "August twentieth is another major day when I celebrate the foundation of the state.", hu: "Augusztus huszadika egy másik jeles nap, amikor az államalapítást ünneplem." },
+                    { en: "I am also interested in unique holidays of English-speaking countries, like Thanksgiving in the US.", hu: "Érdekelnek az angol nyelvű országok egyedi ünnepei is, mint a Hálaadás az Egyesült Államokban." },
+                    { en: "I also find Halloween in October fun, which is popular among young people.", hu: "Az októberi Halloweent is viccesnek tartom, ami népszerű a fiatalok körében." },
+                    { en: "I think holidays are perfect because they bring people closer to each other.", hu: "Úgy gondolom, az ünnepek tökéletesek, mert közelebb hozzák egymáshoz az embereket." }
+                ]
+            },
+            {
+                title: "7. Olvasás – televízió, videó, mozi (Media and Entertainment)",
+                paragraphs: [
+                    { en: "I have many ways to get information and enjoy entertainment today.", hu: "Számos módom van ma az információszerzésre és a szórakozásra." },
+                    { en: "I love reading books in my free time because it relaxes my mind.", hu: "Szeretek könyveket olvasni a szabadidőmben, mert ez megnyugtatja az elmémet." },
+                    { en: "I often read traditional paper books, but I also use the internet to find interesting articles.", hu: "Gyakran olvasok hagyományos papírkönyveket, de az internetet is használom érdekes cikkek keresésére." },
+                    { en: "Sometimes I visit the local library to borrow professional books or modern novels.", hu: "Néha ellátogatok a helyi könyvtárba, hogy szakkönyveket vagy modern regényeket kölcsönözzek." },
+                    { en: "I do not read daily newspapers because I can find all the fresh news online.", hu: "Nem olvasok napi sajtót, mert minden friss hírt megtalálok az interneten." },
+                    { en: "Besides reading, watching television and videos is also a popular activity for me.", hu: "Az olvasás mellett a televízió és a videók nézése is népszerű tevékenység számomra." },
+                    { en: "I prefer streaming platforms where I can choose my favourite series anytime.", hu: "Jobban szeretem a streaming platformokat, ahol bármikor kiválaszthatom a kedvenc sorozatomat." },
+                    { en: "Going to the cinema is a special experience for me and my friends.", hu: "A moziba járás különleges élmény számomra és a barátaim számára." },
+                    { en: "We love the big screen and the great sound system in modern cinemas.", hu: "Szeretjük a nagy képernyőt és a nagyszerű hangrendszert a modern mozikban." },
+                    { en: "We usually buy some salty popcorn and cold drinks before the movie starts.", hu: "Általában veszünk egy kis sós pattogatott kukoricát és hideg italokat a film kezdete előtt." },
+                    { en: "Entertainment helps me forget about daily stress and routine problems.", hu: "A szórakozás segít elfelejtenem a mindennapi stresszt és a rutinproblémákat." }
+                ]
+            },
+            {
+                title: "8. Művelődés (Culture and Art)",
+                paragraphs: [
+                    { en: "Cultural activities are essential for my personal and mental development.", hu: "A kulturális tevékenységek alapvetőek a személyes és mentális fejlődésemhez." },
+                    { en: "Music is a key part of my daily routine, and I listen to it every day.", hu: "A zene kulcsfontosságú része a napi rutinomnak, minden nap hallgatom." },
+                    { en: "I enjoy pop music, but sometimes I also listen to classical music to relax.", hu: "A popzenét élvezem, de néha klasszikus zenét is hallgatok a kikapcsolódáshoz." },
+                    { en: "Going to a live concert or an opera house is always an unforgettable event for me.", hu: "Élő koncertre vagy operaházba menni mindig felejthetetlen esemény számomra." },
+                    { en: "Unfortunately, I do not play any musical instruments, but I respect musicians.", hu: "Sajnos nem játszom semmilyen hangszeren, de tisztelem a zenészeket." },
+                    { en: "Theatre is another wonderful form of art that I like to experience.", hu: "A színház egy másik csodálatos művészeti forma, amelyet szeretek megtapasztalni." },
+                    { en: "Seeing real actors on the stage creates a very unique and deep atmosphere for me.", hu: "Valódi színészeket látni a színpadon nagyon egyedi és mély hangulatot teremt számomra." },
+                    { en: "I also visit museums and modern art exhibitions a few times a year.", hu: "Múzeumokat és modern művészeti kiállításokat is meglátogatokvente néhányszor." },
+                    { en: "They help me learn a lot about history, traditional culture, and international paintings.", hu: "Segítenek abban, hogy sokat tanuljak a történelemről, a hagyományos kultúráról és a nemzetközi festményekről." },
+                    { en: "Learning about art makes me feel more open-minded and intelligent.", hu: "A művészetek megismerése nyitottabbá és intelligensebbé teszi a gondolkodásomat." },
+                    { en: "I believe that local governments should support cultural places and programs.", hu: "Úgy gondolom, hogy a helyi önkormányzatoknak támogatniuk kellene a kulturális helyeket és programokat." }
+                ]
+            },
+            {
+                title: "9. Hobbik (Hobbies and Free Time)",
+                paragraphs: [
+                    { en: "Having a hobby is my favourite way to spend free time creatively.", hu: "A hobbi a kedvenc módom arra, hogy kreatívan töltsem el a szabadidőmet." },
+                    { en: "On weekends, I sometimes enjoy going to lively parties or elegant events with friends.", hu: "Hétvégenként néha élvezem, ha vidám bulikba vagy elegáns rendezvényekre járhatok a barátaimmal." },
+                    { en: "These events are great for dancing, wearing nice clothes, and making new friends.", hu: "Ezek az események nagyszerűek a táncolásra, a szép ruhák viselésére és az új barátkozásra." },
+                    { en: "My main hobby at home is keeping and taking care of my pet.", hu: "A fő otthoni hobbim a kisállatom tartása és gondozása." },
+                    { en: "I have a cute dog, and taking care of him is a big responsibility for me.", hu: "Van egy aranyos kutyám, és a gondozása nagy felelősséggel jár számomra." },
+                    { en: "I feed him every morning and walk him in the park twice a day.", hu: "Minden reggel meg etetem, és naponta kétszer elviszem sétálni a parkba." },
+                    { en: "I also find gardening and taking care of indoor plants very relaxing.", hu: "A kertészkedést és a szobanövények gondozását is nagyon pihentetőnek találom." },
+                    { en: "My family has beautiful flowers in our rooms, and I always help water them.", hu: "A családomnak gyönyörű virágai vannak a szobáinkban, és mindig segítek megöntözni őket." },
+                    { en: "In spring, we plant fresh vegetables and small green bushes in the garden.", hu: "Tavasz folyamán friss zöldségeket és kis zöld bokrokat ültetünk a kertbe." },
+                    { en: "My other popular free time activities include doing sports, photography, and traveling.", hu: "Az egyéb kedvenc szabadidős tevékenységeim közé tartozik a sportolás, a fotózás és az utazás." },
+                    { en: "Hobbies make my life interesting and help me stay healthy and happy.", hu: "A hobbik érdekessé teszik az életemet, és segítenek egészségesnek és boldognak maradnom." }
+                ]
+            },
+            {
+                title: "10. Tanulás, oktatás, iskolarendszer (Education and Languages)",
+                paragraphs: [
+                    { en: "Education is highly valuable to me because it prepares me for my future career.", hu: "Az oktatás nagyon értékes számomra, mert felkészít a jövőbeli karrieremre." },
+                    { en: "Regarding my school history, I finished primary school and then graduated from high school.", hu: "Ami az iskolai múltamat illeti, az általános iskola befejezése után középiskolában érettségiztem." },
+                    { en: "Currently, I am studying to get a professional qualification and pass my upcoming exams.", hu: "Jelenleg azért tanulok, hogy szakmai végzettséget szerezzek és letegyem a közeledő vizsgáimat." },
+                    { en: "My favourite subjects were always history and foreign languages.", hu: "A kedvenc tantárgyaim mindig a történelem és az idegen nyelvek voltak." },
+                    { en: "My language learning experience is very special and important to me.", hu: "A nyelvtanulási tapasztalatom nagyon különleges és fontos számomra." },
+                    { en: "I started learning English a few years ago because it is an international language.", hu: "Néhány éve kezdtem el angolul tanulni, mert ez egy nemzetközi nyelv." },
+                    { en: "Foreign languages play an essential role in my daily life.", hu: "Az idegen nyelvek alapvető szerepet játszanak a mindennapjaimban." },
+                    { en: "Since I speak English, I can travel anywhere without communication problems.", hu: "Mivel beszélek angolul, bárhová elutazhatok kommunikációs problémák nélkül." },
+                    { en: "It also helps me find a well-paying job at an international company.", hu: "Segít abban is, hogy jól fizető állást találjak egy nemzetközi vállalatnál." },
+                    { en: "To improve my skills, I listen to English texts and watch movies with subtitles.", hu: "A készségeim fejlesztése érdekében angol szövegeket hallgatok, és feliratos filmeket nézek." },
+                    { en: "Learning a new language requires patience, but for me, it opens up the whole world.", hu: "Egy új nyelv tanulása türelmet igényel, de számomra megnyitja az egész világot." }
+                ]
+            }
+        ];
+
+        let synth = window.speechSynthesis, utterance = null, isPlaying = false, isPaused = false;
+
+        function loadTopic() {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let html = `<h2>${topic.title}</h2>`;
+            topic.paragraphs.forEach((p, i) => {
+                html += `<div id="p-${i}"><div class="english-text" onclick="playSingleSentence(${i})" title="Kattints ide a mondat felolvasásához!">${p.en}</div><div class="hungarian-text">${p.hu}</div></div>`;
+            });
+            document.getElementById("storyContent").innerHTML = html;
+        }
+
+        function updateSpeed() {
+            const speed = document.getElementById("speedRange").value;
+            document.getElementById("speedValue").innerText = speed;
+        }
+
+        function stopSpeech() {
+            synth.cancel(); 
+            isPlaying = false; 
+            isPaused = false;
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "▶ Indítás"; 
+            btn.className = "";
+            pauseBtn.style.display = "none";
+            pauseBtn.innerText = "⏸ Szünet";
+            document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+        }
+
+        function toggleSpeech() {
+            if (isPaused) {
+                synth.resume();
+                isPaused = false;
+                document.getElementById("pauseBtn").innerText = "⏸ Szünet";
+                return;
+            }
+            if (isPlaying) { 
+                stopSpeech(); 
+                return; 
+            }
+            
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            isPlaying = true;
+            isPaused = false;
+            
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "⏹ Leállítás"; 
+            btn.className = "stop";
+            pauseBtn.style.display = "inline-block";
+            pauseBtn.innerText = "⏸ Szünet";
+
+            let fullText = topic.paragraphs.map(p => p.en).join("  ");
+            utterance = new SpeechSynthesisUtterance(fullText);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') { highlightWord(fullText, event.charIndex, event.charLength); }
+            };
+            utterance.onend = stopSpeech;
+            synth.speak(utterance);
+        }
+
+        function togglePause() {
+            if (!isPlaying) return;
+            
+            const pauseBtn = document.getElementById("pauseBtn");
+            if (!isPaused) {
+                synth.pause();
+                isPaused = true;
+                pauseBtn.innerText = "▶ Folytatás";
+            } else {
+                synth.resume();
+                isPaused = false;
+                pauseBtn.innerText = "⏸ Szünet";
+            }
+        }
+
+        function playSingleSentence(pIdx) {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const p = topics[index].paragraphs[pIdx];
+            
+            utterance = new SpeechSynthesisUtterance(p.en);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+            
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') {
+                    const localCharIndex = event.charIndex;
+                    const charLength = event.charLength;
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+            };
+            
+            utterance.onend = function() {
+                textNode.innerHTML = p.en;
+            };
+
+            synth.speak(utterance);
+        }
+
+        function highlightWord(fullText, charIndex, charLength) {
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let textCounter = 0;
+            topic.paragraphs.forEach((p, pIdx) => {
+                const startOfPara = textCounter;
+                const endOfPara = startOfPara + p.en.length;
+                if (charIndex >= startOfPara && charIndex <= endOfPara) {
+                    const localCharIndex = charIndex - startOfPara;
+                    const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+                textCounter += p.en.length + 2;
+            });
+        }
+        loadTopic();
+    </script>
+</body>
+</html>

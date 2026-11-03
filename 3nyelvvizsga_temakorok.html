@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Alapfokú Szóbeli Felkészítő - Főmenü</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --accent: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--text-main);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -8px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-top: 5px solid var(--primary);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--text-main);
+            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-start {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .card:hover .btn-start {
+            background-color: var(--primary-dark);
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Angol Szóbeli Felkészítő</h1>
+            <p class="subtitle">A2 Alapfokú Nyelvvizsga Interaktív Olvasókönyv &bull; Válassz egy modult a kezdéshez!</p>
+        </header>
+
+        <div class="grid">
+            <!-- 1-5. Téma -->
+            <a href="3olvas_vizsga1_5.html" class="card">
+                <div>
+                    <div class="card-icon">👤</div>
+                    <h3>1–5. Témakör</h3>
+                    <p>Személyiség, külső, öltözködés, emberi kapcsolatok, család és lakókörnyezet.</p>
+                </div>
+                <button class="btn-start">Megnyitás ▶</button>
+            </a>
+
+            <!-- 6-10. Téma -->
+            <a href="3olvas_vizsga 6_10.html" class="card">
+                <div>
+                    <div class="card-icon">🎉</div>
+                    <h3>6–10. Témakör</h3>
+                    <p>Ünnepek, média, olvasás, mozi, művelődés, hobbik, valamint tanulás és iskolarendszer.</p>
+                </div>
+                <button class="btn-start">Megnyitás ▶</button>
+            </a>
+
+            <!-- 11-15. Téma -->
+            <a href="3olvas_vizsga 11_15.html" class="card">
+                <div>
+                    <div class="card-icon">💼</div>
+                    <h3>11–15. Témakör</h3>
+                    <p>Munka, sport, egészség, egészséges táplálkozás, szolgáltatások és mindennapi vásárlás.</p>
+                </div>
+                <button class="btn-start">Megnyitás ▶</button>
+            </a>
+
+            <!-- 16-21. Téma -->
+            <a href="3olvas_vizsga 16_21.html" class="card">
+                <div>
+                    <div class="card-icon">🌍</div>
+                    <h3>16–21. Témakör</h3>
+                    <p>Közlekedés, utazásszervezés, időjárás, környezetvédelem, telekommunikáció és országismeret.</p>
+                </div>
+                <button class="btn-start">Megnyitás ▶</button>
+            </a>
+
+            <!-- 22-26. Téma (Javítva aláhúzásos fájlnévre) -->
+            <a href="3olvas_vizsga 22_26.html" class="card">
+                <div>
+                    <div class="card-icon">🚀</div>
+                    <h3>22–26. Témakör</h3>
+                    <p>Technológia, utazási élmények, hagyományok, fenntarthatóság és különleges szabadidős élmények.</p>
+                </div>
+                <button class="btn-start">Megnyitás ▶</button>
+            </a>
+        </div>
+
+        <footer>
+            <p>Sok sikert kívánok a nyelvvizsgához! 🚀</p>
+        </footer>
+    </div>
+
+</body>
+</html>

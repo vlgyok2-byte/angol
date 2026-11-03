@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Felkészítő Olvasókönyv (16-21. Téma)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .controls { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between; }
+        select, button, input { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background-color: #3498db; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button.stop { background-color: #e74c3c; }
+        button.pause { background-color: #f39c12; }
+        .story-container { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); line-height: 1.8; font-size: 18px; }
+        .english-text { font-weight: 500; margin-bottom: 8px; cursor: pointer; transition: color 0.2s; }
+        .english-text:hover { color: #3498db; }
+        .hungarian-text { color: #7f8c8d; font-size: 16px; border-top: 1px dashed #ddd; padding-top: 8px; margin-bottom: 25px; }
+        .highlight { background-color: #ffeaa7; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Angol Szóbeli Felkészítő (A2 szint - 16-21. Téma)</h1>
+
+    <div class="controls">
+        <div>
+            <label for="topicSelect">Válassz témakört: </label>
+            <select id="topicSelect" onchange="loadTopic()">
+                <option value="0">16. Közlekedés (Transportation)</option>
+                <option value="1">17. Utazás megszervezése (Travel Organization)</option>
+                <option value="2">18. Időjárás és környezetvédelem (Weather and Environment)</option>
+                <option value="3">19. Telekommunikáció (Telecommunications)</option>
+                <option value="4">20. Magyarország (Hungary)</option>
+                <option value="5">21. A célnyelv országai (English-Speaking Countries)</option>
+            </select>
+        </div>
+        <div>
+            <label for="speedRange">Sebesség: <span id="speedValue">0.9</span>x</label>
+            <input type="range" id="speedRange" min="0.5" max="1.5" step="0.1" value="0.9" oninput="updateSpeed()">
+        </div>
+        <div>
+            <button id="playBtn" onclick="toggleSpeech()">▶ Indítás</button>
+            <button id="pauseBtn" onclick="togglePause()" style="display:none;" class="pause">⏸ Szünet</button>
+        </div>
+    </div>
+
+    <div class="story-container" id="storyContent"></div>
+
+    <script>
+        const topics = [
+            {
+                title: "16. Közlekedés (Transportation)",
+                paragraphs: [
+                    { en: "In my daily transportation, I usually take the bus to get to my workplace.", hu: "A napi közlekedésem során általában busszal járok a munkahelyemre." },
+                    { en: "For me, urban public transport is practical, fast, and environmentally friendly.", hu: "Számomra a városi tömegközlekedés praktikus, gyors és környezetbarát." },
+                    { en: "I usually travel by underground, tram, or bus using my monthly pass.", hu: "Általában metróval, villamossal vagy busszal utazom a havi bérletemmel." },
+                    { en: "Sometimes, when I am in a hurry or carry heavy bags, I call a taxi.", hu: "Néha, amikor sietek vagy nehéz táskákat cipelek, hívok egy taxit." },
+                    { en: "For longer journeys between cities, I choose interurban transport like trains and coaches.", hu: "A városok közötti távolsági utazásokhoz olyan helyközi közlekedési eszközöket választok, mint a vonatok és a távolsági buszok." },
+                    { en: "If I want to travel abroad quickly, I prefer taking a plane.", hu: "Ha gyorsan akarok külföldre utazni, jobban szeretek repülőre ülni." },
+                    { en: "Traveling by ship or ferry is also a wonderful and relaxing experience for me on water.", hu: "Hajóval vagy komppal utazni szintén csodálatos és pihentető élmény számomra a vízen." },
+                    { en: "Regarding individual transport, I sometimes drive my own car or ride a bicycle.", hu: "Az egyéni közlekedést illetően néha a saját autómat vezetem vagy kerékpározom." },
+                    { en: "I like cycling because it keeps me healthy and helps avoid traffic jams.", hu: "Szeretek kerékpározni, mert egészségesen tart és segít elkerülni a dugókat." },
+                    { en: "Walking in the city is healthy for me, but I always pay attention to traffic lights at pedestrian crossings.", hu: "A gyalogos közlekedés egészséges számomra a városban, de a gyalogátkelőhelyeken mindig figyelek a lámpákra." }
+                ]
+            },
+            {
+                title: "17. Kül- és belföldi utazás megszervezése (Travel Organization)",
+                paragraphs: [
+                    { en: "When I organize a domestic or foreign trip, I always plan everything carefully.", hu: "Amikor belföldi vagy külföldi utazást szervezek, mindig mindent gondosan eltervezek." },
+                    { en: "First, I choose my destination and find suitable accommodation options for my budget.", hu: "Először kiválasztom az úti célomat, és a keretemnek megfelelő szálláslehetőségeket keresek." },
+                    { en: "I like staying in comfortable hotels, cosy guesthouses, or affordable youth hostels.", hu: "Szeretek kényelmes szállodákban, hangulatos panziókban vagy megfizethető ifjúsági szállókban megszállni." },
+                    { en: "Today, I easily book my rooms online using travel websites or mobile applications.", hu: "Ma már könnyen lefoglalom a szobáimat online utazási weboldalak vagy mobilalkalmazások segítségével." },
+                    { en: "I always buy my tickets in advance to check timetables and get special discounts.", hu: "Mindig elővételben veszem meg a jegyeimet, hogy ellenőrizzem a menetrendeket és kedvezményeket kapjak." },
+                    { en: "I often look for student or seasonal discounts to travel at reduced prices.", hu: "Gyakran keresek diák- vagy szezonális kedvezményeket, hogy alacsonyabb áron utazhassak." },
+                    { en: "When I travel abroad, I always check my passport validity and exchange currency in time.", hu: "Amikor külföldre utazom, mindig időben ellenőrzöm az meglévő útlevelem érvényességét és pénzt váltok." }
+                ]
+            },
+            {
+                title: "18. Időjárás, évszakok, környezetvédelem (Weather and Environment)",
+                paragraphs: [
+                    { en: "I enjoy watching how weather and seasons change throughout the year.", hu: "Élvezem nézni, ahogyan az időjárás és az évszakok változnak az év során." },
+                    { en: "In spring, I love seeing nature wake up, flowers bloom, and feeling the warmer weather.", hu: "Tavasszal imádom látni a természet ébredését, a virágok nyílását és érezni a melegebb időt." },
+                    { en: "Summer is hot and sunny, which is my favourite time for spending days at the beach.", hu: "A nyár meleg és napos, ami a kedvenc időszakom a tengerparti napok eltöltésére." },
+                    { en: "In autumn, I enjoy the colorful leaves, even on windy days with rain showers.", hu: "Ősszel élvezem a színes leveleket, még a szeles és esős napokon is." },
+                    { en: "Winter is usually cold, but I like watching the snow and ice outside.", hu: "A tél általában hideg, de szeretem nézni a havat és a jeget a szabadban." },
+                    { en: "Environmental protection is very important to me for saving our planet.", hu: "A környezetvédelem nagyon fontos számomra a bolygónk megóvása érdekében." },
+                    { en: "At home, I always practice selective waste collection by separating paper, plastic, and glass.", hu: "Otthon mindig gyakorlom a szelektív szemétgyűjtést a papír, a műanyag és az üveg különválasztásával." },
+                    { en: "I practice home energy-saving by turning off unnecessary lights and saving heating energy.", hu: "Úgy takarékoskodom az energiával otthon, hogy lekapcsolom a felesleges fényeket és spórolok a fűtéssel." },
+                    { en: "I believe my small everyday actions help protect our environment for future generations.", hu: "Hiszem, hogy az apró mindennapi cselekedeteim segítenek megvédeni a környezetet a jövő generációk számára." }
+                ]
+            },
+            {
+                title: "19. Telekommunikáció (Telecommunications)",
+                paragraphs: [
+                    { en: "I use telecommunication tools every day to connect with people across the world instantly.", hu: "Minden nap használok távközlési eszközöket, hogy azonnal kapcsolatba léphessek a világ bármely pontján élő emberekkel." },
+                    { en: "I still use postal services for sending parcels, buying stamps, and managing financial transactions.", hu: "Még mindig használok postai szolgáltatásokat csomagok feladására, bélyegvásárlásra és pénzügyi ügyek intézésére." },
+                    { en: "I know that in the past people sent telegrams, but today my smartphone is much faster.", hu: "Tudom, hogy a múltban az emberek táviratot küldtek, de ma az okostelefonom sokkal gyorsabb." },
+                    { en: "I always have my smartphone with me to make phone calls and send text messages anytime.", hu: "Mindig nálam van az okostelefonom, hogy bármikor telefonálhassak és szöveges üzenetet küldhessek." },
+                    { en: "I use my computer and the internet to send emails, browse websites, and work online.", hu: "A számítógépemet és az internetet használom e-mailek küldésére, weboldalak böngészésére és online munkára." },
+                    { en: "People often ask me if I still write traditional letters nowadays.", hu: "Az emberek gyakran megkérdezik tőlem, hogy írok-e még hagyományos leveleket manapság." },
+                    { en: "Traditional letters are rare for me, but I still love sending real greeting cards for birthdays and Christmas.", hu: "A hagyományos levelek ritkák számomra, de még mindig imádok valódi üdvözlőlapokat küldeni születésnapra és karácsonyra." }
+                ]
+            },
+            {
+                title: "20. Magyarország (Hungary)",
+                paragraphs: [
+                    { en: "I am proud to live in Hungary, which is a beautiful country located in the heart of Europe.", hu: "Büszke vagyok rá, hogy Magyarországon élhetek, ami egy gyönyörű ország Európa szívében." },
+                    { en: "My place of residence is a pleasant town with friendly people and green parks.", hu: "A lakóhelyem egy kellemes kisváros barátságos emberekkel és zöld parkokkal." },
+                    { en: "I love visiting our capital city, Budapest, which is famous for the River Danube and historic bridges.", hu: "Szeretek ellátogatni a fővárosunkba, Budapestre, amely híres a Dunáról és a történelmi hidakról." },
+                    { en: "My favourite tourist attractions are the Hungarian Parliament, Buda Castle, and Gellért Hill.", hu: "A kedvenc turisztikai látványosságaim az Országház, a Budavári Palota és a Gellért-hegy." },
+                    { en: "I also love going to Lake Balaton, which we often call the Hungarian sea.", hu: "A Balatonra is imádok lejárni, amelyet gyakran magyar tengernek nevezünk." },
+                    { en: "I really enjoy Hungarian thermal baths, delicious traditional food, and fine wine.", hu: "Nagyon élvezem a magyar termálfürdőket, a finom hagyományos ételeket és a jó borokat." }
+                ]
+            },
+            {
+                title: "21. A célnyelv országai (English-Speaking Countries)",
+                paragraphs: [
+                    { en: "I am deeply interested in countries where English is spoken as an official language.", hu: "Mélyen érdeklődöm azon országok iránt, ahol az angolt hivatalos nyelvként beszélik." },
+                    { en: "I enjoy learning general information about the United Kingdom, its capital London, and the royal family.", hu: "Élvezem az Egyesült Királyságról, annak fővárosáról, Londonról és a királyi családról szóló információk tanulmányozását." },
+                    { en: "I dream of visiting major tourist attractions in London, like Big Ben, the London Eye, and the Tower of London.", hu: "Arról álmodozom, hogy meglátogatom London főbb turisztikai látványosságait, mint a Big Ben, a London Eye és a Tower." },
+                    { en: "I also find the USA fascinating with its famous cities like New York, Los Angeles, and Washington.", hu: "Az USA-t is lenyűgözőnek találom olyan híres városaival, mint New York, Los Angeles és Washington." },
+                    { en: "I would love to see key landmarks in the US like the Statue of Liberty and the Grand Canyon.", hu: "Nagyon szeretném megnézni az USA kulcsfontosságú nevezetességeit, mint a Szabadság-szobor és a Grand Canyon." },
+                    { en: "I also hope to travel to other English-speaking countries like Canada, Australia, and New Zealand to explore their nature.", hu: "Remélem, hogy más angol nyelvű országokba is eljutok, mint Kanada, Ausztrália és Új-Zéland, hogy felfedezzem a természetüket." }
+                ]
+            }
+        ];
+
+        let synth = window.speechSynthesis, utterance = null, isPlaying = false, isPaused = false;
+
+        function loadTopic() {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let html = `<h2>${topic.title}</h2>`;
+            topic.paragraphs.forEach((p, i) => {
+                html += `<div id="p-${i}"><div class="english-text" onclick="playSingleSentence(${i})" title="Kattints ide a mondat felolvasásához!">${p.en}</div><div class="hungarian-text">${p.hu}</div></div>`;
+            });
+            document.getElementById("storyContent").innerHTML = html;
+        }
+
+        function updateSpeed() {
+            const speed = document.getElementById("speedRange").value;
+            document.getElementById("speedValue").innerText = speed;
+        }
+
+        function stopSpeech() {
+            synth.cancel(); 
+            isPlaying = false; 
+            isPaused = false;
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "▶ Indítás"; 
+            btn.className = "";
+            pauseBtn.style.display = "none";
+            pauseBtn.innerText = "⏸ Szünet";
+            document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+        }
+
+        function toggleSpeech() {
+            if (isPaused) {
+                synth.resume();
+                isPaused = false;
+                document.getElementById("pauseBtn").innerText = "⏸ Szünet";
+                return;
+            }
+            if (isPlaying) { 
+                stopSpeech(); 
+                return; 
+            }
+            
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            isPlaying = true;
+            isPaused = false;
+            
+            const btn = document.getElementById("playBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            btn.innerText = "⏹ Leállítás"; 
+            btn.className = "stop";
+            pauseBtn.style.display = "inline-block";
+            pauseBtn.innerText = "⏸ Szünet";
+
+            let fullText = topic.paragraphs.map(p => p.en).join("  ");
+            utterance = new SpeechSynthesisUtterance(fullText);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') { highlightWord(fullText, event.charIndex, event.charLength); }
+            };
+            utterance.onend = stopSpeech;
+            synth.speak(utterance);
+        }
+
+        function togglePause() {
+            if (!isPlaying) return;
+            
+            const pauseBtn = document.getElementById("pauseBtn");
+            if (!isPaused) {
+                synth.pause();
+                isPaused = true;
+                pauseBtn.innerText = "▶ Folytatás";
+            } else {
+                synth.resume();
+                isPaused = false;
+                pauseBtn.innerText = "⏸ Szünet";
+            }
+        }
+
+        function playSingleSentence(pIdx) {
+            stopSpeech();
+            const index = document.getElementById("topicSelect").value;
+            const p = topics[index].paragraphs[pIdx];
+            
+            utterance = new SpeechSynthesisUtterance(p.en);
+            utterance.lang = "en-US";
+            utterance.rate = document.getElementById("speedRange").value;
+
+            const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+            
+            utterance.onboundary = function(event) {
+                if (event.name === 'word') {
+                    const localCharIndex = event.charIndex;
+                    const charLength = event.charLength;
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+            };
+            
+            utterance.onend = function() {
+                textNode.innerHTML = p.en;
+            };
+
+            synth.speak(utterance);
+        }
+
+        function highlightWord(fullText, charIndex, charLength) {
+            const index = document.getElementById("topicSelect").value;
+            const topic = topics[index];
+            let textCounter = 0;
+            topic.paragraphs.forEach((p, pIdx) => {
+                const startOfPara = textCounter;
+                const endOfPara = startOfPara + p.en.length;
+                if (charIndex >= startOfPara && charIndex <= endOfPara) {
+                    const localCharIndex = charIndex - startOfPara;
+                    const textNode = document.querySelector(`#p-${pIdx} .english-text`);
+                    const before = p.en.substring(0, localCharIndex);
+                    const word = p.en.substring(localCharIndex, localCharIndex + charLength);
+                    const after = p.en.substring(localCharIndex + charLength);
+                    document.querySelectorAll('.english-text').forEach(el => el.innerHTML = el.innerText);
+                    textNode.innerHTML = `${before}<span class="highlight">${word}</span>${after}`;
+                }
+                textCounter += p.en.length + 2;
+            });
+        }
+        loadTopic();
+    </script>
+</body>
+</html>
