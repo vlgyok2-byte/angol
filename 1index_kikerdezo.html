@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Gyakorló - Nyitóoldal</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --primary: #3b82f6;
+            --primary-hover: #60a5fa;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.5;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .title-group h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .title-group p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: var(--card-shadow);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-muted);
+        }
+
+        .btn-start {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card:hover .btn-start {
+            color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title-group">
+                <h1>Angol Szóbeli Gyakorló modulok</h1>
+                <p>Válassz egy témakört a gyakorlás megkezdéséhez!</p>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙 Sötét mód</button>
+        </header>
+
+        <main class="grid">
+            <a href="no vs not_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"No" vs "Not"</h2>
+                    <p class="card-desc">Gyakorold a tagadószavak helyes használatát különböző mondatkörnyezetekben.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">8 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Hogy tetszettet_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Hogy tetszett?"</h2>
+                    <p class="card-desc">Véleménykérő és értékelő kifejezések gyakorlása angolul.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">10 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Tought_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Thought" és hasonló szavak</h2>
+                    <p class="card-desc">Though, thought, through, thorough, tough és hasonló kifejezések megkülönböztetése.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">6 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Could_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Could" segédige</h2>
+                    <p class="card-desc">Készségek, udvarias kérések és feltételes mód gyakorlása.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">16 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Draw_ige_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Draw" ige</h2>
+                    <p class="card-desc">A rajzolással és ábrázolással kapcsolatos kifejezések gyakorlása.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">25 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Have_ige_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Have" ige</h2>
+                    <p class="card-desc">Birtoklás, műveltetés, tevékenységek és összetett igeidők használata.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">20 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Make_ige_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Make" ige</h2>
+                    <p class="card-desc">Készítés, kényszerítés, pénzkeresés és állandósult szókapcsolatok.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">18 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Take_ige_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Take" ige</h2>
+                    <p class="card-desc">Elvitel, időtartam, közlekedés és elviselés kifejezései.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">18 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Go_ige_kikerdezo.html" class="card">
+                <div>
+                    <h2 class="card-title">"Go" ige</h2>
+                    <p class="card-desc">Haladás, állapotváltozás, jövő idő és gyakori kifejezések.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">16 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+
+            <a href="Put_ige_kikerdezo_02.html" class="card">
+                <div>
+                    <h2 class="card-title">"Put" ige</h2>
+                    <p class="card-desc">Helyezés, megfogalmazás, szavakba öntés és állandósult kifejezések.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge">40 kérdés</span>
+                    <span class="btn-start">Indítás &rarr;</span>
+                </div>
+            </a>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            document.querySelector('.theme-toggle').textContent = isDark ? '☀️ Világos mód' : '🌙 Sötét mód';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Téma betöltése megjegyzett beállítás alapján
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            document.querySelector('.theme-toggle').textContent = '☀️ Világos mód';
+        }
+    </script>
+</body>
+</html>
