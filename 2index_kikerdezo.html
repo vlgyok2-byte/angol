@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Szóbeli Gyakorló - Nyitóoldal</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --primary-color: #2b7a78;
+            --accent-color: #17252a;
+        }
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --primary-color: #3aafa9;
+            --accent-color: #def2f1;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .theme-toggle {
+            cursor: pointer;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .start-btn {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .start-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>Angol Szóbeli Gyakorló modulok</h1>
+            <p style="margin: 5px 0 0 0;">Válassz egy témakört a gyakorlás megkezdéséhez!</p>
+        </div>
+        <button class="theme-toggle" onclick="toggleDarkMode()">🌙 Sötét mód</button>
+    </header>
+
+    <main class="grid">
+        <!-- ÚJ MODUL -->
+        <div class="card">
+            <div>
+                <h2>"Ügyes vagy! Szép munka!"</h2>
+                <p>Dicsérő és elismerő kifejezések gyakorlása angolul – 16 természetes kifejezés.</p>
+            </div>
+            <div class="card-footer">
+                <span>16 kérdés</span>
+                <a href="ugyes_vagy_kikerdezo.html" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <!-- Eredeti modulok -->
+        <div class="card">
+            <div>
+                <h2>"No" vs "Not"</h2>
+                <p>Gyakorold a tagadószavak helyes használatát különböző mondatkörnyezetekben.</p>
+            </div>
+            <div class="card-footer">
+                <span>8 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Hogy tetszett?"</h2>
+                <p>Véleménykérő és értékelő kifejezések gyakorlása angolul.</p>
+            </div>
+            <div class="card-footer">
+                <span>10 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Thought" és hasonló szavak</h2>
+                <p>Though, thought, through, thorough, tough és hasonló kifejezések megkülönböztetése.</p>
+            </div>
+            <div class="card-footer">
+                <span>6 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Could" segédige</h2>
+                <p>Készségek, udvarias kérések és feltételes mód gyakorlása.</p>
+            </div>
+            <div class="card-footer">
+                <span>16 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Draw" ige</h2>
+                <p>A rajzolással és ábrázolással kapcsolatos kifejezések gyakorlása.</p>
+            </div>
+            <div class="card-footer">
+                <span>25 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Have" ige</h2>
+                <p>Birtoklás, műveltetés, tevékenységek és összetett igeidők használata.</p>
+            </div>
+            <div class="card-footer">
+                <span>20 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Make" ige</h2>
+                <p>Készítés, kényszerítés, pénzkeresés és állandósult szókapcsolatok.</p>
+            </div>
+            <div class="card-footer">
+                <span>18 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Take" ige</h2>
+                <p>Elvitel, időtartam, közlekedés és elviselés kifejezései.</p>
+            </div>
+            <div class="card-footer">
+                <span>18 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Go" ige</h2>
+                <p>Haladás, állapotváltozás, jövő idő és gyakori kifejezések.</p>
+            </div>
+            <div class="card-footer">
+                <span>16 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div>
+                <h2>"Put" ige</h2>
+                <p>Helyezés, megfogalmazás, szavakba öntés és állandósult kifejezések.</p>
+            </div>
+            <div class="card-footer">
+                <span>40 kérdés</span>
+                <a href="#" class="start-btn">Indítás →</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const btn = document.querySelector('.theme-toggle');
+        if(document.body.classList.contains('dark-mode')) {
+            btn.textContent = '☀️ Világos mód';
+        } else {
+            btn.textContent = '🌙 Sötét mód';
+        }
+    }
+</script>
+</body>
+</html>
