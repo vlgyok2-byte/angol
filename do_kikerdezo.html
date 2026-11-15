@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Angol szóbeli gyakorló - "Jó reggelt! Reggeli a családdal."</title>
+<title>Angol szóbeli gyakorló - "do"</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -112,7 +112,7 @@ body.dark button {
 </style>
 </head>
 <body>
-<h1>Angol szóbeli gyakorló - "Jó reggelt! Reggeli a családdal."</h1>
+<h1>Angol szóbeli gyakorló - "Do"</h1>
 
 <div class="panel">
     <div class="controls-row">
@@ -135,7 +135,7 @@ body.dark button {
 <div id="answers"></div>
 <div id="result"></div>
 
-<p>⏳ Hátralévő idő: <span id="timer">8</span> mp</p>
+<p>⏳ Hátralévő idő: <span id="timer">18</span> mp</p>
 <p>Kérdés: <span id="current">0</span>/<span id="total">0</span></p>
 <p>Pont: <span id="score">0</span></p>
 <p>Teljesítmény: <span id="percent">0</span>%</p>
@@ -171,7 +171,7 @@ let score = 0;
 let lastText = "";
 let lastLang = "en-US";
 let timer = null;
-let timeLeft = 8;
+let timeLeft = 18;
 let quizEnded = false;
 let waitingNextQuestion = false;
 
@@ -249,7 +249,7 @@ function resetQuiz() {
     wrongQuestionKeys = new Set();
     index = 0;
     score = 0;
-    timeLeft = 8;
+    timeLeft = 18;
     quizEnded = false;
     waitingNextQuestion = false;
 
@@ -269,7 +269,7 @@ function disableChoices() {
 
 function startTimer(correct) {
     clearInterval(timer);
-    timeLeft = 8;
+    timeLeft = 18;
     document.getElementById("timer").textContent = timeLeft;
 
     timer = setInterval(() => {
@@ -456,7 +456,7 @@ function retryWrong() {
     wrongQuestionKeys = new Set();
     index = 0;
     score = 0;
-    timeLeft = 8;
+    timeLeft = 18;
     quizEnded = false;
     waitingNextQuestion = false;
 
