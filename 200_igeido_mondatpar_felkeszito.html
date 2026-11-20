@@ -1,0 +1,3839 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>200 Angol Igeidő Mondatpár (Jelen, Múlt, Jövő) – Nyelvvizsga Felkészítő</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .card-transition {
+            transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        .speaking-active {
+            animation: pulse-ring 1.5s infinite;
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Felső navigációs és hangbeállítási sáv -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                <!-- Cím és haladás -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-indigo-700 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+                            200
+                        </div>
+                        <div>
+                            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Jelen, Múlt és Jövő Igeidők Mesterfokon</h1>
+                            <p class="text-xs text-slate-500">Alapfokú (A2–B1) nyelvvizsga felkészítő • 200 × 3 mondat • Hangos tananyag</p>
+                        </div>
+                    </div>
+
+                    <!-- Mobil haladás jelvény -->
+                    <div class="lg:hidden flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span id="mobileProgressBadge" class="text-xs font-bold text-emerald-800">0/200</span>
+                    </div>
+                </div>
+
+                <!-- Hangbeállítások és Haladás -->
+                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 sm:gap-3">
+                    <!-- Akcentus választó -->
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setAccent('en-GB')" id="btn-en-GB" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            🇬🇧 Brit (UK)
+                        </button>
+                        <button onclick="setAccent('en-US')" id="btn-en-US" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🇺🇸 Amerikai (US)
+                        </button>
+                    </div>
+
+                    <!-- Sebesség választó -->
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setRate(1.0)" id="btn-rate-1" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            1.0x Normál
+                        </button>
+                        <button onclick="setRate(0.72)" id="btn-rate-slow" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🐢 0.75x Lassú
+                        </button>
+                    </div>
+
+                    <!-- Asztali haladásjelző -->
+                    <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl">
+                        <div>
+                            <div class="flex items-center justify-between text-xs gap-4 mb-1">
+                                <span class="font-medium text-slate-600">Elsajátítva:</span>
+                                <span id="desktopProgressText" class="font-bold text-emerald-700">0 / 200 (0%)</span>
+                            </div>
+                            <div class="w-36 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div id="desktopProgressBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fő menüfülek -->
+            <nav class="flex items-center gap-1.5 sm:gap-2 mt-3 pt-2.5 border-t border-slate-100 overflow-x-auto pb-1">
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition">
+                    <span>🗂️</span> Tanulókártyák
+                </button>
+                <button onclick="switchTab('list')" id="tab-list" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📋</span> Teljes Táblázat (1–200)
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>🎯</span> Kvíz & Hallásértés
+                </button>
+                <button onclick="switchTab('grammar')" id="tab-grammar" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📘</span> Igeidő Kisokos
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Globális Szűrő Sáv (Tanulókártyákhoz és Listához) -->
+    <section id="globalFilterBar" class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Vizsga fókusz kapcsoló -->
+                <button onclick="toggleCoreFilter()" id="btnCoreFilter" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm">
+                    <span id="coreCheckIcon">⭐</span>
+                    <span>Alapfokú vizsga törzsanyag (A2–B1)</span>
+                </button>
+
+                <!-- Kategória választó -->
+                <select id="categorySelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Összes nyelvtani csoport</option>
+                    <option value="Egyszerű igeidők – Szabályos igék">1. Egyszerű igeidők – Szabályos igék (-ed)</option>
+                    <option value="Egyszerű igeidők – Rendhagyó igék">2. Egyszerű igeidők – Rendhagyó igék (V2)</option>
+                    <option value="Folyamatos igeidők">3. Folyamatos igeidők (be + -ing)</option>
+                    <option value="Befejezett igeidők">4. Befejezett igeidők (have/had + V3)</option>
+                    <option value="Létige és állapotigék">5. Létige (to be) és állapotigék</option>
+                </select>
+
+                <!-- Státusz szűrő -->
+                <select id="statusSelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Minden állapot</option>
+                    <option value="UNLEARNED">Még gyakorlandó</option>
+                    <option value="LEARNED">Már megtanultam ✓</option>
+                </select>
+            </div>
+
+            <!-- Találatok száma + Hangoskönyv mód -->
+            <div class="flex items-center justify-between md:justify-end gap-3">
+                <span id="filteredCountLabel" class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">
+                    Szűrt tételek: 200 db
+                </span>
+                <button onclick="toggleAutoPlay()" id="btnAutoPlay" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition">
+                    <span id="autoPlayIcon">▶️</span>
+                    <span id="autoPlayText">Hangoskönyv mód</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FŐ TARTALMI TERÜLET -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+
+        <!-- 1. NÉZET: TANULÓKÁRTYÁK (FLASHCARDS) -->
+        <div id="view-flashcards" class="space-y-6">
+            <!-- Kártya vezérlő fejléc -->
+            <div class="max-w-2xl mx-auto flex items-center justify-between text-sm text-slate-600">
+                <span id="fcPosition" class="font-bold text-slate-800 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+                    1 / 200. kártya
+                </span>
+                <div class="flex items-center gap-2">
+                    <button onclick="shuffleFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔀 Keverés
+                    </button>
+                    <button onclick="resetOrderFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔢 Sorrendben
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3D Megfordítható Kártya -->
+            <div id="flashcardContainer" class="max-w-2xl mx-auto perspective-1000">
+                <div id="flashcardInner" onclick="flipCard()" class="relative w-full min-h-[560px] sm:min-h-[580px] cursor-pointer transform-style-3d card-transition">
+                    
+                    <!-- ELŐLAP (ANGOL 3 IGEIDŐ) -->
+                    <div id="fcFrontFace" class="absolute inset-0 backface-hidden bg-white rounded-3xl border-2 border-slate-200 shadow-lg p-5 sm:p-7 flex flex-col justify-between">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="fcNumber" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">#1</span>
+                                <span id="fcCategory" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-semibold text-xs">Egyszerű igeidők – Szabályos igék</span>
+                                <span id="fcCoreBadge" class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>
+                            </div>
+                            <span id="fcLearnedBadge" class="hidden px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs">✓ Megtanulva</span>
+                        </div>
+
+                        <div class="my-auto space-y-3 py-3">
+                            <!-- Present Tense -->
+                            <div class="bg-blue-50/80 rounded-2xl p-3.5 border border-blue-200/80 flex items-center justify-between gap-3">
+                                <div>
+                                    <span class="inline-block text-[11px] uppercase tracking-wider font-extrabold text-blue-700 mb-0.5">🔵 Present (Jelen idő)</span>
+                                    <p id="fcPresent" class="text-lg sm:text-xl font-bold text-slate-900">I play cricket.</p>
+                                </div>
+                                <button onclick="event.stopPropagation(); speakCurrentPart('present', this)" class="shrink-0 w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-xs transition" title="Jelen idő meghallgatása">
+                                    🔊
+                                </button>
+                            </div>
+
+                            <!-- Past Tense -->
+                            <div class="bg-emerald-50/80 rounded-2xl p-3.5 border border-emerald-200/80 flex items-center justify-between gap-3">
+                                <div>
+                                    <span class="inline-block text-[11px] uppercase tracking-wider font-extrabold text-emerald-700 mb-0.5">🟢 Past (Múlt idő)</span>
+                                    <p id="fcPast" class="text-lg sm:text-xl font-bold text-slate-900">I played cricket.</p>
+                                </div>
+                                <button onclick="event.stopPropagation(); speakCurrentPart('past', this)" class="shrink-0 w-10 h-10 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-xs transition" title="Múlt idő meghallgatása">
+                                    🔊
+                                </button>
+                            </div>
+
+                            <!-- Future Tense -->
+                            <div class="bg-purple-50/80 rounded-2xl p-3.5 border border-purple-200/80 flex items-center justify-between gap-3">
+                                <div>
+                                    <span class="inline-block text-[11px] uppercase tracking-wider font-extrabold text-purple-700 mb-0.5">🟣 Future (Jövő idő)</span>
+                                    <p id="fcFuture" class="text-lg sm:text-xl font-bold text-slate-900">I will play cricket.</p>
+                                </div>
+                                <button onclick="event.stopPropagation(); speakCurrentPart('future', this)" class="shrink-0 w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center shadow-xs transition" title="Jövő idő meghallgatása">
+                                    🔊
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Összes meghallgatása gomb -->
+                        <div class="flex items-center justify-center pt-1" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentAllThree(this)" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                                <span>🎧</span> Mindhárom igeidő meghallgatása egymás után
+                            </button>
+                        </div>
+
+                        <p class="text-center text-xs text-slate-400 mt-2.5">Kattints a kártyára a magyar jelentéshez és nyelvtani tipphez ↻</p>
+                    </div>
+
+                    <!-- HÁTLAP (MAGYAR FORDÍTÁS & NYELVTANI MAGYARÁZAT) -->
+                    <div id="fcBackFace" class="absolute inset-0 backface-hidden rotate-y-180 pointer-events-none bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-3xl border-2 border-slate-700 shadow-xl p-5 sm:p-7 flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+                            <span id="fcBackNumber" class="px-2.5 py-1 rounded-lg bg-white/10 text-amber-300 font-bold text-xs">#1 • Magyar fordítások</span>
+                            <span class="text-xs text-slate-400">Kattints a visszafordításhoz ↺</span>
+                        </div>
+
+                        <!-- 3 Különálló, tagolt blokk mindhárom igeidőhöz angolul és magyarul -->
+                        <div class="my-auto space-y-2.5 py-2.5">
+                            <!-- Present -->
+                            <div class="bg-blue-950/50 border border-blue-400/25 rounded-2xl px-4 py-2.5 text-left">
+                                <div class="flex items-center justify-between gap-2 mb-0.5">
+                                    <span class="text-[11px] uppercase tracking-wider font-extrabold text-blue-300">🔵 Present (Jelen idő)</span>
+                                    <span id="fcBackPresent" class="text-xs font-semibold text-blue-200/90">I play cricket.</span>
+                                </div>
+                                <p id="fcBackPresentHu" class="text-sm sm:text-base font-bold text-white leading-snug">Krikettezem / krikettet játszom.</p>
+                            </div>
+
+                            <!-- Past -->
+                            <div class="bg-emerald-950/50 border border-emerald-400/25 rounded-2xl px-4 py-2.5 text-left">
+                                <div class="flex items-center justify-between gap-2 mb-0.5">
+                                    <span class="text-[11px] uppercase tracking-wider font-extrabold text-emerald-300">🟢 Past (Múlt idő)</span>
+                                    <span id="fcBackPast" class="text-xs font-semibold text-emerald-200/90">I played cricket.</span>
+                                </div>
+                                <p id="fcBackPastHu" class="text-sm sm:text-base font-bold text-white leading-snug">Kriketteztem / krikettet játszottam.</p>
+                            </div>
+
+                            <!-- Future -->
+                            <div class="bg-purple-950/50 border border-purple-400/25 rounded-2xl px-4 py-2.5 text-left">
+                                <div class="flex items-center justify-between gap-2 mb-0.5">
+                                    <span class="text-[11px] uppercase tracking-wider font-extrabold text-purple-300">🟣 Future (Jövő idő)</span>
+                                    <span id="fcBackFuture" class="text-xs font-semibold text-purple-200/90">I will play cricket.</span>
+                                </div>
+                                <p id="fcBackFutureHu" class="text-sm sm:text-base font-bold text-amber-300 leading-snug">Krikettezni fogok / krikettet fogok játszani.</p>
+                            </div>
+
+                            <!-- Tagolt nyelvtani összefoglaló -->
+                            <div class="bg-white/5 rounded-2xl px-4 py-3 border border-white/10 text-left space-y-1.5">
+                                <p class="text-[11px] uppercase tracking-wider font-extrabold text-brand-300">💡 Nyelvtani szerkezet</p>
+                                <div id="fcTipHu" class="text-xs text-slate-200 leading-relaxed space-y-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center pt-1" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentAllThree(this)" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition">
+                                <span>🔊</span> Mindhárom alak meghallgatása
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Kártya léptető és állapotjelölő gombok -->
+            <div class="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                <button onclick="prevCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    <span>⬅️</span> Előző
+                </button>
+
+                <button onclick="markCurrentCard(false)" class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 hover:bg-amber-100 text-amber-900 font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>🔄</span> Még gyakorlom
+                </button>
+
+                <button onclick="markCurrentCard(true)" class="p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>✅</span> Tudom!
+                </button>
+
+                <button onclick="nextCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    Következő <span>➡️</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. NÉZET: TELJES LISTA & KERESŐ -->
+        <div id="view-list" class="hidden space-y-4">
+            <!-- Kereső mező -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Keresés angol vagy magyar mondatra, igére, sorszámra (pl. 'went', 'will', 'levél', '121')..." class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <button onclick="clearSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
+                </div>
+                <button onclick="resetAllProgress()" class="px-4 py-2.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition whitespace-nowrap">
+                    🗑️ Haladás nullázása
+                </button>
+            </div>
+
+            <!-- Lista kártyák -->
+            <div id="listContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- JavaScript tölti fel -->
+            </div>
+        </div>
+
+        <!-- 3. NÉZET: INTERAKTÍV KVÍZ & HALLÁSÉRTÉS -->
+        <div id="view-quiz" class="hidden max-w-2xl mx-auto space-y-6">
+            <!-- Kvíz mód választó -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setQuizMode('tense_transform')" id="qmode-tense_transform" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition">
+                        🔄 Igeidő-átalakító kvíz
+                    </button>
+                    <button onclick="setQuizMode('meaning')" id="qmode-meaning" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        🇭🇺 Jelentés kvíz
+                    </button>
+                    <button onclick="setQuizMode('listening')" id="qmode-listening" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        🎧 Hallás utáni értés
+                    </button>
+                </div>
+
+                <div class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-xl text-slate-700">
+                    Pontszám: <span id="quizScore" class="text-emerald-600">0</span> / <span id="quizTotal">0</span>
+                </div>
+            </div>
+
+            <!-- Kvíz Kártya -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span id="quizQuestionTypeBadge" class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">
+                        Válaszd ki a mondat helyes múlt idejű párját!
+                    </span>
+                    <button onclick="speakQuizPrompt()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">
+                        <span>🔊</span> Meghallgatás
+                    </button>
+                </div>
+
+                <!-- Kérdés szövege -->
+                <div id="quizPromptBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-center space-y-2">
+                    <h3 id="quizMainPrompt" class="text-2xl sm:text-3xl font-extrabold text-slate-900">He goes to school.</h3>
+                    <p id="quizSubPrompt" class="text-sm sm:text-base text-slate-600">Alakítsd át Past Tense (múlt idő) alakba!</p>
+                </div>
+
+                <!-- 4 Válaszlehetőség -->
+                <div id="quizOptions" class="grid grid-cols-1 gap-3">
+                    <!-- JS tölti fel -->
+                </div>
+
+                <!-- Visszajelzés és Következő gomb -->
+                <div id="quizFeedback" class="hidden rounded-2xl p-4 text-sm font-medium"></div>
+
+                <div class="flex justify-end">
+                    <button onclick="generateQuizQuestion()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-sm transition">
+                        Következő kérdés ➡️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. NÉZET: IGEIDŐ KISOKOS (MAGYARUL) -->
+        <div id="view-grammar" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-brand-600 to-indigo-700 rounded-3xl p-6 sm:p-8 text-white shadow-md">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-2">📘 Alapfokú (A2–B1) Angol Igeidők Áttekintő Kisokos</h2>
+                <p class="text-sm sm:text-base text-brand-100 max-w-3xl">
+                    A 200 × 3 mondatos gyűjtemény bemutatja, hogyan változik ugyanaz a cselekvés <strong>Jelen (Present)</strong>, <strong>Múlt (Past)</strong> és <strong>Jövő (Future)</strong> időben. Figyeld meg a rendhagyó igék múlt idejű alakjait (pl. <em>go → went, buy → bought, write → wrote</em>), valamint a folyamatos és befejezett szerkezetek átalakulását!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grammarCardsGrid">
+                <!-- JS tölti fel -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Lábléc -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            Present, Past, Future Tense Sentences (1–200) • Alapfokú nyelvvizsga felkészítő webalkalmazás • Web Speech API hangszintézissel
+        </div>
+    </footer>
+
+    <!-- Megerősítő üzenetablak -->
+    <div id="customModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-slate-200 space-y-4">
+            <h3 id="modalTitle" class="text-lg font-bold text-slate-900">Megerősítés</h3>
+            <p id="modalText" class="text-sm text-slate-600">Biztosan törölni szeretnéd az eddigi tanulási haladásodat?</p>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold">Mégse</button>
+                <button id="modalConfirmBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold">Igen, törlés</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // TELJES 200 TÉTELES ADATBÁZIS (A 8 KÉP PONTOS TARTALMA + MAGYAR FORDÍTÁSOK)
+        // Formátum: [id, present, past, future, hu, kategoria_kod, alapfok_e]
+        // ============================================================================
+        const RAW_DATA = [
+            [
+                        1,
+                        "I play cricket.",
+                        "I played cricket.",
+                        "I will play cricket.",
+                        [
+                                    "Krikettezem / krikettet játszom.",
+                                    "Kriketteztem / krikettet játszottam.",
+                                    "Krikettezni fogok / krikettet fogok játszani."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        2,
+                        "She cooks food.",
+                        "She cooked food.",
+                        "She will cook food.",
+                        [
+                                    "Ételt főz.",
+                                    "Ételt főzött.",
+                                    "Ételt fog főzni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        3,
+                        "He goes to school.",
+                        "He went to school.",
+                        "He will go to school.",
+                        [
+                                    "Iskolába megy.",
+                                    "Iskolába ment.",
+                                    "Iskolába fog menni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        4,
+                        "They watch TV.",
+                        "They watched TV.",
+                        "They will watch TV.",
+                        [
+                                    "Tévét néznek.",
+                                    "Tévét néztek.",
+                                    "Tévét fognak nézni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        5,
+                        "We learn English.",
+                        "We learned English.",
+                        "We will learn English.",
+                        [
+                                    "Angolul tanulunk.",
+                                    "Angolul tanultunk.",
+                                    "Angolul fogunk tanulni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        6,
+                        "I write a letter.",
+                        "I wrote a letter.",
+                        "I will write a letter.",
+                        [
+                                    "Levelet írok.",
+                                    "Levelet írtam.",
+                                    "Levelet fogok írni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        7,
+                        "She sings a song.",
+                        "She sang a song.",
+                        "She will sing a song.",
+                        [
+                                    "Énekel egy dalt.",
+                                    "Énekelt egy dalt.",
+                                    "Énekelni fog egy dalt."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        8,
+                        "He drinks milk.",
+                        "He drank milk.",
+                        "He will drink milk.",
+                        [
+                                    "Tejet iszik.",
+                                    "Tejet ivott.",
+                                    "Tejet fog inni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        9,
+                        "They play football.",
+                        "They played football.",
+                        "They will play football.",
+                        [
+                                    "Fociznak / futballoznak.",
+                                    "Fociztak / futballoztak.",
+                                    "Focizni / futballozni fognak."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        10,
+                        "I read a book.",
+                        "I read a book.",
+                        "I will read a book.",
+                        [
+                                    "Könyvet olvasok.",
+                                    "Könyvet olvastam.",
+                                    "Könyvet fogok olvasni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        11,
+                        "She buys vegetables.",
+                        "She bought vegetables.",
+                        "She will buy vegetables.",
+                        [
+                                    "Zöldségeket vásárol.",
+                                    "Zöldségeket vásárolt.",
+                                    "Zöldségeket fog vásárolni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        12,
+                        "He drives a car.",
+                        "He drove a car.",
+                        "He will drive a car.",
+                        [
+                                    "Autót vezet.",
+                                    "Autót vezetett.",
+                                    "Autót fog vezetni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        13,
+                        "We visit our friends.",
+                        "We visited our friends.",
+                        "We will visit our friends.",
+                        [
+                                    "Meglátogatjuk a barátainkat.",
+                                    "Meglátogattuk a barátainkat.",
+                                    "Meg fogjuk látogatni a barátainkat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        14,
+                        "I clean my room.",
+                        "I cleaned my room.",
+                        "I will clean my room.",
+                        [
+                                    "Kitakarítom a szobámat.",
+                                    "Kitakarítottam a szobámat.",
+                                    "Ki fogom takarítani a szobámat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        15,
+                        "She teaches English.",
+                        "She taught English.",
+                        "She will teach English.",
+                        [
+                                    "Angolt tanít.",
+                                    "Angolt tanított.",
+                                    "Angolt fog tanítani."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        16,
+                        "He makes tea.",
+                        "He made tea.",
+                        "He will make tea.",
+                        [
+                                    "Teát készít / főz.",
+                                    "Teát készített / főzött.",
+                                    "Teát fog készíteni / főzni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        17,
+                        "They build a house.",
+                        "They built a house.",
+                        "They will build a house.",
+                        [
+                                    "Házat építenek.",
+                                    "Házat építettek.",
+                                    "Házat fognak építeni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        18,
+                        "I help my mother.",
+                        "I helped my mother.",
+                        "I will help my mother.",
+                        [
+                                    "Segítek édesanyámnak.",
+                                    "Segítettem édesanyámnak.",
+                                    "Segíteni fogok édesanyámnak."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        19,
+                        "We visit the market.",
+                        "We visited the market.",
+                        "We will visit the market.",
+                        [
+                                    "Ellátogatunk a piacra.",
+                                    "Ellátogattunk a piacra.",
+                                    "El fogunk látogatni a piacra."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        20,
+                        "She opens the door.",
+                        "She opened the door.",
+                        "She will open the door.",
+                        [
+                                    "Kinyitja az ajtót.",
+                                    "Kinyitotta az ajtót.",
+                                    "Ki fogja nyitni az ajtót."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        21,
+                        "He runs fast.",
+                        "He ran fast.",
+                        "He will run fast.",
+                        [
+                                    "Gyorsan fut.",
+                                    "Gyorsan futott.",
+                                    "Gyorsan fog futni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        22,
+                        "I drink water.",
+                        "I drank water.",
+                        "I will drink water.",
+                        [
+                                    "Vizet iszom.",
+                                    "Vizet ittam.",
+                                    "Vizet fogok inni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        23,
+                        "They dance together.",
+                        "They danced together.",
+                        "They will dance together.",
+                        [
+                                    "Együtt táncolnak.",
+                                    "Együtt táncoltak.",
+                                    "Együtt fognak táncolni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        24,
+                        "She washes clothes.",
+                        "She washed clothes.",
+                        "She will wash clothes.",
+                        [
+                                    "Ruhákat mos.",
+                                    "Ruhákat mosott.",
+                                    "Ruhákat fog mosni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        25,
+                        "We celebrate birthdays.",
+                        "We celebrated birthdays.",
+                        "We will celebrate birthdays.",
+                        [
+                                    "Születésnapokat ünneplünk.",
+                                    "Születésnapokat ünnepeltünk.",
+                                    "Születésnapokat fogunk ünnepelni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        26,
+                        "He speaks English.",
+                        "He spoke English.",
+                        "He will speak English.",
+                        [
+                                    "Beszél angolul.",
+                                    "Beszélt angolul.",
+                                    "Beszélni fog angolul."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        27,
+                        "I meet my friends.",
+                        "I met my friends.",
+                        "I will meet my friends.",
+                        [
+                                    "Találkozom a barátaimmal.",
+                                    "Találkoztam a barátaimmal.",
+                                    "Találkozni fogok a barátaimmal."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        28,
+                        "She writes stories.",
+                        "She wrote stories.",
+                        "She will write stories.",
+                        [
+                                    "Történeteket ír.",
+                                    "Történeteket írt.",
+                                    "Történeteket fog írni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        29,
+                        "They visit the zoo.",
+                        "They visited the zoo.",
+                        "They will visit the zoo.",
+                        [
+                                    "Meglátogatják az állatkertet.",
+                                    "Meglátogatták az állatkertet.",
+                                    "Meg fogják látogatni az állatkertet."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        30,
+                        "My father reads newspapers.",
+                        "My father read newspapers.",
+                        "My father will read newspapers.",
+                        [
+                                    "Édesapám újságokat olvas.",
+                                    "Édesapám újságokat olvasott.",
+                                    "Édesapám újságokat fog olvasni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        31,
+                        "I wash my hands.",
+                        "I washed my hands.",
+                        "I will wash my hands.",
+                        [
+                                    "Kezet mosok.",
+                                    "Kezet mostam.",
+                                    "Kezet fogok mosni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        32,
+                        "He catches the ball.",
+                        "He caught the ball.",
+                        "He will catch the ball.",
+                        [
+                                    "Elkapja a labdát.",
+                                    "Elkapta a labdát.",
+                                    "El fogja kapni a labdát."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        33,
+                        "She draws pictures.",
+                        "She drew pictures.",
+                        "She will draw pictures.",
+                        [
+                                    "Képeket rajzol.",
+                                    "Képeket rajzolt.",
+                                    "Képeket fog rajzolni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        34,
+                        "We enjoy the party.",
+                        "We enjoyed the party.",
+                        "We will enjoy the party.",
+                        [
+                                    "Élvezzük a bulit.",
+                                    "Élveztük a bulit.",
+                                    "Élvezni fogjuk a bulit."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        35,
+                        "They sell fruits.",
+                        "They sold fruits.",
+                        "They will sell fruits.",
+                        [
+                                    "Gyümölcsöket árulnak.",
+                                    "Gyümölcsöket árultak.",
+                                    "Gyümölcsöket fognak árulni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        36,
+                        "I teach children.",
+                        "I taught children.",
+                        "I will teach children.",
+                        [
+                                    "Gyerekeket tanítok.",
+                                    "Gyerekeket tanítottam.",
+                                    "Gyerekeket fogok tanítani."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        37,
+                        "She makes cakes.",
+                        "She made cakes.",
+                        "She will make cakes.",
+                        [
+                                    "Süteményeket készít.",
+                                    "Süteményeket készített.",
+                                    "Süteményeket fog készíteni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        38,
+                        "He repairs bicycles.",
+                        "He repaired bicycles.",
+                        "He will repair bicycles.",
+                        [
+                                    "Kerékpárokat javít.",
+                                    "Kerékpárokat javított.",
+                                    "Kerékpárokat fog javítani."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        39,
+                        "We plant trees.",
+                        "We planted trees.",
+                        "We will plant trees.",
+                        [
+                                    "Fákat ültetünk.",
+                                    "Fákat ültettünk.",
+                                    "Fákat fogunk ültetni."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        40,
+                        "I visit my grandmother.",
+                        "I visited my grandmother.",
+                        "I will visit my grandmother.",
+                        [
+                                    "Meglátogatom a nagymamámat.",
+                                    "Meglátogattam a nagymamámat.",
+                                    "Meg fogom látogatni a nagymamámat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        41,
+                        "She wears a red dress.",
+                        "She wore a red dress.",
+                        "She will wear a red dress.",
+                        [
+                                    "Piros ruhát visel.",
+                                    "Piros ruhát viselt.",
+                                    "Piros ruhát fog viselni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        42,
+                        "He buys a newspaper.",
+                        "He bought a newspaper.",
+                        "He will buy a newspaper.",
+                        [
+                                    "Vesz egy újságot.",
+                                    "Vett egy újságot.",
+                                    "Venni fog egy újságot."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        43,
+                        "They play chess.",
+                        "They played chess.",
+                        "They will play chess.",
+                        [
+                                    "Sakkoznak.",
+                                    "Sakkoztak.",
+                                    "Sakkozni fognak."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        44,
+                        "I prepare breakfast.",
+                        "I prepared breakfast.",
+                        "I will prepare breakfast.",
+                        [
+                                    "Reggelit készítek.",
+                                    "Reggelit készítettem.",
+                                    "Reggelit fogok készíteni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        45,
+                        "We watch movies.",
+                        "We watched movies.",
+                        "We will watch movies.",
+                        [
+                                    "Filmeket nézünk.",
+                                    "Filmeket néztünk.",
+                                    "Filmeket fogunk nézni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        46,
+                        "She answers questions.",
+                        "She answered questions.",
+                        "She will answer questions.",
+                        [
+                                    "Kérdésekre válaszol.",
+                                    "Kérdésekre válaszolt.",
+                                    "Kérdésekre fog válaszolni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        47,
+                        "He tells the truth.",
+                        "He told the truth.",
+                        "He will tell the truth.",
+                        [
+                                    "Igazat mond.",
+                                    "Igazat mondott.",
+                                    "Igazat fog mondani."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        48,
+                        "I learn new words.",
+                        "I learned new words.",
+                        "I will learn new words.",
+                        [
+                                    "Új szavakat tanulok.",
+                                    "Új szavakat tanultam.",
+                                    "Új szavakat fogok tanulni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        49,
+                        "They clean the classroom.",
+                        "They cleaned the classroom.",
+                        "They will clean the classroom.",
+                        [
+                                    "Kitakarítják az osztálytermet.",
+                                    "Kitakarították az osztálytermet.",
+                                    "Ki fogják takarítani az osztálytermet."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        50,
+                        "My mother prepares dinner.",
+                        "My mother prepared dinner.",
+                        "My mother will prepare dinner.",
+                        [
+                                    "Édesanyám vacsorát készít.",
+                                    "Édesanyám vacsorát készített.",
+                                    "Édesanyám vacsorát fog készíteni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        51,
+                        "I go to school.",
+                        "I went to school.",
+                        "I will go to school.",
+                        [
+                                    "Iskolába megyek.",
+                                    "Iskolába mentem.",
+                                    "Iskolába fogok menni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        52,
+                        "She drinks coffee.",
+                        "She drank coffee.",
+                        "She will drink coffee.",
+                        [
+                                    "Kávét iszik.",
+                                    "Kávét ivott.",
+                                    "Kávét fog inni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        53,
+                        "He writes poems.",
+                        "He wrote poems.",
+                        "He will write poems.",
+                        [
+                                    "Verseket ír.",
+                                    "Verseket írt.",
+                                    "Verseket fog írni."
+                        ],
+                        2,
+                        false
+            ],
+            [
+                        54,
+                        "They visit temples.",
+                        "They visited temples.",
+                        "They will visit temples.",
+                        [
+                                    "Templomokat látogatnak meg.",
+                                    "Templomokat látogattak meg.",
+                                    "Templomokat fognak meglátogatni."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        55,
+                        "We play badminton.",
+                        "We played badminton.",
+                        "We will play badminton.",
+                        [
+                                    "Tollaslabdázunk.",
+                                    "Tollaslabdáztunk.",
+                                    "Tollaslabdázni fogunk."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        56,
+                        "I send a message.",
+                        "I sent a message.",
+                        "I will send a message.",
+                        [
+                                    "Üzenetet küldök.",
+                                    "Üzenetet küldtem.",
+                                    "Üzenetet fogok küldeni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        57,
+                        "She takes photographs.",
+                        "She took photographs.",
+                        "She will take photographs.",
+                        [
+                                    "Fényképeket készít.",
+                                    "Fényképeket készített.",
+                                    "Fényképeket fog készíteni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        58,
+                        "He breaks the glass.",
+                        "He broke the glass.",
+                        "He will break the glass.",
+                        [
+                                    "Eltöri a poharat / üveget.",
+                                    "Eltörte a poharat / üveget.",
+                                    "El fogja törni a poharat / üveget."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        59,
+                        "They eat apples.",
+                        "They ate apples.",
+                        "They will eat apples.",
+                        [
+                                    "Almát esznek.",
+                                    "Almát ettek.",
+                                    "Almát fognak enni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        60,
+                        "We speak politely.",
+                        "We spoke politely.",
+                        "We will speak politely.",
+                        [
+                                    "Udvariasan beszélünk.",
+                                    "Udvariasan beszéltünk.",
+                                    "Udvariasan fogunk beszélni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        61,
+                        "I wake up early.",
+                        "I woke up early.",
+                        "I will wake up early.",
+                        [
+                                    "Korán ébredek.",
+                                    "Korán ébredtem.",
+                                    "Korán fogok ébredni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        62,
+                        "She keeps her room clean.",
+                        "She kept her room clean.",
+                        "She will keep her room clean.",
+                        [
+                                    "Tisztán tartja a szobáját.",
+                                    "Tisztán tartotta a szobáját.",
+                                    "Tisztán fogja tartani a szobáját."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        63,
+                        "He finds his keys.",
+                        "He found his keys.",
+                        "He will find his keys.",
+                        [
+                                    "Megtalálja a kulcsait.",
+                                    "Megtalálta a kulcsait.",
+                                    "Meg fogja találni a kulcsait."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        64,
+                        "They bring fresh flowers.",
+                        "They brought fresh flowers.",
+                        "They will bring fresh flowers.",
+                        [
+                                    "Friss virágokat hoznak.",
+                                    "Friss virágokat hoztak.",
+                                    "Friss virágokat fognak hozni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        65,
+                        "We help poor people.",
+                        "We helped poor people.",
+                        "We will help poor people.",
+                        [
+                                    "Segítünk a szegény embereknek.",
+                                    "Segítettünk a szegény embereknek.",
+                                    "Segíteni fogunk a szegény embereknek."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        66,
+                        "I ride a bicycle.",
+                        "I rode a bicycle.",
+                        "I will ride a bicycle.",
+                        [
+                                    "Kerékpározom / biciklizem.",
+                                    "Kerékpároztam / bicikliztem.",
+                                    "Kerékpározni / biciklizni fogok."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        67,
+                        "She teaches mathematics.",
+                        "She taught mathematics.",
+                        "She will teach mathematics.",
+                        [
+                                    "Matematikát tanít.",
+                                    "Matematikát tanított.",
+                                    "Matematikát fog tanítani."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        68,
+                        "He catches the train.",
+                        "He caught the train.",
+                        "He will catch the train.",
+                        [
+                                    "Eléri a vonatot.",
+                                    "Elérte a vonatot.",
+                                    "El fogja érni a vonatot."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        69,
+                        "They grow vegetables.",
+                        "They grew vegetables.",
+                        "They will grow vegetables.",
+                        [
+                                    "Zöldségeket termesztenek.",
+                                    "Zöldségeket termesztettek.",
+                                    "Zöldségeket fognak termeszteni."
+                        ],
+                        2,
+                        false
+            ],
+            [
+                        70,
+                        "We enjoy music.",
+                        "We enjoyed music.",
+                        "We will enjoy music.",
+                        [
+                                    "Élvezzük a zenét.",
+                                    "Élveztük a zenét.",
+                                    "Élvezni fogjuk a zenét."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        71,
+                        "I call my brother.",
+                        "I called my brother.",
+                        "I will call my brother.",
+                        [
+                                    "Felhívom a fivéremet.",
+                                    "Felhívtam a fivéremet.",
+                                    "Fel fogom hívni a fivéremet."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        72,
+                        "She feeds the birds.",
+                        "She fed the birds.",
+                        "She will feed the birds.",
+                        [
+                                    "Megeteti a madarakat.",
+                                    "Megetette a madarakat.",
+                                    "Meg fogja etetni a madarakat."
+                        ],
+                        2,
+                        false
+            ],
+            [
+                        73,
+                        "He draws a picture.",
+                        "He drew a picture.",
+                        "He will draw a picture.",
+                        [
+                                    "Rajzol egy képet.",
+                                    "Rajzolt egy képet.",
+                                    "Rajzolni fog egy képet."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        74,
+                        "They swim in the river.",
+                        "They swam in the river.",
+                        "They will swim in the river.",
+                        [
+                                    "A folyóban úsznak.",
+                                    "A folyóban úsztak.",
+                                    "A folyóban fognak úszni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        75,
+                        "We arrange a meeting.",
+                        "We arranged a meeting.",
+                        "We will arrange a meeting.",
+                        [
+                                    "Megbeszélést szervezünk.",
+                                    "Megbeszélést szerveztünk.",
+                                    "Megbeszélést fogunk szervezni."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        76,
+                        "I wash my clothes.",
+                        "I washed my clothes.",
+                        "I will wash my clothes.",
+                        [
+                                    "Kimosom a ruháimat.",
+                                    "Kimostam a ruháimat.",
+                                    "Ki fogom mosni a ruháimat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        77,
+                        "She makes beautiful dresses.",
+                        "She made beautiful dresses.",
+                        "She will make beautiful dresses.",
+                        [
+                                    "Gyönyörű ruhákat készít.",
+                                    "Gyönyörű ruhákat készített.",
+                                    "Gyönyörű ruhákat fog készíteni."
+                        ],
+                        2,
+                        false
+            ],
+            [
+                        78,
+                        "He sells old books.",
+                        "He sold old books.",
+                        "He will sell old books.",
+                        [
+                                    "Régi könyveket árul.",
+                                    "Régi könyveket árult.",
+                                    "Régi könyveket fog árulni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        79,
+                        "They sing together.",
+                        "They sang together.",
+                        "They will sing together.",
+                        [
+                                    "Együtt énekelnek.",
+                                    "Együtt énekeltek.",
+                                    "Együtt fognak énekelni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        80,
+                        "We travel by train.",
+                        "We travelled by train.",
+                        "We will travel by train.",
+                        [
+                                    "Vonattal utazunk.",
+                                    "Vonattal utaztunk.",
+                                    "Vonattal fogunk utazni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        81,
+                        "I open the window.",
+                        "I opened the window.",
+                        "I will open the window.",
+                        [
+                                    "Kinyitom az ablakot.",
+                                    "Kinyitottam az ablakot.",
+                                    "Ki fogom nyitni az ablakot."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        82,
+                        "She closes the shop.",
+                        "She closed the shop.",
+                        "She will close the shop.",
+                        [
+                                    "Bezárja a boltot.",
+                                    "Bezárta a boltot.",
+                                    "Be fogja zárni a boltot."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        83,
+                        "He drives carefully.",
+                        "He drove carefully.",
+                        "He will drive carefully.",
+                        [
+                                    "Óvatosan vezet.",
+                                    "Óvatosan vezetett.",
+                                    "Óvatosan fog vezetni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        84,
+                        "They build bridges.",
+                        "They built bridges.",
+                        "They will build bridges.",
+                        [
+                                    "Hidakat építenek.",
+                                    "Hidakat építettek.",
+                                    "Hidakat fognak építeni."
+                        ],
+                        2,
+                        false
+            ],
+            [
+                        85,
+                        "We celebrate festivals.",
+                        "We celebrated festivals.",
+                        "We will celebrate festivals.",
+                        [
+                                    "Ünnepeket / fesztiválokat ünneplünk.",
+                                    "Ünnepeket / fesztiválokat ünnepeltünk.",
+                                    "Ünnepeket / fesztiválokat fogunk ünnepelni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        86,
+                        "I understand the lesson.",
+                        "I understood the lesson.",
+                        "I will understand the lesson.",
+                        [
+                                    "Megértem a tananyagot / leckét.",
+                                    "Megértettem a tananyagot / leckét.",
+                                    "Meg fogom érteni a tananyagot / leckét."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        87,
+                        "She speaks the truth.",
+                        "She spoke the truth.",
+                        "She will speak the truth.",
+                        [
+                                    "Igazat mond.",
+                                    "Igazat mondott.",
+                                    "Igazat fog mondani."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        88,
+                        "He pays the bill.",
+                        "He paid the bill.",
+                        "He will pay the bill.",
+                        [
+                                    "Kifizeti a számlát.",
+                                    "Kifizette a számlát.",
+                                    "Ki fogja fizetni a számlát."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        89,
+                        "They choose their books.",
+                        "They chose their books.",
+                        "They will choose their books.",
+                        [
+                                    "Kiválasztják a könyveiket.",
+                                    "Kiválasztották a könyveiket.",
+                                    "Ki fogják választani a könyveiket."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        90,
+                        "We complete our homework.",
+                        "We completed our homework.",
+                        "We will complete our homework.",
+                        [
+                                    "Befejezzük a házi feladatunkat.",
+                                    "Befejeztük a házi feladatunkat.",
+                                    "Be fogjuk fejezni a házi feladatunkat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        91,
+                        "I borrow books.",
+                        "I borrowed books.",
+                        "I will borrow books.",
+                        [
+                                    "Könyveket kölcsönzök.",
+                                    "Könyveket kölcsönöztem.",
+                                    "Könyveket fogok kölcsönözni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        92,
+                        "She invites her friends.",
+                        "She invited her friends.",
+                        "She will invite her friends.",
+                        [
+                                    "Meghívja a barátait.",
+                                    "Meghívta a barátait.",
+                                    "Meg fogja hívni a barátait."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        93,
+                        "He throws the ball.",
+                        "He threw the ball.",
+                        "He will throw the ball.",
+                        [
+                                    "Eldobja a labdát.",
+                                    "Eldobta a labdát.",
+                                    "El fogja dobni a labdát."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        94,
+                        "They wear uniforms.",
+                        "They wore uniforms.",
+                        "They will wear uniforms.",
+                        [
+                                    "Egyenruhát viselnek.",
+                                    "Egyenruhát viseltek.",
+                                    "Egyenruhát fognak viselni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        95,
+                        "We discuss important topics.",
+                        "We discussed important topics.",
+                        "We will discuss important topics.",
+                        [
+                                    "Fontos témákat vitatunk meg.",
+                                    "Fontos témákat vitattunk meg.",
+                                    "Fontos témákat fogunk megvitatni."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        96,
+                        "I feed my dog.",
+                        "I fed my dog.",
+                        "I will feed my dog.",
+                        [
+                                    "Megetetem a kutyámat.",
+                                    "Megetettem a kutyámat.",
+                                    "Meg fogom etetni a kutyámat."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        97,
+                        "She washes the dishes.",
+                        "She washed the dishes.",
+                        "She will wash the dishes.",
+                        [
+                                    "Elmosogat.",
+                                    "Elmosogatott.",
+                                    "El fog mosogatni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        98,
+                        "He wins the match.",
+                        "He won the match.",
+                        "He will win the match.",
+                        [
+                                    "Megnyeri a mérkőzést.",
+                                    "Megnyerte a mérkőzést.",
+                                    "Meg fogja nyerni a mérkőzést."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        99,
+                        "They attend classes.",
+                        "They attended classes.",
+                        "They will attend classes.",
+                        [
+                                    "Órákra járnak.",
+                                    "Órákra jártak.",
+                                    "Órákra fognak járni."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        100,
+                        "We respect our teachers.",
+                        "We respected our teachers.",
+                        "We will respect our teachers.",
+                        [
+                                    "Tiszteljük a tanárainkat.",
+                                    "Tiszteltük a tanárainkat.",
+                                    "Tisztelni fogjuk a tanárainkat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        101,
+                        "I am reading a book.",
+                        "I was reading a book.",
+                        "I will be reading a book.",
+                        [
+                                    "Éppen egy könyvet olvasok.",
+                                    "Éppen egy könyvet olvastam.",
+                                    "Éppen egy könyvet fogok olvasni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        102,
+                        "She is cooking rice.",
+                        "She was cooking rice.",
+                        "She will be cooking rice.",
+                        [
+                                    "Éppen rizst főz.",
+                                    "Éppen rizst főzött.",
+                                    "Éppen rizst fog főzni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        103,
+                        "He is playing cricket.",
+                        "He was playing cricket.",
+                        "He will be playing cricket.",
+                        [
+                                    "Éppen krikettezik.",
+                                    "Éppen krikettezett.",
+                                    "Éppen krikettezni fog."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        104,
+                        "They are watching television.",
+                        "They were watching television.",
+                        "They will be watching television.",
+                        [
+                                    "Éppen televíziót néznek.",
+                                    "Éppen televíziót néztek.",
+                                    "Éppen televíziót fognak nézni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        105,
+                        "We are learning English.",
+                        "We were learning English.",
+                        "We will be learning English.",
+                        [
+                                    "Éppen angolul tanulunk.",
+                                    "Éppen angolul tanultunk.",
+                                    "Éppen angolul fogunk tanulni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        106,
+                        "I am writing a letter.",
+                        "I was writing a letter.",
+                        "I will be writing a letter.",
+                        [
+                                    "Éppen levelet írok.",
+                                    "Éppen levelet írtam.",
+                                    "Éppen levelet fogok írni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        107,
+                        "She is singing a song.",
+                        "She was singing a song.",
+                        "She will be singing a song.",
+                        [
+                                    "Éppen egy dalt énekel.",
+                                    "Éppen egy dalt énekelt.",
+                                    "Éppen egy dalt fog énekelni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        108,
+                        "He is cleaning his room.",
+                        "He was cleaning his room.",
+                        "He will be cleaning his room.",
+                        [
+                                    "Éppen a szobáját takarítja.",
+                                    "Éppen a szobáját takarította.",
+                                    "Éppen a szobáját fogja takarítani."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        109,
+                        "They are playing football.",
+                        "They were playing football.",
+                        "They will be playing football.",
+                        [
+                                    "Éppen fociznak.",
+                                    "Éppen fociztak.",
+                                    "Éppen focizni fognak."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        110,
+                        "We are preparing dinner.",
+                        "We were preparing dinner.",
+                        "We will be preparing dinner.",
+                        [
+                                    "Éppen a vacsorát készítjük.",
+                                    "Éppen a vacsorát készítettük.",
+                                    "Éppen a vacsorát fogjuk készíteni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        111,
+                        "I am talking to my friend.",
+                        "I was talking to my friend.",
+                        "I will be talking to my friend.",
+                        [
+                                    "Éppen a barátommal beszélgetek.",
+                                    "Éppen a barátommal beszélgettem.",
+                                    "Éppen a barátommal fogok beszélgetni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        112,
+                        "She is washing clothes.",
+                        "She was washing clothes.",
+                        "She will be washing clothes.",
+                        [
+                                    "Éppen ruhákat mos.",
+                                    "Éppen ruhákat mosott.",
+                                    "Éppen ruhákat fog mosni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        113,
+                        "He is repairing the computer.",
+                        "He was repairing the computer.",
+                        "He will be repairing the computer.",
+                        [
+                                    "Éppen a számítógépet javítja.",
+                                    "Éppen a számítógépet javította.",
+                                    "Éppen a számítógépet fogja javítani."
+                        ],
+                        3,
+                        false
+            ],
+            [
+                        114,
+                        "They are dancing together.",
+                        "They were dancing together.",
+                        "They will be dancing together.",
+                        [
+                                    "Éppen együtt táncolnak.",
+                                    "Éppen együtt táncoltak.",
+                                    "Éppen együtt fognak táncolni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        115,
+                        "We are decorating the house.",
+                        "We were decorating the house.",
+                        "We will be decorating the house.",
+                        [
+                                    "Éppen a házat díszítjük.",
+                                    "Éppen a házat díszítettük.",
+                                    "Éppen a házat fogjuk díszíteni."
+                        ],
+                        3,
+                        false
+            ],
+            [
+                        116,
+                        "I am waiting for the bus.",
+                        "I was waiting for the bus.",
+                        "I will be waiting for the bus.",
+                        [
+                                    "Éppen a buszra várok.",
+                                    "Éppen a buszra vártam.",
+                                    "Éppen a buszra fogok várni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        117,
+                        "She is teaching English.",
+                        "She was teaching English.",
+                        "She will be teaching English.",
+                        [
+                                    "Éppen angolt tanít.",
+                                    "Éppen angolt tanított.",
+                                    "Éppen angolt fog tanítani."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        118,
+                        "He is driving a car.",
+                        "He was driving a car.",
+                        "He will be driving a car.",
+                        [
+                                    "Éppen autót vezet.",
+                                    "Éppen autót vezetett.",
+                                    "Éppen autót fog vezetni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        119,
+                        "They are planting trees.",
+                        "They were planting trees.",
+                        "They will be planting trees.",
+                        [
+                                    "Éppen fákat ültetnek.",
+                                    "Éppen fákat ültettek.",
+                                    "Éppen fákat fognak ültetni."
+                        ],
+                        3,
+                        false
+            ],
+            [
+                        120,
+                        "We are watching a movie.",
+                        "We were watching a movie.",
+                        "We will be watching a movie.",
+                        [
+                                    "Éppen egy filmet nézünk.",
+                                    "Éppen egy filmet néztünk.",
+                                    "Éppen egy filmet fogunk nézni."
+                        ],
+                        3,
+                        true
+            ],
+            [
+                        121,
+                        "I have finished my homework.",
+                        "I had finished my homework.",
+                        "I will have finished my homework.",
+                        [
+                                    "Befejeztem a házi feladatomat (már kész van).",
+                                    "Befejeztem a házi feladatomat (korábban).",
+                                    "Be fogom fejezni a házi feladatomat (mire odaérsz)."
+                        ],
+                        4,
+                        true
+            ],
+            [
+                        122,
+                        "She has cooked dinner.",
+                        "She had cooked dinner.",
+                        "She will have cooked dinner.",
+                        [
+                                    "Megfőzte a vacsorát (már kész).",
+                                    "Megfőzte a vacsorát (korábban).",
+                                    "Meg fogja főzni a vacsorát (mire hazaérünk)."
+                        ],
+                        4,
+                        true
+            ],
+            [
+                        123,
+                        "He has written a letter.",
+                        "He had written a letter.",
+                        "He will have written a letter.",
+                        [
+                                    "Írt egy levelet (már megírta).",
+                                    "Írt egy levelet (korábban).",
+                                    "Meg fog írni egy levelet (addigra)."
+                        ],
+                        4,
+                        true
+            ],
+            [
+                        124,
+                        "They have completed the project.",
+                        "They had completed the project.",
+                        "They will have completed the project.",
+                        [
+                                    "Befejezték a projektet (már készen van).",
+                                    "Befejezték a projektet (korábban).",
+                                    "Be fogják fejezni a projektet (határidőre)."
+                        ],
+                        4,
+                        false
+            ],
+            [
+                        125,
+                        "We have visited the museum.",
+                        "We had visited the museum.",
+                        "We will have visited the museum.",
+                        [
+                                    "Meglátogattuk a múzeumot (már jártunk ott).",
+                                    "Meglátogattuk a múzeumot (korábban).",
+                                    "Meg fogjuk látogatni a múzeumot (addigra)."
+                        ],
+                        4,
+                        true
+            ],
+            [
+                        126,
+                        "I like to travel.",
+                        "I liked to travel.",
+                        "I will like to travel.",
+                        [
+                                    "Szeretek utazni.",
+                                    "Szerettem utazni.",
+                                    "Szeretni fogok utazni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        127,
+                        "She reads a book.",
+                        "She read a book.",
+                        "She will read a book.",
+                        [
+                                    "Olvas egy könyvet.",
+                                    "Olvasott egy könyvet.",
+                                    "Olvasni fog egy könyvet."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        128,
+                        "He plays the guitar.",
+                        "He played the guitar.",
+                        "He will play the guitar.",
+                        [
+                                    "Gitározik.",
+                                    "Gitározott.",
+                                    "Gitározni fog."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        129,
+                        "They watch a movie.",
+                        "They watched a movie.",
+                        "They will watch a movie.",
+                        [
+                                    "Megnéznek egy filmet.",
+                                    "Megnéztek egy filmet.",
+                                    "Meg fognak nézni egy filmet."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        130,
+                        "We learn new things.",
+                        "We learned new things.",
+                        "We will learn new things.",
+                        [
+                                    "Új dolgokat tanulunk.",
+                                    "Új dolgokat tanultunk.",
+                                    "Új dolgokat fogunk tanulni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        131,
+                        "I eat healthy food.",
+                        "I ate healthy food.",
+                        "I will eat healthy food.",
+                        [
+                                    "Egészséges ételeket eszem.",
+                                    "Egészséges ételeket ettem.",
+                                    "Egészséges ételeket fogok enni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        132,
+                        "She drinks water.",
+                        "She drank water.",
+                        "She will drink water.",
+                        [
+                                    "Vizet iszik.",
+                                    "Vizet ivott.",
+                                    "Vizet fog inni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        133,
+                        "He writes a letter.",
+                        "He wrote a letter.",
+                        "He will write a letter.",
+                        [
+                                    "Levelet ír.",
+                                    "Levelet írt.",
+                                    "Levelet fog írni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        134,
+                        "They visit the museum.",
+                        "They visited the museum.",
+                        "They will visit the museum.",
+                        [
+                                    "Meglátogatják a múzeumot.",
+                                    "Meglátogatták a múzeumot.",
+                                    "Meg fogják látogatni a múzeumot."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        135,
+                        "We meet our friends.",
+                        "We met our friends.",
+                        "We will meet our friends.",
+                        [
+                                    "Találkozunk a barátainkkal.",
+                                    "Találkoztunk a barátainkkal.",
+                                    "Találkozni fogunk a barátainkkal."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        136,
+                        "I buy a gift.",
+                        "I bought a gift.",
+                        "I will buy a gift.",
+                        [
+                                    "Veszek egy ajándékot.",
+                                    "Vettem egy ajándékot.",
+                                    "Venni fogok egy ajándékot."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        137,
+                        "She sings a song.",
+                        "She sang a song.",
+                        "She will sing a song.",
+                        [
+                                    "Énekel egy dalt.",
+                                    "Énekelt egy dalt.",
+                                    "Énekelni fog egy dalt."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        138,
+                        "He teaches English.",
+                        "He taught English.",
+                        "He will teach English.",
+                        [
+                                    "Angolt tanít.",
+                                    "Angolt tanított.",
+                                    "Angolt fog tanítani."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        139,
+                        "They clean the room.",
+                        "They cleaned the room.",
+                        "They will clean the room.",
+                        [
+                                    "Kitakarítják a szobát.",
+                                    "Kitakarították a szobát.",
+                                    "Ki fogják takarítani a szobát."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        140,
+                        "We follow the rules.",
+                        "We followed the rules.",
+                        "We will follow the rules.",
+                        [
+                                    "Betartjuk a szabályokat.",
+                                    "Betartottuk a szabályokat.",
+                                    "Be fogjuk tartani a szabályokat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        141,
+                        "I finish my work.",
+                        "I finished my work.",
+                        "I will finish my work.",
+                        [
+                                    "Befejezem a munkámat.",
+                                    "Befejeztem a munkámat.",
+                                    "Be fogom fejezni a munkámat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        142,
+                        "She goes for a walk.",
+                        "She went for a walk.",
+                        "She will go for a walk.",
+                        [
+                                    "Elmegy sétálni.",
+                                    "Elment sétálni.",
+                                    "El fog menni sétálni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        143,
+                        "He helps his friend.",
+                        "He helped his friend.",
+                        "He will help his friend.",
+                        [
+                                    "Segít a barátjának.",
+                                    "Segített a barátjának.",
+                                    "Segíteni fog a barátjának."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        144,
+                        "They use a computer.",
+                        "They used a computer.",
+                        "They will use a computer.",
+                        [
+                                    "Számítógépet használnak.",
+                                    "Számítógépet használtak.",
+                                    "Számítógépet fognak használni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        145,
+                        "We enjoy the party.",
+                        "We enjoyed the party.",
+                        "We will enjoy the party.",
+                        [
+                                    "Élvezzük a bulit.",
+                                    "Élveztük a bulit.",
+                                    "Élvezni fogjuk a bulit."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        146,
+                        "I plan a trip.",
+                        "I planned a trip.",
+                        "I will plan a trip.",
+                        [
+                                    "Utazást tervezek.",
+                                    "Utazást terveztem.",
+                                    "Utazást fogok tervezni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        147,
+                        "She cooks dinner.",
+                        "She cooked dinner.",
+                        "She will cook dinner.",
+                        [
+                                    "Vacsorát főz.",
+                                    "Vacsorát főzött.",
+                                    "Vacsorát fog főzni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        148,
+                        "He fixes the bike.",
+                        "He fixed the bike.",
+                        "He will fix the bike.",
+                        [
+                                    "Megjavítja a biciklit.",
+                                    "Megjavította a biciklit.",
+                                    "Meg fogja javítani a biciklit."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        149,
+                        "They read newspapers.",
+                        "They read newspapers.",
+                        "They will read newspapers.",
+                        [
+                                    "Újságokat olvasnak.",
+                                    "Újságokat olvastak.",
+                                    "Újságokat fognak olvasni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        150,
+                        "We celebrate festivals.",
+                        "We celebrated festivals.",
+                        "We will celebrate festivals.",
+                        [
+                                    "Ünnepeket ünneplünk.",
+                                    "Ünnepeket ünnepeltünk.",
+                                    "Ünnepeket fogunk ünnepelni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        151,
+                        "I know the answer.",
+                        "I knew the answer.",
+                        "I will know the answer.",
+                        [
+                                    "Tudom a választ.",
+                                    "Tudtam a választ.",
+                                    "Tudni fogom a választ."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        152,
+                        "She loves her family.",
+                        "She loved her family.",
+                        "She will love her family.",
+                        [
+                                    "Szereti a családját.",
+                                    "Szerette a családját.",
+                                    "Szeretni fogja a családját."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        153,
+                        "He feels happy.",
+                        "He felt happy.",
+                        "He will feel happy.",
+                        [
+                                    "Boldognak érzi magát.",
+                                    "Boldognak érezte magát.",
+                                    "Boldognak fogja érezni magát."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        154,
+                        "They have a beautiful house.",
+                        "They had a beautiful house.",
+                        "They will have a beautiful house.",
+                        [
+                                    "Szép házuk van.",
+                                    "Szép házuk volt.",
+                                    "Szép házuk lesz."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        155,
+                        "We believe in hard work.",
+                        "We believed in hard work.",
+                        "We will believe in hard work.",
+                        [
+                                    "Hiszünk a kemény munkában.",
+                                    "Hittünk a kemény munkában.",
+                                    "Hinni fogunk a kemény munkában."
+                        ],
+                        5,
+                        false
+            ],
+            [
+                        156,
+                        "I remember your name.",
+                        "I remembered your name.",
+                        "I will remember your name.",
+                        [
+                                    "Emlékszem a nevedre.",
+                                    "Emlékeztem a nevedre.",
+                                    "Emlékezni fogok a nevedre."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        157,
+                        "She understands English.",
+                        "She understood English.",
+                        "She will understand English.",
+                        [
+                                    "Érti az angolt.",
+                                    "Értette az angolt.",
+                                    "Érteni fogja az angolt."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        158,
+                        "He needs some help.",
+                        "He needed some help.",
+                        "He will need some help.",
+                        [
+                                    "Segítségre van szüksége.",
+                                    "Segítségre volt szüksége.",
+                                    "Segítségre lesz szüksége."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        159,
+                        "They want a new car.",
+                        "They wanted a new car.",
+                        "They will want a new car.",
+                        [
+                                    "Új autót akarnak.",
+                                    "Új autót akartak.",
+                                    "Új autót fognak akarni."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        160,
+                        "We enjoy our holidays.",
+                        "We enjoyed our holidays.",
+                        "We will enjoy our holidays.",
+                        [
+                                    "Élvezzük a nyaralásunkat.",
+                                    "Élveztük a nyaralásunkat.",
+                                    "Élvezni fogjuk a nyaralásunkat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        161,
+                        "I am happy today.",
+                        "I was happy today.",
+                        "I will be happy today.",
+                        [
+                                    "Ma boldog vagyok.",
+                                    "Ma boldog voltam.",
+                                    "Ma boldog leszek."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        162,
+                        "She is at home.",
+                        "She was at home.",
+                        "She will be at home.",
+                        [
+                                    "Otthon van.",
+                                    "Otthon volt.",
+                                    "Otthon lesz."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        163,
+                        "He is busy today.",
+                        "He was busy yesterday.",
+                        "He will be busy tomorrow.",
+                        [
+                                    "Ma elfoglalt.",
+                                    "Tegnap elfoglalt volt.",
+                                    "Holnap elfoglalt lesz."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        164,
+                        "They are ready.",
+                        "They were ready.",
+                        "They will be ready.",
+                        [
+                                    "Készen állnak.",
+                                    "Készen álltak.",
+                                    "Készen fognak állni."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        165,
+                        "We are friends.",
+                        "We were friends.",
+                        "We will be friends.",
+                        [
+                                    "Barátok vagyunk.",
+                                    "Barátok voltunk.",
+                                    "Barátok leszünk."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        166,
+                        "I am a student.",
+                        "I was a student.",
+                        "I will be a student.",
+                        [
+                                    "Diák / tanuló vagyok.",
+                                    "Diák / tanuló voltam.",
+                                    "Diák / tanuló leszek."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        167,
+                        "She is a teacher.",
+                        "She was a teacher.",
+                        "She will be a teacher.",
+                        [
+                                    "Tanárnő.",
+                                    "Tanárnő volt.",
+                                    "Tanárnő lesz."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        168,
+                        "He is tired.",
+                        "He was tired.",
+                        "He will be tired.",
+                        [
+                                    "Fáradt.",
+                                    "Fáradt volt.",
+                                    "Fáradt lesz."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        169,
+                        "They are in the garden.",
+                        "They were in the garden.",
+                        "They will be in the garden.",
+                        [
+                                    "A kertben vannak.",
+                                    "A kertben voltak.",
+                                    "A kertben lesznek."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        170,
+                        "We are excited.",
+                        "We were excited.",
+                        "We will be excited.",
+                        [
+                                    "Izgatottak vagyunk.",
+                                    "Izgatottak voltunk.",
+                                    "Izgatottak leszünk."
+                        ],
+                        5,
+                        true
+            ],
+            [
+                        171,
+                        "I work in an office.",
+                        "I worked in an office.",
+                        "I will work in an office.",
+                        [
+                                    "Irodában dolgozom.",
+                                    "Irodában dolgoztam.",
+                                    "Irodában fogok dolgozni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        172,
+                        "She studies mathematics.",
+                        "She studied mathematics.",
+                        "She will study mathematics.",
+                        [
+                                    "Matematikát tanul.",
+                                    "Matematikát tanult.",
+                                    "Matematikát fog tanulni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        173,
+                        "He plays the guitar.",
+                        "He played the guitar.",
+                        "He will play the guitar.",
+                        [
+                                    "Gitározik.",
+                                    "Gitározott.",
+                                    "Gitározni fog."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        174,
+                        "They organize events.",
+                        "They organized events.",
+                        "They will organize events.",
+                        [
+                                    "Rendezvényeket szerveznek.",
+                                    "Rendezvényeket szerveztek.",
+                                    "Rendezvényeket fognak szervezni."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        175,
+                        "We attend the meeting.",
+                        "We attended the meeting.",
+                        "We will attend the meeting.",
+                        [
+                                    "Részt veszünk a megbeszélésen.",
+                                    "Részt vettünk a megbeszélésen.",
+                                    "Részt fogunk venni a megbeszélésen."
+                        ],
+                        1,
+                        false
+            ],
+            [
+                        176,
+                        "I take a bath.",
+                        "I took a bath.",
+                        "I will take a bath.",
+                        [
+                                    "Fürdőt veszek / megfürdöm.",
+                                    "Fürdőt vettem / megfürödtem.",
+                                    "Fürdőt fogok venni / meg fogok fürödni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        177,
+                        "She writes a letter.",
+                        "She wrote a letter.",
+                        "She will write a letter.",
+                        [
+                                    "Levelet ír.",
+                                    "Levelet írt.",
+                                    "Levelet fog írni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        178,
+                        "He watches a movie.",
+                        "He watched a movie.",
+                        "He will watch a movie.",
+                        [
+                                    "Megnéz egy filmet.",
+                                    "Megnézett egy filmet.",
+                                    "Meg fog nézni egy filmet."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        179,
+                        "They play games.",
+                        "They played games.",
+                        "They will play games.",
+                        [
+                                    "Játékokat játszanak.",
+                                    "Játékokat játszottak.",
+                                    "Játékokat fognak játszani."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        180,
+                        "We attend a class.",
+                        "We attended a class.",
+                        "We will attend a class.",
+                        [
+                                    "Órán veszünk részt.",
+                                    "Órán vettünk részt.",
+                                    "Órán fogunk részt venni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        181,
+                        "I drink water.",
+                        "I drank water.",
+                        "I will drink water.",
+                        [
+                                    "Vizet iszom.",
+                                    "Vizet ittam.",
+                                    "Vizet fogok inni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        182,
+                        "She eats an apple.",
+                        "She ate an apple.",
+                        "She will eat an apple.",
+                        [
+                                    "Eszik egy almát.",
+                                    "Evett egy almát.",
+                                    "Enni fog egy almát."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        183,
+                        "He reads a newspaper.",
+                        "He read a newspaper.",
+                        "He will read a newspaper.",
+                        [
+                                    "Újságot olvas.",
+                                    "Újságot olvasott.",
+                                    "Újságot fog olvasni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        184,
+                        "They visit a friend.",
+                        "They visited a friend.",
+                        "They will visit a friend.",
+                        [
+                                    "Meglátogatnak egy barátot.",
+                                    "Meglátogattak egy barátot.",
+                                    "Meg fognak látogatni egy barátot."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        185,
+                        "We go for a walk.",
+                        "We went for a walk.",
+                        "We will go for a walk.",
+                        [
+                                    "Elmegyünk sétálni.",
+                                    "Elmentünk sétálni.",
+                                    "El fogunk menni sétálni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        186,
+                        "I study English.",
+                        "I studied English.",
+                        "I will study English.",
+                        [
+                                    "Angolt tanulok.",
+                                    "Angolt tanultam.",
+                                    "Angolt fogok tanulni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        187,
+                        "She cooks dinner.",
+                        "She cooked dinner.",
+                        "She will cook dinner.",
+                        [
+                                    "Vacsorát főz.",
+                                    "Vacsorát főzött.",
+                                    "Vacsorát fog főzni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        188,
+                        "He helps his friend.",
+                        "He helped his friend.",
+                        "He will help his friend.",
+                        [
+                                    "Segít a barátjának.",
+                                    "Segített a barátjának.",
+                                    "Segíteni fog a barátjának."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        189,
+                        "They buy a gift.",
+                        "They bought a gift.",
+                        "They will buy a gift.",
+                        [
+                                    "Vesznek egy ajándékot.",
+                                    "Vettek egy ajándékot.",
+                                    "Venni fognak egy ajándékot."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        190,
+                        "We watch TV.",
+                        "We watched TV.",
+                        "We will watch TV.",
+                        [
+                                    "Tévét nézünk.",
+                                    "Tévét néztünk.",
+                                    "Tévét fogunk nézni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        191,
+                        "I learn new words.",
+                        "I learned new words.",
+                        "I will learn new words.",
+                        [
+                                    "Új szavakat tanulok.",
+                                    "Új szavakat tanultam.",
+                                    "Új szavakat fogok tanulni."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        192,
+                        "She sings a song.",
+                        "She sang a song.",
+                        "She will sing a song.",
+                        [
+                                    "Énekel egy dalt.",
+                                    "Énekelt egy dalt.",
+                                    "Énekelni fog egy dalt."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        193,
+                        "He drives a car.",
+                        "He drove a car.",
+                        "He will drive a car.",
+                        [
+                                    "Autót vezet.",
+                                    "Autót vezetett.",
+                                    "Autót fog vezetni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        194,
+                        "They clean the house.",
+                        "They cleaned the house.",
+                        "They will clean the house.",
+                        [
+                                    "Kitakarítják a házat.",
+                                    "Kitakarították a házat.",
+                                    "Ki fogják takarítani a házat."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        195,
+                        "We have lunch.",
+                        "We had lunch.",
+                        "We will have lunch.",
+                        [
+                                    "Ebédelünk.",
+                                    "Ebédeltünk.",
+                                    "Ebédelni fogunk."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        196,
+                        "I meet my friend.",
+                        "I met my friend.",
+                        "I will meet my friend.",
+                        [
+                                    "Találkozom a barátommal.",
+                                    "Találkoztam a barátommal.",
+                                    "Találkozni fogok a barátommal."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        197,
+                        "She takes a bus.",
+                        "She took a bus.",
+                        "She will take a bus.",
+                        [
+                                    "Busszal megy / buszra száll.",
+                                    "Busszal ment / buszra szállt.",
+                                    "Busszal fog menni / buszra fog szállni."
+                        ],
+                        2,
+                        true
+            ],
+            [
+                        198,
+                        "He opens the window.",
+                        "He opened the window.",
+                        "He will open the window.",
+                        [
+                                    "Kinyitja az ablakot.",
+                                    "Kinyitotta az ablakot.",
+                                    "Ki fogja nyitni az ablakot."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        199,
+                        "They close the door.",
+                        "They closed the door.",
+                        "They will close the door.",
+                        [
+                                    "Becsukják az ajtót.",
+                                    "Becsukták az ajtót.",
+                                    "Be fogják csukni az ajtót."
+                        ],
+                        1,
+                        true
+            ],
+            [
+                        200,
+                        "We celebrate festivals.",
+                        "We celebrated festivals.",
+                        "We will celebrate festivals.",
+                        [
+                                    "Ünnepeket ünneplünk.",
+                                    "Ünnepeket ünnepeltünk.",
+                                    "Ünnepeket fogunk ünnepelni."
+                        ],
+                        1,
+                        true
+            ]
+];
+
+        const CATEGORIES = {
+            1: {
+                name: "Egyszerű igeidők – Szabályos igék",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Jelen (Present):</strong> szótári alak (E/3. személyben <em>-s/-es</em>, pl. <em>She cooks</em>).</li>
+                        <li><strong class="text-emerald-300">Múlt (Past):</strong> szabályos <strong>-ed</strong> végződés (pl. <em>played, cooked</em>).</li>
+                        <li><strong class="text-purple-300">Jövő (Future):</strong> <strong>will + szótári alak</strong> (pl. <em>will play</em>).</li>
+                    </ul>`,
+                tip: "Egyszerű jelenben E/3. személyben (he/she/it) -s/-es ragot kap az ige (pl. She cooks). Múlt időben a szabályos igék -ed végződést kapnak (cooked), jövő időben pedig will + szótári alakot használunk (will cook).",
+                desc: "Szabályos ragozású igék egyszerű jelen, egyszerű múlt és egyszerű jövő időben (play, cook, watch, clean, visit)."
+            },
+            2: {
+                name: "Egyszerű igeidők – Rendhagyó igék",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Jelen (Present):</strong> szótári alak (E/3. személyben <em>-s/-es</em>, pl. <em>He goes</em>).</li>
+                        <li><strong class="text-emerald-300">Múlt (Past):</strong> rendhagyó 2. alak (V2), nem <em>-ed</em> (pl. <em>went, wrote, drank</em>).</li>
+                        <li><strong class="text-purple-300">Jövő (Future):</strong> <strong>will + szótári alak</strong> (visszakapja az alapalakot: <em>will go</em>).</li>
+                    </ul>`,
+                tip: "Vizsgán kiemelten fontos! A rendhagyó igék múlt ideje nem -ed végződésű: go → went, write → wrote, drink → drank, buy → bought, speak → spoke, take → took. Jövő időben (will után) viszont visszakapják a szótári alakjukat!",
+                desc: "Gyakori rendhagyó igék (go/went, write/wrote, eat/ate, drive/drove, sing/sang, catch/caught)."
+            },
+            3: {
+                name: "Folyamatos igeidők",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Jelen (Present):</strong> <strong>am / is / are + -ing</strong> (éppen most történik).</li>
+                        <li><strong class="text-emerald-300">Múlt (Past):</strong> <strong>was / were + -ing</strong> (a múltban zajlott).</li>
+                        <li><strong class="text-purple-300">Jövő (Future):</strong> <strong>will be + -ing</strong> (a jövőben fog zajlani).</li>
+                    </ul>`,
+                tip: "A folyamatos szemléletet a 'to be' megfelelő alakja + az ige -ing-es alakja fejezi ki: Jelenben am/is/are + -ing, múltban was/were + -ing, jövőben pedig will be + -ing.",
+                desc: "Éppen folyamatban lévő cselekvések (101–120. tétel: am reading / was reading / will be reading)."
+            },
+            4: {
+                name: "Befejezett igeidők",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Jelen (Present Perfect):</strong> <strong>have / has + 3. alak (V3)</strong>.</li>
+                        <li><strong class="text-emerald-300">Múlt (Past Perfect):</strong> <strong>had + 3. alak (V3)</strong>.</li>
+                        <li><strong class="text-purple-300">Jövő (Future Perfect):</strong> <strong>will have + 3. alak (V3)</strong>.</li>
+                    </ul>`,
+                tip: "A befejezett alakoknál a segédige változik, míg a főige mindig a 3. alakban (V3) marad: have/has finished (jelen) → had finished (múlt) → will have finished (jövő).",
+                desc: "Már lezárult vagy adott időpontra befejeződő cselekvések (121–125. tétel: have finished / had finished / will have finished)."
+            },
+            5: {
+                name: "Létige és állapotigék",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Létige (to be):</strong> <em>am/is/are</em> (jelen) → <em>was/were</em> (múlt) → <em>will be</em> (jövő).</li>
+                        <li><strong class="text-emerald-300">Állapotigék:</strong> érzelmi és tudati igék (<em>know, love, need, want</em>) egyszerű alakban állnak.</li>
+                    </ul>`,
+                tip: "A 'to be' létige jelenben am/is/are, múltban was/were, jövőben will be. Az érzelmi és tudati állapotigék (know, love, understand, need, want) általában egyszerű igeidőkben állnak.",
+                desc: "A létige (am/is/are → was/were → will be) és alapvető állapotigék (know, love, feel, need, want)."
+            }
+        };
+
+        // Teljes objektumlista felépítése
+        const TENSES_DB = RAW_DATA.map(item => ({
+            id: item[0],
+            present: item[1],
+            past: item[2],
+            future: item[3],
+            huPresent: item[4][0],
+            huPast: item[4][1],
+            huFuture: item[4][2],
+            hu: item[4][0],
+            catId: item[5],
+            category: CATEGORIES[item[5]].name,
+            tip: CATEGORIES[item[5]].tip,
+            tipHtml: CATEGORIES[item[5]].tipHtml,
+            isCore: item[6]
+        }));
+
+        // ============================================================================
+        // ALKALMAZÁS ÁLLAPOT (STATE)
+        // ============================================================================
+        let state = {
+            activeTab: 'flashcards',
+            accent: 'en-GB',
+            rate: 1.0,
+            coreOnly: false,
+            categoryFilter: 'ALL',
+            statusFilter: 'ALL',
+            searchQuery: '',
+            learnedIds: JSON.parse(localStorage.getItem('tenses200_learned') || '[]'),
+            filteredItems: [],
+            fcIndex: 0,
+            isFlipped: false,
+            autoPlayActive: false,
+            autoPlayTimer: null,
+            quizMode: 'tense_transform',
+            quizScore: 0,
+            quizTotal: 0,
+            currentQuizItem: null,
+            quizPromptText: '',
+            quizAnswered: false
+        };
+
+        // ============================================================================
+        // HANGSZINTÉZIS (WEB SPEECH API)
+        // ============================================================================
+        let availableVoices = [];
+
+        function loadVoices() {
+            if ('speechSynthesis' in window) {
+                availableVoices = window.speechSynthesis.getVoices();
+            }
+        }
+        if ('speechSynthesis' in window) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speakText(text, btnElement = null, onEndCallback = null) {
+            if (!('speechSynthesis' in window)) {
+                if (onEndCallback) onEndCallback();
+                return;
+            }
+            window.speechSynthesis.cancel();
+
+            document.querySelectorAll('.speaking-active').forEach(el => el.classList.remove('speaking-active'));
+            if (btnElement) btnElement.classList.add('speaking-active');
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = state.accent;
+            utterance.rate = state.rate;
+
+            const preferredVoice = availableVoices.find(v => v.lang === state.accent && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Daniel') || v.name.includes('Samantha')))
+                || availableVoices.find(v => v.lang.startsWith(state.accent.substring(0, 5)))
+                || availableVoices.find(v => v.lang.startsWith('en'));
+
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+
+            utterance.onend = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+            utterance.onerror = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakThreeTenses(presentText, pastText, futureText, btnElement = null, onAllEnd = null) {
+            speakText(presentText, btnElement, () => {
+                setTimeout(() => {
+                    speakText(pastText, btnElement, () => {
+                        setTimeout(() => {
+                            speakText(futureText, btnElement, onAllEnd);
+                        }, 380);
+                    });
+                }, 380);
+            });
+        }
+
+        function setAccent(acc) {
+            state.accent = acc;
+            document.getElementById('btn-en-GB').className = acc === 'en-GB'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-en-US').className = acc === 'en-US'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function setRate(r) {
+            state.rate = r;
+            document.getElementById('btn-rate-1').className = r === 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-rate-slow').className = r < 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function toggleAutoPlay() {
+            state.autoPlayActive = !state.autoPlayActive;
+            const btn = document.getElementById('btnAutoPlay');
+            const icon = document.getElementById('autoPlayIcon');
+            const text = document.getElementById('autoPlayText');
+
+            if (state.autoPlayActive) {
+                btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-600 text-white shadow-sm transition';
+                icon.textContent = '⏹️';
+                text.textContent = 'Leállítás';
+                if (state.activeTab !== 'flashcards') {
+                    switchTab('flashcards');
+                }
+                runAutoPlayStep();
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        function stopAutoPlay() {
+            state.autoPlayActive = false;
+            clearTimeout(state.autoPlayTimer);
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const btn = document.getElementById('btnAutoPlay');
+            document.getElementById('autoPlayIcon').textContent = '▶️';
+            document.getElementById('autoPlayText').textContent = 'Hangoskönyv mód';
+            btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition';
+        }
+
+        function runAutoPlayStep() {
+            if (!state.autoPlayActive || state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            state.isFlipped = false;
+            updateFlashcardUI();
+
+            speakThreeTenses(item.present, item.past, item.future, null, () => {
+                if (!state.autoPlayActive) return;
+                state.isFlipped = true;
+                updateFlashcardUI();
+
+                state.autoPlayTimer = setTimeout(() => {
+                    if (!state.autoPlayActive) return;
+                    state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+                    runAutoPlayStep();
+                }, 2200);
+            });
+        }
+
+        // ============================================================================
+        // SZŰRÉS ÉS HALADÁS KEZELÉSE
+        // ============================================================================
+        function saveProgress() {
+            localStorage.setItem('tenses200_learned', JSON.stringify(state.learnedIds));
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const total = TENSES_DB.length;
+            const count = state.learnedIds.length;
+            const pct = Math.round((count / total) * 100);
+
+            document.getElementById('mobileProgressBadge').textContent = `${count}/${total}`;
+            document.getElementById('desktopProgressText').textContent = `${count} / ${total} (${pct}%)`;
+            document.getElementById('desktopProgressBar').style.width = `${pct}%`;
+        }
+
+        function toggleCoreFilter() {
+            state.coreOnly = !state.coreOnly;
+            const btn = document.getElementById('btnCoreFilter');
+            const icon = document.getElementById('coreCheckIcon');
+            if (state.coreOnly) {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm';
+                icon.textContent = '⭐';
+            } else {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100';
+                icon.textContent = '🌐';
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            state.categoryFilter = document.getElementById('categorySelect').value;
+            state.statusFilter = document.getElementById('statusSelect').value;
+            state.searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            state.filteredItems = TENSES_DB.filter(item => {
+                if (state.coreOnly && !item.isCore) return false;
+                if (state.categoryFilter !== 'ALL' && item.category !== state.categoryFilter) return false;
+                const isLearned = state.learnedIds.includes(item.id);
+                if (state.statusFilter === 'LEARNED' && !isLearned) return false;
+                if (state.statusFilter === 'UNLEARNED' && isLearned) return false;
+
+                if (state.searchQuery) {
+                    const matchId = String(item.id) === state.searchQuery;
+                    const matchEn = item.present.toLowerCase().includes(state.searchQuery)
+                        || item.past.toLowerCase().includes(state.searchQuery)
+                        || item.future.toLowerCase().includes(state.searchQuery);
+                    const matchHu = item.huPresent.toLowerCase().includes(state.searchQuery)
+                        || item.huPast.toLowerCase().includes(state.searchQuery)
+                        || item.huFuture.toLowerCase().includes(state.searchQuery);
+                    if (!matchId && !matchEn && !matchHu) return false;
+                }
+                return true;
+            });
+
+            document.getElementById('filteredCountLabel').textContent = `Szűrt tételek: ${state.filteredItems.length} db`;
+            state.fcIndex = 0;
+            state.isFlipped = false;
+
+            updateFlashcardUI();
+            renderList();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        }
+
+        // ============================================================================
+        // FÜLEK (NÉZETEK) VÁLTÁSA
+        // ============================================================================
+        function switchTab(tabName) {
+            if (tabName !== 'flashcards' && state.autoPlayActive) {
+                stopAutoPlay();
+            }
+            state.activeTab = tabName;
+
+            ['flashcards', 'list', 'quiz', 'grammar'].forEach(t => {
+                const viewEl = document.getElementById(`view-${t}`);
+                const tabEl = document.getElementById(`tab-${t}`);
+                if (t === tabName) {
+                    viewEl.classList.remove('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition';
+                } else {
+                    viewEl.classList.add('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+                }
+            });
+
+            const filterBar = document.getElementById('globalFilterBar');
+            if (tabName === 'flashcards' || tabName === 'list') {
+                filterBar.classList.remove('hidden');
+            } else {
+                filterBar.classList.add('hidden');
+            }
+
+            if (tabName === 'quiz' && !state.currentQuizItem) {
+                generateQuizQuestion();
+            }
+        }
+
+        // ============================================================================
+        // 1. TANULÓKÁRTYÁK LOGIKA
+        // ============================================================================
+        function updateFlashcardUI() {
+            const inner = document.getElementById('flashcardInner');
+            const front = document.getElementById('fcFrontFace');
+            const back = document.getElementById('fcBackFace');
+            if (state.isFlipped) {
+                inner.classList.add('rotate-y-180');
+                if (front) front.classList.add('pointer-events-none');
+                if (back) back.classList.remove('pointer-events-none');
+            } else {
+                inner.classList.remove('rotate-y-180');
+                if (front) front.classList.remove('pointer-events-none');
+                if (back) back.classList.add('pointer-events-none');
+            }
+
+            if (state.filteredItems.length === 0) {
+                document.getElementById('fcPosition').textContent = '0 / 0 kártya';
+                document.getElementById('fcPresent').textContent = 'Nincs találat';
+                document.getElementById('fcPast').textContent = 'Módosítsd a szűrőket!';
+                document.getElementById('fcFuture').textContent = '';
+                document.getElementById('fcBackPresentHu').textContent = 'Nincs találat';
+                return;
+            }
+
+            const item = state.filteredItems[state.fcIndex];
+            const isLearned = state.learnedIds.includes(item.id);
+
+            document.getElementById('fcPosition').textContent = `${state.fcIndex + 1} / ${state.filteredItems.length}. kártya`;
+            document.getElementById('fcNumber').textContent = `#${item.id}`;
+            document.getElementById('fcBackNumber').textContent = `#${item.id} • Magyar jelentés`;
+            document.getElementById('fcCategory').textContent = item.category;
+
+            document.getElementById('fcPresent').textContent = item.present;
+            document.getElementById('fcPast').textContent = item.past;
+            document.getElementById('fcFuture').textContent = item.future;
+
+            document.getElementById('fcBackPresent').textContent = item.present;
+            document.getElementById('fcBackPresentHu').textContent = item.huPresent;
+            document.getElementById('fcBackPast').textContent = item.past;
+            document.getElementById('fcBackPastHu').textContent = item.huPast;
+            document.getElementById('fcBackFuture').textContent = item.future;
+            document.getElementById('fcBackFutureHu').textContent = item.huFuture;
+            document.getElementById('fcTipHu').innerHTML = item.tipHtml;
+
+            const coreBadge = document.getElementById('fcCoreBadge');
+            if (item.isCore) {
+                coreBadge.classList.remove('hidden');
+            } else {
+                coreBadge.classList.add('hidden');
+            }
+
+            const learnedBadge = document.getElementById('fcLearnedBadge');
+            if (isLearned) {
+                learnedBadge.classList.remove('hidden');
+            } else {
+                learnedBadge.classList.add('hidden');
+            }
+        }
+
+        function flipCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = !state.isFlipped;
+            updateFlashcardUI();
+        }
+
+        function nextCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function prevCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function markCurrentCard(learned) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            if (learned) {
+                if (!state.learnedIds.includes(item.id)) {
+                    state.learnedIds.push(item.id);
+                }
+            } else {
+                state.learnedIds = state.learnedIds.filter(id => id !== item.id);
+            }
+            saveProgress();
+            renderList();
+            nextCard();
+        }
+
+        function shuffleFlashcards() {
+            for (let i = state.filteredItems.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [state.filteredItems[i], state.filteredItems[j]] = [state.filteredItems[j], state.filteredItems[i]];
+            }
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function resetOrderFlashcards() {
+            state.filteredItems.sort((a, b) => a.id - b.id);
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function speakCurrentPart(part, btn) {
+            if (state.filteredItems.length === 0) return;
+            speakText(state.filteredItems[state.fcIndex][part], btn);
+        }
+
+        function speakCurrentAllThree(btn) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            speakThreeTenses(item.present, item.past, item.future, btn);
+        }
+
+        // ============================================================================
+        // 2. TELJES TÁBLÁZAT / LISTA RENDERELÉSE
+        // ============================================================================
+        function renderList() {
+            const container = document.getElementById('listContainer');
+            if (state.filteredItems.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+                        <p class="text-slate-500 font-medium">Nincs a szűrésnek megfelelő tétel.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = state.filteredItems.map(item => {
+                const isLearned = state.learnedIds.includes(item.id);
+                return `
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border ${isLearned ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-200'} shadow-xs hover:shadow-md transition flex flex-col justify-between gap-3">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2.5">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-xs">#${item.id}</span>
+                                <span class="px-2 py-0.5 rounded-md bg-brand-50 text-brand-700 font-medium text-xs">${item.category}</span>
+                                ${item.isCore ? '<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>' : ''}
+                            </div>
+                            <button onclick="toggleItemLearned(${item.id})" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${isLearned ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                                ${isLearned ? '✓ Tudom' : '○ Jelölés'}
+                            </button>
+                        </div>
+
+                        <div class="space-y-2 mt-2">
+                            <div class="flex items-center justify-between gap-2 bg-blue-50/70 border border-blue-100 rounded-xl px-3 py-2">
+                                <div>
+                                    <div class="text-sm">
+                                        <span class="text-[10px] uppercase font-extrabold text-blue-700 mr-1.5">Present</span>
+                                        <span class="font-bold text-slate-900">${item.present}</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-0.5">🇭🇺 ${item.huPresent}</p>
+                                </div>
+                                <button onclick="speakText('${escapeQuotes(item.present)}', this)" class="text-xs px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shrink-0">🔊</button>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-2 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2">
+                                <div>
+                                    <div class="text-sm">
+                                        <span class="text-[10px] uppercase font-extrabold text-emerald-700 mr-1.5">Past</span>
+                                        <span class="font-bold text-slate-900">${item.past}</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-0.5">🇭🇺 ${item.huPast}</p>
+                                </div>
+                                <button onclick="speakText('${escapeQuotes(item.past)}', this)" class="text-xs px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shrink-0">🔊</button>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-2 bg-purple-50/70 border border-purple-100 rounded-xl px-3 py-2">
+                                <div>
+                                    <div class="text-sm">
+                                        <span class="text-[10px] uppercase font-extrabold text-purple-700 mr-1.5">Future</span>
+                                        <span class="font-bold text-slate-900">${item.future}</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-0.5">🇭🇺 ${item.huFuture}</p>
+                                </div>
+                                <button onclick="speakText('${escapeQuotes(item.future)}', this)" class="text-xs px-2.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold shrink-0">🔊</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-1">
+                        <button onclick="speakThreeTenses('${escapeQuotes(item.present)}', '${escapeQuotes(item.past)}', '${escapeQuotes(item.future)}', this)" class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                            <span>🎧</span> Mindhárom igeidő meghallgatása
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'");
+        }
+
+        function toggleItemLearned(id) {
+            if (state.learnedIds.includes(id)) {
+                state.learnedIds = state.learnedIds.filter(x => x !== id);
+            } else {
+                state.learnedIds.push(id);
+            }
+            saveProgress();
+            renderList();
+            updateFlashcardUI();
+        }
+
+        // ============================================================================
+        // 3. INTERAKTÍV KVÍZ ÉS HALLÁSÉRTÉS
+        // ============================================================================
+        function setQuizMode(mode) {
+            state.quizMode = mode;
+            ['tense_transform', 'meaning', 'listening'].forEach(m => {
+                const btn = document.getElementById(`qmode-${m}`);
+                btn.className = m === mode
+                    ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition'
+                    : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+            });
+            generateQuizQuestion();
+        }
+
+        function generateQuizQuestion() {
+            state.quizAnswered = false;
+            document.getElementById('quizFeedback').classList.add('hidden');
+
+            const pool = TENSES_DB;
+            const target = pool[Math.floor(Math.random() * pool.length)];
+            state.currentQuizItem = target;
+
+            const badge = document.getElementById('quizQuestionTypeBadge');
+            const mainPrompt = document.getElementById('quizMainPrompt');
+            const subPrompt = document.getElementById('quizSubPrompt');
+            const optionsContainer = document.getElementById('quizOptions');
+
+            if (state.quizMode === 'tense_transform') {
+                const askPast = Math.random() < 0.65;
+                const correctText = askPast ? target.past : target.future;
+                state.quizPromptText = target.present;
+
+                badge.textContent = askPast
+                    ? '🟢 Válaszd ki a mondat helyes MÚLT IDEJŰ (Past Tense) alakját!'
+                    : '🟣 Válaszd ki a mondat helyes JÖVŐ IDEJŰ (Future Tense) alakját!';
+                mainPrompt.textContent = target.present;
+                subPrompt.textContent = `Jelentése: „${target.hu}”`;
+
+                const distractors = new Set();
+                if (askPast) {
+                    distractors.add(target.future);
+                } else {
+                    distractors.add(target.past);
+                }
+                while (distractors.size < 3) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    const candText = askPast ? candidate.past : candidate.future;
+                    if (candText !== correctText) {
+                        distractors.add(candText);
+                    }
+                }
+
+                const options = [
+                    { text: correctText, isCorrect: true, label: askPast ? 'Past Tense' : 'Future Tense' },
+                    ...Array.from(distractors).map(t => ({ text: t, isCorrect: false, label: '' }))
+                ].sort(() => Math.random() - 0.5);
+
+                optionsContainer.innerHTML = options.map((opt, idx) => `
+                    <button onclick="checkQuizAnswerBoolean(${opt.isCorrect}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-bold text-slate-800 transition flex items-center justify-between">
+                        <span>${opt.text}</span>
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'meaning') {
+                const tenses = ['present', 'past', 'future'];
+                const chosenTense = tenses[Math.floor(Math.random() * tenses.length)];
+                const huKeyMap = { present: 'huPresent', past: 'huPast', future: 'huFuture' };
+                const huKey = huKeyMap[chosenTense];
+                const tenseLabels = { present: 'Present (Jelen)', past: 'Past (Múlt)', future: 'Future (Jövő)' };
+                state.quizPromptText = target[chosenTense];
+
+                badge.textContent = `🇭🇺 Válaszd ki a mondat magyar jelentését! (${tenseLabels[chosenTense]})`;
+                mainPrompt.textContent = target[chosenTense];
+                subPrompt.textContent = `Kategória: ${target.category}`;
+
+                const distractors = [];
+                while (distractors.length < 3) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    if (candidate.id !== target.id && candidate[huKey] !== target[huKey] && !distractors.some(d => d[huKey] === candidate[huKey])) {
+                        distractors.push(candidate);
+                    }
+                }
+
+                const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswerBoolean(${opt.id === target.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition">
+                        ${opt[huKey]}
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'listening') {
+                const tenses = ['present', 'past', 'future'];
+                const chosenTense = tenses[Math.floor(Math.random() * tenses.length)];
+                state.quizPromptText = target[chosenTense];
+
+                badge.textContent = '🎧 Hallgasd meg a mondatot, és válaszd ki, mit hallottál!';
+                mainPrompt.textContent = '🔊 Hallgasd meg a hanganyagot!';
+                subPrompt.textContent = 'Kattints a „Meghallgatás” gombra, ha újra hallani szeretnéd.';
+                speakText(state.quizPromptText);
+
+                const distractors = [];
+                while (distractors.length < 3) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    if (candidate.id !== target.id && candidate.hu !== target.hu && !distractors.some(d => d.hu === candidate.hu)) {
+                        distractors.push(candidate);
+                    }
+                }
+
+                const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswerBoolean(${opt.id === target.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition">
+                        ${opt[chosenTense]} <span class="block text-xs text-slate-500 font-normal mt-0.5">${opt.hu}</span>
+                    </button>
+                `).join('');
+            }
+        }
+
+        function speakQuizPrompt() {
+            if (!state.quizPromptText) return;
+            speakText(state.quizPromptText);
+        }
+
+        function checkQuizAnswerBoolean(isCorrect, btnEl) {
+            if (state.quizAnswered) return;
+            state.quizAnswered = true;
+            state.quizTotal++;
+
+            const target = state.currentQuizItem;
+            if (isCorrect) state.quizScore++;
+
+            document.getElementById('quizScore').textContent = state.quizScore;
+            document.getElementById('quizTotal').textContent = state.quizTotal;
+
+            document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-brand-400', 'hover:bg-brand-50/40');
+            });
+
+            if (isCorrect) {
+                btnEl.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+            } else {
+                btnEl.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+            }
+
+            const fb = document.getElementById('quizFeedback');
+            fb.classList.remove('hidden');
+            fb.className = isCorrect
+                ? 'rounded-2xl p-4 text-sm font-medium bg-emerald-50 border border-emerald-200 text-emerald-900'
+                : 'rounded-2xl p-4 text-sm font-medium bg-rose-50 border border-rose-200 text-rose-900';
+
+            fb.innerHTML = `
+                <p class="font-bold mb-1.5">${isCorrect ? '✅ Helyes válasz!' : '❌ Nem egészen!'}</p>
+                <ul class="text-xs space-y-1 opacity-95">
+                    <li><strong>Present:</strong> ${target.present} — <em>${target.huPresent}</em></li>
+                    <li><strong>Past:</strong> ${target.past} — <em>${target.huPast}</em></li>
+                    <li><strong>Future:</strong> ${target.future} — <em>${target.huFuture}</em></li>
+                </ul>
+            `;
+
+            speakThreeTenses(target.present, target.past, target.future);
+        }
+
+        // ============================================================================
+        // 4. IGEIDŐ KISOKOS RENDERELÉSE
+        // ============================================================================
+        function renderGrammarCards() {
+            const grid = document.getElementById('grammarCardsGrid');
+            grid.innerHTML = Object.entries(CATEGORIES).map(([id, cat]) => {
+                const count = TENSES_DB.filter(x => x.catId === Number(id)).length;
+                const coreCount = TENSES_DB.filter(x => x.catId === Number(id) && x.isCore).length;
+                return `
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-bold text-xs">${id}. csoport</span>
+                            <span class="text-xs font-semibold text-slate-500">${coreCount} alapfokú / ${count} összes</span>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-2">${cat.name}</h3>
+                        <p class="text-sm text-slate-600 mb-3">${cat.desc}</p>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
+                            <strong>💡 Vizsgaszabály:</strong> ${cat.tip}
+                        </div>
+                    </div>
+                    <button onclick="practiceCategory('${cat.name}')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold transition">
+                        Csoport gyakorlása kártyákkal ➡️
+                    </button>
+                </div>`;
+            }).join('');
+        }
+
+        function practiceCategory(catName) {
+            document.getElementById('categorySelect').value = catName;
+            if (state.coreOnly) {
+                toggleCoreFilter();
+            }
+            applyFilters();
+            switchTab('flashcards');
+        }
+
+        // ============================================================================
+        // MODAL ÉS INICIALIZÁLÁS
+        // ============================================================================
+        function resetAllProgress() {
+            document.getElementById('modalTitle').textContent = 'Haladás törlése';
+            document.getElementById('modalText').textContent = 'Biztosan törölni szeretnéd az összes megtanultként megjelölt tételt?';
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('hidden');
+
+            document.getElementById('modalConfirmBtn').onclick = () => {
+                state.learnedIds = [];
+                saveProgress();
+                applyFilters();
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (state.activeTab !== 'flashcards') return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+            if (e.code === 'ArrowRight') nextCard();
+            else if (e.code === 'ArrowLeft') prevCard();
+            else if (e.code === 'Space') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        window.onload = () => {
+            updateProgressUI();
+            renderGrammarCards();
+            applyFilters();
+        };
+    </script>
+</body>
+</html>
