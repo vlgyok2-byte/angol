@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>400 Fontos Angol Elöljárószó – Alapfokú Nyelvvizsga Felkészítő</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .card-transition {
+            transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        .speaking-active {
+            animation: pulse-ring 1.5s infinite;
+            background-color: #7c3aed !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Felső navigációs és hangbeállítási sáv -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-slate-800 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+                            400
+                        </div>
+                        <div>
+                            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">400 Fontos Angol Elöljárószó</h1>
+                            <p class="text-xs text-slate-500">Alapfokú (A2–B1) nyelvvizsga felkészítő • Hangos tananyag</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:hidden flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span id="mobileProgressBadge" class="text-xs font-bold text-emerald-800">0/400</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 sm:gap-3">
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setAccent('en-GB')" id="btn-en-GB" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            🇬🇧 Brit (UK)
+                        </button>
+                        <button onclick="setAccent('en-US')" id="btn-en-US" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🇺🇸 Amerikai (US)
+                        </button>
+                    </div>
+
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setRate(1.0)" id="btn-rate-1" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            1.0x Normál
+                        </button>
+                        <button onclick="setRate(0.72)" id="btn-rate-slow" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🐢 0.75x Lassú
+                        </button>
+                    </div>
+
+                    <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl">
+                        <div>
+                            <div class="flex items-center justify-between text-xs gap-4 mb-1">
+                                <span class="font-medium text-slate-600">Elsajátítva:</span>
+                                <span id="desktopProgressText" class="font-bold text-emerald-700">0 / 400 (0%)</span>
+                            </div>
+                            <div class="w-36 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div id="desktopProgressBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="flex items-center gap-1.5 sm:gap-2 mt-3 pt-2.5 border-t border-slate-100 overflow-x-auto pb-1">
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition">
+                    <span>🗂️</span> Tanulókártyák
+                </button>
+                <button onclick="switchTab('list')" id="tab-list" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📋</span> Teljes Lista (1–400)
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>🎯</span> Kvíz & Hallásértés
+                </button>
+                <button onclick="switchTab('grammar')" id="tab-grammar" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📘</span> Nyelvtani Kisokos
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Globális Szűrő Sáv -->
+    <section id="globalFilterBar" class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="toggleCoreFilter()" id="btnCoreFilter" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm">
+                    <span id="coreCheckIcon">⭐</span>
+                    <span>Alapfokú vizsga törzsanyag (A2–B1)</span>
+                </button>
+
+                <select id="categorySelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Összes kategória</option>
+                    <option value="Időhatározói elöljárószavak">1. Időhatározói elöljárószavak</option>
+<option value="Helyhatározói elöljárószavak">2. Helyhatározói elöljárószavak</option>
+<option value="Irányok és közlekedés">3. Irányok és közlekedés</option>
+<option value="Ige + elöljárószó kapcsolatok">4. Ige + elöljárószó kapcsolatok</option>
+<option value="Melléknév + elöljárószó">5. Melléknév + elöljárószó</option>
+<option value="Állandósult elöljárós kifejezések">6. Állandósult elöljárós kifejezések</option>
+<option value="Összetett és viszonyító elöljárók">7. Összetett és viszonyító elöljárók</option>
+<option value="Főnév + elöljárószó kapcsolatok">8. Főnév + elöljárószó kapcsolatok</option>
+                </select>
+
+                <select id="statusSelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Minden állapot</option>
+                    <option value="UNLEARNED">Még gyakorlandó</option>
+                    <option value="LEARNED">Már megtanultam ✓</option>
+                </select>
+            </div>
+
+            <div class="flex items-center justify-between md:justify-end gap-3">
+                <span id="filteredCountLabel" class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">
+                    Szűrt tételek: 400 db
+                </span>
+                <button onclick="toggleAutoPlay()" id="btnAutoPlay" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-50 text-brand-700 border border-brand-200 hover:bg-brand-100 transition">
+                    <span id="autoPlayIcon">▶️</span>
+                    <span id="autoPlayText">Hangoskönyv mód</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FŐ TARTALMI TERÜLET -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+
+        <!-- 1. NÉZET: TANULÓKÁRTYÁK -->
+        <div id="view-flashcards" class="space-y-6">
+            <div class="max-w-2xl mx-auto flex items-center justify-between text-sm text-slate-600">
+                <span id="fcPosition" class="font-bold text-slate-800 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+                    1 / 400. kártya
+                </span>
+                <div class="flex items-center gap-2">
+                    <button onclick="shuffleFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔀 Keverés
+                    </button>
+                    <button onclick="resetOrderFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔢 Sorrendben
+                    </button>
+                </div>
+            </div>
+
+            <div id="flashcardContainer" class="max-w-2xl mx-auto perspective-1000">
+                <div id="flashcardInner" onclick="flipCard()" class="relative w-full min-h-[380px] sm:min-h-[410px] cursor-pointer transform-style-3d card-transition">
+                    
+                    <!-- ELŐLAP -->
+                    <div class="absolute inset-0 backface-hidden bg-white rounded-3xl border-2 border-slate-200 shadow-lg p-6 sm:p-8 flex flex-col justify-between">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="fcNumber" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">#1</span>
+                                <span id="fcCategory" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-semibold text-xs">Kategória</span>
+                                <span id="fcCoreBadge" class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>
+                            </div>
+                            <span id="fcLearnedBadge" class="hidden px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs">✓ Megtanulva</span>
+                        </div>
+
+                        <div class="my-auto text-center space-y-5 py-4">
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Angol elöljárószó / szerkezet</p>
+                                <h2 id="fcPronounEn" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Item</h2>
+                            </div>
+
+                            <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-100">
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1.5">Példamondat</p>
+                                <p id="fcSentenceEn" class="text-lg sm:text-2xl font-medium text-slate-800 leading-relaxed">Sentence.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-center gap-2 pt-2" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentPronoun(this)" class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold text-xs sm:text-sm transition">
+                                <span>🔊</span> Kifejezés
+                            </button>
+                            <button onclick="speakCurrentSentence(this)" class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold text-xs sm:text-sm transition">
+                                <span>🗣️</span> Mondat
+                            </button>
+                            <button onclick="speakCurrentBoth(this)" class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                                <span>🎧</span> Mindkettő
+                            </button>
+                        </div>
+
+                        <p class="text-center text-xs text-slate-400 mt-3">Kattints a kártyára a magyar fordításhoz ↻</p>
+                    </div>
+
+                    <!-- HÁTLAP -->
+                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl border-2 border-slate-700 shadow-xl p-6 sm:p-8 flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <span id="fcBackNumber" class="px-2.5 py-1 rounded-lg bg-white/10 text-slate-200 font-bold text-xs">#1 • Magyar jelentés</span>
+                            <span class="text-xs text-slate-400">Kattints a visszafordításhoz ↺</span>
+                        </div>
+
+                        <div class="my-auto text-center space-y-5 py-4">
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-brand-200 font-semibold mb-1">Magyar megfelelője</p>
+                                <h2 id="fcPronounHu" class="text-2xl sm:text-3xl font-extrabold text-amber-300">jelentés</h2>
+                            </div>
+
+                            <div class="bg-white/10 rounded-2xl p-4 sm:p-5 border border-white/10">
+                                <p class="text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">Mondat fordítása</p>
+                                <p id="fcSentenceHu" class="text-lg sm:text-xl font-medium text-white leading-relaxed">Magyar mondat.</p>
+                                <p id="fcSentenceEnSmall" class="text-xs text-slate-300 mt-2 italic">„English sentence.”</p>
+                            </div>
+
+                            <div class="bg-brand-900/50 rounded-xl px-4 py-2.5 border border-brand-500/30 text-left">
+                                <p class="text-xs text-brand-200"><strong class="text-white">💡 Vizsgatipp:</strong> <span id="fcTipHu">Tipp</span></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center gap-3 pt-2" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentBoth(this)" class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm transition">
+                                <span>🔊</span> Angol kiejtés meghallgatása
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                <button onclick="prevCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    <span>⬅️</span> Előző
+                </button>
+
+                <button onclick="markCurrentCard(false)" class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 hover:bg-amber-100 text-amber-900 font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>🔄</span> Még gyakorlom
+                </button>
+
+                <button onclick="markCurrentCard(true)" class="p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>✅</span> Tudom!
+                </button>
+
+                <button onclick="nextCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    Következő <span>➡️</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. NÉZET: TELJES LISTA & KERESŐ -->
+        <div id="view-list" class="hidden space-y-4">
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Keresés angol vagy magyar kifejezésre, sorszámra..." class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <button onclick="clearSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
+                </div>
+                <button onclick="resetAllProgress()" class="px-4 py-2.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition whitespace-nowrap">
+                    🗑️ Haladás nullázása
+                </button>
+            </div>
+
+            <div id="listContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            </div>
+        </div>
+
+        <!-- 3. NÉZET: INTERAKTÍV KVÍZ & HALLÁSÉRTÉS -->
+        <div id="view-quiz" class="hidden max-w-2xl mx-auto space-y-6">
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setQuizMode('meaning')" id="qmode-meaning" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition">
+                        🇭🇺 Jelentés kvíz
+                    </button>
+                    <button onclick="setQuizMode('fill')" id="qmode-fill" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        ✍️ Mondat kvíz
+                    </button>
+                    <button onclick="setQuizMode('listening')" id="qmode-listening" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        🎧 Hallás utáni értés
+                    </button>
+                </div>
+
+                <div class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-xl text-slate-700">
+                    Pontszám: <span id="quizScore" class="text-emerald-600">0</span> / <span id="quizTotal">0</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span id="quizQuestionTypeBadge" class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">
+                        Válaszd ki a helyes magyar jelentést!
+                    </span>
+                    <button onclick="speakQuizPrompt()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">
+                        <span>🔊</span> Meghallgatás
+                    </button>
+                </div>
+
+                <div id="quizPromptBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-center space-y-2">
+                    <h3 id="quizMainPrompt" class="text-xl sm:text-2xl font-extrabold text-slate-900">Prompt</h3>
+                    <p id="quizSubPrompt" class="text-sm sm:text-base text-slate-600">Subprompt</p>
+                </div>
+
+                <div id="quizOptions" class="grid grid-cols-1 gap-3">
+                </div>
+
+                <div id="quizFeedback" class="hidden rounded-2xl p-4 text-sm font-medium"></div>
+
+                <div class="flex justify-end">
+                    <button onclick="generateQuizQuestion()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-sm transition">
+                        Következő kérdés ➡️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. NÉZET: NYELVTANI KISOKOS -->
+        <div id="view-grammar" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-brand-600 to-slate-800 rounded-3xl p-6 sm:p-8 text-white shadow-md">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-2">📘 Alapfokú (A2–B1) Angol Elöljárószó Kisokos</h2>
+                <p class="text-sm sm:text-base text-brand-100 max-w-3xl">
+                    Az elöljárószavak (in, on, at, for, by, with...) és az állandósult vonzatok az angol nyelvvizsga leggyakoribb buktatói. Ez a 400 tételes gyűjtemény logikus csoportokban, példamondatokkal és kiejtéssel segít a biztos elsajátításban.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grammarCardsGrid">
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            400 Important English Prepositions & Phrases • Alapfokú nyelvvizsga felkészítő webalkalmazás • Web Speech API hangszintézissel
+        </div>
+    </footer>
+
+    <div id="customModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-slate-200 space-y-4">
+            <h3 id="modalTitle" class="text-lg font-bold text-slate-900">Megerősítés</h3>
+            <p id="modalText" class="text-sm text-slate-600">Biztosan törölni szeretnéd az eddigi tanulási haladásodat?</p>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold">Mégse</button>
+                <button id="modalConfirmBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold">Igen, törlés</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const RAW_DATA = [[1, "in the morning", "I usually drink coffee in the morning.", "reggel / délelőtt", "Reggelente általában kávét iszom.", 1, true], [2, "in the afternoon", "We have a meeting in the afternoon.", "délután", "Délután megbeszélésünk van.", 1, true], [3, "in the evening", "They watch TV in the evening.", "este", "Este tévét néznek.", 1, true], [4, "at night", "The city looks beautiful at night.", "éjszaka / éjjel", "A város gyönyörűen néz ki éjszaka.", 1, true], [5, "at noon / at midday", "We always have lunch at noon.", "délben", "Mindig délben ebédelünk.", 1, true], [6, "at midnight", "The train arrives at midnight.", "éjfélkor", "A vonat éjfélkor érkezik.", 1, true], [7, "on Monday", "Our English course starts on Monday.", "hétfőn", "Hétfőn kezdődik az angol tanfolyamunk.", 1, true], [8, "on Friday evening", "Let's go to the cinema on Friday evening.", "péntek este", "Menjünk moziba péntek este!", 1, true], [9, "on weekends / at the weekend", "What do you usually do at the weekend?", "hétvégén", "Mit szoktál csinálni hétvégén?", 1, true], [10, "on 15th May", "Her birthday is on 15th May.", "május 15-én", "Május 15-én van a születésnapja.", 1, true], [11, "on Christmas Day", "Families gather together on Christmas Day.", "karácsony napján", "A családok összegyűlnek karácsony napján.", 1, true], [12, "at Christmas", "We always visit our grandparents at Christmas.", "karácsonykor (ünnepi időszak)", "Karácsonykor mindig meglátogatjuk a nagyszüleinket.", 1, true], [13, "in July", "It is very hot in July.", "júliusban", "Júliusban nagyon meleg van.", 1, true], [14, "in summer", "We often go swimming in summer.", "nyáron", "Nyáron gyakran járunk úszni.", 1, true], [15, "in winter", "It snows a lot in winter.", "télen", "Télen sokat havazik.", 1, true], [16, "in spring", "Flowers bloom in spring.", "tavasszal", "Tavasszal virágoznak a virágok.", 1, true], [17, "in autumn / in fall", "Leaves turn yellow in autumn.", "ősszel", "Ősszel megsárgulnak a levelek.", 1, true], [18, "in 2026", "I am taking my language exam in 2026.", "2026-ban", "2026-ban teszem le a nyelvvizsgámat.", 1, true], [19, "in the 21st century", "Technology develops fast in the 21st century.", "a 21. században", "A technológia gyorsan fejlődik a 21. században.", 1, true], [20, "at 7 o'clock", "My alarm rings at 7 o'clock.", "7 órakor", "7 órakor csörög az ébresztőm.", 1, true], [21, "at half past eight", "The lesson begins at half past eight.", "fél kilenckor", "Fél kilenckor kezdődik az óra.", 1, true], [22, "for two hours", "I have been studying for two hours.", "két órája / két órán át", "Két órája tanulok.", 1, true], [23, "for three years", "They have lived here for three years.", "három éve", "Három éve élnek itt.", 1, true], [24, "since Monday", "I haven't seen him since Monday.", "hétfő óta", "Hétfő óta nem láttam őt.", 1, true], [25, "since 2020", "She has worked there since 2020.", "2020 óta", "2020 óta dolgozik ott.", 1, true], [26, "during the holiday", "We took many photos during the holiday.", "a nyaralás alatt / folyamán", "Sok fényképet készítettünk a nyaralás alatt.", 1, true], [27, "during the lesson", "Please don't use your phone during the lesson.", "az óra alatt", "Kérlek, ne használd a telefonodat az óra alatt!", 1, true], [28, "before breakfast", "I always go for a run before breakfast.", "reggeli előtt", "Mindig elmegyek futni reggeli előtt.", 1, true], [29, "after work", "Let's meet for a drink after work.", "munka után", "Találkozzunk egy italra munka után!", 1, true], [30, "until / till 6 PM", "The shop is open until 6 PM.", "este 6-ig", "A bolt este 6-ig van nyitva.", 1, true], [31, "by Friday", "Please send me the report by Friday.", "péntekig (határidő)", "Kérlek, péntekig küldd el nekem a jelentést!", 1, true], [32, "by the end of the month", "We will finish the project by the end of the month.", "a hónap végéig", "A hónap végéig befejezzük a projektet.", 1, true], [33, "from 9 to 5", "He works from 9 to 5 every day.", "9-től 5-ig", "Minden nap 9-től 5-ig dolgozik.", 1, true], [34, "between 2 and 4", "Call me between 2 and 4 o'clock.", "2 és 4 között", "Hívj fel 2 és 4 óra között!", 1, true], [35, "in ten minutes", "The bus will arrive in ten minutes.", "tíz perc múlva", "Tíz perc múlva érkezik a busz.", 1, true], [36, "in a few days", "I will see you again in a few days.", "néhány nap múlva", "Néhány nap múlva újra látlak.", 1, true], [37, "on time", "The train arrived right on time.", "pontos időben (nem késve)", "A vonat pontosan időben érkezett.", 1, true], [38, "in time", "We arrived at the airport just in time.", "időben (még épp előtte)", "Épp időben érkeztünk a repülőtérre.", 1, true], [39, "at the moment", "She is busy at the moment.", "jelenleg / ebben a pillanatban", "Jelenleg elfoglalt.", 1, true], [40, "at present", "At present, he is living in Vienna.", "jelenleg", "Jelenleg Bécsben él.", 1, false], [41, "at the beginning of", "At the beginning of the year, I made a plan.", "valaminek az elején", "Az év elején készítettem egy tervet.", 1, true], [42, "at the end of", "There is a test at the end of the course.", "valaminek a végén", "A tanfolyam végén van egy teszt.", 1, true], [43, "in the past", "People wrote more letters in the past.", "a múltban / régen", "Régen az emberek több levelet írtak.", 1, true], [44, "in the future", "I hope to travel more in the future.", "a jövőben", "Remélem, többet fogok utazni a jövőben.", 1, true], [45, "for the first time", "I visited London for the first time last year.", "első alkalommal", "Tavaly jártam először Londonban.", 1, true], [46, "from time to time", "We meet for coffee from time to time.", "időről időre", "Időről időre találkozunk egy kávéra.", 1, true], [47, "once a week", "I go to the gym once a week.", "hetente egyszer", "Hetente egyszer járok edzőterembe.", 1, true], [48, "twice a day", "Brush your teeth twice a day.", "naponta kétszer", "Naponta kétszer moss fogat!", 1, true], [49, "within an hour", "You will receive an email within an hour.", "egy órán belül", "Egy órán belül kapni fogsz egy e-mailt.", 1, false], [50, "throughout the year", "The museum is open throughout the year.", "egész évben", "A múzeum egész évben nyitva tart.", 1, false], [51, "in the room", "There are three chairs in the room.", "a szobában", "Három szék van a szobában.", 2, true], [52, "in the kitchen", "My mother is cooking in the kitchen.", "a konyhában", "Édesanyám a konyhában főz.", 2, true], [53, "in the garden", "The children are playing in the garden.", "a kertben", "A gyerekek a kertben játszanak.", 2, true], [54, "in Budapest", "He lives in Budapest.", "Budapesten", "Budapesten él.", 2, true], [55, "in Hungary", "Lake Balaton is in Hungary.", "Magyarországon", "A Balaton Magyarországon van.", 2, true], [56, "in the city centre", "We booked a hotel in the city centre.", "a belvárosban", "A belvárosban foglaltunk szállodát.", 2, true], [57, "in the street", "There were many people in the street.", "az utcán", "Sokan voltak az utcán.", 2, true], [58, "in the park", "Let's go for a walk in the park.", "a parkban", "Menjünk sétálni a parkba!", 2, true], [59, "on the table", "Your keys are on the table.", "az asztalon", "A kulcsaid az asztalon vannak.", 2, true], [60, "on the wall", "There is a nice painting on the wall.", "a falon", "Egy szép festmény van a falon.", 2, true], [61, "on the floor", "Don't leave your clothes on the floor.", "a padlón", "Ne hagyd a ruháidat a padlón!", 2, true], [62, "on the first floor", "Our flat is on the first floor.", "az első emeleten", "A lakásunk az első emeleten van.", 2, true], [63, "on the left", "The bank is on the left.", "balra / a bal oldalon", "A bank a bal oldalon van.", 2, true], [64, "on the right", "Turn right, and you will see it on the right.", "jobbra / a jobb oldalon", "Fordulj jobbra, és a jobb oldalon fogod látni.", 2, true], [65, "on the corner", "There is a small café on the corner.", "a sarkon", "Van egy kis kávézó a sarkon.", 2, true], [66, "at home", "I stayed at home yesterday.", "otthon", "Tegnap otthon maradtam.", 2, true], [67, "at work", "She is still at work.", "a munkahelyén / dolgozik", "Még a munkahelyén van.", 2, true], [68, "at school", "The children are at school now.", "az iskolában", "A gyerekek most az iskolában vannak.", 2, true], [69, "at university", "My sister studies law at university.", "az egyetemen", "A nővérem jogot tanul az egyetemen.", 2, true], [70, "at the bus stop", "Wait for me at the bus stop.", "a buszmegállóban", "Várj meg a buszmegállóban!", 2, true], [71, "at the station", "I will meet you at the train station.", "az állomáson", "Találkozunk a vasútállomáson!", 2, true], [72, "at the airport", "We arrived at the airport two hours early.", "a repülőtéren", "Két órával korábban érkeztünk a repülőtérre.", 2, true], [73, "at the door", "Someone is standing at the door.", "az ajtónál", "Valaki áll az ajtónál.", 2, true], [74, "at the top of", "Write your name at the top of the page.", "valaminek a tetején", "Írd a neved az oldal tetejére!", 2, true], [75, "at the bottom of", "Sign your name at the bottom of the form.", "valaminek az alján", "Írd alá a neved az űrlap alján!", 2, true], [76, "under the bed", "The cat is hiding under the bed.", "az ágy alatt", "A macska az ágy alatt bujkál.", 2, true], [77, "above the sofa", "We hung a mirror above the sofa.", "a kanapé felett", "Egy tükröt akasztottunk a kanapé fölé.", 2, true], [78, "over the bridge", "Walk over the bridge to get to the castle.", "a hídon át / felett", "Menj át a hídon, hogy eljuss a várhoz!", 2, true], [79, "below zero", "The temperature dropped below zero.", "nulla fok alatt", "A hőmérséklet nulla fok alá süllyedt.", 2, true], [80, "next to / beside", "Sit down next to me.", "mellett / mellé", "Ülj le mellém!", 2, true], [81, "between", "The pharmacy is between the bank and the post office.", "között (kettő)", "A gyógyszertár a bank és a posta között van.", 2, true], [82, "among", "She was happy to be among friends.", "között (több)", "Boldog volt, hogy barátok között lehet.", 2, true], [83, "in front of", "There is a bus stop in front of our house.", "előtt", "Van egy buszmegálló a házunk előtt.", 2, true], [84, "behind", "The parking lot is behind the supermarket.", "mögött", "A parkoló a szupermarket mögött van.", 2, true], [85, "opposite", "The cinema is opposite the library.", "szemben", "A mozi a könyvtárral szemben van.", 2, true], [86, "near / close to", "Do you live near the city centre?", "közel valamihez", "A belváros közelében laksz?", 2, true], [87, "far from", "The airport is quite far from here.", "messze valamitől", "A repülőtér elég messze van innen.", 2, true], [88, "inside", "It's raining, let's go inside the house.", "belül / bent", "Esik az eső, menjünk be a házba!", 2, true], [89, "outside", "The children are playing outside.", "kívül / kint", "A gyerekek kint játszanak.", 2, true], [90, "on the beach", "We spent the whole day on the beach.", "a strandon / tengerparton", "Egész napot a tengerparton töltöttük.", 2, true], [91, "in the mountains", "They love hiking in the mountains.", "a hegyekben", "Imádnak a hegyekben túrázni.", 2, true], [92, "by the sea", "We rented a small cottage by the sea.", "a tenger mellett / partján", "Béreltünk egy kis nyaralót a tengerparton.", 2, true], [93, "in bed", "He stayed in bed because he had a fever.", "ágyban", "Ágyban maradt, mert láza volt.", 2, true], [94, "in hospital", "My uncle is in hospital for a check-up.", "kórházban (betegként)", "A nagybátyám kórházban van kivizsgáláson.", 2, true], [95, "at the hospital", "I visited my friend at the hospital.", "a kórházban (látogatóként)", "Meglátogattam a barátomat a kórházban.", 2, false], [96, "in the sky", "Look at those dark clouds in the sky.", "az égen", "Nézd azokat a sötét felhőket az égen!", 2, true], [97, "in the photo", "Who is the girl on the left in the photo?", "a fényképen", "Ki az a lány a bal oldalon a fényképen?", 2, true], [98, "in the newspaper", "I read an interesting article in the newspaper.", "az újságban", "Olvastam egy érdekes cikket az újságban.", 2, true], [99, "on TV", "What is on TV tonight?", "a tévében", "Mi van ma este a tévében?", 2, true], [100, "on the internet", "You can find everything on the internet.", "az interneten", "Mindent megtalálsz az interneten.", 2, true], [101, "go to school", "My children go to school by bus.", "iskolába menni", "A gyerekeim busszal járnak iskolába.", 3, true], [102, "go to bed", "I usually go to bed at 11 PM.", "lefeküdni aludni", "Általában este 11-kor fekszem le.", 3, true], [103, "go home", "Let's go home, it's getting dark.", "hazamenni (nincs 'to'!)", "Menjünk haza, sötétedik!", 3, true], [104, "come from", "Where do you come from?", "származni valahonnan / jönni", "Honnan származol?", 3, true], [105, "walk into", "She walked into the room and smiled.", "belépni valahová", "Belépett a szobába és elmosolyodott.", 3, true], [106, "get out of", "Get out of the car carefully.", "kiszállni / kimenni valamiből", "Óvatosan szállj ki az autóból!", 3, true], [107, "put onto", "Put the plates onto the table.", "rátenni valamire", "Tedd a tányérokat az asztalra!", 3, false], [108, "take off", "Take your shoes off in the hall.", "levenni valamiről", "Vedd le a cipődet az előszobában!", 3, true], [109, "walk across", "We walked across the square.", "átmenni / átsétálni valamin", "Átsétáltunk a téren.", 3, true], [110, "drive through", "We drove through a long tunnel.", "áthajtani valamin (alagút, erdő)", "Egy hosszú alagúton hajtottunk keresztül.", 3, true], [111, "walk along", "They walked along the river.", "végigsétálni valami mentén", "A folyó mentén sétáltak.", 3, true], [112, "run around", "The dog ran around the garden.", "körbefutni valami körül", "A kutya körbefutotta a kertet.", 3, true], [113, "walk past", "I walk past the post office every day.", "elmenni valami mellett", "Minden nap elmegyek a posta mellett.", 3, true], [114, "go up", "Go up the stairs to the second floor.", "felmenni (lépcsőn, hegyre)", "Menj fel a lépcsőn a második emeletre!", 3, true], [115, "go down", "Be careful when you go down the stairs.", "lemenni (lépcsőn)", "Vigyázz, amikor lemész a lépcsőn!", 3, true], [116, "towards", "He walked towards the station.", "valami felé", "Az állomás felé sétált.", 3, true], [117, "away from", "Keep away from the edge of the platform!", "távol valamitől", "Maradj távol a peron szélétől!", 3, true], [118, "by bus", "I go to work by bus.", "busszal", "Busszal járok dolgozni.", 3, true], [119, "by train", "Travelling by train is very comfortable.", "vonattal", "Vonattal utazni nagyon kényelmes.", 3, true], [120, "by car", "We went to Croatia by car.", "autóval", "Autóval mentünk Horvátországba.", 3, true], [121, "by plane", "Have you ever travelled by plane?", "repülővel", "Utaztál már valaha repülővel?", 3, true], [122, "by bike", "She goes to university by bike.", "biciklivel", "Biciklivel jár egyetemre.", 3, true], [123, "on foot", "It's close, so we can go on foot.", "gyalog", "Közel van, így mehetünk gyalog.", 3, true], [124, "in a taxi", "We came home in a taxi.", "taxiban (egyes számú névelővel!)", "Taxival jöttünk haza.", 3, true], [125, "on the bus", "I met an old friend on the bus.", "a buszon", "Találkoztam egy régi barátommal a buszon.", 3, true], [126, "get on the train", "We got on the train at platform 3.", "felszállni a vonatra", "A 3-as vágánynál szálltunk fel a vonatra.", 3, true], [127, "get off the bus", "Get off the bus at the next stop.", "leszállni a buszról", "Szállj le a buszról a következő megállónál!", 3, true], [128, "arrive in (a city/country)", "We arrived in Paris in the evening.", "megérkezni (városba/országba)", "Este érkeztünk meg Párizsba.", 3, true], [129, "arrive at (a building/station)", "What time do we arrive at the hotel?", "megérkezni (épületbe/állomásra)", "Hány órakor érkezünk a szállodába?", 3, true], [130, "leave for", "Our flight leaves for Rome at 10 AM.", "elindulni valahová", "A járatunk délelőtt 10-kor indul Rómába.", 3, true], [131, "head for", "After lunch, we headed for the beach.", "elindulni valami irányába", "Ebéd után a tengerpart felé vettük az irányt.", 3, false], [132, "jump over", "The horse jumped over the fence.", "átugrani valami felett", "A ló átugrotta a kerítést.", 3, true], [133, "climb up", "We climbed up the hill to see the view.", "felmászni valamire", "Felmásztunk a dombra, hogy lássuk a kilátást.", 3, true], [134, "fall off", "He fell off his bicycle.", "leesni valamiről", "Leesett a biciklijéről.", 3, true], [135, "fall into", "The ball fell into the water.", "beleesni valamibe", "A labda beleesett a vízbe.", 3, true], [136, "fly over", "The plane flew over the Alps.", "átrepülni valami felett", "A repülőgép átrepült az Alpok felett.", 3, true], [137, "sail across", "They sailed across the lake.", "áthajózni valamin", "Áthajózták a tavat.", 3, false], [138, "swim across", "Can you swim across this river?", "átúszni valamin", "Át tudod úszni ezt a folyót?", 3, true], [139, "turn left at", "Turn left at the corner.", "balra fordulni valaminél", "Fordulj balra a sarkon!", 3, true], [140, "go straight ahead", "Go straight ahead for 200 metres.", "egyenesen előre menni", "Menj egyenesen előre 200 métert!", 3, true], [141, "out of the window", "She looked out of the window.", "kinézni az ablakon", "Kinézett az ablakon.", 3, true], [142, "through the door", "The dog ran through the open door.", "át az ajtón", "A kutya kirohant a nyitott ajtón.", 3, true], [143, "around the corner", "The bakery is just around the corner.", "a sarkon túl / sarkon", "A pékség rögtön a sarkon van.", 3, true], [144, "up to", "Walk up to the traffic lights.", "egészen valameddig", "Sétálj el egészen a közlekedési lámpáig!", 3, true], [145, "onto the platform", "Passengers stepped onto the platform.", "ki a peronra", "Az utasok kiléptek a peronra.", 3, false], [146, "back to", "We flew back to Budapest on Sunday.", "vissza valahová", "Vasárnap repültünk vissza Budapestre.", 3, true], [147, "from ... to ...", "How far is it from here to the station?", "valahonnan valahová", "Milyen messze van innen az állomásig?", 3, true], [148, "via", "We flew to New York via London.", "valamin keresztül / érintésével", "Londonon keresztül repültünk New Yorkba.", 3, false], [149, "aboard", "Welcome aboard our flight to Madrid.", "fedélzeten (hajó/repülő)", "Üdvözöljük a Madridba tartó járatunk fedélzetén!", 3, false], [150, "off the coast", "There is a small island off the coast.", "a part közelében (tengerben)", "Van egy kis sziget a part közelében.", 3, false], [151, "listen to", "I like listening to music while studying.", "hallgatni valamit", "Szeretek zenét hallgatni tanulás közben.", 4, true], [152, "look at", "Look at the blackboard, please.", "nézni valamit", "Nézzétek a táblát, kérlek!", 4, true], [153, "look for", "Are you looking for your keys?", "keresni valamit", "A kulcsaidat keresed?", 4, true], [154, "look after", "Can you look after my plants while I'm away?", "vigyázni valakire/valamire", "Tudsz vigyázni a növényeimre, amíg távol vagyok?", 4, true], [155, "wait for", "I am waiting for my friend.", "várni valakire/valamire", "A barátomra várok.", 4, true], [156, "ask for", "He asked for a glass of water.", "kérni valamit", "Kért egy pohár vizet.", 4, true], [157, "pay for", "I paid for the tickets online.", "fizetni valamiért", "Online fizettem a jegyekért.", 4, true], [158, "thank for", "Thank you for your help!", "megköszönni valamit", "Köszönöm a segítségedet!", 4, true], [159, "apologize for", "She apologized for being late.", "elnézést kérni valamiért", "Elnézést kért a késésért.", 4, true], [160, "prepare for", "We are preparing for the exam.", "felkészülni valamire", "A vizsgára készülünk.", 4, true], [161, "apply for", "He applied for a new job.", "jelentkezni / pályázni valamire", "Jelentkezett egy új állásra.", 4, true], [162, "care for", "Nurses care for sick people.", "gondoskodni valakiről", "Az ápolók gondoskodnak a betegekről.", 4, true], [163, "care about", "She really cares about the environment.", "törődni valamivel / fontosnak tartani", "Igazán törődik a környezetvédelemmel.", 4, true], [164, "talk about", "What are you talking about?", "beszélgetni valamiről", "Miről beszélgettek?", 4, true], [165, "talk to / with", "I need to talk to the manager.", "beszélni valakivel", "Beszélnem kell az üzletvezetővel.", 4, true], [166, "think about", "I am thinking about my holiday.", "gondolkodni valamin", "A nyaralásomon gondolkodom.", 4, true], [167, "think of", "What do you think of this dress?", "véleménnyel lenni valamiről", "Mit gondolsz erről a ruháról?", 4, true], [168, "dream about / of", "I dream of travelling around the world.", "álmodni valamiről", "Arról álmodom, hogy körbeutazom a világot.", 4, true], [169, "hear about", "Did you hear about the accident?", "hallani valamiről (hír)", "Hallottál a balesetről?", 4, true], [170, "hear from", "I haven't heard from her for weeks.", "hírt kapni valakiről", "Hetek óta nem hallottam felőle.", 4, true], [171, "agree with", "I agree with you completely.", "egyetérteni valakivel", "Teljesen egyetértek veled.", 4, true], [172, "agree on", "We couldn't agree on a date.", "megegyezni valamiben", "Nem tudtunk megegyezni egy időpontban.", 4, true], [173, "depend on", "Our plans depend on the weather.", "függeni valamitől", "A terveink az időjárástól függnek.", 4, true], [174, "rely on", "You can always rely on me.", "számítani / támaszkodni valakire", "Rám mindig számíthatsz.", 4, true], [175, "spend money on", "He spends too much money on clothes.", "pénzt költeni valamire", "Túl sok pénzt költ ruhákra.", 4, true], [176, "concentrate on", "Please concentrate on your work.", "összpontosítani valamire", "Kérlek, összpontosíts a munkádra!", 4, true], [177, "focus on", "Let's focus on the main problem.", "fókuszálni valamire", "Fókuszáljunk a fő problémára!", 4, true], [178, "insist on", "She insisted on helping us.", "ragaszkodni valamihez", "Ragaszkodott hozzá, hogy segítsen nekünk.", 4, false], [179, "believe in", "Do you believe in ghosts?", "hinni valamiben", "Hiszel a szellemekben?", 4, true], [180, "succeed in", "She succeeded in passing the exam.", "sikerrel járni valamiben", "Sikerült letennie a vizsgát.", 4, true], [181, "participate in", "Everyone can participate in the game.", "részt venni valamiben", "Mindenki részt vehet a játékban.", 4, true], [182, "arrive at / in", "We arrived at the cinema early.", "megérkezni valahová", "Korán érkeztünk a moziba.", 4, true], [183, "laugh at", "It's rude to laugh at others.", "kinevetni valakit", "Udvariatlanság kinevetni másokat.", 4, true], [184, "smile at", "The baby smiled at me.", "rámosolyogni valakire", "A baba rám mosolygott.", 4, true], [185, "shout at", "Don't shout at me!", "kiabálni valakivel", "Ne kiabálj velem!", 4, true], [186, "point at / to", "He pointed at the map.", "mutatni valamire", "Rámutatott a térképre.", 4, true], [187, "belong to", "Does this bag belong to you?", "tartozni valakihez", "Hozzád tartozik ez a táska?", 4, true], [188, "happen to", "What happened to your arm?", "történni valakivel/valamivel", "Mi történt a karoddal?", 4, true], [189, "explain to", "Can you explain this to me?", "elmagyarázni valakinek", "El tudod ezt magyarázni nekem?", 4, true], [190, "introduce to", "Let me introduce you to my parents.", "bemutatni valakinek", "Hadd mutassalak be a szüleimnek!", 4, true], [191, "invite to", "She invited me to her birthday party.", "meghívni valahová", "Meghívott a születésnapi bulijába.", 4, true], [192, "prefer ... to ...", "I prefer walking to driving.", "jobban szeretni valamit valaminél", "Jobban szeretek gyalogolni, mint vezetni.", 4, true], [193, "consist of", "Water consists of hydrogen and oxygen.", "áll valamiből", "A víz hidrogénből és oxigénből áll.", 4, true], [194, "remind of", "You remind me of my cousin.", "emlékeztetni valakire/valamire", "Az unokatestvéremre emlékeztetsz.", 4, true], [195, "suffer from", "He suffers from terrible headaches.", "szenvedni valamitől (betegség)", "Szörnyű fejfájástól szenved.", 4, true], [196, "recover from", "She is recovering from a cold.", "felépülni valamiből", "Épp egy megfázásból épül fel.", 4, true], [197, "protect from", "Wear sunscreen to protect your skin from the sun.", "megvédeni valamitől", "Használj naptejet, hogy megvédd a bőrödet a naptól!", 4, true], [198, "borrow from", "I borrowed this book from the library.", "kölcsönkérni valakitől/valahonnan", "A könyvtárból kölcsönöztem ezt a könyvet.", 4, true], [199, "complain about", "Guests complained about the noise.", "panaszkodni valami miatt", "A vendégek panaszkodtak a zaj miatt.", 4, true], [200, "worry about", "Don't worry about the future.", "aggódni valami miatt", "Ne aggódj a jövő miatt!", 4, true], [201, "good at", "She is very good at mathematics.", "jó valamiben (ügyes)", "Nagyon jó matematikából.", 5, true], [202, "bad at", "I am terrible at singing.", "rossz valamiben (ügyetlen)", "Borzalmasan énekelek.", 5, true], [203, "interested in", "Are you interested in art?", "érdeklődik valami iránt", "Érdekel a művészet?", 5, true], [204, "afraid of", "Many people are afraid of spiders.", "fél valamitől", "Sokan félnek a pókoktól.", 5, true], [205, "scared of", "My little brother is scared of the dark.", "megijed / fél valamitől", "A kisöcsém fél a sötétben.", 5, true], [206, "proud of", "We are very proud of our daughter.", "büszke valakire/valamire", "Nagyon büszkék vagyunk a lányunkra.", 5, true], [207, "fond of", "She is very fond of animals.", "kedvel / szeret valamit", "Nagyon szereti az állatokat.", 5, true], [208, "tired of", "I am tired of waiting for him.", "elege van valamiből", "Elegem van abból, hogy rá várjak.", 5, true], [209, "full of", "The room was full of people.", "tele van valamivel", "A szoba tele volt emberekkel.", 5, true], [210, "aware of", "Are you aware of the problem?", "tudatában van valaminek", "Tisztában vagy a problémával?", 5, false], [211, "capable of", "He is capable of winning the race.", "képes valamire", "Képes megnyerni a versenyt.", 5, false], [212, "jealous of", "Don't be jealous of your friend's success.", "féltékeny valakire/valamire", "Ne légy féltékeny a barátod sikerére!", 5, true], [213, "famous for", "Hungary is famous for its thermal baths.", "híres valamiről", "Magyarország híres a termálfürdőiről.", 5, true], [214, "ready for", "Are you ready for the English test?", "készen áll valamire", "Készen állsz az angol tesztre?", 5, true], [215, "late for", "Hurry up, we will be late for school!", "elkésik valahonnan", "Siess, elkésünk az iskolából!", 5, true], [216, "sorry for / about", "I am sorry for the mistake.", "sajnál valamit / elnézést kér", "Sajnálom a hibát.", 5, true], [217, "responsible for", "Who is responsible for this project?", "felelős valamiért", "Ki a felelős ezért a projektért?", 5, true], [218, "suitable for", "This movie is not suitable for young children.", "alkalmas / megfelelő valakinek", "Ez a film nem alkalmas kisgyerekeknek.", 5, true], [219, "grateful for", "I am very grateful for your support.", "hálás valamiért", "Nagyon hálás vagyok a támogatásodért.", 5, true], [220, "angry with (someone)", "Why are you angry with me?", "mérges valakire", "Miért vagy mérges rám?", 5, true], [221, "angry about (something)", "He was angry about the cancelled flight.", "mérges valami miatt", "Mérges volt a törölt járat miatt.", 5, true], [222, "pleased with", "The teacher was pleased with our work.", "elégedett valamivel", "A tanár elégedett volt a munkánkkal.", 5, true], [223, "satisfied with", "Are you satisfied with the service?", "elégedett valamivel", "Elégedett vagy a kiszolgálással?", 5, true], [224, "bored with", "The kids got bored with the game.", "unatkozik / un valamit", "A gyerekek megunták a játékot.", 5, true], [225, "crowded with", "The streets were crowded with tourists.", "zsúfolt valamivel", "Az utcák zsúfoltak voltak a turistáktól.", 5, true], [226, "familiar with", "I am not familiar with this software.", "ismerős / jártas valamiben", "Nem ismerem ezt a szoftvert.", 5, false], [227, "married to", "She is married to a French doctor.", "házas valakivel", "Egy francia orvoshoz ment feleségül.", 5, true], [228, "engaged to", "Tom is engaged to Anna.", "jegyes / eljegyzett valakivel", "Tom eljegyezte Annát.", 5, false], [229, "similar to", "Your jacket is very similar to mine.", "hasonló valamihez", "A dzsekid nagyon hasonlít az enyémhez.", 5, true], [230, "different from", "Life in the country is different from city life.", "különbözik valamitől", "A vidéki élet különbözik a várositól.", 5, true], [231, "kind to", "Always be kind to animals.", "kedves valakihez", "Mindig légy kedves az állatokhoz!", 5, true], [232, "polite to", "Shop assistants should be polite to customers.", "udvarias valakivel", "Az eladóknak udvariasnak kell lenniük a vásárlókkal.", 5, true], [233, "rude to", "It's bad manners to be rude to anyone.", "udvariatlan valakivel", "Rossz modorra vall bárkivel udvariatlannak lenni.", 5, true], [234, "allergic to", "I am allergic to cats and dust.", "allergiás valamire", "Allergiás vagyok a macskákra és a porra.", 5, true], [235, "addicted to", "Many teenagers are addicted to their phones.", "függő valamitől", "Sok tinédzser telefonfüggő.", 5, true], [236, "used to", "I am used to getting up early.", "hozzá van szokva valamihez", "Hozzá vagyok szokva a korán keléshez.", 5, true], [237, "excited about", "The children are excited about the school trip.", "izgatott valami miatt", "A gyerekek izgatottak az osztálykirándulás miatt.", 5, true], [238, "worried about", "My parents are worried about my exams.", "aggódik valami miatt", "A szüleim aggódnak a vizsgáim miatt.", 5, true], [239, "happy about", "We are really happy about the good news.", "boldog valami miatt", "Igazán boldogok vagyunk a jó hír miatt.", 5, true], [240, "sad about", "She was sad about leaving her friends.", "szomorú valami miatt", "Szomorú volt, hogy el kellett hagynia a barátait.", 5, true], [241, "crazy about", "He is crazy about football.", "megőrül valamiért (imádja)", "Megőrül a fociért.", 5, true], [242, "surprised at / by", "I was surprised at his reaction.", "meglepődött valamin", "Meglepődtem a reakcióján.", 5, true], [243, "shocked at / by", "Everyone was shocked by the news.", "megdöbbent valamin", "Mindenkit megdöbbentett a hír.", 5, true], [244, "disappointed with / in", "She was disappointed with her test result.", "csalódott valamiben", "Csalódott volt a teszteredménye miatt.", 5, true], [245, "keen on", "I'm not very keen on spicy food.", "lelkesedik / rajong valamiért", "Nem rajongok a csípős ételekért.", 5, true], [246, "dependent on", "Children are dependent on their parents.", "függő valakitől", "A gyerekek a szüleiktől függnek.", 5, false], [247, "short of", "We are a bit short of time today.", "szűkében van valaminek", "Ma egy kicsit szűkében vagyunk az időnek.", 5, true], [248, "typical of", "Rain is typical of British weather.", "jellemző valamire", "Az eső jellemző a brit időjárásra.", 5, true], [249, "absent from", "Three students were absent from class today.", "hiányzik valahonnan", "Három diák hiányzott ma az óráról.", 5, true], [250, "safe from", "Inside the house, we were safe from the storm.", "biztonságban valamitől", "A házban biztonságban voltunk a vihartól.", 5, true], [251, "by mistake", "I took your umbrella by mistake.", "tévedésből / véletlenül", "Tévedésből vittem el az esernyődet.", 6, true], [252, "by accident", "She broke the glass by accident.", "véletlenül", "Véletlenül törte el a poharat.", 6, true], [253, "on purpose", "He didn't do it on purpose.", "szándékosan", "Nem szándékosan csinálta.", 6, true], [254, "in a hurry", "Sorry, I can't talk now, I'm in a hurry.", "siet / rohanásban van", "Bocs, most nem tudok beszélni, sietek.", 6, true], [255, "in cash", "Would you like to pay in cash or by card?", "készpénzben", "Készpénzzel vagy kártyával szeretne fizetni?", 6, true], [256, "by credit card", "Can I pay by credit card here?", "bankkártyával", "Fizethetek itt bankkártyával?", 6, true], [257, "by cheque", "In the past, people often paid by cheque.", "csekkel", "Régen az emberek gyakran fizettek csekkel.", 6, false], [258, "on sale", "These winter coats are on sale now.", "leárazva / akciósan", "Ezek a télikabátok most akciósak.", 6, true], [259, "for sale", "Is that house for sale?", "eladó", "Eladó az a ház?", 6, true], [260, "in stock", "Sorry, that size is not in stock.", "raktáron / készleten", "Sajnos az a méret nincs raktáron.", 6, true], [261, "out of stock", "The new book is temporarily out of stock.", "elfogyott / nincs készleten", "Az új könyv átmenetileg elfogyott.", 6, true], [262, "out of order", "The lift is out of order, let's take the stairs.", "nem működik / üzemen kívül", "A lift nem működik, menjünk a lépcsőn!", 6, true], [263, "in danger", "Some wild animals are in danger.", "veszélyben", "Néhány vadállat veszélyben van.", 6, true], [264, "out of danger", "The doctors said the patient is out of danger.", "veszélyen kívül", "Az orvosok azt mondták, a beteg túl van az életveszélyen.", 6, false], [265, "in trouble", "If you don't do your homework, you'll be in trouble.", "bajban van", "Ha nem csinálod meg a leckét, bajban leszel.", 6, true], [266, "in love", "They fell in love at first sight.", "szerelmes", "Első látásra egymásba szerettek.", 6, true], [267, "in pain", "He was in pain after the operation.", "fájdalmai vannak", "Fájdalmai voltak a műtét után.", 6, true], [268, "in good health", "My grandmother is 85 and in good health.", "jó egészségben", "A nagymamám 85 éves és jó egészségnek örvend.", 6, true], [269, "on a diet", "She is on a diet because she wants to lose weight.", "diétázik / fogyókúrázik", "Diétázik, mert fogyni szeretne.", 6, true], [270, "on holiday / on vacation", "Mr Smith is on holiday this week.", "szabadságon / nyaraláson van", "Smith úr ezen a héten szabadságon van.", 6, true], [271, "on business", "He travels to Germany on business every month.", "üzleti úton", "Minden hónapban üzleti útra megy Németországba.", 6, true], [272, "on strike", "The train drivers are on strike today.", "sztrájkolnak", "A mozdonyvezetők ma sztrájkolnak.", 6, false], [273, "on fire", "Call the fire brigade, the building is on fire!", "ég / lángokban áll", "Hívjátok a tűzoltókat, ég az épület!", 6, true], [274, "in general", "In general, people here are very friendly.", "általánosságban", "Általánosságban az emberek itt nagyon barátságosak.", 6, true], [275, "in fact", "I thought he was English, but in fact he's Irish.", "valójában / tulajdonképpen", "Azt hittem, angol, de valójában ír.", 6, true], [276, "in particular", "I love Italian food, pizza in particular.", "különösen", "Imádom az olasz ételeket, különösen a pizzát.", 6, true], [277, "in common", "We have a lot of interests in common.", "közös (valamiben)", "Sok közös érdeklődési körünk van.", 6, true], [278, "in advance", "You should book your tickets in advance.", "előre", "Érdemes előre lefoglalni a jegyeket.", 6, true], [279, "in public", "She doesn't like speaking in public.", "nyilvánosan / nyilvánosság előtt", "Nem szeret nyilvánosság előtt beszélni.", 6, true], [280, "in private", "Can I speak to you in private?", "négyszemközt / magánban", "Beszélhetek veled négyszemközt?", 6, false], [281, "in silence", "Everyone listened to the music in silence.", "csendben", "Mindenki csendben hallgatta a zenét.", 6, true], [282, "in tears", "She was in tears after watching the sad film.", "könnyek között / sírva", "Könnyek között volt a szomorú film után.", 6, false], [283, "in ink", "Please fill in the form in blue or black ink.", "tintával / tollal", "Kérjük, kék vagy fekete tollal töltse ki az űrlapot!", 6, true], [284, "in pencil", "Write your answers in pencil first.", "ceruzával", "Először ceruzával írd be a válaszaidat!", 6, true], [285, "in English", "Can you say that in English?", "angolul", "Tudod ezt angolul mondani?", 6, true], [286, "at once", "Come here at once!", "azonnal / egyszerre", "Gyere ide azonnal!", 6, true], [287, "at least", "You should drink at least two litres of water.", "legalább", "Legalább két liter vizet kellene innod.", 6, true], [288, "at last", "At last, the bus has arrived!", "végre", "Végre megérkezett a busz!", 6, true], [289, "at first", "At first, English grammar seemed difficult.", "először / kezdetben", "Kezdetben nehéznek tűnt az angol nyelvtan.", 6, true], [290, "for example / for instance", "I love fruits, for example apples and bananas.", "például", "Szeretem a gyümölcsöket, például az almát és a banánt.", 6, true], [291, "for free", "Children under six can enter for free.", "ingyen", "Hat év alatti gyerekek ingyen léphetnek be.", 6, true], [292, "for a change", "Let's eat out tonight for a change.", "a változatosság kedvéért", "A változatosság kedvéért együnk ma este étteremben!", 6, true], [293, "for sure", "I don't know for sure when he will arrive.", "biztosan", "Nem tudom biztosan, mikor érkezik.", 6, true], [294, "by chance", "I met my old teacher by chance in the street.", "véletlenül (szerencsés egybeesés)", "Véletlenül összefutottam a régi tanárommal az utcán.", 6, true], [295, "by heart", "We had to learn a poem by heart.", "kívülről (emlékezetből)", "Kívülről kellett megtanulnunk egy verset.", 6, true], [296, "on the phone", "Hold on, my sister is on the phone.", "telefonál / a telefonban van", "Várj, a nővérem telefonál.", 6, true], [297, "on the radio", "I heard a great song on the radio.", "a rádióban", "Hallottam egy remek dalt a rádióban.", 6, true], [298, "on average", "On average, I sleep seven hours a night.", "átlagosan", "Átlagosan hét órát alszom éjszaka.", 6, true], [299, "under pressure", "He works well even under pressure.", "nyomás alatt", "Nyomás alatt is jól dolgozik.", 6, false], [300, "without doubt", "She is without doubt the best student.", "kétségkívül", "Kétségkívül ő a legjobb diák.", 6, false], [301, "because of", "The match was cancelled because of the rain.", "valami miatt (főnév előtt)", "Az eső miatt elmaradt a meccs.", 7, true], [302, "due to", "The train was delayed due to technical problems.", "valaminek köszönhetően / miatt", "Műszaki okok miatt késett a vonat.", 7, true], [303, "thanks to", "Thanks to your help, I passed the exam.", "valakinek/valaminek köszönhetően", "A segítségednek köszönhetően átmentem a vizsgán.", 7, true], [304, "according to", "According to the weather forecast, it will be sunny.", "valami szerint", "Az időjárás-előrejelzés szerint napos idő lesz.", 7, true], [305, "instead of", "Let's drink tea instead of coffee today.", "valami helyett", "Igyunk ma teát kávé helyett!", 7, true], [306, "in spite of", "We went for a walk in spite of the cold.", "valami ellenére", "A hideg ellenére elmentünk sétálni.", 7, true], [307, "despite", "Despite the traffic, we arrived on time.", "valami ellenére (nincs 'of'!)", "A forgalom ellenére időben érkeztünk.", 7, true], [308, "apart from", "Apart from English, she speaks German.", "valamin kívül / eltekintve", "Az angolon kívül németül is beszél.", 7, true], [309, "except for", "Everyone was there except for Tom.", "kivéve", "Mindenki ott volt Tomot kivéve.", 7, true], [310, "besides", "Besides swimming, I also enjoy cycling.", "valamellett / kívül", "Az úszás mellett a biciklizést is élvezem.", 7, true], [311, "in addition to", "In addition to the salary, they offer free meals.", "valamin felül / kívül", "A fizetésen felül ingyenes étkezést is biztosítanak.", 7, false], [312, "as well as", "She plays the piano as well as the guitar.", "valamint / éppúgy mint", "Zongorázik, valamint gitározik is.", 7, true], [313, "such as", "I enjoy outdoor sports such as hiking and skiing.", "mint például", "Szeretem a szabadtéri sportokat, mint például a túrázást és a síelést.", 7, true], [314, "like", "He swims like a fish.", "mint (hasonlítás)", "Úgy úszik, mint egy hal.", 7, true], [315, "as", "She works as a tour guide.", "mint (munkakör / funkció)", "Idegenvezetőként dolgozik.", 7, true], [316, "for", "This present is for you.", "számára / részére", "Ez az ajándék neked szól.", 7, true], [317, "with", "I cut the bread with a sharp knife.", "valamivel (eszköz) / valakivel", "Éles késsel vágtam fel a kenyeret.", 7, true], [318, "without", "I can't live without my morning coffee.", "nélkül", "Nem tudok élni a reggeli kávém nélkül.", 7, true], [319, "about", "Tell me about your family.", "valamiről", "Mesélj a családodról!", 7, true], [320, "against", "Are you for or against this idea?", "ellen", "Mellette vagy ellene vagy ennek az ötletnek?", 7, true], [321, "in favour of", "Most people are in favour of recycling.", "valami mellett (támogatva)", "A legtöbb ember támogatja az újrahasznosítást.", 7, false], [322, "in front of", "Don't park in front of the garage.", "előtt", "Ne parkolj a garázs előtt!", 7, true], [323, "in the middle of", "There is a fountain in the middle of the square.", "valaminek a közepén", "A tér közepén van egy szökőkút.", 7, true], [324, "at the back of", "We sat at the back of the bus.", "valaminek a hátuljában", "A busz hátuljában ültünk.", 7, true], [325, "at the front of", "The teacher stood at the front of the class.", "valaminek az elején", "A tanár az osztály elején állt.", 7, true], [326, "on behalf of", "I am writing on behalf of our company.", "valaki nevében", "Cégünk nevében írok.", 7, false], [327, "in charge of", "Sarah is in charge of organizing the party.", "felelős / megbízott valamivel", "Sarah a felelős a buli megszervezéséért.", 7, false], [328, "in touch with", "We keep in touch with our old classmates.", "kapcsolatban van valakivel", "Tartjuk a kapcsolatot a régi osztálytársainkkal.", 7, true], [329, "out of touch with", "I'm out of touch with modern technology.", "elvesztette a kapcsolatot / lemaradt", "Lemaradtam a modern technológiáról.", 7, false], [330, "in need of", "The old building is in need of repair.", "rászorul valamire", "A régi épület javításra szorul.", 7, false], [331, "by means of", "We communicated by means of sign language.", "valami segítségével / révén", "Jelnyelv segítségével kommunikáltunk.", 7, false], [332, "with regard to", "I am calling with regard to your advertisement.", "valamivel kapcsolatban (hivatalos)", "A hirdetésével kapcsolatban telefonálok.", 7, false], [333, "in case of", "In case of fire, do not use the lift.", "valami esetén", "Tűz esetén ne használja a liftet!", 7, true], [334, "for the sake of", "Please stop arguing for the sake of the children.", "valaki/valami kedvéért", "Kérlek, hagyjátok abba a veszekedést a gyerekek kedvéért!", 7, false], [335, "on top of", "Put the box on top of the cupboard.", "valaminek a tetejére", "Tedd a dobozt a szekrény tetejére!", 7, true], [336, "underneath", "The letter was hidden underneath the books.", "alatt (közvetlenül)", "A levél a könyvek alatt volt elrejtve.", 7, false], [337, "beyond", "The village is just beyond those hills.", "túl valamin", "A falu közvetlenül azokon a dombokon túl van.", 7, false], [338, "within", "Please reply within three working days.", "belül (idő/távolság)", "Kérjük, három munkanapon belül válaszoljon!", 7, true], [339, "per", "The speed limit is 50 kilometres per hour.", "per / -ként", "A sebességkorlátozás 50 kilométer per óra.", 7, true], [340, "plus", "Two plus two equals four.", "meg / plusz", "Kettő meg kettő az négy.", 7, true], [341, "minus", "It was minus five degrees last night.", "mínusz / kivéve", "Mínusz öt fok volt tegnap éjjel.", 7, true], [342, "including", "The price is £50, including breakfast.", "beleértve", "Az ár 50 font, beleértve a reggelit.", 7, true], [343, "excluding", "The price is £40, excluding tax.", "kivéve / nem beleértve", "Az ár 40 font, az adót nem beleértve.", 7, false], [344, "concerning", "We received an email concerning the schedule.", "valamire vonatkozóan", "Kaptunk egy e-mailt az órarendre vonatkozóan.", 7, false], [345, "regarding", "Please contact us regarding your order.", "valamivel kapcsolatban", "Kérjük, lépjen kapcsolatba velünk a rendelésével kapcsolatban!", 7, false], [346, "regardless of", "Everyone is welcome, regardless of age.", "tekintet nélkül valamire", "Mindenkit szívesen látunk, életkortól függetlenül.", 7, false], [347, "ahead of", "She is always ahead of her classmates.", "előtt / megelőzve", "Mindig az osztálytársai előtt jár.", 7, false], [348, "alongside", "A cycle path runs alongside the main road.", "mellett / mentén", "Kerékpárút fut a főút mentén.", 7, false], [349, "amid", "The hotel is set amid beautiful gardens.", "közepette", "A szálloda gyönyörű kertek közepette található.", 7, false], [350, "versus", "Tonight's match is Hungary versus England.", "ellen (sport/jog)", "A ma esti meccs Magyarország Anglia ellen.", 7, true], [351, "a reason for", "What was the reason for the delay?", "ok valamire", "Mi volt a késés oka?", 8, true], [352, "an answer to", "Do you know the answer to this question?", "válasz valamire", "Tudod a választ erre a kérdésre?", 8, true], [353, "a solution to", "We need to find a solution to this problem.", "megoldás valamire", "Megoldást kell találnunk erre a problémára.", 8, true], [354, "an invitation to", "I received an invitation to their wedding.", "meghívás valahová", "Meghívást kaptam az esküvőjükre.", 8, true], [355, "a key to", "Where is the key to the front door?", "kulcs valamihez", "Hol van a kulcs a bejárati ajtóhoz?", 8, true], [356, "an interest in", "He has a great interest in history.", "érdeklődés valami iránt", "Nagyon érdekli a történelem.", 8, true], [357, "an increase in", "There has been an increase in prices.", "növekedés valamiben", "Emelkedés volt tapasztalható az árakban.", 8, true], [358, "a decrease in", "We noticed a decrease in traffic.", "csökkenés valamiben", "Csökkenést vettünk észre a forgalomban.", 8, false], [359, "a difference between", "What is the difference between 'say' and 'tell'?", "különbség valamik között", "Mi a különbség a 'say' és a 'tell' között?", 8, true], [360, "a connection between", "Is there a connection between the two events?", "kapcsolat valamik között", "Van kapcsolat a két esemény között?", 8, true], [361, "a relationship with", "She has a great relationship with her sister.", "kapcsolat valakivel", "Remek kapcsolata van a nővérével.", 8, true], [362, "an advantage of", "One advantage of living here is the quiet.", "előnye valaminek", "Az itt élés egyik előnye a csend.", 8, true], [363, "a disadvantage of", "What is a disadvantage of working from home?", "hátránya valaminek", "Mi a hátránya az otthoni munkavégzésnek?", 8, true], [364, "a photo of", "Here is a photo of my family.", "fénykép valakiről/valamiről", "Itt egy fénykép a családomról.", 8, true], [365, "a map of", "We bought a map of London.", "térkép valamiről", "Vettünk egy térképet Londonról.", 8, true], [366, "a lack of", "The plants died from a lack of water.", "hiánya valaminek", "A növények vízhiány miatt pusztultak el.", 8, false], [367, "a piece of", "Would you like a piece of cake?", "egy darab valami", "Kérsz egy szelet tortát?", 8, true], [368, "a cup of", "I need a cup of hot tea.", "egy csésze valami", "Szükségem van egy csésze forró teára.", 8, true], [369, "a glass of", "Could I have a glass of water, please?", "egy pohár valami", "Kaphatnék egy pohár vizet, kérem?", 8, true], [370, "a bottle of", "Buy a bottle of orange juice, please.", "egy üveg valami", "Vegyél egy üveg narancslevet, kérlek!", 8, true], [371, "a pair of", "I bought a new pair of jeans.", "egy pár valami", "Vettem egy új farmert.", 8, true], [372, "a lot of / lots of", "There are a lot of tourists in summer.", "sok", "Nyáron sok turista van.", 8, true], [373, "plenty of", "Don't rush, we have plenty of time.", "bőven / rengeteg", "Ne siess, bőven van időnk!", 8, true], [374, "a couple of", "I'll be back in a couple of minutes.", "egy pár / néhány", "Pár perc múlva visszajövök.", 8, true], [375, "a number of", "A number of students asked for help.", "számos / néhány", "Számos diák kért segítséget.", 8, true], [376, "the majority of", "The majority of people agreed with the plan.", "a többsége valaminek", "Az emberek többsége egyetértett a tervvel.", 8, false], [377, "an example of", "Can you give me an example of this rule?", "példa valamire", "Tudsz mondani egy példát erre a szabályra?", 8, true], [378, "a cause of", "Careless driving is a major cause of accidents.", "oka valaminek", "A figyelmetlen vezetés a balesetek fő oka.", 8, true], [379, "an effect on", "The weather has a big effect on my mood.", "hatás valamire", "Az időjárás nagy hatással van a hangulatomra.", 8, true], [380, "an impact on", "Tourism has a huge impact on the local economy.", "hatás valamire", "A turizmusnak hatalmas hatása van a helyi gazdaságra.", 8, false], [381, "a demand for", "There is a high demand for electric cars.", "kereslet valamire", "Nagy a kereslet az elektromos autók iránt.", 8, false], [382, "a need for", "There is a growing need for clean energy.", "szükséglet valamire", "Egyre nagyobb szükség van a tiszta energiára.", 8, false], [383, "respect for", "Children should show respect for their elders.", "tisztelet valaki iránt", "A gyerekeknek tiszteletet kell mutatniuk az idősebbek iránt.", 8, true], [384, "pity for", "I felt pity for the stray dog.", "szánalom valaki iránt", "Szánalmat éreztem a kóbor kutya iránt.", 8, false], [385, "sympathy for", "We feel great sympathy for the victims.", "együttérzés valaki iránt", "Nagy együttérzést érzünk az áldozatok iránt.", 8, false], [386, "trouble with", "I'm having trouble with my internet connection.", "probléma / baj valamivel", "Problémám van az internetkapcsolatommal.", 8, true], [387, "difficulty in / with", "She has no difficulty in understanding English.", "nehézség valamiben", "Semmi nehézséget nem okoz neki az angol megértése.", 8, true], [388, "experience in", "Do you have any experience in customer service?", "tapasztalat valamiben", "Van tapasztalatod az ügyfélszolgálat terén?", 8, true], [389, "success in", "I wish you every success in your new job!", "siker valamiben", "Sok sikert kívánok az új munkahelyeden!", 8, true], [390, "belief in", "Her belief in herself helped her win.", "hit valamiben", "Az önmagába vetett hite segítette a győzelemhez.", 8, false], [391, "confidence in", "You need more confidence in your abilities.", "bizalom valamiben", "Több önbizalomra van szükséged a képességeidben.", 8, true], [392, "doubt about", "There is no doubt about his honesty.", "kétség valami felől", "Semmi kétség az őszintesége felől.", 8, false], [393, "advice on", "Can you give me some advice on learning vocabulary?", "tanács valamivel kapcsolatban", "Tudsz adni néhány tanácsot a szókincstanuláshoz?", 8, true], [394, "information about / on", "Where can I find information about train times?", "információ valamiről", "Hol találok információt a vonatindulásokról?", 8, true], [395, "news about", "Have you heard the news about Sarah?", "hír valakiről/valamiről", "Hallottad a híreket Sarah-ról?", 8, true], [396, "opinion about / on", "What is your opinion on this topic?", "vélemény valamiről", "Mi a véleményed erről a témáról?", 8, true], [397, "attitude towards", "He has a positive attitude towards work.", "hozzáállás valamihez", "Pozitív a hozzáállása a munkához.", 8, false], [398, "damage to", "The flood caused serious damage to the bridge.", "kár valamiben", "Az árvíz komoly kárt okozott a hídban.", 8, true], [399, "reaction to", "What was her reaction to the surprise?", "reakció valamire", "Mi volt a reakciója a meglepetésre?", 8, true], [400, "access to", "All guests have access to the swimming pool.", "hozzáférés / belépés valahová", "Minden vendégnek van belépése az uszodába.", 8, true]];
+
+        const CATEGORIES = {"1": {"name": "Időhatározói elöljárószavak", "tip": "Órákra: AT (at 7 o'clock), napokra/dátumokra: ON (on Monday), hónapokra/évszakokra/évekre: IN (in July, in 2026)!", "desc": "A legfontosabb időhatározói szerkezetek (in, on, at, for, since, during, by, until) életszerű példamondatokkal."}, "2": {"name": "Helyhatározói elöljárószavak", "tip": "Zárt térben/városban/országban: IN (in Budapest), felületen: ON (on the table), konkrét ponton/intézményben: AT (at the bus stop).", "desc": "Térbeli elhelyezkedést kifejező elöljárószavak (in, on, at, under, between, opposite, in front of, behind)."}, "3": {"name": "Irányok és közlekedés", "tip": "Járműveknél általánosságban BY áll (by bus, by train, by car), de a gyaloglás mindig ON FOOT, a 'home' előtt pedig nincs 'to' (go home)!", "desc": "Mozgást, irányokat (into, across, through, towards) és utazási módokat leíró szerkezetek."}, "4": {"name": "Ige + elöljárószó kapcsolatok", "tip": "A magyar és az angol vonzatok gyakran eltérnek! Pl. listen TO music (zenét hallgat), wait FOR someone (vár valakire).", "desc": "A nyelvvizsga tesztek kedvenc feladatai: állandósult igei vonzatok (look after, depend on, apologize for, belong to)."}, "5": {"name": "Melléknév + elöljárószó", "tip": "Elöljárószó után az ige mindig -ing alakba kerül! Pl. good AT swimming (jó az úszásban), tired OF waiting (elege van a várakozásból).", "desc": "Érzelmeket és tulajdonságokat kifejező melléknévi vonzatok (interested in, afraid of, proud of, famous for)."}, "6": {"name": "Állandósult elöljárós kifejezések", "tip": "Ezeket a kifejezéseket egyben érdemes megtanulni: by mistake (tévedésből), on purpose (szándékosan), in a hurry (siet), at least (legalább).", "desc": "Mindennapi beszédben és olvasott szövegértésben gyakori állandósult fordulatok (in cash, on sale, out of order)."}, "7": {"name": "Összetett és viszonyító elöljárók", "tip": "A 'because of' és a 'despite' után főnév vagy -ing áll (despite the rain), míg a 'because' és 'although' után tagmondat (although it rained).", "desc": "Okot, ellentétet és kivételt kifejező elöljárók (because of, instead of, according to, in spite of, except for)."}, "8": {"name": "Főnév + elöljárószó kapcsolatok", "tip": "Figyelj a leggyakoribb főnévi vonzatokra: reason FOR (oka valaminek), answer TO (válasz valamire), difference BETWEEN (különbség).", "desc": "Levélíráshoz és fogalmazáshoz elengedhetetlen főnévi szerkezetek (an advantage of, a solution to, advice on)."}};
+
+        const PRONOUNS_DB = RAW_DATA.map(item => ({
+            id: item[0],
+            en: item[1],
+            sentenceEn: item[2],
+            hu: item[3],
+            sentenceHu: item[4],
+            catId: item[5],
+            category: CATEGORIES[item[5]].name,
+            tip: CATEGORIES[item[5]].tip,
+            isCore: item[6]
+        }));
+
+        let state = {
+            activeTab: 'flashcards',
+            accent: 'en-GB',
+            rate: 1.0,
+            coreOnly: true,
+            categoryFilter: 'ALL',
+            statusFilter: 'ALL',
+            searchQuery: '',
+            learnedIds: JSON.parse(localStorage.getItem('preps400_learned') || '[]'),
+            filteredItems: [],
+            fcIndex: 0,
+            isFlipped: false,
+            autoPlayActive: false,
+            autoPlayTimer: null,
+            quizMode: 'meaning',
+            quizScore: 0,
+            quizTotal: 0,
+            currentQuizItem: null,
+            quizAnswered: false
+        };
+
+        let availableVoices = [];
+
+        function loadVoices() {
+            if ('speechSynthesis' in window) {
+                availableVoices = window.speechSynthesis.getVoices();
+            }
+        }
+        if ('speechSynthesis' in window) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function cleanForSpeech(text) {
+            return text.replace(/\s*\([^)]*\)/g, '').replace(/\s*–\s*/g, ', ').trim();
+        }
+
+        function speakText(text, btnElement = null, onEndCallback = null) {
+            if (!('speechSynthesis' in window)) {
+                if (onEndCallback) onEndCallback();
+                return;
+            }
+            window.speechSynthesis.cancel();
+
+            document.querySelectorAll('.speaking-active').forEach(el => el.classList.remove('speaking-active'));
+            if (btnElement) btnElement.classList.add('speaking-active');
+
+            const utterance = new SpeechSynthesisUtterance(cleanForSpeech(text));
+            utterance.lang = state.accent;
+            utterance.rate = state.rate;
+
+            const preferredVoice = availableVoices.find(v => v.lang === state.accent && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Daniel') || v.name.includes('Samantha')))
+                || availableVoices.find(v => v.lang.startsWith(state.accent.substring(0, 5)))
+                || availableVoices.find(v => v.lang.startsWith('en'));
+
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+
+            utterance.onend = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+            utterance.onerror = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakPair(pronounText, sentenceText, btnElement = null, onBothEnd = null) {
+            speakText(pronounText, btnElement, () => {
+                setTimeout(() => {
+                    speakText(sentenceText, btnElement, onBothEnd);
+                }, 400);
+            });
+        }
+
+        function setAccent(acc) {
+            state.accent = acc;
+            document.getElementById('btn-en-GB').className = acc === 'en-GB'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-en-US').className = acc === 'en-US'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function setRate(r) {
+            state.rate = r;
+            document.getElementById('btn-rate-1').className = r === 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-rate-slow').className = r < 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function toggleAutoPlay() {
+            state.autoPlayActive = !state.autoPlayActive;
+            const btn = document.getElementById('btnAutoPlay');
+            const icon = document.getElementById('autoPlayIcon');
+            const text = document.getElementById('autoPlayText');
+
+            if (state.autoPlayActive) {
+                btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-600 text-white shadow-sm transition';
+                icon.textContent = '⏹️';
+                text.textContent = 'Leállítás';
+                if (state.activeTab !== 'flashcards') {
+                    switchTab('flashcards');
+                }
+                runAutoPlayStep();
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        function stopAutoPlay() {
+            state.autoPlayActive = false;
+            clearTimeout(state.autoPlayTimer);
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const btn = document.getElementById('btnAutoPlay');
+            document.getElementById('autoPlayIcon').textContent = '▶️';
+            document.getElementById('autoPlayText').textContent = 'Hangoskönyv mód';
+            btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-50 text-brand-700 border border-brand-200 hover:bg-brand-100 transition';
+        }
+
+        function runAutoPlayStep() {
+            if (!state.autoPlayActive || state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            state.isFlipped = false;
+            updateFlashcardUI();
+
+            speakPair(item.en, item.sentenceEn, null, () => {
+                if (!state.autoPlayActive) return;
+                state.isFlipped = true;
+                updateFlashcardUI();
+
+                state.autoPlayTimer = setTimeout(() => {
+                    if (!state.autoPlayActive) return;
+                    state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+                    runAutoPlayStep();
+                }, 2200);
+            });
+        }
+
+        function saveProgress() {
+            localStorage.setItem('preps400_learned', JSON.stringify(state.learnedIds));
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const total = PRONOUNS_DB.length;
+            const count = state.learnedIds.length;
+            const pct = Math.round((count / total) * 100);
+
+            document.getElementById('mobileProgressBadge').textContent = `${count}/${total}`;
+            document.getElementById('desktopProgressText').textContent = `${count} / ${total} (${pct}%)`;
+            document.getElementById('desktopProgressBar').style.width = `${pct}%`;
+        }
+
+        function toggleCoreFilter() {
+            state.coreOnly = !state.coreOnly;
+            const btn = document.getElementById('btnCoreFilter');
+            const icon = document.getElementById('coreCheckIcon');
+            if (state.coreOnly) {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm';
+                icon.textContent = '⭐';
+            } else {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100';
+                icon.textContent = '🌐';
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            state.categoryFilter = document.getElementById('categorySelect').value;
+            state.statusFilter = document.getElementById('statusSelect').value;
+            state.searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            state.filteredItems = PRONOUNS_DB.filter(item => {
+                if (state.coreOnly && !item.isCore) return false;
+                if (state.categoryFilter !== 'ALL' && item.category !== state.categoryFilter) return false;
+                const isLearned = state.learnedIds.includes(item.id);
+                if (state.statusFilter === 'LEARNED' && !isLearned) return false;
+                if (state.statusFilter === 'UNLEARNED' && isLearned) return false;
+
+                if (state.searchQuery) {
+                    const matchId = String(item.id) === state.searchQuery;
+                    const matchEn = item.en.toLowerCase().includes(state.searchQuery) || item.sentenceEn.toLowerCase().includes(state.searchQuery);
+                    const matchHu = item.hu.toLowerCase().includes(state.searchQuery) || item.sentenceHu.toLowerCase().includes(state.searchQuery);
+                    if (!matchId && !matchEn && !matchHu) return false;
+                }
+                return true;
+            });
+
+            document.getElementById('filteredCountLabel').textContent = `Szűrt tételek: ${state.filteredItems.length} db`;
+            state.fcIndex = 0;
+            state.isFlipped = false;
+
+            updateFlashcardUI();
+            renderList();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        }
+
+        function switchTab(tabName) {
+            if (tabName !== 'flashcards' && state.autoPlayActive) {
+                stopAutoPlay();
+            }
+            state.activeTab = tabName;
+
+            ['flashcards', 'list', 'quiz', 'grammar'].forEach(t => {
+                const viewEl = document.getElementById(`view-${t}`);
+                const tabEl = document.getElementById(`tab-${t}`);
+                if (t === tabName) {
+                    viewEl.classList.remove('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition';
+                } else {
+                    viewEl.classList.add('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+                }
+            });
+
+            const filterBar = document.getElementById('globalFilterBar');
+            if (tabName === 'flashcards' || tabName === 'list') {
+                filterBar.classList.remove('hidden');
+            } else {
+                filterBar.classList.add('hidden');
+            }
+
+            if (tabName === 'quiz' && !state.currentQuizItem) {
+                generateQuizQuestion();
+            }
+        }
+
+        function updateFlashcardUI() {
+            const inner = document.getElementById('flashcardInner');
+            if (state.isFlipped) {
+                inner.classList.add('rotate-y-180');
+            } else {
+                inner.classList.remove('rotate-y-180');
+            }
+
+            if (state.filteredItems.length === 0) {
+                document.getElementById('fcPosition').textContent = '0 / 0 kártya';
+                document.getElementById('fcPronounEn').textContent = 'Nincs találat';
+                document.getElementById('fcSentenceEn').textContent = 'Módosítsd a szűrőket a felső sávban!';
+                document.getElementById('fcPronounHu').textContent = 'Nincs találat';
+                document.getElementById('fcSentenceHu').textContent = '';
+                return;
+            }
+
+            const item = state.filteredItems[state.fcIndex];
+            const isLearned = state.learnedIds.includes(item.id);
+
+            document.getElementById('fcPosition').textContent = `${state.fcIndex + 1} / ${state.filteredItems.length}. kártya`;
+            document.getElementById('fcNumber').textContent = `#${item.id}`;
+            document.getElementById('fcBackNumber').textContent = `#${item.id} • Magyar jelentés`;
+            document.getElementById('fcCategory').textContent = item.category;
+            document.getElementById('fcPronounEn').textContent = item.en;
+            document.getElementById('fcSentenceEn').textContent = item.sentenceEn;
+            document.getElementById('fcPronounHu').textContent = item.hu;
+            document.getElementById('fcSentenceHu').textContent = item.sentenceHu;
+            document.getElementById('fcSentenceEnSmall').textContent = `„${item.sentenceEn}”`;
+            document.getElementById('fcTipHu').textContent = item.tip;
+
+            const coreBadge = document.getElementById('fcCoreBadge');
+            if (item.isCore) {
+                coreBadge.classList.remove('hidden');
+            } else {
+                coreBadge.classList.add('hidden');
+            }
+
+            const learnedBadge = document.getElementById('fcLearnedBadge');
+            if (isLearned) {
+                learnedBadge.classList.remove('hidden');
+            } else {
+                learnedBadge.classList.add('hidden');
+            }
+        }
+
+        function flipCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = !state.isFlipped;
+            updateFlashcardUI();
+        }
+
+        function nextCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function prevCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function markCurrentCard(learned) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            if (learned) {
+                if (!state.learnedIds.includes(item.id)) {
+                    state.learnedIds.push(item.id);
+                }
+            } else {
+                state.learnedIds = state.learnedIds.filter(id => id !== item.id);
+            }
+            saveProgress();
+            renderList();
+            nextCard();
+        }
+
+        function shuffleFlashcards() {
+            for (let i = state.filteredItems.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [state.filteredItems[i], state.filteredItems[j]] = [state.filteredItems[j], state.filteredItems[i]];
+            }
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function resetOrderFlashcards() {
+            state.filteredItems.sort((a, b) => a.id - b.id);
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function speakCurrentPronoun(btn) {
+            if (state.filteredItems.length === 0) return;
+            speakText(state.filteredItems[state.fcIndex].en, btn);
+        }
+
+        function speakCurrentSentence(btn) {
+            if (state.filteredItems.length === 0) return;
+            speakText(state.filteredItems[state.fcIndex].sentenceEn, btn);
+        }
+
+        function speakCurrentBoth(btn) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            speakPair(item.en, item.sentenceEn, btn);
+        }
+
+        function renderList() {
+            const container = document.getElementById('listContainer');
+            if (state.filteredItems.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+                        <p class="text-slate-500 font-medium">Nincs a szűrésnek megfelelő tétel.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = state.filteredItems.map(item => {
+                const isLearned = state.learnedIds.includes(item.id);
+                return `
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border ${isLearned ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-200'} shadow-xs hover:shadow-md transition flex flex-col justify-between gap-3">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-xs">#${item.id}</span>
+                                <span class="px-2 py-0.5 rounded-md bg-brand-50 text-brand-700 font-medium text-xs">${item.category}</span>
+                                ${item.isCore ? '<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>' : ''}
+                            </div>
+                            <button onclick="toggleItemLearned(${item.id})" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${isLearned ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                                ${isLearned ? '✓ Tudom' : '○ Jelölés'}
+                            </button>
+                        </div>
+
+                        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1.5">
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">${item.en}</h3>
+                            <span class="text-sm font-bold text-brand-700">${item.hu}</span>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 space-y-1">
+                            <p class="text-sm font-medium text-slate-800">${item.sentenceEn}</p>
+                            <p class="text-xs text-slate-500">${item.sentenceHu}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-1">
+                        <button onclick="speakText('${escapeQuotes(item.en)}', this)" class="flex-1 py-2 px-2.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1">
+                            <span>🔊</span> Kifejezés
+                        </button>
+                        <button onclick="speakText('${escapeQuotes(item.sentenceEn)}', this)" class="flex-1 py-2 px-2.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1">
+                            <span>🗣️</span> Mondat
+                        </button>
+                        <button onclick="speakPair('${escapeQuotes(item.en)}', '${escapeQuotes(item.sentenceEn)}', this)" class="py-2 px-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition flex items-center justify-center gap-1">
+                            <span>🎧</span> Együtt
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'");
+        }
+
+        function toggleItemLearned(id) {
+            if (state.learnedIds.includes(id)) {
+                state.learnedIds = state.learnedIds.filter(x => x !== id);
+            } else {
+                state.learnedIds.push(id);
+            }
+            saveProgress();
+            renderList();
+            updateFlashcardUI();
+        }
+
+        function setQuizMode(mode) {
+            state.quizMode = mode;
+            ['meaning', 'fill', 'listening'].forEach(m => {
+                const btn = document.getElementById(`qmode-${m}`);
+                btn.className = m === mode
+                    ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition'
+                    : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+            });
+            generateQuizQuestion();
+        }
+
+        function generateQuizQuestion() {
+            state.quizAnswered = false;
+            document.getElementById('quizFeedback').classList.add('hidden');
+
+            const pool = PRONOUNS_DB.filter(x => x.isCore);
+            const target = pool[Math.floor(Math.random() * pool.length)];
+            state.currentQuizItem = target;
+
+            const distractors = [];
+            while (distractors.length < 3) {
+                const candidate = pool[Math.floor(Math.random() * pool.length)];
+                if (candidate.id !== target.id && candidate.hu !== target.hu && !distractors.some(d => d.hu === candidate.hu || d.en === candidate.en)) {
+                    distractors.push(candidate);
+                }
+            }
+
+            const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+            const badge = document.getElementById('quizQuestionTypeBadge');
+            const mainPrompt = document.getElementById('quizMainPrompt');
+            const subPrompt = document.getElementById('quizSubPrompt');
+            const optionsContainer = document.getElementById('quizOptions');
+
+            if (state.quizMode === 'meaning') {
+                badge.textContent = '🇭🇺 Válaszd ki a kifejezés helyes magyar jelentését!';
+                mainPrompt.textContent = target.en;
+                subPrompt.textContent = `Példamondat: „${target.sentenceEn}”`;
+
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswer(${opt.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition flex items-center justify-between">
+                        <span>${opt.hu}</span>
+                        <span class="text-xs text-slate-400 font-normal">(${opt.category})</span>
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'fill') {
+                badge.textContent = '✍️ Melyik angol kifejezés illik a mondathoz?';
+                mainPrompt.textContent = target.sentenceHu;
+                subPrompt.textContent = `Kategória: ${target.category}`;
+
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswer(${opt.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-bold text-slate-800 transition">
+                        ${opt.en}
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'listening') {
+                badge.textContent = '🎧 Hallgasd meg a hanganyagot, és válaszd ki a magyar jelentését!';
+                mainPrompt.textContent = '🔊 Hallgasd meg a hanganyagot!';
+                subPrompt.textContent = 'Kattints a „Meghallgatás” gombra, ha újra hallani szeretnéd.';
+                speakPair(target.en, target.sentenceEn);
+
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswer(${opt.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition">
+                        ${opt.sentenceHu} <span class="text-xs text-brand-600 font-bold">(${opt.hu})</span>
+                    </button>
+                `).join('');
+            }
+        }
+
+        function speakQuizPrompt() {
+            if (!state.currentQuizItem) return;
+            speakPair(state.currentQuizItem.en, state.currentQuizItem.sentenceEn);
+        }
+
+        function checkQuizAnswer(selectedId, btnEl) {
+            if (state.quizAnswered) return;
+            state.quizAnswered = true;
+            state.quizTotal++;
+
+            const target = state.currentQuizItem;
+            const isCorrect = selectedId === target.id;
+            if (isCorrect) state.quizScore++;
+
+            document.getElementById('quizScore').textContent = state.quizScore;
+            document.getElementById('quizTotal').textContent = state.quizTotal;
+
+            document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-brand-400', 'hover:bg-brand-50/40');
+            });
+
+            if (isCorrect) {
+                btnEl.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+            } else {
+                btnEl.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+            }
+
+            const fb = document.getElementById('quizFeedback');
+            fb.classList.remove('hidden');
+            fb.className = isCorrect
+                ? 'rounded-2xl p-4 text-sm font-medium bg-emerald-50 border border-emerald-200 text-emerald-900'
+                : 'rounded-2xl p-4 text-sm font-medium bg-rose-50 border border-rose-200 text-rose-900';
+
+            fb.innerHTML = `
+                <p class="font-bold mb-1">${isCorrect ? '✅ Helyes válasz!' : '❌ Nem egészen!'}</p>
+                <p><strong>${target.en}</strong> = ${target.hu}</p>
+                <p class="text-xs mt-1 opacity-90">„${target.sentenceEn}” — <em>${target.sentenceHu}</em></p>
+            `;
+
+            speakText(target.sentenceEn);
+        }
+
+        function renderGrammarCards() {
+            const grid = document.getElementById('grammarCardsGrid');
+            grid.innerHTML = Object.entries(CATEGORIES).map(([id, cat]) => {
+                const count = PRONOUNS_DB.filter(x => x.catId === Number(id)).length;
+                const coreCount = PRONOUNS_DB.filter(x => x.catId === Number(id) && x.isCore).length;
+                return `
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-bold text-xs">${id}. kategória</span>
+                            <span class="text-xs font-semibold text-slate-500">${coreCount} alapfokú / ${count} összes</span>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-2">${cat.name}</h3>
+                        <p class="text-sm text-slate-600 mb-3">${cat.desc}</p>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
+                            <strong>💡 Vizsgaszabály:</strong> ${cat.tip}
+                        </div>
+                    </div>
+                    <button onclick="practiceCategory('${cat.name}')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold transition">
+                        Kategória gyakorlása kártyákkal ➡️
+                    </button>
+                </div>`;
+            }).join('');
+        }
+
+        function practiceCategory(catName) {
+            document.getElementById('categorySelect').value = catName;
+            applyFilters();
+            switchTab('flashcards');
+        }
+
+        function resetAllProgress() {
+            document.getElementById('modalTitle').textContent = 'Haladás törlése';
+            document.getElementById('modalText').textContent = 'Biztosan törölni szeretnéd az összes megtanultként megjelölt tételt?';
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('hidden');
+
+            document.getElementById('modalConfirmBtn').onclick = () => {
+                state.learnedIds = [];
+                saveProgress();
+                applyFilters();
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (state.activeTab !== 'flashcards') return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+            if (e.code === 'ArrowRight') nextCard();
+            else if (e.code === 'ArrowLeft') prevCard();
+            else if (e.code === 'Space') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        window.onload = () => {
+            updateProgressUI();
+            renderGrammarCards();
+            applyFilters();
+        };
+    </script>
+</body>
+</html>
