@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>800 Interview Questions and Answers (1–800)</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary: #1b4332;
+            --primary-light: #d8f3dc;
+            --accent: #1d4ed8;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --border-color: #e5e7eb;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: var(--primary-light);
+            border: 2px solid var(--primary);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        header h1 {
+            color: #081c15;
+            font-size: 2rem;
+            margin-bottom: 6px;
+        }
+        header p {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        .controls input {
+            flex: 1;
+            min-width: 240px;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .controls input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+        }
+
+        .controls select, .controls button {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            font-size: 0.92rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .controls button.primary-btn {
+            background-color: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .controls button.primary-btn:hover {
+            background-color: #2d6a4f;
+        }
+        .controls button.stop-btn {
+            background-color: #dc2626;
+            color: #fff;
+            border-color: #dc2626;
+        }
+        .controls button.stop-btn:hover {
+            background-color: #b91c1c;
+        }
+        .qa-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 14px 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .qa-card.speaking {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .audio-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding-top: 8px;
+            border-top: 1px dashed #e5e7eb;
+        }
+        .audio-btn {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: background-color 0.15s, color 0.15s;
+        }
+        .audio-btn:hover {
+            background-color: #e2e8f0;
+        }
+        .audio-btn.both-btn {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border-color: #93c5fd;
+        }
+        .audio-btn.both-btn:hover {
+            background-color: #bfdbfe;
+        }
+
+        .stats {
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .qa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+            gap: 14px;
+        }
+        @media (max-width: 540px) {
+            .qa-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .qa-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .question {
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+            font-size: 1.02rem;
+        }
+        .q-num {
+            color: var(--primary);
+            margin-right: 6px;
+        }
+        .answer {
+            color: var(--accent);
+            font-size: 0.98rem;
+        }
+        .answer span {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+        .q-hu {
+            font-weight: 500;
+            color: #4b5563;
+            font-size: 0.92rem;
+            margin-top: 2px;
+            margin-bottom: 6px;
+        }
+        .a-hu {
+            color: #0f766e;
+            font-size: 0.92rem;
+            margin-top: 3px;
+        }
+        .a-hu span {
+            font-weight: 600;
+            color: #115e59;
+        }
+        .hidden-answer .answer, .hidden-answer .a-hu {
+            filter: blur(5px);
+            user-select: none;
+            cursor: pointer;
+        }
+        .hidden-answer .qa-card:hover .answer, .hidden-answer .qa-card:hover .a-hu {
+            filter: none;
+        }
+        .hide-hu .q-hu, .hide-hu .a-hu {
+            display: none;
+        }
+        .controls button.hu-btn {
+            background-color: #0f766e;
+            color: #fff;
+            border-color: #0f766e;
+        }
+        .controls button.hu-btn:hover {
+            background-color: #115e59;
+        }
+        .hidden-answer .answer {
+            filter: blur(5px);
+            user-select: none;
+            cursor: pointer;
+        }
+        .hidden-answer .qa-card:hover .answer {
+            filter: none;
+        }
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding: 16px;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>800 Interview Questions and Answers</h1>
+        <p>Complete Collection: Questions 1 – 800 (Easy Way to Learn)</p>
+    </header>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Keresés angolul vagy magyarul (pl. tűzfal, teamwork, 250)..." onkeyup="filterQA()">
+        <select id="rangeSelect" onchange="filterQA()">
+            <option value="all">All Questions (1–800)</option>
+            <option value="1-50">Page 1: 1 – 50 (General & HR)</option>
+            <option value="51-100">Page 2: 51 – 100 (Workplace & Career)</option>
+            <option value="101-150">Page 3: 101 – 150 (Work & IT Basics)</option>
+            <option value="151-200">Page 4: 151 – 200 (Business & Tech)</option>
+            <option value="201-250">Page 5: 201 – 250 (Data, Networks & OOP)</option>
+            <option value="251-300">Page 6: 251 – 300 (Systems & Security)</option>
+            <option value="301-350">Page 7: 301 – 350 (Programming & Databases)</option>
+            <option value="351-400">Page 8: 351 – 400 (OS, Concurrency & OOP)</option>
+            <option value="401-450">Page 9: 401 – 450 (DevOps, Cloud & SQL)</option>
+            <option value="451-500">Page 10: 451 – 500 (CS & System Concepts)</option>
+            <option value="501-550">Page 11: 501 – 550 (Exceptions, Threads & Data Structures)</option>
+            <option value="551-600">Page 12: 551 – 600 (File Systems, Security & Crypto)</option>
+            <option value="601-650">Page 13: 601 – 650 (Concurrency, Functional & OOP)</option>
+            <option value="651-700">Page 14: 651 – 700 (OS, Software Engineering & DevOps)</option>
+            <option value="701-750">Page 15: 701 – 750 (SQL, Networking & OOP)</option>
+            <option value="751-800">Page 16: 751 – 800 (Cloud, AI, Blockchain & Security)</option>
+        </select>
+        <select id="voiceSelect" title="Select English Accent">
+            <option value="en-US">Accent: US English (en-US)</option>
+            <option value="en-GB">Accent: UK English (en-GB)</option>
+        </select>
+        <select id="rateSelect" title="Speech Speed">
+            <option value="0.75">Speed: 0.75x (Slow)</option>
+            <option value="0.95" selected>Speed: 1.0x (Normal)</option>
+            <option value="1.15">Speed: 1.15x (Fast)</option>
+        </select>
+        <button type="button" class="hu-btn" id="toggleHuBtn" onclick="toggleHungarian()">Magyar fordítás: BE</button>
+        <button type="button" class="primary-btn" id="togglePracticeBtn" onclick="togglePracticeMode()">Practice Mode</button>
+        <button type="button" class="stop-btn" onclick="stopSpeech()">Stop Audio</button>
+    </div>
+
+    <div class="stats" id="statsDisplay">Showing 800 of 800 questions</div>
+
+    <div class="qa-grid" id="qaGrid"></div>
+
+    <footer>Easy Way to Learn</footer>
+</div>
+
+<script>
+const qaData = [
+    { n: 1, q: "Tell me about yourself.", qh: "Mesélj magadról.", a: "I am a hardworking and honest person.", ah: "Szorgalmas és őszinte ember vagyok." },
+    { n: 2, q: "What is your full name?", qh: "Mi a teljes neved?", a: "My full name is [Your Name].", ah: "A teljes nevem [Neved]." },
+    { n: 3, q: "Where are you from?", qh: "Honnan származol?", a: "I am from [Your City].", ah: "[Városod] városából származom." },
+    { n: 4, q: "What is your qualification?", qh: "Mi a végzettséged?", a: "I have a [Degree] degree.", ah: "[Végzettség] diplomával rendelkezem." },
+    { n: 5, q: "Are you a fresher or experienced?", qh: "Pályakezdő vagy tapasztalt vagy?", a: "I am a fresher.", ah: "Pályakezdő vagyok." },
+    { n: 6, q: "What are your strengths?", qh: "Mik az erősségeid?", a: "My strengths are hard work and honesty.", ah: "Az erősségeim a szorgalom és az őszinteség." },
+    { n: 7, q: "What are your weaknesses?", qh: "Mik a gyengeségeid?", a: "I focus too much on details.", ah: "Túl sokat összpontosítok a részletekre." },
+    { n: 8, q: "What are your hobbies?", qh: "Mik a hobbijaid?", a: "I like reading and learning new things.", ah: "Szeretek olvasni és új dolgokat tanulni." },
+    { n: 9, q: "What is your goal in life?", qh: "Mi az életcélod?", a: "My goal is to have a successful career.", ah: "A célom, hogy sikeres karriert építsek." },
+    { n: 10, q: "What motivates you?", qh: "Mi motivál téged?", a: "Learning and achieving goals motivate me.", ah: "A tanulás és a célok elérése motivál." },
+    { n: 11, q: "Tell me about your family.", qh: "Mesélj a családodról.", a: "My family is supportive and caring.", ah: "A családom támogató és gondoskodó." },
+    { n: 12, q: "Why should we hire you?", qh: "Miért téged válasszunk?", a: "I work hard and learn quickly.", ah: "Keményen dolgozom és gyorsan tanulok." },
+    { n: 13, q: "What makes you different?", qh: "Miben vagy más, mint a többiek?", a: "My positive attitude.", ah: "A pozitív hozzáállásom." },
+    { n: 14, q: "Are you a team player?", qh: "Csapatjátékos vagy?", a: "Yes, I enjoy team work.", ah: "Igen, szeretek csapatban dolgozni." },
+    { n: 15, q: "Can you work under pressure?", qh: "Tudsz nyomás alatt dolgozni?", a: "Yes, I stay calm and focused.", ah: "Igen, nyugodt és fókuszált maradok." },
+    { n: 16, q: "How do you handle criticism?", qh: "Hogyan kezeled a kritikát?", a: "I take it positively.", ah: "Pozitívan fogadom." },
+    { n: 17, q: "What is your biggest achievement?", qh: "Mi a legnagyobb eredményed?", a: "Completing my education.", ah: "A tanulmányaim sikeres befejezése." },
+    { n: 18, q: "What is your dream job?", qh: "Mi az álommunkád?", a: "A job where I can grow.", ah: "Olyan munka, ahol fejlődhetek." },
+    { n: 19, q: "Where do you see yourself in 5 years?", qh: "Hol látod magad 5 év múlva?", a: "In a responsible position.", ah: "Felelősségteljes pozícióban." },
+    { n: 20, q: "Why do you want this job?", qh: "Miért szeretnéd ezt az állást?", a: "Because it matches my skills.", ah: "Mert illeszkedik a készségeimhez." },
+    { n: 21, q: "Why do you want to join our company?", qh: "Miért szeretnél csatlakozni a cégünkhöz?", a: "Your company has good opportunities.", ah: "Az Önök cége jó lehetőségeket kínál." },
+    { n: 22, q: "What do you know about our company?", qh: "Mit tudsz a cégünkről?", a: "It is a reputed and trusted company.", ah: "Ez egy jó hírű és megbízható vállalat." },
+    { n: 23, q: "What are your salary expectations?", qh: "Mik a bérigényeid?", a: "As per industry standards.", ah: "Az iparági szabványoknak megfelelően." },
+    { n: 24, q: "Are you willing to relocate?", qh: "Hajlandó vagy elköltözni (relokációra)?", a: "Yes, if required.", ah: "Igen, ha szükséges." },
+    { n: 25, q: "Are you comfortable working night shifts?", qh: "Vállalsz éjszakai műszakot?", a: "Yes, I am.", ah: "Igen, vállalom." },
+    { n: 26, q: "What is communication?", qh: "Mi az a kommunikáció?", a: "Sharing information with others.", ah: "Információk megosztása másokkal." },
+    { n: 27, q: "Why is communication important?", qh: "Miért fontos a kommunikáció?", a: "It helps us work better.", ah: "Segít abban, hogy jobban dolgozzunk együtt." },
+    { n: 28, q: "What is teamwork?", qh: "Mi az a csapatmunka?", a: "Working together to achieve a goal.", ah: "Együttműködés egy cél elérése érdekében." },
+    { n: 29, q: "What is leadership?", qh: "Mi az a vezetés / vezetői képesség?", a: "Guiding and motivating others.", ah: "Mások irányítása és motiválása." },
+    { n: 30, q: "What is time management?", qh: "Mi az az időgazdálkodás?", a: "Using time effectively.", ah: "Az idő hatékony kihasználása." },
+    { n: 31, q: "What is discipline?", qh: "Mi az a fegyelem?", a: "Following rules and being consistent.", ah: "A szabályok betartása és a következetesség." },
+    { n: 32, q: "What is professionalism?", qh: "Mi az a professzionalizmus?", a: "Being responsible and respectful.", ah: "Felelősségteljesnek és tisztelettudónak lenni." },
+    { n: 33, q: "What is customer service?", qh: "Mi az az ügyfélszolgálat?", a: "Helping customers.", ah: "Segítségnyújtás az ügyfeleknek." },
+    { n: 34, q: "What is a positive attitude?", qh: "Mi az a pozitív hozzáállás?", a: "Looking at the bright side.", ah: "A dolgok jó oldalát nézni." },
+    { n: 35, q: "What is responsibility?", qh: "Mi az a felelősségvállalás?", a: "Doing your duties properly.", ah: "A kötelességek megfelelő teljesítése." },
+    { n: 36, q: "What is punctuality?", qh: "Mi az a pontosság?", a: "Being on time.", ah: "Pontosan érkezni." },
+    { n: 37, q: "How do you solve problems?", qh: "Hogyan oldod meg a problémákat?", a: "By analyzing and finding solutions.", ah: "Elemzéssel és megoldások keresésével." },
+    { n: 38, q: "How do you handle failure?", qh: "Hogyan kezeled a kudarcot?", a: "I learn and try again.", ah: "Tanulok belőle, és újra megpróbálom." },
+    { n: 39, q: "What is success?", qh: "Mi az a siker?", a: "Achieving goals through hard work.", ah: "Célok elérése kemény munkával." },
+    { n: 40, q: "How do you manage your time?", qh: "Hogyan osztod be az idődet?", a: "Plan and prioritize tasks.", ah: "Megtervezem és fontossági sorrendbe állítom a feladatokat." },
+    { n: 41, q: "What will you do if you make a mistake?", qh: "Mit teszel, ha hibázol?", a: "I will correct it and learn from it.", ah: "Kijavítom, és tanulok belőle." },
+    { n: 42, q: "How do you deal with difficult people?", qh: "Hogyan kezeled a nehéz embereket?", a: "I stay calm and be polite.", ah: "Nyugodt maradok, és udvariasan viselkedem." },
+    { n: 43, q: "What is a good work environment?", qh: "Mi az a jó munkakörnyezet?", a: "Friendly and supportive.", ah: "Barátságos és támogató." },
+    { n: 44, q: "How do you maintain work quality?", qh: "Hogyan tartod fenn a munka minőségét?", a: "By paying attention to details.", ah: "A részletekre való odafigyeléssel." },
+    { n: 45, q: "What is problem-solving?", qh: "Mi az a problémamegoldás?", a: "Finding solutions to problems.", ah: "Megoldások találása a problémákra." },
+    { n: 46, q: "What is adaptability?", qh: "Mi az az alkalmazkodóképesség?", a: "Adjusting to new situations.", ah: "Alkalmazkodás az új helyzetekhez." },
+    { n: 47, q: "What is multitasking?", qh: "Mi az a többfeladatos munkavégzés (multitasking)?", a: "Handling more than one task.", ah: "Egyszerre több feladat kezelése." },
+    { n: 48, q: "Why is honesty important?", qh: "Miért fontos az őszinteség?", a: "It builds trust.", ah: "Bizalmat épít." },
+    { n: 49, q: "What is a career goal?", qh: "Mi az a karriercél?", a: "To grow and achieve success.", ah: "Hogy fejlődjek és sikereket érjek el." },
+    { n: 50, q: "Do you have any questions?", qh: "Van bármilyen kérdésed?", a: "Yes, I would like to know more.", ah: "Igen, szeretnék többet megtudni." },
+    { n: 51, q: "What is your ideal working environment?", qh: "Mi számodra az ideális munkakörnyezet?", a: "A friendly, supportive and professional workplace.", ah: "Barátságos, támogató és professzionális munkahely." },
+    { n: 52, q: "What will you do if you make a mistake at work?", qh: "Mit teszel, ha hibázol a munkahelyen?", a: "I will accept it, learn from it and correct it.", ah: "Elfogadom, tanulok belőle és kijavítom." },
+    { n: 53, q: "What will you do if your manager gives you extra work?", qh: "Mit teszel, ha a felettesed plusz munkát ad?", a: "I will manage my time and complete it.", ah: "Beosztom az időmet, és elvégzem." },
+    { n: 54, q: "What if you disagree with your manager?", qh: "Mi történik, ha nem értesz egyet a feletteseddel?", a: "I will respectfully share my view.", ah: "Tisztelettudóan megosztom a véleményemet." },
+    { n: 55, q: "How do you handle deadlines?", qh: "Hogyan kezeled a határidőket?", a: "I plan my work and complete it on time.", ah: "Megtervezem a munkámat, és időben befejezem." },
+    { n: 56, q: "What is teamwork in the workplace?", qh: "Mi az a csapatmunka a munkahelyen?", a: "Working together to achieve a goal.", ah: "Együttműködés egy cél elérése érdekében." },
+    { n: 57, q: "How do you maintain work quality?", qh: "Hogyan tartod fenn a munka minőségét?", a: "By paying attention to details and reviewing work.", ah: "A részletekre való odafigyeléssel és a munka ellenőrzésével." },
+    { n: 58, q: "What is punctuality?", qh: "Mi az a pontosság?", a: "Arriving on time and being reliable.", ah: "Időben érkezés és megbízhatóság." },
+    { n: 59, q: "What will you do if you don't understand a task?", qh: "Mit teszel, ha nem értesz egy feladatot?", a: "I will ask for guidance.", ah: "Iránymutatást kérek." },
+    { n: 60, q: "What is workplace ethics?", qh: "Mi az a munkahelyi etika?", a: "Following honesty, respect and responsibility.", ah: "Az őszinteség, a tisztelet és a felelősségvállalás követése." },
+    { n: 61, q: "What is a company?", qh: "Mi az a vállalat / cég?", a: "An organization that provides products or services.", ah: "Olyan szervezet, amely termékeket vagy szolgáltatásokat nyújt." },
+    { n: 62, q: "What is an organization?", qh: "Mi az a szervezet?", a: "A group of people working towards a goal.", ah: "Emberek csoportja, akik egy közös célért dolgoznak." },
+    { n: 63, q: "What is a manager?", qh: "Mi az a vezető / menedzser?", a: "A person who manages a team or work.", ah: "Olyan személy, aki egy csapatot vagy munkát irányít." },
+    { n: 64, q: "What is an employee?", qh: "Mi az a munkavállaló / alkalmazott?", a: "A person who works for an organization.", ah: "Olyan személy, aki egy szervezetnél dolgozik." },
+    { n: 65, q: "What is an employer?", qh: "Mi az a munkáltató?", a: "A person or company that hires employees.", ah: "Olyan személy vagy cég, aki munkavállalókat alkalmaz." },
+    { n: 66, q: "What is teamwork skill?", qh: "Mi az a csapatmunka-készség?", a: "The ability to work well with others.", ah: "Az a képesség, hogy jól tudjunk együttműködni másokkal." },
+    { n: 67, q: "What is decision-making?", qh: "Mi az a döntéshozatal?", a: "Choosing the best option.", ah: "A legjobb lehetőség kiválasztása." },
+    { n: 68, q: "What is problem-solving?", qh: "Mi az a problémamegoldás?", a: "Finding solutions to problems.", ah: "Megoldások találása a problémákra." },
+    { n: 69, q: "What is adaptability?", qh: "Mi az az alkalmazkodóképesség?", a: "Adjusting to new situations.", ah: "Alkalmazkodás az új helyzetekhez." },
+    { n: 70, q: "What is multitasking?", qh: "Mi az a többfeladatos munkavégzés (multitasking)?", a: "Doing more than one task at a time.", ah: "Egyszerre több feladat végzése." },
+    { n: 71, q: "What will you do if a customer is angry?", qh: "Mit teszel, ha egy ügyfél dühös?", a: "I will listen, apologize and solve the issue.", ah: "Meghallgatom, elnézést kérek és megoldom a problémát." },
+    { n: 72, q: "What will you do if a colleague does not cooperate?", qh: "Mit teszel, ha egy kolléga nem működik együtt?", a: "I will communicate politely.", ah: "Udvariasan kommunikálok." },
+    { n: 73, q: "What will you do if you have too much work?", qh: "Mit teszel, ha túl sok a munkád?", a: "I will prioritize and complete it step by step.", ah: "Priorizálom a feladatokat, és lépésről lépésre elvégzem őket." },
+    { n: 74, q: "What will you do if you don't know the answer?", qh: "Mit teszel, ha nem tudod a választ?", a: "I will honestly say I don't know and learn.", ah: "Őszintén megmondom, hogy nem tudom, és utánanézek." },
+    { n: 75, q: "What will you do if you are late for work?", qh: "Mit teszel, ha elkésel a munkából?", a: "I will inform my manager and apologize.", ah: "Értesítem a felettesemet, és elnézést kérek." },
+    { n: 76, q: "How will you handle a stressful situation?", qh: "Hogyan kezelnél egy stresszes helyzetet?", a: "I will stay calm and think logically.", ah: "Nyugodt maradok, és logikusan gondolkodom." },
+    { n: 77, q: "What will you do if you see someone breaking rules?", qh: "Mit teszel, ha látod, hogy valaki megszegi a szabályokat?", a: "I will report it to the authority.", ah: "Jelentem az illetékesnek." },
+    { n: 78, q: "What will you do if you receive negative feedback?", qh: "Mit teszel, ha negatív visszajelzést kapsz?", a: "I will accept it and work on improvement.", ah: "Elfogadom, és dolgozom a fejlődésen." },
+    { n: 79, q: "What if you have a disagreement with a coworker?", qh: "Mi történik, ha nézeteltérésed támad egy munkatársaddal?", a: "I will discuss and find a solution.", ah: "Megbeszélem, és megoldást keresek." },
+    { n: 80, q: "What will you do if you are assigned an unfamiliar task?", qh: "Mit teszel, ha egy ismeretlen feladatot kapsz?", a: "I will learn about it and complete it.", ah: "Utánanézek, megtanulom, és elvégzem." },
+    { n: 81, q: "What are your career objectives?", qh: "Mik a karriercéljaid?", a: "To grow in my career and gain new skills.", ah: "Hogy fejlődjek a karrieremben és új készségeket szerezzek." },
+    { n: 82, q: "What do you know about this position?", qh: "Mit tudsz erről a pozícióról?", a: "It requires skills, teamwork and dedication.", ah: "Készségeket, csapatmunkát és elhivatottságot igényel." },
+    { n: 83, q: "What are your technical skills?", qh: "Mik a technikai készségeid?", a: "My technical skills include [mention skills].", ah: "A technikai készségeim közé tartozik: [készségek]." },
+    { n: 84, q: "Do you have any questions for us?", qh: "Van bármilyen kérdésed hozzánk?", a: "Yes, I would like to know about growth.", ah: "Igen, szeretnék többet megtudni a fejlődési lehetőségekről." },
+    { n: 85, q: "What is your notice period?", qh: "Mennyi a felmondási időd?", a: "My notice period is [mention].", ah: "A felmondási időm [időtartam]." },
+    { n: 86, q: "What do you do in your free time?", qh: "Mit csinálsz a szabadidődben?", a: "I read, learn and spend time with family.", ah: "Olvasok, tanulok, és a családommal töltöm az időt." },
+    { n: 87, q: "What is your greatest strength?", qh: "Mi a legnagyobb erősséged?", a: "My dedication and positive attitude.", ah: "Az elhivatottságom és a pozitív hozzáállásom." },
+    { n: 88, q: "What do you understand by hard work?", qh: "Mit értesz kemény munka alatt?", a: "Putting consistent effort for success.", ah: "Következetes erőfeszítés a siker érdekében." },
+    { n: 89, q: "What do you understand by smart work?", qh: "Mit értesz okos (hatékony) munka alatt?", a: "Working efficiently and wisely.", ah: "Hatékony és okos munkavégzés." },
+    { n: 90, q: "How do you improve yourself?", qh: "Hogyan fejleszted önmagad?", a: "By learning, practicing and taking feedback.", ah: "Tanulással, gyakorlással és a visszajelzések megfogadásával." },
+    { n: 91, q: "Are you willing to learn new skills?", qh: "Hajlandó vagy új készségeket tanulni?", a: "Yes, I am always ready to learn.", ah: "Igen, mindig készen állok a tanulásra." },
+    { n: 92, q: "Can you accept new challenges?", qh: "El tudsz fogadni új kihívásokat?", a: "Yes, I see challenges as opportunities.", ah: "Igen, a kihívásokat lehetőségként kezelem." },
+    { n: 93, q: "What is your expected career growth?", qh: "Milyen szakmai fejlődésre számítasz?", a: "I want to grow and take more responsibility.", ah: "Szeretnék fejlődni és több felelősséget vállalni." },
+    { n: 94, q: "How would your friends describe you?", qh: "Hogyan írnának le téged a barátaid?", a: "Helpful, honest, friendly and hardworking.", ah: "Segítőkész, őszinte, barátságos és szorgalmas." },
+    { n: 95, q: "What does honesty mean to you?", qh: "Mit jelent számodra az őszinteség?", a: "Speaking the truth and acting with integrity.", ah: "Az igazmondás és a tisztességes cselekedet." },
+    { n: 96, q: "Why should we select you over others?", qh: "Miért téged válasszunk másokkal szemben?", a: "I am hardworking, quick learner and sincere.", ah: "Szorgalmas, gyorsan tanuló és őszinte vagyok." },
+    { n: 97, q: "What is your biggest professional goal?", qh: "Mi a legnagyobb szakmai célod?", a: "To become a skilled and successful professional.", ah: "Hogy képzett és sikeres szakemberré váljak." },
+    { n: 98, q: "What do you expect from your manager?", qh: "Mit vársz el a felettesedtől?", a: "Guidance, support and constructive feedback.", ah: "Iránymutatás, támogatás és építő jellegű visszajelzés." },
+    { n: 99, q: "Do you have any questions about the job?", qh: "Van bármilyen kérdésed az állással kapcsolatban?", a: "Yes, I would like to know about training.", ah: "Igen, szeretnék többet megtudni a betanításról." },
+    { n: 100, q: "Why should we give you this opportunity?", qh: "Miért adjuk meg neked ezt a lehetőséget?", a: "Because I am eager to learn and contribute.", ah: "Mert lelkesen szeretnék tanulni és hozzájárulni a sikerekhez." },
+    { n: 101, q: "What is a resume?", qh: "Mi az az önéletrajz?", a: "A resume is a summary of your skills and experience.", ah: "Az önéletrajz a készségeid és tapasztalataid összefoglalása." },
+    { n: 102, q: "What is a cover letter?", qh: "Mi az a motivációs levél?", a: "A cover letter is a letter to introduce yourself.", ah: "A motivációs levél egy levél, amelyben bemutatod magad." },
+    { n: 103, q: "What is an interview?", qh: "Mi az az állásinterjú?", a: "An interview is a conversation for a job.", ah: "Az interjú egy állással kapcsolatos beszélgetés." },
+    { n: 104, q: "What is a portfolio?", qh: "Mi az a portfólió?", a: "A portfolio is a collection of your work.", ah: "A portfólió a munkáid gyűjteménye." },
+    { n: 105, q: "What is a skill?", qh: "Mi az a készség?", a: "A skill is the ability to do something well.", ah: "A készség az a képesség, hogy valamit jól csináljunk." },
+    { n: 106, q: "What is a competency?", qh: "Mi az a kompetencia?", a: "A competency is a skill required for a job.", ah: "A kompetencia egy munkakörhöz szükséges készség." },
+    { n: 107, q: "What is a KPI?", qh: "Mi az a KPI (fő teljesítménymutató)?", a: "KPI means Key Performance Indicator.", ah: "A KPI a fő teljesítménymutatót jelenti." },
+    { n: 108, q: "What is a deadline?", qh: "Mi az a határidő?", a: "A deadline is the last date to complete work.", ah: "A határidő a munka befejezésének utolsó időpontja." },
+    { n: 109, q: "What is a project?", qh: "Mi az a projekt?", a: "A project is a specific task or goal.", ah: "A projekt egy konkrét feladat vagy cél." },
+    { n: 110, q: "What is a task?", qh: "Mi az a feladat?", a: "A task is a small work assignment.", ah: "A feladat egy kisebb munkamegbízás." },
+    { n: 111, q: "What is a strategy?", qh: "Mi az a stratégia?", a: "A strategy is a plan to achieve a goal.", ah: "A stratégia egy cél elérésére szolgáló terv." },
+    { n: 112, q: "What is a policy?", qh: "Mi az a szabályzat (policy)?", a: "A policy is a set of rules.", ah: "A szabályzat szabályok összessége." },
+    { n: 113, q: "What is a procedure?", qh: "Mi az az eljárás?", a: "A procedure is a step-by-step method.", ah: "Az eljárás egy lépésről lépésre haladó módszer." },
+    { n: 114, q: "What is a process?", qh: "Mi az a folyamat (process)?", a: "A process is a series of steps.", ah: "A folyamat lépések sorozata." },
+    { n: 115, q: "What is a system?", qh: "Mi az a rendszer?", a: "A system is a set of connected parts.", ah: "A rendszer egymással összekapcsolt részek összessége." },
+    { n: 116, q: "What is a database?", qh: "Mi az az adatbázis?", a: "A database is a collection of data.", ah: "Az adatbázis adatok gyűjteménye." },
+    { n: 117, q: "What is software?", qh: "Mi az a szoftver?", a: "Software is a set of programs.", ah: "A szoftver programok összessége." },
+    { n: 118, q: "What is hardware?", qh: "Mi az a hardver?", a: "Hardware is the physical part of a computer.", ah: "A hardver a számítógép fizikai része." },
+    { n: 119, q: "What is a network?", qh: "Mi az a hálózat?", a: "A network connects multiple devices.", ah: "A hálózat több eszközt kapcsol össze." },
+    { n: 120, q: "What is the internet?", qh: "Mi az az internet?", a: "The internet is a global network.", ah: "Az internet egy globális hálózat." },
+    { n: 121, q: "What is cloud computing?", qh: "Mi az a felhőalapú számítástechnika?", a: "Cloud computing stores data online.", ah: "A felhőalapú számítástechnika online tárolja az adatokat." },
+    { n: 122, q: "What is artificial intelligence?", qh: "Mi az a mesterséges intelligencia (MI)?", a: "AI is the ability of machines to think.", ah: "A mesterséges intelligencia a gépek gondolkodási képessége." },
+    { n: 123, q: "What is machine learning?", qh: "Mi az a gépi tanulás (machine learning)?", a: "Machine learning helps computers learn.", ah: "A gépi tanulás segít a számítógépeknek tanulni." },
+    { n: 124, q: "What is cybersecurity?", qh: "Mi az a kiberbiztonság?", a: "Cybersecurity protects data and systems.", ah: "A kiberbiztonság védi az adatokat és a rendszereket." },
+    { n: 125, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 126, q: "What is a virus?", qh: "Mi az a vírus?", a: "A virus is a harmful program.", ah: "A vírus egy kártékony program." },
+    { n: 127, q: "What is malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is any harmful software.", ah: "A malware bármilyen kártékony szoftver." },
+    { n: 128, q: "What is a bug?", qh: "Mi az a bug (programhiba)?", a: "A bug is an error in a program.", ah: "A bug egy hiba a programban." },
+    { n: 129, q: "What is debugging?", qh: "Mi az a hibakeresés (debugging)?", a: "Debugging means fixing errors.", ah: "A hibakeresés a hibák javítását jelenti." },
+    { n: 130, q: "What is an algorithm?", qh: "Mi az az algoritmus?", a: "An algorithm is a step-by-step procedure.", ah: "Az algoritmus egy lépésről lépésre haladó eljárás." },
+    { n: 131, q: "What is data analysis?", qh: "Mi az az adatelemzés?", a: "Data analysis means studying data.", ah: "Az adatelemzés az adatok vizsgálatát jelenti." },
+    { n: 132, q: "What is data science?", qh: "Mi az az adattudomány?", a: "Data science is finding useful insights.", ah: "Az adattudomány hasznos összefüggések feltárása." },
+    { n: 133, q: "What is big data?", qh: "Mi az a big data?", a: "Big data is large amounts of data.", ah: "A big data nagy mennyiségű adatot jelent." },
+    { n: 134, q: "What is a spreadsheet?", qh: "Mi az a táblázatkezelő / munkafüzet?", a: "A spreadsheet is a table of data.", ah: "A táblázat adatok táblázatos elrendezése." },
+    { n: 135, q: "What is a formula?", qh: "Mi az a képlet?", a: "A formula is a rule for calculation.", ah: "A képlet egy számítási szabály." },
+    { n: 136, q: "What is a chart?", qh: "Mi az a diagram?", a: "A chart shows data visually.", ah: "A diagram vizuálisan jeleníti meg az adatokat." },
+    { n: 137, q: "What is a graph?", qh: "Mi az a gráf / diagram?", a: "A graph shows data trends.", ah: "A diagram adat trendeket mutat." },
+    { n: 138, q: "What is a report?", qh: "Mi az a jelentés / riport?", a: "A report is a summary of information.", ah: "A jelentés információk összefoglalása." },
+    { n: 139, q: "What is a presentation?", qh: "Mi az a prezentáció / előadás?", a: "A presentation shares information.", ah: "A prezentáció információt oszt meg." },
+    { n: 140, q: "What is a meeting?", qh: "Mi az a megbeszélés / értekezlet?", a: "A meeting is a group discussion.", ah: "A megbeszélés egy csoportos eszmecsere." },
+    { n: 141, q: "What is a document?", qh: "Mi az a dokumentum?", a: "A document is written information.", ah: "A dokumentum írott információ." },
+    { n: 142, q: "What is a file?", qh: "Mi az a fájl?", a: "A file stores data.", ah: "A fájl adatokat tárol." },
+    { n: 143, q: "What is a folder?", qh: "Mi az a mappa?", a: "A folder organizes files.", ah: "A mappa rendszerezi a fájlokat." },
+    { n: 144, q: "What is a backup?", qh: "Mi az a biztonsági mentés (backup)?", a: "A backup is a copy of data.", ah: "A biztonsági mentés az adatok másolata." },
+    { n: 145, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption protects data.", ah: "A titkosítás védi az adatokat." },
+    { n: 146, q: "What is a password?", qh: "Mi az a jelszó?", a: "A password keeps your account safe.", ah: "A jelszó biztonságban tartja a fiókodat." },
+    { n: 147, q: "What is a proxy?", qh: "Mi az a proxy?", a: "A proxy acts as an intermediary.", ah: "A proxy közvetítőként működik." },
+    { n: 148, q: "What is a router?", qh: "Mi az a router (útválasztó)?", a: "A router connects devices to the internet.", ah: "A router csatlakoztatja az eszközöket az internethez." },
+    { n: 149, q: "What is a modem?", qh: "Mi az a modem?", a: "A modem connects your device to the internet.", ah: "A modem csatlakoztatja az eszközödet az internethez." },
+    { n: 150, q: "What is a server?", qh: "Mi az a szerver?", a: "A server stores and manages data.", ah: "A szerver adatokat tárol és kezel." },
+    { n: 151, q: "What is an entrepreneur?", qh: "Mi az a vállalkozó?", a: "An entrepreneur is a person who starts and runs a business.", ah: "A vállalkozó olyan személy, aki vállalkozást indít és vezet." },
+    { n: 152, q: "What is a business plan?", qh: "Mi az az üzleti terv?", a: "A business plan is a plan to start and grow a business.", ah: "Az üzleti terv egy vállalkozás elindítására és növelésére szolgáló terv." },
+    { n: 153, q: "What is marketing?", qh: "Mi az a marketing?", a: "Marketing is promoting a product or service.", ah: "A marketing egy termék vagy szolgáltatás népszerűsítése." },
+    { n: 154, q: "What is sales?", qh: "Mi az az értékesítés?", a: "Sales is selling products or services.", ah: "Az értékesítés termékek vagy szolgáltatások eladása." },
+    { n: 155, q: "What is finance?", qh: "Mi az a pénzügy?", a: "Finance is managing money.", ah: "A pénzügy a pénz kezelését jelenti." },
+    { n: 156, q: "What is an investment?", qh: "Mi az a befektetés?", a: "An investment is putting money for future gains.", ah: "A befektetés pénz elhelyezése jövőbeni haszon reményében." },
+    { n: 157, q: "What is profit?", qh: "Mi az a profit (nyereség)?", a: "Profit is the money earned after expenses.", ah: "A profit a kiadások levonása után megmaradó bevétel." },
+    { n: 158, q: "What is loss?", qh: "Mi az a veszteség?", a: "Loss is the money lost in business.", ah: "A veszteség az üzleti tevékenység során elvesztett pénz." },
+    { n: 159, q: "What is a budget?", qh: "Mi az a költségvetés?", a: "A budget is a plan to manage money.", ah: "A költségvetés a pénz beosztására szolgáló terv." },
+    { n: 160, q: "What is a project?", qh: "Mi az a projekt?", a: "A project is a planned task to achieve a goal.", ah: "A projekt egy cél elérésére tervezett feladat." },
+    { n: 161, q: "What is a network?", qh: "Mi az a hálózat?", a: "A network is a group of connected devices.", ah: "A hálózat összekapcsolt eszközök csoportja." },
+    { n: 162, q: "What is a database?", qh: "Mi az az adatbázis?", a: "A database is a collection of organized data.", ah: "Az adatbázis rendezett adatok gyűjteménye." },
+    { n: 163, q: "What is software?", qh: "Mi az a szoftver?", a: "Software is a program that helps us do work.", ah: "A szoftver egy program, amely segít a munkavégzésben." },
+    { n: 164, q: "What is hardware?", qh: "Mi az a hardver?", a: "Hardware is the physical part of a computer.", ah: "A hardver a számítógép fizikai része." },
+    { n: 165, q: "What is a website?", qh: "Mi az a weboldal / webhely?", a: "A website is a collection of web pages.", ah: "A webhely weboldalak gyűjteménye." },
+    { n: 166, q: "What is an application?", qh: "Mi az az alkalmazás?", a: "An application is a program for a specific task.", ah: "Az alkalmazás egy adott feladatra készült program." },
+    { n: 167, q: "What is a file?", qh: "Mi az a fájl?", a: "A file is a collection of data.", ah: "A fájl adatok gyűjteménye." },
+    { n: 168, q: "What is a folder?", qh: "Mi az a mappa?", a: "A folder is a place to store files.", ah: "A mappa egy hely fájlok tárolására." },
+    { n: 169, q: "What is a browser?", qh: "Mi az a böngésző?", a: "A browser is used to open websites.", ah: "A böngésző weboldalak megnyitására szolgál." },
+    { n: 170, q: "What is an operating system?", qh: "Mi az az operációs rendszer?", a: "An operating system manages the computer.", ah: "Az operációs rendszer irányítja a számítógépet." },
+    { n: 171, q: "What is a shortcut?", qh: "Mi az a parancsikon / gyorsbillentyű?", a: "A shortcut is a quick way to open something.", ah: "A parancsikon gyors módja valami megnyitásának." },
+    { n: 172, q: "What is a hyperlink?", qh: "Mi az a hiperhivatkozás?", a: "A hyperlink is a link to another page.", ah: "A hiperhivatkozás egy másik oldalra mutató hivatkozás." },
+    { n: 173, q: "What is a password?", qh: "Mi az a jelszó?", a: "A password is a secret code.", ah: "A jelszó egy titkos kód." },
+    { n: 174, q: "What is cybersecurity?", qh: "Mi az a kiberbiztonság?", a: "Cybersecurity is protecting data and systems.", ah: "A kiberbiztonság az adatok és rendszerek védelme." },
+    { n: 175, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 176, q: "What is a virus?", qh: "Mi az a vírus?", a: "A virus is a harmful program.", ah: "A vírus egy kártékony program." },
+    { n: 177, q: "What is malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is any harmful software.", ah: "A malware bármilyen kártékony szoftver." },
+    { n: 178, q: "What is a bug?", qh: "Mi az a bug (programhiba)?", a: "A bug is an error in a program.", ah: "A bug egy hiba a programban." },
+    { n: 179, q: "What is debugging?", qh: "Mi az a hibakeresés (debugging)?", a: "Debugging means fixing errors.", ah: "A hibakeresés a hibák javítását jelenti." },
+    { n: 180, q: "What is an algorithm?", qh: "Mi az az algoritmus?", a: "An algorithm is a step-by-step procedure.", ah: "Az algoritmus egy lépésről lépésre haladó eljárás." },
+    { n: 181, q: "What is data mining?", qh: "Mi az az adatbányászat?", a: "Data mining means finding useful data.", ah: "Az adatbányászat hasznos adatok feltárását jelenti." },
+    { n: 182, q: "What is artificial intelligence?", qh: "Mi az a mesterséges intelligencia (MI)?", a: "AI is the ability of machines to think.", ah: "A mesterséges intelligencia a gépek gondolkodási képessége." },
+    { n: 183, q: "What is machine learning?", qh: "Mi az a gépi tanulás (machine learning)?", a: "Machine learning means computers learn from data.", ah: "A gépi tanulás azt jelenti, hogy a számítógépek adatokból tanulnak." },
+    { n: 184, q: "What is cloud computing?", qh: "Mi az a felhőalapú számítástechnika?", a: "Cloud computing stores data online.", ah: "A felhőalapú számítástechnika online tárolja az adatokat." },
+    { n: 185, q: "What is big data?", qh: "Mi az a big data?", a: "Big data is large amounts of data.", ah: "A big data nagy mennyiségű adatot jelent." },
+    { n: 186, q: "What is IoT?", qh: "Mi az az IoT (dolgok internete)?", a: "IoT means connecting devices to the internet.", ah: "Az IoT az eszközök internetre csatlakoztatását jelenti." },
+    { n: 187, q: "What is a smartphone?", qh: "Mi az az okostelefon?", a: "A smartphone is a mobile computer.", ah: "Az okostelefon egy mobil számítógép." },
+    { n: 188, q: "What is an app?", qh: "Mi az az alkalmazás (app)?", a: "An app is a program for a mobile device.", ah: "Az app egy mobileszközre készült program." },
+    { n: 189, q: "What is a social media?", qh: "Mi az a közösségi média?", a: "Social media is a platform to share and connect.", ah: "A közösségi média egy platform megosztásra és kapcsolattartásra." },
+    { n: 190, q: "What is a digital payment?", qh: "Mi az a digitális fizetés?", a: "Digital payment is paying online.", ah: "A digitális fizetés az online fizetést jelenti." },
+    { n: 191, q: "What is online shopping?", qh: "Mi az az online vásárlás?", a: "Online shopping is buying products online.", ah: "Az online vásárlás termékek interneten történő megvásárlása." },
+    { n: 192, q: "What is a QR code?", qh: "Mi az a QR-kód?", a: "A QR code is a quick response code.", ah: "A QR-kód egy gyors válaszadásra tervezett kód." },
+    { n: 193, q: "What is a chatbot?", qh: "Mi az a chatbot?", a: "A chatbot is a computer program that chats.", ah: "A chatbot egy beszélgetésre képes számítógépes program." },
+    { n: 194, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN keeps your online activity private.", ah: "A VPN priváttá teszi az online tevékenységedet." },
+    { n: 195, q: "What is a password manager?", qh: "Mi az a jelszókezelő?", a: "A password manager saves passwords.", ah: "A jelszókezelő elmenti a jelszavakat." },
+    { n: 196, q: "What is two-factor authentication?", qh: "Mi az a kétfaktoros hitelesítés (2FA)?", a: "Two-factor authentication adds extra security.", ah: "A kétfaktoros hitelesítés extra biztonságot nyújt." },
+    { n: 197, q: "What is a spam?", qh: "Mi az a spam (levélszemét)?", a: "Spam is unwanted messages.", ah: "A spam kéretlen üzeneteket jelent." },
+    { n: 198, q: "What is phishing?", qh: "Mi az az adathalászat (phishing)?", a: "Phishing is trying to steal personal information.", ah: "Az adathalászat személyes adatok ellopására irányuló kísérlet." },
+    { n: 199, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores information on your device.", ah: "A süti információkat tárol az eszközödön." },
+    { n: 200, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 201, q: "What is a database?", qh: "Mi az az adatbázis?", a: "A database is a collection of organized data.", ah: "Az adatbázis rendezett adatok gyűjteménye." },
+    { n: 202, q: "What is a spreadsheet?", qh: "Mi az a táblázatkezelő / munkafüzet?", a: "A spreadsheet is a table of data.", ah: "A táblázat adatok táblázatos elrendezése." },
+    { n: 203, q: "What is a formula?", qh: "Mi az a képlet?", a: "A formula is a rule for calculation.", ah: "A képlet egy számítási szabály." },
+    { n: 204, q: "What is a chart?", qh: "Mi az a diagram?", a: "A chart shows data visually.", ah: "A diagram vizuálisan jeleníti meg az adatokat." },
+    { n: 205, q: "What is a graph?", qh: "Mi az a gráf / diagram?", a: "A graph shows data trends.", ah: "A diagram adat trendeket mutat." },
+    { n: 206, q: "What is a report?", qh: "Mi az a jelentés / riport?", a: "A report is a summary of information.", ah: "A jelentés információk összefoglalása." },
+    { n: 207, q: "What is a presentation?", qh: "Mi az a prezentáció / előadás?", a: "A presentation shares information.", ah: "A prezentáció információt oszt meg." },
+    { n: 208, q: "What is a meeting?", qh: "Mi az a megbeszélés / értekezlet?", a: "A meeting is a group discussion.", ah: "A megbeszélés egy csoportos eszmecsere." },
+    { n: 209, q: "What is a document?", qh: "Mi az a dokumentum?", a: "A document is written information.", ah: "A dokumentum írott információ." },
+    { n: 210, q: "What is a file?", qh: "Mi az a fájl?", a: "A file stores data.", ah: "A fájl adatokat tárol." },
+    { n: 211, q: "What is a folder?", qh: "Mi az a mappa?", a: "A folder organizes files.", ah: "A mappa rendszerezi a fájlokat." },
+    { n: 212, q: "What is a backup?", qh: "Mi az a biztonsági mentés (backup)?", a: "A backup is a copy of data.", ah: "A biztonsági mentés az adatok másolata." },
+    { n: 213, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption protects data.", ah: "A titkosítás védi az adatokat." },
+    { n: 214, q: "What is a password?", qh: "Mi az a jelszó?", a: "A password keeps your account safe.", ah: "A jelszó biztonságban tartja a fiókodat." },
+    { n: 215, q: "What is a proxy?", qh: "Mi az a proxy?", a: "A proxy acts as an intermediary.", ah: "A proxy közvetítőként működik." },
+    { n: 216, q: "What is a router?", qh: "Mi az a router (útválasztó)?", a: "A router connects devices to the internet.", ah: "A router csatlakoztatja az eszközöket az internethez." },
+    { n: 217, q: "What is a modem?", qh: "Mi az a modem?", a: "A modem connects your device to the internet.", ah: "A modem csatlakoztatja az eszközödet az internethez." },
+    { n: 218, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 219, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN keeps your online activity private.", ah: "A VPN priváttá teszi az online tevékenységedet." },
+    { n: 220, q: "What is a Wi-Fi?", qh: "Mi az a Wi-Fi?", a: "Wi-Fi is wireless internet.", ah: "A Wi-Fi vezeték nélküli internetkapcsolat." },
+    { n: 221, q: "What is a LAN?", qh: "Mi az a LAN (helyi hálózat)?", a: "A LAN is a local area network.", ah: "A LAN egy helyi hálózat." },
+    { n: 222, q: "What is a WAN?", qh: "Mi az a WAN (kiterjedt hálózat)?", a: "A WAN is a wide area network.", ah: "A WAN egy kiterjedt hálózat." },
+    { n: 223, q: "What is an IP address?", qh: "Mi az az IP-cím?", a: "An IP address is a device address.", ah: "Az IP-cím egy eszköz címe." },
+    { n: 224, q: "What is a URL?", qh: "Mi az az URL?", a: "A URL is a web page address.", ah: "Az URL egy weboldal címe." },
+    { n: 225, q: "What is a browser?", qh: "Mi az a böngésző?", a: "A browser is used to open websites.", ah: "A böngésző weboldalak megnyitására szolgál." },
+    { n: 226, q: "What is a cache?", qh: "Mi az a gyorsítótár (cache)?", a: "A cache stores frequently used data.", ah: "A gyorsítótár a gyakran használt adatokat tárolja." },
+    { n: 227, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores information on your device.", ah: "A süti információkat tárol az eszközödön." },
+    { n: 228, q: "What is a temporary file?", qh: "Mi az az ideiglenes fájl?", a: "A temporary file is short-term data.", ah: "Az ideiglenes fájl rövid távú adatokat tartalmaz." },
+    { n: 229, q: "What is a queue?", qh: "Mi az a sor (queue)?", a: "A queue is a first-in-first-out list.", ah: "A sor egy 'elsőként be, elsőként ki' lista." },
+    { n: 230, q: "What is a stack?", qh: "Mi az a verem (stack)?", a: "A stack is a last-in-first-out list.", ah: "A verem egy 'utolsóként be, elsőként ki' lista." },
+    { n: 231, q: "What is a binary search?", qh: "Mi az a bináris keresés?", a: "A binary search finds data quickly.", ah: "A bináris keresés gyorsan megtalálja az adatokat." },
+    { n: 232, q: "What is a sorting algorithm?", qh: "Mi az a rendezési algoritmus?", a: "A sorting algorithm arranges data.", ah: "A rendezési algoritmus rendezi az adatokat." },
+    { n: 233, q: "What is a debugging?", qh: "Mi az a hibakeresés (debugging)?", a: "Debugging means finding and fixing errors.", ah: "A hibakeresés a hibák megtalálását és kijavítását jelenti." },
+    { n: 234, q: "What is a compiler?", qh: "Mi az a fordítóprogram (compiler)?", a: "A compiler converts code into machine language.", ah: "A fordítóprogram gépi nyelvre alakítja a kódot." },
+    { n: 235, q: "What is an interpreter?", qh: "Mi az az értelmező (interpreter)?", a: "An interpreter runs code directly.", ah: "Az értelmező közvetlenül futtatja a kódot." },
+    { n: 236, q: "What is an IDE?", qh: "Mi az az IDE (integrált fejlesztői környezet)?", a: "An IDE is a development environment.", ah: "Az IDE egy fejlesztői környezet." },
+    { n: 237, q: "What is a variable?", qh: "Mi az a változó?", a: "A variable stores data in a program.", ah: "A változó adatokat tárol egy programban." },
+    { n: 238, q: "What is a constant?", qh: "Mi az a konstans (állandó)?", a: "A constant is a fixed value.", ah: "A konstans egy rögzített érték." },
+    { n: 239, q: "What is a loop?", qh: "Mi az a ciklus (loop)?", a: "A loop repeats a set of instructions.", ah: "A ciklus utasítások egy csoportját ismétli." },
+    { n: 240, q: "What is a function?", qh: "Mi az a függvény?", a: "A function performs a specific task.", ah: "A függvény egy konkrét feladatot hajt végre." },
+    { n: 241, q: "What is an array?", qh: "Mi az a tömb (array)?", a: "An array stores multiple values.", ah: "A tömb több értéket tárol." },
+    { n: 242, q: "What is a string?", qh: "Mi az a karakterlánc (string)?", a: "A string is a sequence of characters.", ah: "A karakterlánc karakterek sorozata." },
+    { n: 243, q: "What is a list?", qh: "Mi az a lista?", a: "A list stores multiple items.", ah: "A lista több elemet tárol." },
+    { n: 244, q: "What is a tuple?", qh: "Mi az a rendezett n-es (tuple)?", a: "A tuple stores data like a list.", ah: "A tuple a listához hasonlóan tárol adatokat (de módosíthatatlan)." },
+    { n: 245, q: "What is a set?", qh: "Mi az a halmaz (set)?", a: "A set stores unique values.", ah: "A halmaz egyedi értékeket tárol." },
+    { n: 246, q: "What is a dictionary?", qh: "Mi az a szótár (dictionary)?", a: "A dictionary stores key-value pairs.", ah: "A szótár kulcs-érték párokat tárol." },
+    { n: 247, q: "What is a class?", qh: "Mi az az osztály (class)?", a: "A class is a template for objects.", ah: "Az osztály egy sablon az objektumokhoz." },
+    { n: 248, q: "What is an object?", qh: "Mi az az objektum?", a: "An object is an instance of a class.", ah: "Az objektum egy osztály példánya." },
+    { n: 249, q: "What is inheritance?", qh: "Mi az az öröklődés?", a: "Inheritance allows a class to reuse code.", ah: "Az öröklődés lehetővé teszi, hogy egy osztály újrahasznosítsa a kódot." },
+    { n: 250, q: "What is polymorphism?", qh: "Mi az a többalakúság (polimorfizmus)?", a: "Polymorphism means multiple forms.", ah: "A polimorfizmus többalakúságot jelent." },
+    { n: 251, q: "What is a team?", qh: "Mi az a csapat?", a: "A team is a group of people working together.", ah: "A csapat együtt dolgozó emberek csoportja." },
+    { n: 252, q: "What is a client?", qh: "Mi az az ügyfél / kliens?", a: "A client is a person who uses a service.", ah: "Az ügyfél olyan személy, aki igénybe vesz egy szolgáltatást." },
+    { n: 253, q: "What is a vendor?", qh: "Mi az a beszállító / szállító?", a: "A vendor is a supplier of goods or services.", ah: "A beszállító áruk vagy szolgáltatások szállítója." },
+    { n: 254, q: "What is outsourcing?", qh: "Mi az a kiszervezés (outsourcing)?", a: "Outsourcing means giving work to another company.", ah: "A kiszervezés azt jelenti, hogy egy munkát egy másik cégnek adunk ki." },
+    { n: 255, q: "What is a KPI?", qh: "Mi az a KPI (fő teljesítménymutató)?", a: "KPI means Key Performance Indicator.", ah: "A KPI a fő teljesítménymutatót jelenti." },
+    { n: 256, q: "What is a workflow?", qh: "Mi az a munkafolyamat?", a: "A workflow is a step-by-step process.", ah: "A munkafolyamat egy lépésről lépésre haladó folyamat." },
+    { n: 257, q: "What is a database?", qh: "Mi az az adatbázis?", a: "A database is a collection of data.", ah: "Az adatbázis adatok gyűjteménye." },
+    { n: 258, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 259, q: "What is a backup?", qh: "Mi az a biztonsági mentés (backup)?", a: "A backup is a copy of data.", ah: "A biztonsági mentés az adatok másolata." },
+    { n: 260, q: "What is a password?", qh: "Mi az a jelszó?", a: "A password is a secret code.", ah: "A jelszó egy titkos kód." },
+    { n: 261, q: "What is a router?", qh: "Mi az a router (útválasztó)?", a: "A router connects devices to the internet.", ah: "A router csatlakoztatja az eszközöket az internethez." },
+    { n: 262, q: "What is a modem?", qh: "Mi az a modem?", a: "A modem connects your device to the internet.", ah: "A modem csatlakoztatja az eszközödet az internethez." },
+    { n: 263, q: "What is a search engine?", qh: "Mi az a keresőmotor?", a: "A search engine helps you find information.", ah: "A keresőmotor segít információt találni." },
+    { n: 264, q: "What is cloud storage?", qh: "Mi az a felhőtárhely?", a: "Cloud storage stores data online.", ah: "A felhőtárhely online tárolja az adatokat." },
+    { n: 265, q: "What is an algorithm?", qh: "Mi az az algoritmus?", a: "An algorithm is a step-by-step procedure.", ah: "Az algoritmus egy lépésről lépésre haladó eljárás." },
+    { n: 266, q: "What is a simulation?", qh: "Mi az a szimuláció?", a: "A simulation is a model of real life.", ah: "A szimuláció a valós élet egy modellje." },
+    { n: 267, q: "What is a prototype?", qh: "Mi az a prototípus?", a: "A prototype is a sample model.", ah: "A prototípus egy mintamodell." },
+    { n: 268, q: "What is a debug?", qh: "Mi az a hibakeresés (debug)?", a: "Debug means finding and fixing errors.", ah: "A hibakeresés a hibák megtalálását és javítását jelenti." },
+    { n: 269, q: "What is a patch?", qh: "Mi az a javítócsomag (patch)?", a: "A patch fixes a bug or security issue.", ah: "A javítócsomag egy hibát vagy biztonsági rést javít ki." },
+    { n: 270, q: "What is a network?", qh: "Mi az a hálózat?", a: "A network connects multiple devices.", ah: "A hálózat több eszközt kapcsol össze." },
+    { n: 271, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN keeps your data private online.", ah: "A VPN megőrzi adataid bizalmasságát az interneten." },
+    { n: 272, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption protects data.", ah: "A titkosítás védi az adatokat." },
+    { n: 273, q: "What is a domain?", qh: "Mi az a domain?", a: "A domain is a website address.", ah: "A domain egy weboldal címe." },
+    { n: 274, q: "What is a URL?", qh: "Mi az az URL?", a: "A URL is a web page address.", ah: "Az URL egy weboldal címe." },
+    { n: 275, q: "What is a hyperlink?", qh: "Mi az a hiperhivatkozás?", a: "A hyperlink is a clickable link.", ah: "A hiperhivatkozás egy kattintható hivatkozás." },
+    { n: 276, q: "What is a fire?", qh: "Mi az a fájl? (eredetiben elírás: fire)", a: "A file stores data.", ah: "A fájl adatokat tárol." },
+    { n: 277, q: "What is a folder?", qh: "Mi az a mappa?", a: "A folder organizes files.", ah: "A mappa rendszerezi a fájlokat." },
+    { n: 278, q: "What is a spreadsheet?", qh: "Mi az a táblázatkezelő / munkafüzet?", a: "A spreadsheet is a table of data.", ah: "A táblázat adatok táblázatos elrendezése." },
+    { n: 279, q: "What is a database management system?", qh: "Mi az az adatbázis-kezelő rendszer (DBMS)?", a: "A DBMS manages databases.", ah: "A DBMS adatbázisokat kezel." },
+    { n: 280, q: "What is a CMS?", qh: "Mi az a CMS (tartalomkezelő rendszer)?", a: "A CMS manages website content.", ah: "A CMS a weboldal tartalmát kezeli." },
+    { n: 281, q: "What is a social network?", qh: "Mi az a közösségi hálózat?", a: "A social network connects people online.", ah: "A közösségi hálózat online köti össze az embereket." },
+    { n: 282, q: "What is an app?", qh: "Mi az az alkalmazás (app)?", a: "An app is a software application.", ah: "Az app egy szoftveralkalmazás." },
+    { n: 283, q: "What is a software update?", qh: "Mi az a szoftverfrissítés?", a: "A software update improves features.", ah: "A szoftverfrissítés javítja a funkciókat." },
+    { n: 284, q: "What is a malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is harmful software.", ah: "A malware kártékony szoftver." },
+    { n: 285, q: "What is a virus?", qh: "Mi az a vírus?", a: "A virus is a harmful program.", ah: "A vírus egy kártékony program." },
+    { n: 286, q: "What is a phishing attack?", qh: "Mi az az adathalász támadás?", a: "Phishing is a trick to steal data.", ah: "Az adathalászat egy trükk adatok ellopására." },
+    { n: 287, q: "What is two-factor authentication?", qh: "Mi az a kétfaktoros hitelesítés (2FA)?", a: "It uses two steps to verify identity.", ah: "Két lépést használ a személyazonosság ellenőrzésére." },
+    { n: 288, q: "What is a firewall rule?", qh: "Mi az a tűzfalszabály?", a: "A firewall rule controls traffic.", ah: "A tűzfalszabály szabályozza a forgalmat." },
+    { n: 289, q: "What is an IP address?", qh: "Mi az az IP-cím?", a: "An IP address is a device address.", ah: "Az IP-cím egy eszköz címe." },
+    { n: 290, q: "What is a LAN?", qh: "Mi az a LAN (helyi hálózat)?", a: "A LAN is a local area network.", ah: "A LAN egy helyi hálózat." },
+    { n: 291, q: "What is a WAN?", qh: "Mi az a WAN (kiterjedt hálózat)?", a: "A WAN is a wide area network.", ah: "A WAN egy kiterjedt hálózat." },
+    { n: 292, q: "What is a CDN?", qh: "Mi az a CDN (tartalomszolgáltató hálózat)?", a: "A CDN delivers content faster.", ah: "A CDN gyorsabban juttatja el a tartalmat." },
+    { n: 293, q: "What is a API?", qh: "Mi az az API?", a: "An API connects different software.", ah: "Az API összeköti a különböző szoftvereket." },
+    { n: 294, q: "What is a GUI?", qh: "Mi az a GUI (grafikus felhasználói felület)?", a: "A GUI is a graphical user interface.", ah: "A GUI egy grafikus felhasználói felület." },
+    { n: 295, q: "What is a command line?", qh: "Mi az a parancssor?", a: "A command line is a text interface.", ah: "A parancssor egy szöveges felület." },
+    { n: 296, q: "What is an operating system?", qh: "Mi az az operációs rendszer?", a: "An operating system manages hardware.", ah: "Az operációs rendszer kezeli a hardvert." },
+    { n: 297, q: "What is a utility program?", qh: "Mi az a segédprogram?", a: "A utility program helps with maintenance.", ah: "A segédprogram segít a karbantartásban." },
+    { n: 298, q: "What is a driver?", qh: "Mi az az illesztőprogram (driver)?", a: "A driver lets hardware work properly.", ah: "Az illesztőprogram lehetővé teszi a hardver megfelelő működését." },
+    { n: 299, q: "What is a cache?", qh: "Mi az a gyorsítótár (cache)?", a: "A cache stores frequently used data.", ah: "A gyorsítótár a gyakran használt adatokat tárolja." },
+    { n: 300, q: "What is a temporary file?", qh: "Mi az az ideiglenes fájl?", a: "A temporary file is short-term data.", ah: "Az ideiglenes fájl rövid távú adatokat tartalmaz." },
+    { n: 301, q: "What is a variable?", qh: "Mi az a változó?", a: "A variable is a container for data.", ah: "A változó egy tároló az adatok számára." },
+    { n: 302, q: "What is a constant?", qh: "Mi az a konstans (állandó)?", a: "A constant is a fixed value.", ah: "A konstans egy rögzített érték." },
+    { n: 303, q: "What is an expression?", qh: "Mi az a kifejezés?", a: "An expression is a combination of values.", ah: "A kifejezés értékek és operátorok kombinációja." },
+    { n: 304, q: "What is a statement?", qh: "Mi az az utasítás (statement)?", a: "A statement is a complete instruction.", ah: "Az utasítás egy teljes parancs." },
+    { n: 305, q: "What is an operator?", qh: "Mi az az operátor?", a: "An operator performs a specific operation.", ah: "Az operátor egy konkrét műveletet hajt végre." },
+    { n: 306, q: "What is a operand?", qh: "Mi az az operandus?", a: "An operand is the value on which operator acts.", ah: "Az operandus az az érték, amelyen az operátor műveletet végez." },
+    { n: 307, q: "What is a precedence?", qh: "Mi az a precedencia (műveleti sorrend)?", a: "Precedence is the order of operations.", ah: "A precedencia a műveletek végrehajtási sorrendje." },
+    { n: 308, q: "What is an algorithm?", qh: "Mi az az algoritmus?", a: "An algorithm is a step-by-step solution.", ah: "Az algoritmus egy lépésről lépésre haladó megoldás." },
+    { n: 309, q: "What is a flowchart?", qh: "Mi az a folyamatábra?", a: "A flowchart is a diagram of steps.", ah: "A folyamatábra a lépések diagramja." },
+    { n: 310, q: "What is a pseudocode?", qh: "Mi az a pszeudokód (álkód)?", a: "Pseudocode is an informal way to write logic.", ah: "A pszeudokód a programlogika leírásának kötetlen módja." },
+    { n: 311, q: "What is a programming language?", qh: "Mi az a programozási nyelv?", a: "A programming language is used to write code.", ah: "A programozási nyelv kód írására szolgál." },
+    { n: 312, q: "What is a compiler?", qh: "Mi az a fordítóprogram (compiler)?", a: "A compiler translates code into machine code.", ah: "A fordítóprogram gépi kódra fordítja a kódot." },
+    { n: 313, q: "What is an interpreter?", qh: "Mi az az értelmező (interpreter)?", a: "An interpreter executes code line by line.", ah: "Az értelmező soronként hajtja végre a kódot." },
+    { n: 314, q: "What is debugging?", qh: "Mi az a hibakeresés (debugging)?", a: "Debugging means finding and fixing errors.", ah: "A hibakeresés a hibák megtalálását és kijavítását jelenti." },
+    { n: 315, q: "What is an IDE?", qh: "Mi az az IDE (integrált fejlesztői környezet)?", a: "An IDE is a tool for writing and testing code.", ah: "Az IDE egy eszköz kód írásához és teszteléséhez." },
+    { n: 316, q: "What is a software development lifecycle?", qh: "Mi az a szoftverfejlesztési életciklus (SDLC)?", a: "SDLC is the process of building software.", ah: "Az SDLC a szoftverfejlesztés teljes folyamata." },
+    { n: 317, q: "What is agile methodology?", qh: "Mi az az agilis módszertan?", a: "Agile is an iterative development approach.", ah: "Az agilis módszertan egy iteratív fejlesztési megközelítés." },
+    { n: 318, q: "What is a framework?", qh: "Mi az a keretrendszer (framework)?", a: "A framework is a structure for development.", ah: "A keretrendszer egy struktúra a fejlesztéshez." },
+    { n: 319, q: "What is a library?", qh: "Mi az a programkönyvtár (library)?", a: "A library is a collection of reusable code.", ah: "A programkönyvtár újrafelhasználható kódok gyűjteménye." },
+    { n: 320, q: "What is an API?", qh: "Mi az az API?", a: "An API is an interface to use a service.", ah: "Az API egy felület egy szolgáltatás használatához." },
+    { n: 321, q: "What is a database query?", qh: "Mi az az adatbázis-lekérdezés?", a: "A database query is a request for data.", ah: "Az adatbázis-lekérdezés egy adatokra irányuló kérés." },
+    { n: 322, q: "What is SQL?", qh: "Mi az az SQL?", a: "SQL is a language to manage databases.", ah: "Az SQL egy adatbázis-kezelő nyelv." },
+    { n: 323, q: "What is a query language?", qh: "Mi az a lekérdezőnyelv?", a: "A query language is used to retrieve data.", ah: "A lekérdezőnyelv adatok lekérésére szolgál." },
+    { n: 324, q: "What is normalization?", qh: "Mi az a normalizálás?", a: "Normalization is organizing data efficiently.", ah: "A normalizálás az adatok hatékony rendszerezése." },
+    { n: 325, q: "What is a primary key?", qh: "Mi az az elsődleges kulcs (primary key)?", a: "A primary key uniquely identifies a record.", ah: "Az elsődleges kulcs egyedileg azonosít egy rekordot." },
+    { n: 326, q: "What is a foreign key?", qh: "Mi az az idegen kulcs (foreign key)?", a: "A foreign key links tables.", ah: "Az idegen kulcs összekapcsolja a táblákat." },
+    { n: 327, q: "What is a trigger?", qh: "Mi az a trigger (eseményindító)?", a: "A trigger is an action on an event.", ah: "A trigger egy eseményre adott művelet." },
+    { n: 328, q: "What is a stored procedure?", qh: "Mi az a tárolt eljárás?", a: "A stored procedure is a saved set of commands.", ah: "A tárolt eljárás parancsok elmentett gyűjteménye." },
+    { n: 329, q: "What is a view?", qh: "Mi az a nézet (view)?", a: "A view is a virtual table.", ah: "A nézet egy virtuális tábla." },
+    { n: 330, q: "What is a index?", qh: "Mi az az index?", a: "An index helps in faster data retrieval.", ah: "Az index segít a gyorsabb adatkinyerésben." },
+    { n: 331, q: "What is a transaction?", qh: "Mi az a tranzakció?", a: "A transaction is a group of operations.", ah: "A tranzakció műveletek egy csoportja." },
+    { n: 332, q: "What is ACID?", qh: "Mi az az ACID?", a: "ACID ensures data reliability.", ah: "Az ACID biztosítja az adatok megbízhatóságát." },
+    { n: 333, q: "What is a backup?", qh: "Mi az a biztonsági mentés (backup)?", a: "A backup is a copy of data.", ah: "A biztonsági mentés az adatok másolata." },
+    { n: 334, q: "What is a restore?", qh: "Mi az a visszaállítás (restore)?", a: "A restore recovers data from a backup.", ah: "A visszaállítás biztonsági mentésből állítja helyre az adatokat." },
+    { n: 335, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall protects the network.", ah: "A tűzfal védi a hálózatot." },
+    { n: 336, q: "What is malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is malicious software.", ah: "A malware rosszindulatú szoftver." },
+    { n: 337, q: "What is antivirus?", qh: "Mi az a vírusirtó?", a: "Antivirus detects and removes malware.", ah: "A vírusirtó felismeri és eltávolítja a kártevőket." },
+    { n: 338, q: "What is a phishing attack?", qh: "Mi az az adathalász támadás?", a: "A phishing attack tricks users for data.", ah: "Az adathalász támadás megtéveszti a felhasználókat adatszerzés céljából." },
+    { n: 339, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption protects data by encoding it.", ah: "A titkosítás kódolással védi az adatokat." },
+    { n: 340, q: "What is decryption?", qh: "Mi az a visszafejtés (dekódolás)?", a: "Decryption converts encrypted data back.", ah: "A visszafejtés visszaalakítja a titkosított adatokat." },
+    { n: 341, q: "What is a session?", qh: "Mi az a munkamenet (session)?", a: "A session is a period of user activity.", ah: "A munkamenet a felhasználói aktivitás egy időszaka." },
+    { n: 342, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores user preferences.", ah: "A süti a felhasználói beállításokat tárolja." },
+    { n: 343, q: "What is a cache?", qh: "Mi az a gyorsítótár (cache)?", a: "A cache keeps frequently used data.", ah: "A gyorsítótár a gyakran használt adatokat tárolja." },
+    { n: 344, q: "What is a proxy server?", qh: "Mi az a proxyszerver?", a: "A proxy server acts as an intermediary.", ah: "A proxyszerver közvetítőként működik." },
+    { n: 345, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN provides secure remote access.", ah: "A VPN biztonságos távoli hozzáférést biztosít." },
+    { n: 346, q: "What is a domain name?", qh: "Mi az a domainnév?", a: "A domain name is a website address.", ah: "A domainnév egy weboldal címe." },
+    { n: 347, q: "What is a URL?", qh: "Mi az az URL?", a: "A URL is the address of a webpage.", ah: "Az URL egy weboldal címe." },
+    { n: 348, q: "What is a sitemap?", qh: "Mi az a webhelytérkép (sitemap)?", a: "A sitemag lists website pages.", ah: "A webhelytérkép (sitemap) felsorolja a weboldal oldalait." },
+    { n: 349, q: "What is a robots.txt?", qh: "Mi az a robots.txt?", a: "A robots.txt controls search engine bots.", ah: "A robots.txt a keresőmotorok robotjait szabályozza." },
+    { n: 350, q: "What is a meta tag?", qh: "Mi az a metacímke (meta tag)?", a: "A meta tag provides information about a page.", ah: "A metacímke információt nyújt az oldalról." },
+    { n: 351, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores small pieces of data.", ah: "A süti kis adatmennyiségeket tárol." },
+    { n: 352, q: "What is a daemon?", qh: "Mi az a démon (háttérfolyamat)?", a: "A daemon is a background process.", ah: "A démon egy háttérfolyamat." },
+    { n: 353, q: "What is a daemon process?", qh: "Mi az a démonfolyamat?", a: "A daemon process runs in the background.", ah: "A démonfolyamat a háttérben fut." },
+    { n: 354, q: "What is a handle?", qh: "Mi az a leíró (handle)?", a: "A handle is a reference to a resource.", ah: "A handle egy erőforrásra mutató hivatkozás." },
+    { n: 355, q: "What is a handle table?", qh: "Mi az a leírótábla (handle table)?", a: "A handle table stores handles.", ah: "A handle tábla leírókat (handle-öket) tárol." },
+    { n: 356, q: "What is a heap?", qh: "Mi az a kupac (heap)?", a: "A heap is a region of memory.", ah: "A kupac (heap) a memória egy területe." },
+    { n: 357, q: "What is a stack frame?", qh: "Mi az a veremkeret (stack frame)?", a: "A stack frame stores function data.", ah: "A veremkeret a függvény adatait tárolja." },
+    { n: 358, q: "What is a queue discipline?", qh: "Mi az a sorban állási elv (queue discipline)?", a: "A queue discipline is FIFO.", ah: "A sorban állási elv a FIFO (elsőként be, elsőként ki)." },
+    { n: 359, q: "What is a semaphore?", qh: "Mi az a szemafor?", a: "A semaphore controls access to resources.", ah: "A szemafor szabályozza az erőforrásokhoz való hozzáférést." },
+    { n: 360, q: "What is a mutex?", qh: "Mi az a mutex?", a: "A mutex provides exclusive access.", ah: "A mutex kizárólagos hozzáférést biztosít." },
+    { n: 361, q: "What is a condition variable?", qh: "Mi az a feltételváltozó?", a: "A condition variable helps in waiting.", ah: "A feltételváltozó segít a szálak várakoztatásában." },
+    { n: 362, q: "What is a thread pool?", qh: "Mi az a szálkészlet (thread pool)?", a: "A thread pool reuses threads.", ah: "A szálkészlet újrahasznosítja a szálakat." },
+    { n: 363, q: "What is a scheduler?", qh: "Mi az az ütemező (scheduler)?", a: "A scheduler decides which task runs.", ah: "Az ütemező dönti el, melyik feladat fusson." },
+    { n: 364, q: "What is a context switch?", qh: "Mi az a kontextusváltás?", a: "A context switch saves and restores state.", ah: "A kontextusváltás elmenti és visszaállítja az állapotot." },
+    { n: 365, q: "What is a deadlock?", qh: "Mi az a holtpont (deadlock)?", a: "A deadlock is a wait cycle.", ah: "A holtpont egy kölcsönös várakozási ciklus." },
+    { n: 366, q: "What is a livelock?", qh: "Mi az az élő holtpont (livelock)?", a: "A livelock is a busy-wait situation.", ah: "Az élő holtpont egy aktív várakozási helyzet." },
+    { n: 367, q: "What is a race condition?", qh: "Mi az a versenyhelyzet (race condition)?", a: "A race condition occurs due to timing.", ah: "A versenyhelyzet időzítési okokból lép fel." },
+    { n: 368, q: "What is a critical section?", qh: "Mi az a kritikus szakasz?", a: "A critical section is a sensitive code part.", ah: "A kritikus szakasz egy érzékeny kódrészlet." },
+    { n: 369, q: "What is a mutex lock?", qh: "Mi az a mutex zár?", a: "A mutex lock ensures mutual exclusion.", ah: "A mutex zár biztosítja a kölcsönös kizárást." },
+    { n: 370, q: "What is a spinlock?", qh: "Mi az a spinlock?", a: "A spinlock waits in a loop.", ah: "A spinlock egy ciklusban várakozik." },
+    { n: 371, q: "What is a monitor?", qh: "Mi az a monitor (szinkronizációs eszköz)?", a: "A monitor controls access with a lock.", ah: "A monitor zár segítségével szabályozza a hozzáférést." },
+    { n: 372, q: "What is a resource leak?", qh: "Mi az az erőforrás-szivárgás?", a: "A resource leak is unused resource.", ah: "Az erőforrás-szivárgás fel nem szabadított, használaton kívüli erőforrás." },
+    { n: 373, q: "What is a thread-safe function?", qh: "Mi az a szálbiztos (thread-safe) függvény?", a: "A thread-safe function works safely.", ah: "A szálbiztos függvény biztonságosan működik több szálon is." },
+    { n: 374, q: "What is a reentrant function?", qh: "Mi az a reentráns függvény?", a: "A reentrant function can be called again.", ah: "A reentráns függvény biztonságosan újrahívható." },
+    { n: 375, q: "What is a callback?", qh: "Mi az a visszahívási függvény (callback)?", a: "A callback is a function passed as argument.", ah: "A callback egy argumentumként átadott függvény." },
+    { n: 376, q: "What is a closure?", qh: "Mi az a lezárás (closure)?", a: "A closure remembers its environment.", ah: "A closure emlékszik a létrehozási környezetére." },
+    { n: 377, q: "What is a coroutine?", qh: "Mi az a korutin (coroutine)?", a: "A coroutine is a lightweight thread.", ah: "A korutin egy könnyűsúlyú szál." },
+    { n: 378, q: "What is a generator?", qh: "Mi az a generátor?", a: "A generator produces values lazily.", ah: "A generátor lusta kiértékeléssel állít elő értékeket." },
+    { n: 379, q: "What is a decorator?", qh: "Mi az a dekorátor?", a: "A decorator modifies a function.", ah: "A dekorátor módosít egy függvényt." },
+    { n: 380, q: "What is a lambda function?", qh: "Mi az a lambda-függvény?", a: "A lambda function is an anonymous function.", ah: "A lambda-függvény egy névtelen függvény." },
+    { n: 381, q: "What is a map function?", qh: "Mi az a map függvény?", a: "A map function applies a function to data.", ah: "A map függvény alkalmaz egy függvényt az adatokra." },
+    { n: 382, q: "What is a filter function?", qh: "Mi az a szűrőfüggvény (filter)?", a: "A filter function filters data.", ah: "A filter függvény szűri az adatokat." },
+    { n: 383, q: "What is a reduce function?", qh: "Mi az a reduce függvény?", a: "A reduce function reduces data to one value.", ah: "A reduce függvény egyetlen értékké redukálja az adatokat." },
+    { n: 384, q: "What is a comprehension?", qh: "Mi az a listaértelmezés (comprehension)?", a: "A comprehension builds a collection.", ah: "A listaértelmezés egy gyűjteményt hoz létre." },
+    { n: 385, q: "What is a class?", qh: "Mi az az osztály (class)?", a: "A class is a blueprint for objects.", ah: "Az osztály egy tervrajz az objektumokhoz." },
+    { n: 386, q: "What is an object?", qh: "Mi az az objektum?", a: "An object is an instance of a class.", ah: "Az objektum egy osztály példánya." },
+    { n: 387, q: "What is inheritance?", qh: "Mi az az öröklődés?", a: "Inheritance reuses class code.", ah: "Az öröklődés újrahasznosítja az osztály kódját." },
+    { n: 388, q: "What is polymorphism?", qh: "Mi az a többalakúság (polimorfizmus)?", a: "Polymorphism allows multiple forms.", ah: "A polimorfizmus többféle megjelenési formát tesz lehetővé." },
+    { n: 389, q: "What is encapsulation?", qh: "Mi az az egységbezárás (encapsulation)?", a: "Encapsulation hides data.", ah: "Az egységbezárás elrejti a belső adatokat." },
+    { n: 390, q: "What is abstraction?", qh: "Mi az az absztrakció?", a: "Abstraction hides complex details.", ah: "Az absztrakció elrejti az összetett részleteket." },
+    { n: 391, q: "What is method overriding?", qh: "Mi az a metódusfelüldefiniálás (overriding)?", a: "Method overriding changes a method.", ah: "A metódusfelüldefiniálás megváltoztatja egy örökölt metódus működését." },
+    { n: 392, q: "What is method overloading?", qh: "Mi az a metódustúlterhelés (overloading)?", a: "Method overloading uses multiple forms.", ah: "A metódustúlterhelés ugyanannak a metódusnévnek több formáját használja." },
+    { n: 393, q: "What is exception handling?", qh: "Mi az a kivételkezelés?", a: "Exception handling manages errors.", ah: "A kivételkezelés kezeli a hibákat." },
+    { n: 394, q: "What is error handling?", qh: "Mi az a hibakezelés?", a: "Error handling handles runtime errors.", ah: "A hibakezelés a futásidejű hibákat kezeli." },
+    { n: 395, q: "What is a try-catch block?", qh: "Mi az a try-catch blokk?", a: "A try-catch block handles exceptions.", ah: "A try-catch blokk kezeli a kivételeket." },
+    { n: 396, q: "What is a finally block?", qh: "Mi az a finally blokk?", a: "A finally block runs always.", ah: "A finally blokk mindig lefut." },
+    { n: 397, q: "What is a throw keyword?", qh: "Mi az a throw kulcsszó?", a: "A throw keyword raises an exception.", ah: "A throw kulcsszó kivételt dob." },
+    { n: 398, q: "What is a custom exception?", qh: "Mi az az egyéni kivétel?", a: "A custom exception is user-defined.", ah: "Az egyéni kivétel felhasználó által definiált." },
+    { n: 399, q: "What is the assert statement?", qh: "Mi az az assert utasítás?", a: "An assert statement checks a condition.", ah: "Az assert utasítás egy feltételt ellenőriz." },
+    { n: 400, q: "What is a unit test?", qh: "Mi az az egységteszt (unit test)?", a: "A unit test verifies a small unit of code.", ah: "Az egységteszt a kód egy kis egységét ellenőrzi." },
+    { n: 401, q: "What is a debugging?", qh: "Mi az a hibakeresés (debugging)?", a: "Debugging is the process of finding and fixing errors.", ah: "A hibakeresés a hibák megtalálásának és kijavításának folyamata." },
+    { n: 402, q: "What is a deployment?", qh: "Mi az az élesítés / telepítés (deployment)?", a: "Deployment is releasing an application to users.", ah: "Az élesítés az alkalmazás kiadása a felhasználók számára." },
+    { n: 403, q: "What is a compiler?", qh: "Mi az a fordítóprogram (compiler)?", a: "A compiler translates code into machine code.", ah: "A fordítóprogram gépi kódra fordítja a kódot." },
+    { n: 404, q: "What is an interpreter?", qh: "Mi az az értelmező (interpreter)?", a: "An interpreter executes code line by line.", ah: "Az értelmező soronként hajtja végre a kódot." },
+    { n: 405, q: "What is an API endpoint?", qh: "Mi az az API-végpont?", a: "An API endpoint is a URL for an API resource.", ah: "Az API-végpont egy API-erőforrás URL-címe." },
+    { n: 406, q: "What is a webhook?", qh: "Mi az a webhook?", a: "A webhook sends data automatically.", ah: "A webhook automatikusan adatokat küld." },
+    { n: 407, q: "What is a cache hit?", qh: "Mi az a gyorsítótár-találat (cache hit)?", a: "A cache hit means data is found in cache.", ah: "A gyorsítótár-találat azt jelenti, hogy az adat megtalálható a gyorsítótárban." },
+    { n: 408, q: "What is a cache miss?", qh: "Mi az a gyorsítótár-tévesztés (cache miss)?", a: "A cache miss means data is not in cache.", ah: "A gyorsítótár-tévesztés azt jelenti, hogy az adat nincs a gyorsítótárban." },
+    { n: 409, q: "What is a session cookie?", qh: "Mi az a munkamenet-süti (session cookie)?", a: "A session cookie stores session information.", ah: "A munkamenet-süti munkamenet-információkat tárol." },
+    { n: 410, q: "What is a JWT?", qh: "Mi az a JWT?", a: "A JWT is a token for secure authentication.", ah: "A JWT egy token a biztonságos hitelesítéshez." },
+    { n: 411, q: "What is a hash function?", qh: "Mi az a hasítófüggvény (hash függvény)?", a: "A hash function converts data into a fixed hash.", ah: "A hasítófüggvény rögzített hosszúságú hash-sé alakítja az adatokat." },
+    { n: 412, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption protects data from unauthorized access.", ah: "A titkosítás megvédi az adatokat az illetéktelen hozzáféréstől." },
+    { n: 413, q: "What is decryption?", qh: "Mi az a visszafejtés (dekódolás)?", a: "Decryption converts encrypted data back.", ah: "A visszafejtés visszaalakítja a titkosított adatokat." },
+    { n: 414, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 415, q: "What is an antivirus?", qh: "Mi az a vírusirtó?", a: "An antivirus detects and removes malware.", ah: "A vírusirtó felismeri és eltávolítja a kártevőket." },
+    { n: 416, q: "What is a malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is harmful software.", ah: "A malware kártékony szoftver." },
+    { n: 417, q: "What is phishing?", qh: "Mi az az adathalászat (phishing)?", a: "Phishing is tricking users to get sensitive data.", ah: "Az adathalászat a felhasználók megtévesztése érzékeny adatok megszerzésére." },
+    { n: 418, q: "What is a DDoS attack?", qh: "Mi az a DDoS-támadás?", a: "A DDoS attack floods a server with requests.", ah: "A DDoS-támadás kérésekkel áraszt el egy szervert." },
+    { n: 419, q: "What is a port?", qh: "Mi az a port?", a: "A port is a communication endpoint.", ah: "A port egy kommunikációs végpont." },
+    { n: 420, q: "What is an IP address?", qh: "Mi az az IP-cím?", a: "An IP address is a unique identifier.", ah: "Az IP-cím egy egyedi azonosító." },
+    { n: 421, q: "What is a subnet mask?", qh: "Mi az az alhálózati maszk?", a: "A subnet mask separates network and host bits.", ah: "Az alhálózati maszk elválasztja a hálózati és az állomásbiteket." },
+    { n: 422, q: "What is a proxy server?", qh: "Mi az a proxyszerver?", a: "A proxy server acts as an intermediary.", ah: "A proxyszerver közvetítőként működik." },
+    { n: 423, q: "What is load balancing?", qh: "Mi az a terheléselosztás?", a: "Load balancing distributes traffic.", ah: "A terheléselosztás elosztja a hálózati forgalmat." },
+    { n: 424, q: "What is a CDN?", qh: "Mi az a CDN (tartalomszolgáltató hálózat)?", a: "A CDN delivers content from nearby servers.", ah: "A CDN közeli szerverekről szolgálja ki a tartalmat." },
+    { n: 425, q: "What is a router?", qh: "Mi az a router (útválasztó)?", a: "A router connects different networks.", ah: "A router különböző hálózatokat köt össze." },
+    { n: 426, q: "What is a switch?", qh: "Mi az a switch (hálózati kapcsoló)?", a: "A switch connects devices in a LAN.", ah: "A switch összekapcsolja az eszközöket egy helyi hálózaton (LAN)." },
+    { n: 427, q: "What is a hub?", qh: "Mi az a hub (elosztó)?", a: "A hub connects multiple devices.", ah: "A hub több eszközt kapcsol össze." },
+    { n: 428, q: "What is a modem?", qh: "Mi az a modem?", a: "A modem connects your network to the ISP.", ah: "A modem csatlakoztatja a hálózatodat az internetszolgáltatóhoz." },
+    { n: 429, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN provides secure remote access.", ah: "A VPN biztonságos távoli hozzáférést biztosít." },
+    { n: 430, q: "What is a hotspot?", qh: "Mi az a hotspot?", a: "A hotspot shares internet connection.", ah: "A hotspot megosztja az internetkapcsolatot." },
+    { n: 431, q: "What is cloud storage?", qh: "Mi az a felhőtárhely?", a: "Cloud storage keeps data on the cloud.", ah: "A felhőtárhely a felhőben tárolja az adatokat." },
+    { n: 432, q: "What is a private cloud?", qh: "Mi az a privát felhő?", a: "A private cloud is for internal use.", ah: "A privát felhő belső használatra szolgál." },
+    { n: 433, q: "What is a public cloud?", qh: "Mi az a nyilvános felhő?", a: "A public cloud is open to everyone.", ah: "A nyilvános felhő mindenki számára nyitott." },
+    { n: 434, q: "What is virtualization?", qh: "Mi az a virtualizáció?", a: "Virtualization runs multiple OS on one machine.", ah: "A virtualizáció több operációs rendszert futtat egyetlen gépen." },
+    { n: 435, q: "What is a container?", qh: "Mi az a konténer?", a: "A container packages an application.", ah: "A konténer becsomagolja az alkalmazást." },
+    { n: 436, q: "What is a microservice?", qh: "Mi az a mikroszolgáltatás?", a: "A microservice is a small, independent service.", ah: "A mikroszolgáltatás egy kisméretű, független szolgáltatás." },
+    { n: 437, q: "What is an ORM?", qh: "Mi az az ORM?", a: "An ORM maps database tables to objects.", ah: "Az ORM objektumokra képezi le az adatbázistáblákat." },
+    { n: 438, q: "What is a database index?", qh: "Mi az az adatbázis-index?", a: "An index speeds up data retrieval.", ah: "Az index felgyorsítja az adatok lekérését." },
+    { n: 439, q: "What is a transaction?", qh: "Mi az a tranzakció?", a: "A transaction is a unit of work.", ah: "A tranzakció egy munkaegység." },
+    { n: 440, q: "What is ACID?", qh: "Mi az az ACID?", a: "ACID ensures data consistency.", ah: "Az ACID biztosítja az adatok konzisztenciáját." },
+    { n: 441, q: "What is a trigger?", qh: "Mi az a trigger (eseményindító)?", a: "A trigger runs an action on an event.", ah: "A trigger egy esemény bekövetkezésekor futtat egy műveletet." },
+    { n: 442, q: "What is a stored procedure?", qh: "Mi az a tárolt eljárás?", a: "A stored procedure is a saved SQL program.", ah: "A tárolt eljárás egy elmentett SQL-program." },
+    { n: 443, q: "What is a cursor?", qh: "Mi az a kurzor?", a: "A cursor processes rows one by one.", ah: "A kurzor egyenként dolgozza fel a sorokat." },
+    { n: 444, q: "What is a view?", qh: "Mi az a nézet (view)?", a: "A view is a virtual table.", ah: "A nézet egy virtuális tábla." },
+    { n: 445, q: "What is a materialized view?", qh: "Mi az a materializált nézet?", a: "A materialized view stores result data.", ah: "A materializált nézet tárolja az eredményadatokat." },
+    { n: 446, q: "What is a data warehouse?", qh: "Mi az az adattárház (data warehouse)?", a: "A data warehouse stores large data for analysis.", ah: "Az adattárház nagy mennyiségű adatot tárol elemzés céljából." },
+    { n: 447, q: "What is a data mart?", qh: "Mi az az adatpiac (data mart)?", a: "A data mart is a smaller data warehouse.", ah: "Az adatpiac egy kisebb adattárház." },
+    { n: 448, q: "What is ETL?", qh: "Mi az az ETL?", a: "ETL extracts, transforms and loads data.", ah: "Az ETL kinyeri, átalakítja és betölti az adatokat." },
+    { n: 449, q: "What is a trigger in SQL?", qh: "Mi az a trigger az SQL-ben?", a: "A trigger executes a procedure on an event.", ah: "A trigger egy esemény hatására hajt végre egy eljárást." },
+    { n: 450, q: "What is a stored function?", qh: "Mi az a tárolt függvény?", a: "A stored function returns a value.", ah: "A tárolt függvény egy értéket ad vissza." },
+    { n: 451, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores small pieces of data.", ah: "A süti kis adatmennyiségeket tárol." },
+    { n: 452, q: "What is a daemon?", qh: "Mi az a démon (háttérfolyamat)?", a: "A daemon runs in the background.", ah: "A démon a háttérben fut." },
+    { n: 453, q: "What is a batch file?", qh: "Mi az a kötegfájl (batch file)?", a: "A batch file contains a set of commands.", ah: "A kötegfájl parancsok sorozatát tartalmazza." },
+    { n: 454, q: "What is a benchmark?", qh: "Mi az a benchmark (teljesítményteszt)?", a: "A benchmark measures performance.", ah: "A benchmark a teljesítményt méri." },
+    { n: 455, q: "What is a bug?", qh: "Mi az a bug (programhiba)?", a: "A bug is an error in a program.", ah: "A bug egy hiba a programban." },
+    { n: 456, q: "What is a bus?", qh: "Mi az a busz (adatbusz)?", a: "A bus is a pathway for data transfer.", ah: "A busz az adatátvitel útvonala." },
+    { n: 457, q: "What is a cache hit?", qh: "Mi az a gyorsítótár-találat (cache hit)?", a: "A cache hit means data is found in cache.", ah: "A gyorsítótár-találat azt jelenti, hogy az adat megtalálható a gyorsítótárban." },
+    { n: 458, q: "What is a cache miss?", qh: "Mi az a gyorsítótár-tévesztés (cache miss)?", a: "A cache miss means data is not in cache.", ah: "A gyorsítótár-tévesztés azt jelenti, hogy az adat nincs a gyorsítótárban." },
+    { n: 459, q: "What is a chassis?", qh: "Mi az a számítógépház (chassis)?", a: "A chassis is the outer case of a computer.", ah: "A számítógépház (chassis) a számítógép külső burkolata." },
+    { n: 460, q: "What is a codec?", qh: "Mi az a kodek?", a: "A codec encodes and decodes media.", ah: "A kodek kódolja és dekódolja a médiafájlokat." },
+    { n: 461, q: "What is a cluster?", qh: "Mi az a fürt (cluster)?", a: "A cluster is a group of related nodes.", ah: "A fürt (cluster) összekapcsolt csomópontok csoportja." },
+    { n: 462, q: "What is a code repository?", qh: "Mi az a kódtár (repository)?", a: "A code repository stores source code.", ah: "A kódtár forráskódot tárol." },
+    { n: 463, q: "What is a console?", qh: "Mi az a konzol?", a: "A console is a user interface.", ah: "A konzol egy felhasználói felület." },
+    { n: 464, q: "What is a coroutine?", qh: "Mi az a korutin (coroutine)?", a: "A coroutine is a function that yields control.", ah: "A korutin egy olyan függvény, amely át tudja adni a vezérlést." },
+    { n: 465, q: "What is a cursor?", qh: "Mi az a kurzor?", a: "A cursor points to a position on screen.", ah: "A kurzor egy pozícióra mutat a képernyőn." },
+    { n: 466, q: "What is a daemon set?", qh: "Mi az a DaemonSet?", a: "A daemon set runs a pod on every node.", ah: "A DaemonSet minden csomóponton futtat egy podot." },
+    { n: 467, q: "What is a data lake?", qh: "Mi az az adattó (data lake)?", a: "A data lake stores raw data.", ah: "Az adattó nyers adatokat tárol." },
+    { n: 468, q: "What is a data mart?", qh: "Mi az az adatpiac (data mart)?", a: "A data mart is a smaller data warehouse.", ah: "Az adatpiac egy kisebb adattárház." },
+    { n: 469, q: "What is a data model?", qh: "Mi az az adatmodell?", a: "A data model defines data structure.", ah: "Az adatmodell meghatározza az adatok szerkezetét." },
+    { n: 470, q: "What is a data pipeline?", qh: "Mi az az adatcsővezeték (data pipeline)?", a: "A data pipeline moves data through stages.", ah: "Az adatcsővezeték szakaszokon keresztül mozgatja az adatokat." },
+    { n: 471, q: "What is a deliverable?", qh: "Mi az a leszállítandó eredmény (deliverable)?", a: "A deliverable is the final output.", ah: "A deliverable a végső leszállítandó eredmény." },
+    { n: 472, q: "What is a dependency?", qh: "Mi az a függőség (dependency)?", a: "A dependency is a required component.", ah: "A függőség egy szükséges összetevő." },
+    { n: 473, q: "What is a deployment?", qh: "Mi az az élesítés / telepítés (deployment)?", a: "A deployment is making an app live.", ah: "A deployment az alkalmazás élesítése." },
+    { n: 474, q: "What is a descriptor?", qh: "Mi az a leíró (descriptor)?", a: "A descriptor provides metadata.", ah: "A leíró metaadatokat biztosít." },
+    { n: 475, q: "What is a design pattern?", qh: "Mi az a tervezési minta (design pattern)?", a: "A design pattern is a reusable solution.", ah: "A tervezési minta egy újrafelhasználható megoldás." },
+    { n: 476, q: "What is a device driver?", qh: "Mi az az eszközillesztő (driver)?", a: "A device driver lets hardware work.", ah: "Az eszközillesztő lehetővé teszi a hardver működését." },
+    { n: 477, q: "What is a directory?", qh: "Mi az a könyvtár (mappa)?", a: "A directory is a folder.", ah: "A könyvtár egy mappa." },
+    { n: 478, q: "What is a firmware?", qh: "Mi az a firmware?", a: "Firmware is software for hardware.", ah: "A firmware a hardverbe épített szoftver." },
+    { n: 479, q: "What is a function?", qh: "Mi az a függvény?", a: "A function performs a specific task.", ah: "A függvény egy konkrét feladatot hajt végre." },
+    { n: 480, q: "What is a GUI?", qh: "Mi az a GUI (grafikus felhasználói felület)?", a: "A GUI is a graphical interface.", ah: "A GUI egy grafikus felület." },
+    { n: 481, q: "What is a hash?", qh: "Mi az a hash?", a: "A hash is a unique fixed-length code.", ah: "A hash egy egyedi, rögzített hosszúságú kód." },
+    { n: 482, q: "What is a heap?", qh: "Mi az a kupac (heap)?", a: "A heap is a memory region.", ah: "A kupac (heap) egy memóriaterület." },
+    { n: 483, q: "What is a hyperlink?", qh: "Mi az a hiperhivatkozás?", a: "A hyperlink connects to another resource.", ah: "A hiperhivatkozás egy másik erőforráshoz kapcsolódik." },
+    { n: 484, q: "What is a IDE?", qh: "Mi az az IDE (integrált fejlesztői környezet)?", a: "An IDE is an integrated development environment.", ah: "Az IDE egy integrált fejlesztői környezet." },
+    { n: 485, q: "What is a index?", qh: "Mi az az index?", a: "An index helps in fast data search.", ah: "Az index segít a gyors adatkeresésben." },
+    { n: 486, q: "What is a interrupt?", qh: "Mi az a megszakítás (interrupt)?", a: "An interrupt stops a program temporarily.", ah: "A megszakítás ideiglenesen leállít egy programot." },
+    { n: 487, q: "What is a iterator?", qh: "Mi az az iterátor?", a: "An iterator lets you loop through data.", ah: "Az iterátor lehetővé teszi az adatok bejárását." },
+    { n: 488, q: "What is a kernel?", qh: "Mi az a rendszermag (kernel)?", a: "A kernel is the core of an operating system.", ah: "A kernel az operációs rendszer magja." },
+    { n: 489, q: "What is a key?", qh: "Mi az a kulcs?", a: "A key is a unique identifier.", ah: "A kulcs egy egyedi azonosító." },
+    { n: 490, q: "What is a label?", qh: "Mi az a címke?", a: "A label tags a part of data.", ah: "A címke megjelöli az adatok egy részét." },
+    { n: 491, q: "What is a latency?", qh: "Mi az a késleltetés (latency)?", a: "Latency is the delay in response.", ah: "A késleltetés a válaszadásban fellépő csúszás." },
+    { n: 492, q: "What is a load balancer?", qh: "Mi az a terheléselosztó (load balancer)?", a: "A load balancer distributes traffic.", ah: "A terheléselosztó elosztja a forgalmat." },
+    { n: 493, q: "What is a logic level?", qh: "Mi az a logikai szint?", a: "A logic level is a voltage level.", ah: "A logikai szint egy feszültségszint." },
+    { n: 494, q: "What is a logic gate?", qh: "Mi az a logikai kapu?", a: "A logic gate performs logic operations.", ah: "A logikai kapu logikai műveleteket végez." },
+    { n: 495, q: "What is a macro?", qh: "Mi az a makró?", a: "A macro is a sequence of commands.", ah: "A makró parancsok sorozata." },
+    { n: 496, q: "What is a mutex?", qh: "Mi az a mutex?", a: "A mutex provides mutual exclusion.", ah: "A mutex kölcsönös kizárást biztosít." },
+    { n: 497, q: "What is a namespace?", qh: "Mi az a névtér (namespace)?", a: "A namespace organizes names.", ah: "A névtér rendszerezi a neveket." },
+    { n: 498, q: "What is a packet?", qh: "Mi az az adatcsomag (packet)?", a: "A packet is a unit of data.", ah: "Az adatcsomag az adatok egy egysége." },
+    { n: 499, q: "What is a patch?", qh: "Mi az a javítócsomag (patch)?", a: "A patch fixes a bug or vulnerability.", ah: "A javítócsomag egy hibát vagy sebezhetőséget javít ki." },
+    { n: 500, q: "What is a plugin?", qh: "Mi az a bővítmény (plugin)?", a: "A plugin adds extra functionality.", ah: "A bővítmény extra funkciókat ad hozzá." },
+    { n: 501, q: "What is an exception?", qh: "Mi az a kivétel (exception)?", a: "An exception is an abnormal condition.", ah: "A kivétel egy rendellenes állapot." },
+    { n: 502, q: "What is exception handling?", qh: "Mi az a kivételkezelés?", a: "Exception handling deals with runtime errors.", ah: "A kivételkezelés a futásidejű hibákkal foglalkozik." },
+    { n: 503, q: "What is try block?", qh: "Mi az a try blokk?", a: "A try block encloses code that may throw an exception.", ah: "A try blokk olyan kódot foglal magába, amely kivételt dobhat." },
+    { n: 504, q: "What is catch block?", qh: "Mi az a catch blokk?", a: "A catch block handles the exception.", ah: "A catch blokk kezeli a kivételt." },
+    { n: 505, q: "What is finally block?", qh: "Mi az a finally blokk?", a: "A finally block runs cleanup code.", ah: "A finally blokk takarító (cleanup) kódot futtat." },
+    { n: 506, q: "What is throw keyword?", qh: "Mi az a throw kulcsszó?", a: "The throw keyword throws an exception.", ah: "A throw kulcsszó kivételt dob." },
+    { n: 507, q: "What is a checked exception?", qh: "Mi az az ellenőrzött kivétel (checked exception)?", a: "A checked exception is checked at compile time.", ah: "Az ellenőrzött kivétel fordítási időben kerül ellenőrzésre." },
+    { n: 508, q: "What is an unchecked exception?", qh: "Mi az a nem ellenőrzött kivétel?", a: "An unchecked exception is checked at runtime.", ah: "A nem ellenőrzött kivétel futásidőben kerül ellenőrzésre." },
+    { n: 509, q: "What is a runtime exception?", qh: "Mi az a futásidejű kivétel?", a: "A runtime exception occurs during execution.", ah: "A futásidejű kivétel a program futása közben következik be." },
+    { n: 510, q: "What is a custom exception?", qh: "Mi az az egyéni kivétel?", a: "A custom exception is user-defined exception.", ah: "Az egyéni kivétel egy felhasználó által definiált kivétel." },
+    { n: 511, q: "What is multithreading?", qh: "Mi az a többszálú végrehajtás (multithreading)?", a: "Multithreading is running multiple threads.", ah: "A többszálúság több szál egyidejű futtatása." },
+    { n: 512, q: "What is a thread?", qh: "Mi az a szál (thread)?", a: "A thread is a lightweight process.", ah: "A szál egy könnyűsúlyú folyamat." },
+    { n: 513, q: "What is a thread class?", qh: "Mi az a Thread osztály?", a: "A thread class is used to create a thread.", ah: "A Thread osztály szál létrehozására szolgál." },
+    { n: 514, q: "What is a runnable interface?", qh: "Mi az a Runnable interfész?", a: "Runnable is an interface to run a thread.", ah: "A Runnable egy interfész szál futtatásához." },
+    { n: 515, q: "What is synchronization?", qh: "Mi az a szinkronizáció?", a: "Synchronization controls access to resources.", ah: "A szinkronizáció szabályozza az erőforrásokhoz való hozzáférést." },
+    { n: 516, q: "What is a daemon thread?", qh: "Mi az a démonszál?", a: "A daemon thread runs in the background.", ah: "A démonszál a háttérben fut." },
+    { n: 517, q: "What is a join method?", qh: "Mi az a join metódus?", a: "Join waits for a thread to finish.", ah: "A join megvárja, amíg egy szál befejeződik." },
+    { n: 518, q: "What is a sleep method?", qh: "Mi az a sleep metódus?", a: "Sleep pauses a thread for a time.", ah: "A sleep egy adott időre szünetelteti a szálat." },
+    { n: 519, q: "What is a mutex?", qh: "Mi az a mutex?", a: "A mutex ensures mutual exclusion.", ah: "A mutex biztosítja a kölcsönös kizárást." },
+    { n: 520, q: "What is a semaphore?", qh: "Mi az a szemafor?", a: "A semaphore controls access to a resource.", ah: "A szemafor szabályozza egy erőforráshoz való hozzáférést." },
+    { n: 521, q: "What is a deadlock?", qh: "Mi az a holtpont (deadlock)?", a: "A deadlock occurs when threads wait forever.", ah: "Holtpont akkor alakul ki, ha a szálak végtelenségig egymásra várnak." },
+    { n: 522, q: "What is a thread pool?", qh: "Mi az a szálkészlet (thread pool)?", a: "A thread pool reuses threads.", ah: "A szálkészlet újrahasznosítja a szálakat." },
+    { n: 523, q: "What is a volatile variable?", qh: "Mi az a volatile változó?", a: "A volatile variable is not cached.", ah: "A volatile változó értéke nem kerül gyorsítótárazásra." },
+    { n: 524, q: "What is a transient variable?", qh: "Mi az a tranziens (nem szerializálható) változó?", a: "A transient variable is not serialized.", ah: "A tranziens változó nem kerül szerializálásra." },
+    { n: 525, q: "What is a context switch?", qh: "Mi az a kontextusváltás?", a: "A context switch changes the running thread.", ah: "A kontextusváltás lecseréli a futó szálat." },
+    { n: 526, q: "What is a process?", qh: "Mi az a folyamat (process)?", a: "A process is a running program.", ah: "A folyamat egy futó program." },
+    { n: 527, q: "What is a program counter?", qh: "Mi az a programszámláló?", a: "A program counter stores next instruction.", ah: "A programszámláló a következő utasítás címét tárolja." },
+    { n: 528, q: "What is a stack?", qh: "Mi az a verem (stack)?", a: "A stack is a LIFO data structure.", ah: "A verem egy LIFO adatstruktúra." },
+    { n: 529, q: "What is a queue?", qh: "Mi az a sor (queue)?", a: "A queue is a FIFO data structure.", ah: "A sor egy FIFO adatstruktúra." },
+    { n: 530, q: "What is a tree?", qh: "Mi az a fa (adatstruktúra)?", a: "A tree is a hierarchical data structure.", ah: "A fa egy hierarchikus adatstruktúra." },
+    { n: 531, q: "What is a graph?", qh: "Mi az a gráf / diagram?", a: "A graph is a collection of nodes and edges.", ah: "A gráf csomópontok és élek gyűjteménye." },
+    { n: 532, q: "What is a linked list?", qh: "Mi az a láncolt lista?", a: "A linked list is a linear data structure.", ah: "A láncolt lista egy lineáris adatstruktúra." },
+    { n: 533, q: "What is a doubly linked list?", qh: "Mi az a duplán láncolt lista?", a: "A doubly linked list has two links.", ah: "A duplán láncolt lista két hivatkozással rendelkezik." },
+    { n: 534, q: "What is a circular linked list?", qh: "Mi az a körkörösen láncolt lista?", a: "A circular linked list links last to first.", ah: "A körkörösen láncolt lista az utolsó elemet az elsőhöz kapcsolja." },
+    { n: 535, q: "What is a binary tree?", qh: "Mi az a bináris fa?", a: "A binary tree has at most two children.", ah: "A bináris fában minden csomópontnak legfeljebb két gyermeke lehet." },
+    { n: 536, q: "What is a balanced tree?", qh: "Mi az a kiegyensúlyozott fa?", a: "A balanced tree has equal height.", ah: "A kiegyensúlyozott fa ágai azonos magasságúak." },
+    { n: 537, q: "What is a hash table?", qh: "Mi az a hasítótábla (hash tábla)?", a: "A hash table stores data using a hash function.", ah: "A hasítótábla hasítófüggvény segítségével tárolja az adatokat." },
+    { n: 538, q: "What is a trie?", qh: "Mi az a trie (prefixfa)?", a: "A trie stores strings efficiently.", ah: "A trie hatékonyan tárolja a karakterláncokat." },
+    { n: 539, q: "What is a min heap?", qh: "Mi az a minimum-kupac (min heap)?", a: "A min heap returns the smallest element.", ah: "A minimum-kupac a legkisebb elemet adja vissza." },
+    { n: 540, q: "What is a max heap?", qh: "Mi az a maximum-kupac (max heap)?", a: "A max heap returns the largest element.", ah: "A maximum-kupac a legnagyobb elemet adja vissza." },
+    { n: 541, q: "What is a priority queue?", qh: "Mi az a prioritási sor?", a: "A priority queue serves elements by priority.", ah: "A prioritási sor prioritás szerint szolgálja ki az elemeket." },
+    { n: 542, q: "What is a deque?", qh: "Mi az a kétvégű sor (deque)?", a: "A deque allows insertion and deletion at both ends.", ah: "A kétvégű sor mindkét végén lehetővé teszi a beszúrást és a törlést." },
+    { n: 543, q: "What is a set?", qh: "Mi az a halmaz (set)?", a: "A set stores unique elements.", ah: "A halmaz egyedi elemeket tárol." },
+    { n: 544, q: "What is a map?", qh: "Mi az a leképezés (map)?", a: "A map stores key-value pairs.", ah: "A map kulcs-érték párokat tárol." },
+    { n: 545, q: "What is a dictionary?", qh: "Mi az a szótár (dictionary)?", a: "A dictionary is a map of key-value pairs.", ah: "A szótár kulcs-érték párok leképezése." },
+    { n: 546, q: "What is a multiset?", qh: "Mi az a multihalmaz (multiset)?", a: "A multiset allows duplicate elements.", ah: "A multihalmaz megengedi az ismétlődő elemeket." },
+    { n: 547, q: "What is a sparse matrix?", qh: "Mi az a ritka mátrix?", a: "A sparse matrix has mostly zero values.", ah: "A ritka mátrix többnyire nulla értékeket tartalmaz." },
+    { n: 548, q: "What is a dense matrix?", qh: "Mi az a sűrű mátrix?", a: "A dense matrix has many non-zero values.", ah: "A sűrű mátrix sok nem nulla értéket tartalmaz." },
+    { n: 549, q: "What is a matrix transpose?", qh: "Mi az a mátrix transzponáltja?", a: "A matrix transpose swaps rows and columns.", ah: "A mátrix transzponálása felcseréli a sorokat és az oszlopokat." },
+    { n: 550, q: "What is a determinant?", qh: "Mi az a determináns?", a: "A determinant is a value of a matrix.", ah: "A determináns egy mátrixhoz tartozó skalárérték." },
+    { n: 551, q: "What is a file system?", qh: "Mi az a fájlrendszer?", a: "A file system organizes and manages files.", ah: "A fájlrendszer rendszerezi és kezeli a fájlokat." },
+    { n: 552, q: "What is a folder?", qh: "Mi az a mappa?", a: "A folder is a directory to store files.", ah: "A mappa egy könyvtár fájlok tárolására." },
+    { n: 553, q: "What is a directory?", qh: "Mi az a könyvtár (mappa)?", a: "A directory is a container for files and folders.", ah: "A könyvtár fájlok és mappák tárolója." },
+    { n: 554, q: "What is the root directory?", qh: "Mi az a gyökérkönyvtár?", a: "The root directory is the topmost directory.", ah: "A gyökérkönyvtár a legfelső szintű könyvtár." },
+    { n: 555, q: "What is a subdirectory?", qh: "Mi az az alkönyvtár (almappa)?", a: "A subdirectory is a folder inside another folder.", ah: "Az alkönyvtár egy másik mappán belüli mappa." },
+    { n: 556, q: "What is a file extension?", qh: "Mi az a fájlkiterjesztés?", a: "A file extension shows the file type.", ah: "A fájlkiterjesztés megmutatja a fájl típusát." },
+    { n: 557, q: "What is an archive file?", qh: "Mi az az archív fájl?", a: "An archive file compresses multiple files.", ah: "Az archív fájl több fájlt tömörít egybe." },
+    { n: 558, q: "What is a backup?", qh: "Mi az a biztonsági mentés (backup)?", a: "A backup is a copy of data.", ah: "A biztonsági mentés az adatok másolata." },
+    { n: 559, q: "What is a restore?", qh: "Mi az a visszaállítás (restore)?", a: "A restore retrieves data from a backup.", ah: "A visszaállítás biztonsági mentésből nyeri vissza az adatokat." },
+    { n: 560, q: "What is a download?", qh: "Mi az a letöltés?", a: "A download saves data from the internet.", ah: "A letöltés adatokat ment le az internetről." },
+    { n: 561, q: "What is an upload?", qh: "Mi az a feltöltés?", a: "An upload sends data to the internet.", ah: "A feltöltés adatokat küld az internetre." },
+    { n: 562, q: "What is a shortcut?", qh: "Mi az a parancsikon / gyorsbillentyű?", a: "A shortcut provides quick access to a file.", ah: "A parancsikon gyors hozzáférést biztosít egy fájlhoz." },
+    { n: 563, q: "What is a recycle bin?", qh: "Mi az a Lomtár?", a: "A recycle bin stores deleted files.", ah: "A Lomtár a törölt fájlokat tárolja." },
+    { n: 564, q: "What is a cache?", qh: "Mi az a gyorsítótár (cache)?", a: "A cache stores temporary data.", ah: "A gyorsítótár ideiglenes adatokat tárol." },
+    { n: 565, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores user preferences.", ah: "A süti a felhasználói beállításokat tárolja." },
+    { n: 566, q: "What is a bookmark?", qh: "Mi az a könyvjelző?", a: "A bookmark saves a web page.", ah: "A könyvjelző elment egy weboldalt." },
+    { n: 567, q: "What is a URL?", qh: "Mi az az URL?", a: "A URL is the address of a webpage.", ah: "Az URL egy weboldal címe." },
+    { n: 568, q: "What is an IP address?", qh: "Mi az az IP-cím?", a: "An IP address uniquely identifies a device.", ah: "Az IP-cím egyedileg azonosít egy eszközt." },
+    { n: 569, q: "What is a domain name?", qh: "Mi az a domainnév?", a: "A domain name is a website address.", ah: "A domainnév egy weboldal címe." },
+    { n: 570, q: "What is a DNS?", qh: "Mi az a DNS?", a: "DNS translates domain names to IP addresses.", ah: "A DNS IP-címekre fordítja le a domainneveket." },
+    { n: 571, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 572, q: "What is malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is malicious software.", ah: "A malware rosszindulatú szoftver." },
+    { n: 573, q: "What is a virus?", qh: "Mi az a vírus?", a: "A virus infects files or systems.", ah: "A vírus megfertőzi a fájlokat vagy rendszereket." },
+    { n: 574, q: "What is a worm?", qh: "Mi az a féreg (worm)?", a: "A worm replicates itself across networks.", ah: "A féreg önmagát sokszorosítja a hálózatokon keresztül." },
+    { n: 575, q: "What is a trojan horse?", qh: "Mi az a trójai faló?", a: "A trojan horse disguises malicious software.", ah: "A trójai faló ártalmatlannak álcázza a kártékony szoftvert." },
+    { n: 576, q: "What is phishing?", qh: "Mi az az adathalászat (phishing)?", a: "Phishing tricks users into revealing sensitive data.", ah: "Az adathalászat ráveszi a felhasználókat érzékeny adatok kiadására." },
+    { n: 577, q: "What is a ransomware?", qh: "Mi az a zsarolóvírus (ransomware)?", a: "Ransomware locks data for ransom.", ah: "A zsarolóvírus váltságdíj fejében zárolja az adatokat." },
+    { n: 578, q: "What is spyware?", qh: "Mi az a kémprogram (spyware)?", a: "Spyware secretly monitors your activity.", ah: "A kémprogram titokban figyeli a tevékenységedet." },
+    { n: 579, q: "What is adware?", qh: "Mi az az adware (reklámprogram)?", a: "Adware displays unwanted advertisements.", ah: "Az adware kéretlen reklámokat jelenít meg." },
+    { n: 580, q: "What is a keylogger?", qh: "Mi az a billentyűnaplózó (keylogger)?", a: "A keylogger records keystrokes.", ah: "A billentyűnaplózó rögzíti a billentyűleütéseket." },
+    { n: 581, q: "What is a DDoS attack?", qh: "Mi az a DDoS-támadás?", a: "A DDoS attack floods a server with traffic.", ah: "A DDoS-támadás forgalommal áraszt el egy szervert." },
+    { n: 582, q: "What is a social engineering attack?", qh: "Mi az a pszichológiai manipulációs (social engineering) támadás?", a: "A social engineering attack tricks users.", ah: "A social engineering támadás megtéveszti a felhasználókat." },
+    { n: 583, q: "What is a buffer overflow?", qh: "Mi az a puffertúlcsordulás?", a: "A buffer overflow occurs when input exceeds buffer.", ah: "Puffertúlcsordulás akkor történik, ha a bemenet túllépi a puffer méretét." },
+    { n: 584, q: "What is a SQL injection?", qh: "Mi az az SQL-injekció?", a: "SQL injection exploits a database query.", ah: "Az SQL-injekció egy adatbázis-lekérdezés sebezhetőségét használja ki." },
+    { n: 585, q: "What is a cross-site scripting (XSS)?", qh: "Mi az a cross-site scripting (XSS)?", a: "XSS injects malicious scripts into a web page.", ah: "Az XSS kártékony szkripteket juttat be egy weboldalba." },
+    { n: 586, q: "What is a man-in-the-middle attack?", qh: "Mi az a közbeékelődéses támadás (MITM)?", a: "It intercepts communication between two parties.", ah: "Lefogja két fél közötti kommunikációt." },
+    { n: 587, q: "What is authentication?", qh: "Mi az a hitelesítés (authentication)?", a: "Authentication verifies identity.", ah: "A hitelesítés igazolja a személyazonosságot." },
+    { n: 588, q: "What is authorization?", qh: "Mi az a jogosultságkezelés (authorization)?", a: "Authorization decides access rights.", ah: "A jogosultságkezelés határozza meg a hozzáférési jogokat." },
+    { n: 589, q: "What is accounting?", qh: "Mi az a naplózás / elszámoltatás (accounting)?", a: "Accounting tracks user activity.", ah: "Az elszámoltatás (accounting) nyomon követi a felhasználói tevékenységet." },
+    { n: 590, q: "What is audit log?", qh: "Mi az az auditnapló?", a: "An audit log records system events.", ah: "Az auditnapló rendszereseményeket rögzít." },
+    { n: 591, q: "What is encryption key?", qh: "Mi az a titkosítási kulcs?", a: "An encryption key unlocks encrypted data.", ah: "A titkosítási kulcs feloldja a titkosított adatokat." },
+    { n: 592, q: "What is decryption?", qh: "Mi az a visszafejtés (dekódolás)?", a: "Decryption converts encrypted data to plain text.", ah: "A visszafejtés egyszerű szöveggé alakítja vissza a titkosított adatokat." },
+    { n: 593, q: "What is a digital certificate?", qh: "Mi az a digitális tanúsítvány?", a: "A digital certificate verifies identity.", ah: "A digitális tanúsítvány igazolja a személyazonosságot." },
+    { n: 594, q: "What is a public key?", qh: "Mi az a nyilvános kulcs?", a: "A public key encrypts data.", ah: "A nyilvános kulcs titkosítja az adatokat." },
+    { n: 595, q: "What is a private key?", qh: "Mi az a privát kulcs?", a: "A private key decrypts data.", ah: "A privát kulcs visszafejti az adatokat." },
+    { n: 596, q: "What is a hash function?", qh: "Mi az a hasítófüggvény (hash függvény)?", a: "A hash function generates a fixed-size hash.", ah: "A hasítófüggvény rögzített méretű hash-t generál." },
+    { n: 597, q: "What is a digital signature?", qh: "Mi az a digitális aláírás?", a: "A digital signature verifies data integrity.", ah: "A digitális aláírás igazolja az adatok sértetlenségét." },
+    { n: 598, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN provides secure remote access.", ah: "A VPN biztonságos távoli hozzáférést biztosít." },
+    { n: 599, q: "What is a proxy server?", qh: "Mi az a proxyszerver?", a: "A proxy server acts as an intermediary.", ah: "A proxyszerver közvetítőként működik." },
+    { n: 600, q: "What is an API?", qh: "Mi az az API?", a: "An API allows programs to communicate.", ah: "Az API lehetővé teszi a programok közötti kommunikációt." },
+    { n: 601, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores small pieces of data.", ah: "A süti kis adatmennyiségeket tárol." },
+    { n: 602, q: "What is a daemon?", qh: "Mi az a démon (háttérfolyamat)?", a: "A daemon is a background process.", ah: "A démon egy háttérfolyamat." },
+    { n: 603, q: "What is a daemon process?", qh: "Mi az a démonfolyamat?", a: "A daemon process runs in the background.", ah: "A démonfolyamat a háttérben fut." },
+    { n: 604, q: "What is a handle?", qh: "Mi az a leíró (handle)?", a: "A handle is a reference to a resource.", ah: "A handle egy erőforrásra mutató hivatkozás." },
+    { n: 605, q: "What is a handle table?", qh: "Mi az a leírótábla (handle table)?", a: "A handle table stores handles.", ah: "A handle tábla leírókat (handle-öket) tárol." },
+    { n: 606, q: "What is a heap?", qh: "Mi az a kupac (heap)?", a: "A heap is a region of memory.", ah: "A kupac (heap) a memória egy területe." },
+    { n: 607, q: "What is a stack frame?", qh: "Mi az a veremkeret (stack frame)?", a: "A stack frame stores function data.", ah: "A veremkeret a függvény adatait tárolja." },
+    { n: 608, q: "What is a queue discipline?", qh: "Mi az a sorban állási elv (queue discipline)?", a: "A queue discipline is FIFO.", ah: "A sorban állási elv a FIFO (elsőként be, elsőként ki)." },
+    { n: 609, q: "What is a semaphore?", qh: "Mi az a szemafor?", a: "A semaphore controls access to resources.", ah: "A szemafor szabályozza az erőforrásokhoz való hozzáférést." },
+    { n: 610, q: "What is a mutex?", qh: "Mi az a mutex?", a: "A mutex provides exclusive access.", ah: "A mutex kizárólagos hozzáférést biztosít." },
+    { n: 611, q: "What is a condition variable?", qh: "Mi az a feltételváltozó?", a: "A condition variable helps in waiting.", ah: "A feltételváltozó segít a szálak várakoztatásában." },
+    { n: 612, q: "What is a thread pool?", qh: "Mi az a szálkészlet (thread pool)?", a: "A thread pool reuses threads.", ah: "A szálkészlet újrahasznosítja a szálakat." },
+    { n: 613, q: "What is a scheduler?", qh: "Mi az az ütemező (scheduler)?", a: "A scheduler decides which task runs.", ah: "Az ütemező dönti el, melyik feladat fusson." },
+    { n: 614, q: "What is a context switch?", qh: "Mi az a kontextusváltás?", a: "A context switch saves and restores state.", ah: "A kontextusváltás elmenti és visszaállítja az állapotot." },
+    { n: 615, q: "What is a deadlock?", qh: "Mi az a holtpont (deadlock)?", a: "A deadlock is a wait cycle.", ah: "A holtpont egy kölcsönös várakozási ciklus." },
+    { n: 616, q: "What is a livelock?", qh: "Mi az az élő holtpont (livelock)?", a: "A livelock is a busy-wait situation.", ah: "Az élő holtpont egy aktív várakozási helyzet." },
+    { n: 617, q: "What is a race condition?", qh: "Mi az a versenyhelyzet (race condition)?", a: "A race condition occurs due to timing.", ah: "A versenyhelyzet időzítési okokból lép fel." },
+    { n: 618, q: "What is a critical section?", qh: "Mi az a kritikus szakasz?", a: "A critical section is a sensitive code part.", ah: "A kritikus szakasz egy érzékeny kódrészlet." },
+    { n: 619, q: "What is a mutex lock?", qh: "Mi az a mutex zár?", a: "A mutex lock ensures mutual exclusion.", ah: "A mutex zár biztosítja a kölcsönös kizárást." },
+    { n: 620, q: "What is a spinlock?", qh: "Mi az a spinlock?", a: "A spinlock waits in a loop.", ah: "A spinlock egy ciklusban várakozik." },
+    { n: 621, q: "What is a monitor?", qh: "Mi az a monitor (szinkronizációs eszköz)?", a: "A monitor controls access with a lock.", ah: "A monitor zár segítségével szabályozza a hozzáférést." },
+    { n: 622, q: "What is a resource leak?", qh: "Mi az az erőforrás-szivárgás?", a: "A resource leak is unused resource.", ah: "Az erőforrás-szivárgás fel nem szabadított, használaton kívüli erőforrás." },
+    { n: 623, q: "What is a thread-safe function?", qh: "Mi az a szálbiztos (thread-safe) függvény?", a: "A thread-safe function works safely.", ah: "A szálbiztos függvény biztonságosan működik több szálon is." },
+    { n: 624, q: "What is a reentrant function?", qh: "Mi az a reentráns függvény?", a: "A reentrant function can be called again.", ah: "A reentráns függvény biztonságosan újrahívható." },
+    { n: 625, q: "What is a callback?", qh: "Mi az a visszahívási függvény (callback)?", a: "A callback is a function passed as argument.", ah: "A callback egy argumentumként átadott függvény." },
+    { n: 626, q: "What is a closure?", qh: "Mi az a lezárás (closure)?", a: "A closure remembers its environment.", ah: "A closure emlékszik a létrehozási környezetére." },
+    { n: 627, q: "What is a coroutine?", qh: "Mi az a korutin (coroutine)?", a: "A coroutine is a lightweight thread.", ah: "A korutin egy könnyűsúlyú szál." },
+    { n: 628, q: "What is a generator?", qh: "Mi az a generátor?", a: "A generator produces values lazily.", ah: "A generátor lusta kiértékeléssel állít elő értékeket." },
+    { n: 629, q: "What is a decorator?", qh: "Mi az a dekorátor?", a: "A decorator modifies a function.", ah: "A dekorátor módosít egy függvényt." },
+    { n: 630, q: "What is a lambda function?", qh: "Mi az a lambda-függvény?", a: "A lambda function is an anonymous function.", ah: "A lambda-függvény egy névtelen függvény." },
+    { n: 631, q: "What is a map function?", qh: "Mi az a map függvény?", a: "A map function applies a function to data.", ah: "A map függvény alkalmaz egy függvényt az adatokra." },
+    { n: 632, q: "What is a filter function?", qh: "Mi az a szűrőfüggvény (filter)?", a: "A filter function filters data.", ah: "A filter függvény szűri az adatokat." },
+    { n: 633, q: "What is a reduce function?", qh: "Mi az a reduce függvény?", a: "A reduce function reduces data to one value.", ah: "A reduce függvény egyetlen értékké redukálja az adatokat." },
+    { n: 634, q: "What is a comprehension?", qh: "Mi az a listaértelmezés (comprehension)?", a: "A comprehension builds a collection.", ah: "A listaértelmezés egy gyűjteményt hoz létre." },
+    { n: 635, q: "What is a class?", qh: "Mi az az osztály (class)?", a: "A class is a blueprint for objects.", ah: "Az osztály egy tervrajz az objektumokhoz." },
+    { n: 636, q: "What is an object?", qh: "Mi az az objektum?", a: "An object is an instance of a class.", ah: "Az objektum egy osztály példánya." },
+    { n: 637, q: "What is inheritance?", qh: "Mi az az öröklődés?", a: "Inheritance reuses class code.", ah: "Az öröklődés újrahasznosítja az osztály kódját." },
+    { n: 638, q: "What is polymorphism?", qh: "Mi az a többalakúság (polimorfizmus)?", a: "Polymorphism allows multiple forms.", ah: "A polimorfizmus többféle megjelenési formát tesz lehetővé." },
+    { n: 639, q: "What is encapsulation?", qh: "Mi az az egységbezárás (encapsulation)?", a: "Encapsulation hides data.", ah: "Az egységbezárás elrejti a belső adatokat." },
+    { n: 640, q: "What is abstraction?", qh: "Mi az az absztrakció?", a: "Abstraction hides complex details.", ah: "Az absztrakció elrejti az összetett részleteket." },
+    { n: 641, q: "What is method overriding?", qh: "Mi az a metódusfelüldefiniálás (overriding)?", a: "Method overriding changes a method.", ah: "A metódusfelüldefiniálás megváltoztatja egy örökölt metódus működését." },
+    { n: 642, q: "What is method overloading?", qh: "Mi az a metódustúlterhelés (overloading)?", a: "Method overloading uses multiple forms.", ah: "A metódustúlterhelés ugyanannak a metódusnévnek több formáját használja." },
+    { n: 643, q: "What is exception handling?", qh: "Mi az a kivételkezelés?", a: "Exception handling manages errors.", ah: "A kivételkezelés kezeli a hibákat." },
+    { n: 644, q: "What is error handling?", qh: "Mi az a hibakezelés?", a: "Error handling handles runtime errors.", ah: "A hibakezelés a futásidejű hibákat kezeli." },
+    { n: 645, q: "What is a try-catch block?", qh: "Mi az a try-catch blokk?", a: "A try-catch block handles exceptions.", ah: "A try-catch blokk kezeli a kivételeket." },
+    { n: 646, q: "What is a finally block?", qh: "Mi az a finally blokk?", a: "A finally block runs always.", ah: "A finally blokk mindig lefut." },
+    { n: 647, q: "What is a throw keyword?", qh: "Mi az a throw kulcsszó?", a: "A throw keyword raises an exception.", ah: "A throw kulcsszó kivételt dob." },
+    { n: 648, q: "What is a custom exception?", qh: "Mi az az egyéni kivétel?", a: "A custom exception is user-defined.", ah: "Az egyéni kivétel felhasználó által definiált." },
+    { n: 649, q: "What is the assert statement?", qh: "Mi az az assert utasítás?", a: "An assert statement checks a condition.", ah: "Az assert utasítás egy feltételt ellenőriz." },
+    { n: 650, q: "What is a unit test?", qh: "Mi az az egységteszt (unit test)?", a: "A unit test verifies a small unit of code.", ah: "Az egységteszt a kód egy kis egységét ellenőrzi." },
+    { n: 651, q: "What is an operating system?", qh: "Mi az az operációs rendszer?", a: "An operating system manages hardware and software.", ah: "Az operációs rendszer kezeli a hardvert és a szoftvert." },
+    { n: 652, q: "What is a utility program?", qh: "Mi az a segédprogram?", a: "A utility program helps maintain a computer.", ah: "A segédprogram segít a számítógép karbantartásában." },
+    { n: 653, q: "What is a compiler?", qh: "Mi az a fordítóprogram (compiler)?", a: "A compiler translates code into machine code.", ah: "A fordítóprogram gépi kódra fordítja a kódot." },
+    { n: 654, q: "What is an interpreter?", qh: "Mi az az értelmező (interpreter)?", a: "An interpreter executes code line by line.", ah: "Az értelmező soronként hajtja végre a kódot." },
+    { n: 655, q: "What is debugging?", qh: "Mi az a hibakeresés (debugging)?", a: "Debugging is finding and fixing errors.", ah: "A hibakeresés a hibák megtalálása és javítása." },
+    { n: 656, q: "What is a breakpoint?", qh: "Mi az a töréspont (breakpoint)?", a: "A breakpoint pauses execution at a point.", ah: "A töréspont egy adott ponton megállítja a futást." },
+    { n: 657, q: "What is a loop?", qh: "Mi az a ciklus (loop)?", a: "A loop repeats a set of instructions.", ah: "A ciklus utasítások egy csoportját ismétli." },
+    { n: 658, q: "What is an array?", qh: "Mi az a tömb (array)?", a: "An array stores multiple values.", ah: "A tömb több értéket tárol." },
+    { n: 659, q: "What is a stack?", qh: "Mi az a verem (stack)?", a: "A stack follows LIFO order.", ah: "A verem a LIFO sorrendet követi." },
+    { n: 660, q: "What is a queue?", qh: "Mi az a sor (queue)?", a: "A queue follows FIFO order.", ah: "A sor a FIFO sorrendet követi." },
+    { n: 661, q: "What is a linked list?", qh: "Mi az a láncolt lista?", a: "A linked list stores data in links.", ah: "A láncolt lista láncolt elemekben tárolja az adatokat." },
+    { n: 662, q: "What is a tree?", qh: "Mi az a fa (adatstruktúra)?", a: "A tree is a hierarchical data structure.", ah: "A fa egy hierarchikus adatstruktúra." },
+    { n: 663, q: "What is a graph?", qh: "Mi az a gráf / diagram?", a: "A graph consists of nodes and edges.", ah: "A gráf csomópontokból és élekből áll." },
+    { n: 664, q: "What is a hash table?", qh: "Mi az a hasítótábla (hash tábla)?", a: "A hash table stores data using a hash function.", ah: "A hasítótábla hasítófüggvény segítségével tárolja az adatokat." },
+    { n: 665, q: "What is a set?", qh: "Mi az a halmaz (set)?", a: "A set stores unique elements.", ah: "A halmaz egyedi elemeket tárol." },
+    { n: 666, q: "What is a map?", qh: "Mi az a leképezés (map)?", a: "A map stores key-value pairs.", ah: "A map kulcs-érték párokat tárol." },
+    { n: 667, q: "What is a dictionary?", qh: "Mi az a szótár (dictionary)?", a: "A dictionary stores key-value pairs.", ah: "A szótár kulcs-érték párokat tárol." },
+    { n: 668, q: "What is a heap?", qh: "Mi az a kupac (heap)?", a: "A heap is a specialized tree structure.", ah: "A kupac (heap) egy speciális fa adatstruktúra." },
+    { n: 669, q: "What is a trie?", qh: "Mi az a trie (prefixfa)?", a: "A trie stores strings efficiently.", ah: "A trie hatékonyan tárolja a karakterláncokat." },
+    { n: 670, q: "What is a mutex?", qh: "Mi az a mutex?", a: "A mutex provides mutual exclusion.", ah: "A mutex kölcsönös kizárást biztosít." },
+    { n: 671, q: "What is a semaphore?", qh: "Mi az a szemafor?", a: "A semaphore controls access to a resource.", ah: "A szemafor szabályozza egy erőforráshoz való hozzáférést." },
+    { n: 672, q: "What is a monitor?", qh: "Mi az a monitor (szinkronizációs eszköz)?", a: "A monitor ensures safe access to shared data.", ah: "A monitor biztonságos hozzáférést biztosít a megosztott adatokhoz." },
+    { n: 673, q: "What is a thread pool?", qh: "Mi az a szálkészlet (thread pool)?", a: "A thread pool manages a group of threads.", ah: "A szálkészlet szálak egy csoportját kezeli." },
+    { n: 674, q: "What is a daemon process?", qh: "Mi az a démonfolyamat?", a: "A daemon process runs in the background.", ah: "A démonfolyamat a háttérben fut." },
+    { n: 675, q: "What is a service?", qh: "Mi az a szolgáltatás (service)?", a: "A service is a program that runs automatically.", ah: "A szolgáltatás egy automatikusan futó program." },
+    { n: 676, q: "What is a driver?", qh: "Mi az az illesztőprogram (driver)?", a: "A driver lets hardware work with software.", ah: "Az illesztőprogram lehetővé teszi a hardver és a szoftver együttműködését." },
+    { n: 677, q: "What is a protocol?", qh: "Mi az a protokoll?", a: "A protocol defines rules for communication.", ah: "A protokoll meghatározza a kommunikáció szabályait." },
+    { n: 678, q: "What is a socket?", qh: "Mi az a socket (szoftveres végpont)?", a: "A socket provides an endpoint for communication.", ah: "A socket kommunikációs végpontot biztosít." },
+    { n: 679, q: "What is an API?", qh: "Mi az az API?", a: "An API allows programs to interact.", ah: "Az API lehetővé teszi a programok közötti interakciót." },
+    { n: 680, q: "What is a library?", qh: "Mi az a programkönyvtár (library)?", a: "A library contains reusable code.", ah: "A programkönyvtár újrafelhasználható kódot tartalmaz." },
+    { n: 681, q: "What is a framework?", qh: "Mi az a keretrendszer (framework)?", a: "A framework provides a structure for development.", ah: "A keretrendszer struktúrát biztosít a fejlesztéshez." },
+    { n: 682, q: "What is a package?", qh: "Mi az a csomag (package)?", a: "A package organizes related modules.", ah: "A csomag összetartozó modulokat rendszerez." },
+    { n: 683, q: "What is a module?", qh: "Mi az a modul?", a: "A module groups related functionality.", ah: "A modul összetartozó funkciókat csoportosít." },
+    { n: 684, q: "What is a script?", qh: "Mi az a szkript?", a: "A script contains executable instructions.", ah: "A szkript végrehajtható utasításokat tartalmaz." },
+    { n: 685, q: "What is a batch file?", qh: "Mi az a kötegfájl (batch file)?", a: "A batch file runs multiple commands.", ah: "A kötegfájl több parancsot futtat le." },
+    { n: 686, q: "What is a macro?", qh: "Mi az a makró?", a: "A macro records a series of actions.", ah: "A makró műveletek sorozatát rögzíti." },
+    { n: 687, q: "What is a template?", qh: "Mi az a sablon (template)?", a: "A template provides a standard format.", ah: "A sablon egységes formátumot biztosít." },
+    { n: 688, q: "What is a plug-in?", qh: "Mi az a bővítmény (plug-in)?", a: "A plug-in adds extra functionality.", ah: "A bővítmény extra funkciókat ad hozzá." },
+    { n: 689, q: "What is a mix-in?", qh: "Mi az a mix-in?", a: "A mix-in adds behavior to a class.", ah: "A mix-in viselkedést ad hozzá egy osztályhoz." },
+    { n: 690, q: "What is a hotfix?", qh: "Mi az a gyorsjavítás (hotfix)?", a: "A hotfix fixes an issue quickly.", ah: "A gyorsjavítás (hotfix) gyorsan elhárít egy hibát." },
+    { n: 691, q: "What is a patch?", qh: "Mi az a javítócsomag (patch)?", a: "A patch updates software with fixes.", ah: "A javítócsomag javításokkal frissíti a szoftvert." },
+    { n: 692, q: "What is a build?", qh: "Mi az a build (fordítási verzió)?", a: "A build is a compiled version of software.", ah: "A build a szoftver lefordított változata." },
+    { n: 693, q: "What is a release?", qh: "Mi az a kiadás (release)?", a: "A release is a version ready for use.", ah: "A kiadás (release) egy használatra kész verzió." },
+    { n: 694, q: "What is a deploy?", qh: "Mi az a telepítés / élesítés (deploy)?", a: "A deploy makes software live.", ah: "A deploy élessé teszi a szoftvert." },
+    { n: 695, q: "What is a rollback?", qh: "Mi az a visszagörgetés (rollback)?", a: "A rollback reverts to a previous version.", ah: "A visszagörgetés visszaállít egy korábbi verziót." },
+    { n: 696, q: "What is a log file?", qh: "Mi az a naplófájl (log file)?", a: "A log file records events.", ah: "A naplófájl eseményeket rögzít." },
+    { n: 697, q: "What is a configuration file?", qh: "Mi az a konfigurációs fájl?", a: "A configuration file stores settings.", ah: "A konfigurációs fájl beállításokat tárol." },
+    { n: 698, q: "What is a environment variable?", qh: "Mi az a környezeti változó?", a: "An environment variable stores runtime data.", ah: "A környezeti változó futásidejű adatokat tárol." },
+    { n: 699, q: "What is a cache?", qh: "Mi az a gyorsítótár (cache)?", a: "A cache stores frequently accessed data.", ah: "A gyorsítótár a gyakran elért adatokat tárolja." },
+    { n: 700, q: "What is an endpoint?", qh: "Mi az a végpont (endpoint)?", a: "An endpoint is a destination for data.", ah: "A végpont az adatok célállomása." },
+    { n: 701, q: "What is a database?", qh: "Mi az az adatbázis?", a: "A database is an organized collection of data.", ah: "Az adatbázis adatok rendezett gyűjteménye." },
+    { n: 702, q: "What is a database management system?", qh: "Mi az az adatbázis-kezelő rendszer (DBMS)?", a: "A DBMS manages and controls a database.", ah: "A DBMS kezeli és felügyeli az adatbázist." },
+    { n: 703, q: "What is SQL?", qh: "Mi az az SQL?", a: "SQL is a language to manage data in a database.", ah: "Az SQL egy nyelv az adatbázisban lévő adatok kezelésére." },
+    { n: 704, q: "What is a query?", qh: "Mi az a lekérdezés?", a: "A query is a request for data.", ah: "A lekérdezés egy adatokra irányuló kérés." },
+    { n: 705, q: "What is a join?", qh: "Mi az az összekapcsolás (join)?", a: "A join combines rows from two tables.", ah: "A join két tábla sorait egyesíti." },
+    { n: 706, q: "What is a primary key?", qh: "Mi az az elsődleges kulcs (primary key)?", a: "A primary key uniquely identifies a record.", ah: "Az elsődleges kulcs egyedileg azonosít egy rekordot." },
+    { n: 707, q: "What is a foreign key?", qh: "Mi az az idegen kulcs (foreign key)?", a: "A foreign key links two tables.", ah: "Az idegen kulcs két táblát kapcsol össze." },
+    { n: 708, q: "What is normalization?", qh: "Mi az a normalizálás?", a: "Normalization reduces data redundancy.", ah: "A normalizálás csökkenti az adatok ismétlődését (redundanciáját)." },
+    { n: 709, q: "What is a trigger?", qh: "Mi az a trigger (eseményindító)?", a: "A trigger performs an action automatically.", ah: "A trigger automatikusan végrehajt egy műveletet." },
+    { n: 710, q: "What is a view?", qh: "Mi az a nézet (view)?", a: "A view is a virtual table.", ah: "A nézet egy virtuális tábla." },
+    { n: 711, q: "What is an index?", qh: "Mi az az index?", a: "An index improves search performance.", ah: "Az index javítja a keresési teljesítményt." },
+    { n: 712, q: "What is a stored procedure?", qh: "Mi az a tárolt eljárás?", a: "A stored procedure is a reusable SQL block.", ah: "A tárolt eljárás egy újrafelhasználható SQL-blokk." },
+    { n: 713, q: "What is a function in SQL?", qh: "Mi az a függvény az SQL-ben?", a: "A function performs a specific task.", ah: "A függvény egy konkrét feladatot hajt végre." },
+    { n: 714, q: "What is a transaction?", qh: "Mi az a tranzakció?", a: "A transaction is a unit of work.", ah: "A tranzakció egy munkaegység." },
+    { n: 715, q: "What is ACID?", qh: "Mi az az ACID?", a: "ACID ensures atomicity, consistency, isolation and durability.", ah: "Az ACID biztosítja az atomosságot, konzisztenciát, izolációt és tartósságot." },
+    { n: 716, q: "What is a backup?", qh: "Mi az a biztonsági mentés (backup)?", a: "A backup is a copy of data for recovery.", ah: "A biztonsági mentés az adatok másolata helyreállítás céljából." },
+    { n: 717, q: "What is a restore?", qh: "Mi az a visszaállítás (restore)?", a: "A restore recovers data from a backup.", ah: "A visszaállítás biztonsági mentésből állítja helyre az adatokat." },
+    { n: 718, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall blocks unauthorized access.", ah: "A tűzfal blokkolja az illetéktelen hozzáférést." },
+    { n: 719, q: "What is antivirus?", qh: "Mi az a vírusirtó?", a: "An antivirus protects against malware.", ah: "A vírusirtó véd a kártevők ellen." },
+    { n: 720, q: "What is a malware?", qh: "Mi az a kártevő (malware)?", a: "Malware is malicious software.", ah: "A malware rosszindulatú szoftver." },
+    { n: 721, q: "What is phishing?", qh: "Mi az az adathalászat (phishing)?", a: "Phishing steals sensitive information.", ah: "Az adathalászat érzékeny információkat lop el." },
+    { n: 722, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption converts data into a secure form.", ah: "A titkosítás biztonságos formába alakítja az adatokat." },
+    { n: 723, q: "What is decryption?", qh: "Mi az a visszafejtés (dekódolás)?", a: "Decryption converts encrypted data back.", ah: "A visszafejtés visszaalakítja a titkosított adatokat." },
+    { n: 724, q: "What is cloud computing?", qh: "Mi az a felhőalapú számítástechnika?", a: "Cloud computing delivers computing services over the internet.", ah: "A felhőalapú számítástechnika az interneten keresztül nyújt számítási szolgáltatásokat." },
+    { n: 725, q: "What is a cloud server?", qh: "Mi az a felhőszerver?", a: "A cloud server hosts data and applications.", ah: "A felhőszerver adatokat és alkalmazásokat tárol és futtat." },
+    { n: 726, q: "What is an API?", qh: "Mi az az API?", a: "An API allows different software to communicate.", ah: "Az API lehetővé teszi különböző szoftverek kommunikációját." },
+    { n: 727, q: "What is a web service?", qh: "Mi az a webszolgáltatás?", a: "A web service provides functionality over the web.", ah: "A webszolgáltatás a weben keresztül nyújt funkcionalitást." },
+    { n: 728, q: "What is a proxy server?", qh: "Mi az a proxyszerver?", a: "A proxy server acts as an intermediary.", ah: "A proxyszerver közvetítőként működik." },
+    { n: 729, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN provides secure remote access.", ah: "A VPN biztonságos távoli hozzáférést biztosít." },
+    { n: 730, q: "What is a router?", qh: "Mi az a router (útválasztó)?", a: "A router forwards data between networks.", ah: "A router adatokat továbbít a hálózatok között." },
+    { n: 731, q: "What is a switch?", qh: "Mi az a switch (hálózati kapcsoló)?", a: "A switch connects devices in a network.", ah: "A switch összekapcsolja az eszközöket egy hálózaton." },
+    { n: 732, q: "What is a modem?", qh: "Mi az a modem?", a: "A modem connects your network to the internet.", ah: "A modem csatlakoztatja a hálózatodat az internethez." },
+    { n: 733, q: "What is a hotspot?", qh: "Mi az a hotspot?", a: "A hotspot shares an internet connection.", ah: "A hotspot megosztja az internetkapcsolatot." },
+    { n: 734, q: "What is a bandwidth?", qh: "Mi az a sávszélesség?", a: "Bandwidth is the amount of data transfer capacity.", ah: "A sávszélesség az adatátviteli kapacitás mértéke." },
+    { n: 735, q: "What is a latency?", qh: "Mi az a késleltetés (latency)?", a: "Latency is the delay in data transfer.", ah: "A késleltetés (latency) az adatátvitel során fellépő csúszás." },
+    { n: 736, q: "What is a server?", qh: "Mi az a szerver?", a: "A server provides services or data.", ah: "A szerver szolgáltatásokat vagy adatokat nyújt." },
+    { n: 737, q: "What is a client?", qh: "Mi az az ügyfél / kliens?", a: "A client requests services or data.", ah: "A kliens szolgáltatásokat vagy adatokat kér." },
+    { n: 738, q: "What is an operating system?", qh: "Mi az az operációs rendszer?", a: "An OS manages hardware and software.", ah: "Az operációs rendszer kezeli a hardvert és a szoftvert." },
+    { n: 739, q: "What is a kernel?", qh: "Mi az a rendszermag (kernel)?", a: "A kernel is the core of an operating system.", ah: "A kernel az operációs rendszer magja." },
+    { n: 740, q: "What is a utility program?", qh: "Mi az a segédprogram?", a: "A utility program performs maintenance tasks.", ah: "A segédprogram karbantartási feladatokat végez." },
+    { n: 741, q: "What is a compiler?", qh: "Mi az a fordítóprogram (compiler)?", a: "A compiler translates code into machine code.", ah: "A fordítóprogram gépi kódra fordítja a kódot." },
+    { n: 742, q: "What is an interpreter?", qh: "Mi az az értelmező (interpreter)?", a: "An interpreter executes code line by line.", ah: "Az értelmező soronként hajtja végre a kódot." },
+    { n: 743, q: "What is object-oriented programming?", qh: "Mi az az objektumorientált programozás (OOP)?", a: "OOP organizes code using objects.", ah: "Az OOP objektumok segítségével szervezi a kódot." },
+    { n: 744, q: "What is a class?", qh: "Mi az az osztály (class)?", a: "A class is a blueprint for objects.", ah: "Az osztály egy tervrajz az objektumokhoz." },
+    { n: 745, q: "What is an object?", qh: "Mi az az objektum?", a: "An object is an instance of a class.", ah: "Az objektum egy osztály példánya." },
+    { n: 746, q: "What is inheritance?", qh: "Mi az az öröklődés?", a: "Inheritance reuses class code.", ah: "Az öröklődés újrahasznosítja az osztály kódját." },
+    { n: 747, q: "What is polymorphism?", qh: "Mi az a többalakúság (polimorfizmus)?", a: "Polymorphism allows multiple forms.", ah: "A polimorfizmus többféle megjelenési formát tesz lehetővé." },
+    { n: 748, q: "What is encapsulation?", qh: "Mi az az egységbezárás (encapsulation)?", a: "Encapsulation hides data.", ah: "Az egységbezárás elrejti a belső adatokat." },
+    { n: 749, q: "What is abstraction?", qh: "Mi az az absztrakció?", a: "Abstraction hides complex details.", ah: "Az absztrakció elrejti az összetett részleteket." },
+    { n: 750, q: "What is a package?", qh: "Mi az a csomag (package)?", a: "A package organizes related modules.", ah: "A csomag összetartozó modulokat rendszerez." },
+    { n: 751, q: "What is a SaaS?", qh: "Mi az a SaaS?", a: "SaaS is a Software as a Service.", ah: "A SaaS a szoftver mint szolgáltatás." },
+    { n: 752, q: "What is a PaaS?", qh: "Mi az a PaaS?", a: "PaaS is a Platform as a Service.", ah: "A PaaS a platform mint szolgáltatás." },
+    { n: 753, q: "What is a IaaS?", qh: "Mi az az IaaS?", a: "IaaS is an Infrastructure as a Service.", ah: "Az IaaS az infrastruktúra mint szolgáltatás." },
+    { n: 754, q: "What is an API gateway?", qh: "Mi az az API-átjáró (API gateway)?", a: "An API gateway manages API requests.", ah: "Az API-átjáró kezeli az API-kéréseket." },
+    { n: 755, q: "What is a microservice?", qh: "Mi az a mikroszolgáltatás?", a: "A microservice is a small service.", ah: "A mikroszolgáltatás egy kisméretű szolgáltatás." },
+    { n: 756, q: "What is containerization?", qh: "Mi az a konténerizáció?", a: "Containerization packages applications.", ah: "A konténerizáció becsomagolja az alkalmazásokat." },
+    { n: 757, q: "What is Docker?", qh: "Mi az a Docker?", a: "Docker is a container platform.", ah: "A Docker egy konténerizációs platform." },
+    { n: 758, q: "What is Kubernetes?", qh: "Mi az a Kubernetes?", a: "Kubernetes manages containers.", ah: "A Kubernetes konténereket kezel." },
+    { n: 759, q: "What is serverless computing?", qh: "Mi az a szerver nélküli (serverless) számítás?", a: "Serverless computing runs code without servers.", ah: "A serverless számítás szerverek kezelése nélkül futtat kódot." },
+    { n: 760, q: "What is a CDN?", qh: "Mi az a CDN (tartalomszolgáltató hálózat)?", a: "A CDN delivers content faster.", ah: "A CDN gyorsabban juttatja el a tartalmat." },
+    { n: 761, q: "What is edge computing?", qh: "Mi az az peremhálózati számítástechnika (edge computing)?", a: "Edge computing processes data near users.", ah: "Az edge computing a felhasználókhoz közel dolgozza fel az adatokat." },
+    { n: 762, q: "What is a data lake?", qh: "Mi az az adattó (data lake)?", a: "A data lake stores raw data.", ah: "Az adattó nyers adatokat tárol." },
+    { n: 763, q: "What is a data warehouse?", qh: "Mi az az adattárház (data warehouse)?", a: "A data warehouse stores structured data.", ah: "Az adattárház strukturált adatokat tárol." },
+    { n: 764, q: "What is ETL?", qh: "Mi az az ETL?", a: "ETL stands for Extract, Transform, Load.", ah: "Az ETL jelentése: kinyerés, átalakítás, betöltés." },
+    { n: 765, q: "What is ELT?", qh: "Mi az az ELT?", a: "ELT stands for Extract, Load, Transform.", ah: "Az ELT jelentése: kinyerés, betöltés, átalakítás." },
+    { n: 766, q: "What is a data mart?", qh: "Mi az az adatpiac (data mart)?", a: "A data mart stores subject-specific data.", ah: "Az adatpiac témakör-specifikus adatokat tárol." },
+    { n: 767, q: "What is big data?", qh: "Mi az a big data?", a: "Big data is large and complex data.", ah: "A big data nagy és összetett adathalmazokat jelent." },
+    { n: 768, q: "What is machine learning?", qh: "Mi az a gépi tanulás (machine learning)?", a: "Machine learning teaches systems to learn.", ah: "A gépi tanulás megtanítja a rendszereket tanulni." },
+    { n: 769, q: "What is deep learning?", qh: "Mi az a mélytanulás (deep learning)?", a: "Deep learning uses neural networks.", ah: "A mélytanulás neurális hálózatokat használ." },
+    { n: 770, q: "What is artificial intelligence?", qh: "Mi az a mesterséges intelligencia (MI)?", a: "AI is the simulation of human intelligence.", ah: "A mesterséges intelligencia az emberi intelligencia szimulációja." },
+    { n: 771, q: "What is a neural network?", qh: "Mi az a neurális hálózat?", a: "A neural network mimics the brain.", ah: "A neurális hálózat az agy működését utánozza." },
+    { n: 772, q: "What is NLP?", qh: "Mi az az NLP (természetes nyelvfeldolgozás)?", a: "NLP is Natural Language Processing.", ah: "Az NLP a természetes nyelvfeldolgozás." },
+    { n: 773, q: "What is computer vision?", qh: "Mi az a számítógépes látás?", a: "Computer vision lets machines see.", ah: "A számítógépes látás lehetővé teszi a gépek számára a látást." },
+    { n: 774, q: "What is robotics?", qh: "Mi az a robotika?", a: "Robotics combines hardware and software.", ah: "A robotika ötvözi a hardvert és a szoftvert." },
+    { n: 775, q: "What is IoT?", qh: "Mi az az IoT (dolgok internete)?", a: "IoT connects physical devices to the internet.", ah: "Az IoT fizikai eszközöket csatlakoztat az internethez." },
+    { n: 776, q: "What is a blockchain?", qh: "Mi az a blokklánc (blockchain)?", a: "A blockchain is a decentralized ledger.", ah: "A blokklánc egy decentralizált főkönyv." },
+    { n: 777, q: "What is cryptocurrency?", qh: "Mi az a kriptovaluta?", a: "Cryptocurrency is digital money.", ah: "A kriptovaluta digitális pénz." },
+    { n: 778, q: "What is a smart contract?", qh: "Mi az az okosszerződés (smart contract)?", a: "A smart contract automates agreements.", ah: "Az okosszerződés automatizálja a megállapodásokat." },
+    { n: 779, q: "What is cloud storage?", qh: "Mi az a felhőtárhely?", a: "Cloud storage stores data online.", ah: "A felhőtárhely online tárolja az adatokat." },
+    { n: 780, q: "What is a firewall?", qh: "Mi az a tűzfal?", a: "A firewall protects a network.", ah: "A tűzfal védi a hálózatot." },
+    { n: 781, q: "What is antivirus?", qh: "Mi az a vírusirtó?", a: "Antivirus removes malicious software.", ah: "A vírusirtó eltávolítja a kártékony szoftvereket." },
+    { n: 782, q: "What is antispyware?", qh: "Mi az az antispyware?", a: "Antispyware blocks spyware.", ah: "Az antispyware blokkolja a kémprogramokat." },
+    { n: 783, q: "What is antimalware?", qh: "Mi az az antimalware?", a: "Antimalware removes malware.", ah: "Az antimalware eltávolítja a kártevőket." },
+    { n: 784, q: "What is a proxy server?", qh: "Mi az a proxyszerver?", a: "A proxy server acts as an intermediary.", ah: "A proxyszerver közvetítőként működik." },
+    { n: 785, q: "What is a VPN?", qh: "Mi az a VPN?", a: "A VPN creates a secure connection.", ah: "A VPN biztonságos kapcsolatot hoz létre." },
+    { n: 786, q: "What is two-factor authentication?", qh: "Mi az a kétfaktoros hitelesítés (2FA)?", a: "2FA adds an extra layer of security.", ah: "A 2FA egy extra biztonsági réteget ad hozzá." },
+    { n: 787, q: "What is encryption?", qh: "Mi az a titkosítás?", a: "Encryption converts data into code.", ah: "A titkosítás kóddá alakítja az adatokat." },
+    { n: 788, q: "What is hashing?", qh: "Mi az a hasítás (hashing)?", a: "Hashing creates a fixed-size hash.", ah: "A hasítás rögzített méretű hash-t hoz létre." },
+    { n: 789, q: "What is a digital signature?", qh: "Mi az a digitális aláírás?", a: "A digital signature verifies identity.", ah: "A digitális aláírás igazolja a személyazonosságot." },
+    { n: 790, q: "What is a certificate authority?", qh: "Mi az a hitelesítésszolgáltató (CA)?", a: "A CA issues digital certificates.", ah: "A hitelesítésszolgáltató (CA) digitális tanúsítványokat állít ki." },
+    { n: 791, q: "What is a session?", qh: "Mi az a munkamenet (session)?", a: "A session is a user's active period.", ah: "A munkamenet a felhasználó aktív időszaka." },
+    { n: 792, q: "What is a cookie?", qh: "Mi az a süti (cookie)?", a: "A cookie stores user preferences.", ah: "A süti a felhasználói beállításokat tárolja." },
+    { n: 793, q: "What is a cache?", qh: "Mi az a gyorsítótár (cache)?", a: "A cache stores frequently accessed data.", ah: "A gyorsítótár a gyakran elért adatokat tárolja." },
+    { n: 794, q: "What is a load balancer?", qh: "Mi az a terheléselosztó (load balancer)?", a: "A load balancer distributes traffic.", ah: "A terheléselosztó elosztja a forgalmat." },
+    { n: 795, q: "What is a DNS server?", qh: "Mi az a DNS-szerver?", a: "A DNS server resolves domain names.", ah: "A DNS-szerver feloldja a domainneveket." },
+    { n: 796, q: "What is a DHCP server?", qh: "Mi az a DHCP-szerver?", a: "A DHCP server assigns IP addresses.", ah: "A DHCP-szerver IP-címeket oszt ki." },
+    { n: 797, q: "What is a router?", qh: "Mi az a router (útválasztó)?", a: "A router forwards data between networks.", ah: "A router adatokat továbbít a hálózatok között." },
+    { n: 798, q: "What is a switch?", qh: "Mi az a switch (hálózati kapcsoló)?", a: "A switch connects devices in a network.", ah: "A switch összekapcsolja az eszközöket egy hálózaton." },
+    { n: 799, q: "What is a modem?", qh: "Mi az a modem?", a: "A modem connects to the internet.", ah: "A modem csatlakozik az internethez." },
+    { n: 800, q: "What is an ISP?", qh: "Mi az az ISP (internetszolgáltató)?", a: "An ISP provides internet access.", ah: "Az ISP internet-hozzáférést biztosít." }
+];
+
+let practiceMode = false;
+
+let availableVoices = [];
+
+function loadVoices() {
+    if ('speechSynthesis' in window) {
+        availableVoices = window.speechSynthesis.getVoices();
+    }
+}
+
+if ('speechSynthesis' in window) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+function stopSpeech() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+    document.querySelectorAll('.qa-card.speaking').forEach(el => el.classList.remove('speaking'));
+}
+
+function speakTexts(texts, cardNumber) {
+    if (!('speechSynthesis' in window)) {
+        alert('A böngésződ sajnos nem támogatja a beépített felolvasást (Web Speech API).');
+        return;
+    }
+    stopSpeech();
+
+    const preferredLang = document.getElementById('voiceSelect').value;
+    const rate = parseFloat(document.getElementById('rateSelect').value);
+    const cardEl = document.getElementById(`card-${cardNumber}`);
+
+    const matchingVoice =
+        availableVoices.find(v => v.lang === preferredLang && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Microsoft'))) ||
+        availableVoices.find(v => v.lang === preferredLang) ||
+        availableVoices.find(v => v.lang.startsWith('en'));
+
+    texts.forEach((text, index) => {
+        const cleanText = text.replace(/\[Your Name\]/g, 'Alex').replace(/\[Your City\]/g, 'London').replace(/\[Degree\]/g, 'bachelor').replace(/\[mention skills\]/g, 'communication and problem solving').replace(/\[mention\]/g, 'two weeks');
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = preferredLang;
+        utterance.rate = rate;
+        if (matchingVoice) {
+            utterance.voice = matchingVoice;
+        }
+        if (index === 0 && cardEl) {
+            utterance.onstart = () => cardEl.classList.add('speaking');
+        }
+        if (index === texts.length - 1 && cardEl) {
+            utterance.onend = () => cardEl.classList.remove('speaking');
+            utterance.onerror = () => cardEl.classList.remove('speaking');
+        }
+        window.speechSynthesis.speak(utterance);
+    });
+}
+
+function playItem(n, mode) {
+    const item = qaData.find(x => x.n === n);
+    if (!item) return;
+    if (mode === 'q') {
+        speakTexts([item.q], n);
+    } else if (mode === 'a') {
+        speakTexts([item.a], n);
+    } else {
+        speakTexts([item.q, item.a], n);
+    }
+}
+
+function renderCards(items) {
+    const grid = document.getElementById('qaGrid');
+    grid.innerHTML = items.map(item => `
+        <div class="qa-card" id="card-${item.n}">
+            <div>
+                <div class="question"><span class="q-num">${item.n}.</span>${item.q}</div>
+                <div class="q-hu">${item.qh}</div>
+                <div class="answer"><span>Answer:</span> ${item.a}</div>
+                <div class="a-hu"><span>Válasz:</span> ${item.ah}</div>
+            </div>
+            <div class="audio-bar">
+                <button type="button" class="audio-btn" onclick="playItem(${item.n}, 'q')" title="Listen to Question">&#128266; Question</button>
+                <button type="button" class="audio-btn" onclick="playItem(${item.n}, 'a')" title="Listen to Answer">&#128266; Answer</button>
+                <button type="button" class="audio-btn both-btn" onclick="playItem(${item.n}, 'both')" title="Listen to Both">&#9654; Q &amp; A</button>
+            </div>
+        </div>
+    `).join('');
+    document.getElementById('statsDisplay').textContent = `Showing ${items.length} of ${qaData.length} questions`;
+}
+
+function filterQA() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const range = document.getElementById('rangeSelect').value;
+    let min = 1, max = 800;
+    if (range !== 'all') {
+        const parts = range.split('-');
+        min = parseInt(parts[0], 10);
+        max = parseInt(parts[1], 10);
+    }
+
+    const filtered = qaData.filter(item => {
+        const inRange = item.n >= min && item.n <= max;
+        if (!inRange) return false;
+        if (!query) return true;
+        return (
+            item.n.toString() === query ||
+            item.q.toLowerCase().includes(query) ||
+            item.a.toLowerCase().includes(query) ||
+            item.qh.toLowerCase().includes(query) ||
+            item.ah.toLowerCase().includes(query)
+        );
+    });
+
+    renderCards(filtered);
+}
+
+let showHungarian = true;
+
+function toggleHungarian() {
+    showHungarian = !showHungarian;
+    const grid = document.getElementById('qaGrid');
+    const btn = document.getElementById('toggleHuBtn');
+    if (showHungarian) {
+        grid.classList.remove('hide-hu');
+        btn.textContent = 'Magyar fordítás: BE';
+    } else {
+        grid.classList.add('hide-hu');
+        btn.textContent = 'Magyar fordítás: KI';
+    }
+}
+
+function togglePracticeMode() {
+    practiceMode = !practiceMode;
+    const grid = document.getElementById('qaGrid');
+    const btn = document.getElementById('togglePracticeBtn');
+    if (practiceMode) {
+        grid.classList.add('hidden-answer');
+        btn.textContent = 'Show All Answers';
+    } else {
+        grid.classList.remove('hidden-answer');
+        btn.textContent = 'Practice Mode (Hide Answers)';
+    }
+}
+
+renderCards(qaData);
+</script>
+</body>
+</html>

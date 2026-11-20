@@ -1,0 +1,3863 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300 Orvosi és Egészségügyi Szókincs – Angol Nyelvvizsga Felkészítő</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .card-transition {
+            transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        .speaking-active {
+            animation: pulse-ring 1.5s infinite;
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Felső navigációs és hangbeállítási sáv -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                <!-- Cím és haladás -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-600 to-brand-700 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+                            300
+                        </div>
+                        <div>
+                            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">300 Orvosi és Egészségügyi Szókincs</h1>
+                            <p class="text-xs text-slate-500">Alapfokú (A2–B1) nyelvvizsga felkészítő • Angol kifejezés + Definíció + Magyar fordítás</p>
+                        </div>
+                    </div>
+
+                    <!-- Mobil haladás jelvény -->
+                    <div class="lg:hidden flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span id="mobileProgressBadge" class="text-xs font-bold text-emerald-800">0/299</span>
+                    </div>
+                </div>
+
+                <!-- Hangbeállítások és Haladás -->
+                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 sm:gap-3">
+                    <!-- Akcentus választó -->
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setAccent('en-GB')" id="btn-en-GB" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            🇬🇧 Brit (UK)
+                        </button>
+                        <button onclick="setAccent('en-US')" id="btn-en-US" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🇺🇸 Amerikai (US)
+                        </button>
+                    </div>
+
+                    <!-- Sebesség választó -->
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setRate(1.0)" id="btn-rate-1" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            1.0x Normál
+                        </button>
+                        <button onclick="setRate(0.72)" id="btn-rate-slow" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🐢 0.75x Lassú
+                        </button>
+                    </div>
+
+                    <!-- Asztali haladásjelző -->
+                    <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl">
+                        <div>
+                            <div class="flex items-center justify-between text-xs gap-4 mb-1">
+                                <span class="font-medium text-slate-600">Elsajátítva:</span>
+                                <span id="desktopProgressText" class="font-bold text-emerald-700">0 / 299 (0%)</span>
+                            </div>
+                            <div class="w-36 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div id="desktopProgressBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fő menüfülek -->
+            <nav class="flex items-center gap-1.5 sm:gap-2 mt-3 pt-2.5 border-t border-slate-100 overflow-x-auto pb-1">
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition">
+                    <span>🗂️</span> Tanulókártyák
+                </button>
+                <button onclick="switchTab('list')" id="tab-list" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📋</span> Teljes Szótár (1–300)
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>🎯</span> Kvíz & Hallásértés
+                </button>
+                <button onclick="switchTab('grammar')" id="tab-grammar" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>🏥</span> Témakör Kisokos
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Globális Szűrő Sáv (Tanulókártyákhoz és Listához) -->
+    <section id="globalFilterBar" class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Vizsga fókusz kapcsoló -->
+                <button onclick="toggleCoreFilter()" id="btnCoreFilter" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100">
+                    <span id="coreCheckIcon">🌐</span>
+                    <span>Alapfokú vizsga törzsanyag (A2–B1)</span>
+                </button>
+
+                <!-- Kategória választó -->
+                <select id="categorySelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Összes témakör (1–300)</option>
+                    <option value="Alapfogalmak, tünetek és sérülések">1. Alapfogalmak, tünetek és sérülések (1–50)</option>
+                    <option value="Anatómia és az emberi test">2. Anatómia és az emberi test (51–100)</option>
+                    <option value="Betegségek és kórképek">3. Betegségek és kórképek (101–150)</option>
+                    <option value="Vizsgálatok, műszerek és beavatkozások">4. Vizsgálatok, műszerek és beavatkozások (151–200)</option>
+                    <option value="Gyógyszerek, készítmények és tápanyagok">5. Gyógyszerek, készítmények és tápanyagok (201–250)</option>
+                    <option value="Szakorvosok és kórházi ellátás">6. Szakorvosok és kórházi ellátás (251–300)</option>
+                </select>
+
+                <!-- Státusz szűrő -->
+                <select id="statusSelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Minden állapot</option>
+                    <option value="UNLEARNED">Még gyakorlandó</option>
+                    <option value="LEARNED">Már megtanultam ✓</option>
+                </select>
+            </div>
+
+            <!-- Találatok száma + Hangoskönyv mód -->
+            <div class="flex items-center justify-between md:justify-end gap-3">
+                <span id="filteredCountLabel" class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">
+                    Szűrt tételek: 299 db
+                </span>
+                <button onclick="toggleAutoPlay()" id="btnAutoPlay" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition">
+                    <span id="autoPlayIcon">▶️</span>
+                    <span id="autoPlayText">Hangoskönyv mód</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FŐ TARTALMI TERÜLET -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+
+        <!-- 1. NÉZET: TANULÓKÁRTYÁK (FLASHCARDS) -->
+        <div id="view-flashcards" class="space-y-6">
+            <!-- Kártya vezérlő fejléc -->
+            <div class="max-w-2xl mx-auto flex items-center justify-between text-sm text-slate-600">
+                <span id="fcPosition" class="font-bold text-slate-800 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+                    1 / 299. kártya
+                </span>
+                <div class="flex items-center gap-2">
+                    <button onclick="shuffleFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔀 Keverés
+                    </button>
+                    <button onclick="resetOrderFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔢 Sorrendben
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3D Megfordítható Kártya -->
+            <div id="flashcardContainer" class="max-w-2xl mx-auto perspective-1000">
+                <div id="flashcardInner" onclick="flipCard()" class="relative w-full min-h-[470px] sm:min-h-[490px] cursor-pointer transform-style-3d card-transition">
+                    
+                    <!-- ELŐLAP (ANGOL KIFEJEZÉS + DEFINÍCIÓ) -->
+                    <div id="fcFrontFace" class="absolute inset-0 backface-hidden bg-white rounded-3xl border-2 border-slate-200 shadow-lg p-5 sm:p-7 flex flex-col justify-between">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="fcNumber" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">#1</span>
+                                <span id="fcCategory" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-semibold text-xs">Alapfogalmak, tünetek és sérülések</span>
+                                <span id="fcCoreBadge" class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>
+                            </div>
+                            <span id="fcLearnedBadge" class="hidden px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs">✓ Megtanulva</span>
+                        </div>
+
+                        <div class="my-auto space-y-4 py-4">
+                            <!-- Angol szakkifejezés -->
+                            <div class="bg-blue-50/80 rounded-2xl p-4 sm:p-5 border border-blue-200/80 flex items-center justify-between gap-3">
+                                <div>
+                                    <span class="inline-block text-[11px] uppercase tracking-wider font-extrabold text-blue-700 mb-1">🩺 English Term (Szakkifejezés)</span>
+                                    <p id="fcTerm" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Medicine</p>
+                                </div>
+                                <button onclick="event.stopPropagation(); speakCurrentPart('term', this)" class="shrink-0 w-11 h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-xs transition text-lg" title="Kifejezés meghallgatása">
+                                    🔊
+                                </button>
+                            </div>
+
+                            <!-- Angol definíció -->
+                            <div class="bg-teal-50/80 rounded-2xl p-4 sm:p-5 border border-teal-200/80 flex items-center justify-between gap-3">
+                                <div>
+                                    <span class="inline-block text-[11px] uppercase tracking-wider font-extrabold text-teal-700 mb-1">📖 English Definition (Meghatározás)</span>
+                                    <p id="fcDef" class="text-base sm:text-lg font-semibold text-slate-800 leading-snug">A substance used to treat illness</p>
+                                </div>
+                                <button onclick="event.stopPropagation(); speakCurrentPart('def', this)" class="shrink-0 w-11 h-11 rounded-xl bg-teal-600 hover:bg-teal-700 text-white flex items-center justify-center shadow-xs transition text-lg" title="Definíció meghallgatása">
+                                    🔊
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Összes meghallgatása gomb -->
+                        <div class="flex items-center justify-center pt-1" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentBoth(this)" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                                <span>🎧</span> Kifejezés és definíció meghallgatása
+                            </button>
+                        </div>
+
+                        <p class="text-center text-xs text-slate-400 mt-2.5">Kattints a kártyára a magyar jelentéshez és vizsgatipphez ↻</p>
+                    </div>
+
+                    <!-- HÁTLAP (MAGYAR FORDÍTÁS & VIZSGATIPP) -->
+                    <div id="fcBackFace" class="absolute inset-0 backface-hidden rotate-y-180 pointer-events-none bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white rounded-3xl border-2 border-slate-700 shadow-xl p-5 sm:p-7 flex flex-col justify-between">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+                            <span id="fcBackNumber" class="px-2.5 py-1 rounded-lg bg-white/10 text-amber-300 font-bold text-xs">#1 • Magyar jelentés</span>
+                            <span class="text-xs text-slate-400">Kattints a visszafordításhoz ↺</span>
+                        </div>
+
+                        <div class="my-auto space-y-3 py-3">
+                            <!-- Magyar kifejezés -->
+                            <div class="bg-blue-950/60 border border-blue-400/30 rounded-2xl px-4 py-3.5 text-left">
+                                <div class="flex items-center justify-between gap-2 mb-1">
+                                    <span class="text-[11px] uppercase tracking-wider font-extrabold text-blue-300">🇭🇺 Magyar megfelelője</span>
+                                    <span id="fcBackTermEn" class="text-xs font-semibold text-blue-200/90">Medicine</span>
+                                </div>
+                                <p id="fcBackTermHu" class="text-xl sm:text-2xl font-extrabold text-amber-300 leading-snug">Gyógyszer / orvosság</p>
+                            </div>
+
+                            <!-- Magyar definíció -->
+                            <div class="bg-teal-950/50 border border-teal-400/25 rounded-2xl px-4 py-3 text-left">
+                                <span class="block text-[11px] uppercase tracking-wider font-extrabold text-teal-300 mb-1">📖 Meghatározás magyarul</span>
+                                <p id="fcBackDefHu" class="text-sm sm:text-base font-medium text-white leading-snug">Betegség kezelésére használt anyag.</p>
+                                <p id="fcBackDefEn" class="text-xs text-teal-200/80 italic mt-1">„A substance used to treat illness”</p>
+                            </div>
+
+                            <!-- Témakör tipp -->
+                            <div class="bg-white/5 rounded-2xl px-4 py-3 border border-white/10 text-left space-y-1">
+                                <p class="text-[11px] uppercase tracking-wider font-extrabold text-brand-300">💡 Szókincs és nyelvvizsga tipp</p>
+                                <div id="fcTipHu" class="text-xs text-slate-200 leading-relaxed"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center pt-1" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentBoth(this)" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition">
+                                <span>🔊</span> Angol kiejtés meghallgatása
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Kártya léptető és állapotjelölő gombok -->
+            <div class="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                <button onclick="prevCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    <span>⬅️</span> Előző
+                </button>
+
+                <button onclick="markCurrentCard(false)" class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 hover:bg-amber-100 text-amber-900 font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>🔄</span> Még gyakorlom
+                </button>
+
+                <button onclick="markCurrentCard(true)" class="p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>✅</span> Tudom!
+                </button>
+
+                <button onclick="nextCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    Következő <span>➡️</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. NÉZET: TELJES SZÓTÁR & KERESŐ -->
+        <div id="view-list" class="hidden space-y-4">
+            <!-- Kereső mező -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Keresés angol vagy magyar szóra, definícióra, sorszámra (pl. 'fever', 'sebész', 'heart', '104')..." class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <button onclick="clearSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
+                </div>
+                <button onclick="resetAllProgress()" class="px-4 py-2.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition whitespace-nowrap">
+                    🗑️ Haladás nullázása
+                </button>
+            </div>
+
+            <!-- Lista kártyák -->
+            <div id="listContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- JavaScript tölti fel -->
+            </div>
+        </div>
+
+        <!-- 3. NÉZET: INTERAKTÍV KVÍZ & HALLÁSÉRTÉS -->
+        <div id="view-quiz" class="hidden max-w-2xl mx-auto space-y-6">
+            <!-- Kvíz mód választó -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setQuizMode('definition_match')" id="qmode-definition_match" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition">
+                        📖 Definíció kvíz
+                    </button>
+                    <button onclick="setQuizMode('meaning')" id="qmode-meaning" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        🇭🇺 Magyar jelentés
+                    </button>
+                    <button onclick="setQuizMode('listening')" id="qmode-listening" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        🎧 Hallás utáni értés
+                    </button>
+                </div>
+
+                <div class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-xl text-slate-700">
+                    Pontszám: <span id="quizScore" class="text-emerald-600">0</span> / <span id="quizTotal">0</span>
+                </div>
+            </div>
+
+            <!-- Kvíz Kártya -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span id="quizQuestionTypeBadge" class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">
+                        Melyik angol szakkifejezés illik a meghatározáshoz?
+                    </span>
+                    <button onclick="speakQuizPrompt()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">
+                        <span>🔊</span> Meghallgatás
+                    </button>
+                </div>
+
+                <!-- Kérdés szövege -->
+                <div id="quizPromptBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-center space-y-2">
+                    <h3 id="quizMainPrompt" class="text-xl sm:text-2xl font-extrabold text-slate-900">A substance used to treat illness</h3>
+                    <p id="quizSubPrompt" class="text-sm sm:text-base text-slate-600">Válaszd ki a megfelelő angol szakkifejezést!</p>
+                </div>
+
+                <!-- 4 Válaszlehetőség -->
+                <div id="quizOptions" class="grid grid-cols-1 gap-3">
+                    <!-- JS tölti fel -->
+                </div>
+
+                <!-- Visszajelzés és Következő gomb -->
+                <div id="quizFeedback" class="hidden rounded-2xl p-4 text-sm font-medium"></div>
+
+                <div class="flex justify-end">
+                    <button onclick="generateQuizQuestion()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-sm transition">
+                        Következő kérdés ➡️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. NÉZET: TÉMAKÖR KISOKOS (MAGYARUL) -->
+        <div id="view-grammar" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-teal-600 to-brand-700 rounded-3xl p-6 sm:p-8 text-white shadow-md">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-2">🏥 Egészségügyi és Orvosi Szókincs – Nyelvvizsga Kisokos</h2>
+                <p class="text-sm sm:text-base text-teal-50 max-w-3xl">
+                    Az „Egészség és betegség” (Health & Illnesses) az alapfokú (A2–B1) nyelvvizsgák egyik leggyakoribb szóbeli és írásbeli témaköre. Gyakorold az orvosi rendelőben előforduló alapvető tüneteket, vizsgálatokat, gyógyszerformákat és szakorvosi megnevezéseket angol meghatározásaikkal együtt!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grammarCardsGrid">
+                <!-- JS tölti fel -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Lábléc -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            300 Medical Vocabulary (1–300) • Alapfokú angol nyelvvizsga felkészítő webalkalmazás • Web Speech API hangszintézissel
+        </div>
+    </footer>
+
+    <!-- Megerősítő üzenetablak -->
+    <div id="customModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-slate-200 space-y-4">
+            <h3 id="modalTitle" class="text-lg font-bold text-slate-900">Megerősítés</h3>
+            <p id="modalText" class="text-sm text-slate-600">Biztosan törölni szeretnéd az eddigi tanulási haladásodat?</p>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold">Mégse</button>
+                <button id="modalConfirmBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold">Igen, törlés</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // TELJES ORVOSI SZÓKINCS ADATBÁZIS (A 6 KÉP PONTOS TARTALMA + MAGYAR FORDÍTÁSOK)
+        // Formátum: [id, term, def, huTerm, huDef, kategoria_kod, alapfok_e]
+        // ============================================================================
+        const RAW_DATA = [
+    [
+        1,
+        "Medicine",
+        "A substance used to treat illness",
+        "Gyógyszer / orvosság",
+        "Betegség kezelésére használt anyag.",
+        1,
+        true
+    ],
+    [
+        2,
+        "Hospital",
+        "A place where sick people receive treatment",
+        "Kórház",
+        "Hely, ahol a beteg emberek kezelést kapnak.",
+        1,
+        true
+    ],
+    [
+        3,
+        "Doctor",
+        "A person trained to treat illnesses",
+        "Orvos",
+        "Betegségek kezelésére képzett személy.",
+        1,
+        true
+    ],
+    [
+        4,
+        "Nurse",
+        "A person who cares for patients",
+        "Ápoló / nővér",
+        "Személy, aki a betegekről gondoskodik.",
+        1,
+        true
+    ],
+    [
+        5,
+        "Patient",
+        "A person receiving medical care",
+        "Beteg / páciens",
+        "Orvosi ellátásban részesülő személy.",
+        1,
+        true
+    ],
+    [
+        6,
+        "Clinic",
+        "A place for medical consultation",
+        "Rendelő / klinika",
+        "Orvosi konzultációra szolgáló hely.",
+        1,
+        true
+    ],
+    [
+        7,
+        "Pharmacy",
+        "A place where medicines are sold",
+        "Gyógyszertár / patika",
+        "Hely, ahol gyógyszereket árulnak.",
+        1,
+        true
+    ],
+    [
+        8,
+        "Prescription",
+        "A doctor's written instruction for medicine",
+        "Orvosi vény / recept",
+        "Az orvos írásos utasítása gyógyszerre.",
+        1,
+        true
+    ],
+    [
+        9,
+        "Diagnosis",
+        "Identification of an illness",
+        "Diagnózis / kórismézés",
+        "Egy betegség azonosítása.",
+        1,
+        true
+    ],
+    [
+        10,
+        "Treatment",
+        "Medical care given to a patient",
+        "Kezelés / gyógykezelés",
+        "A betegnek nyújtott orvosi ellátás.",
+        1,
+        true
+    ],
+    [
+        11,
+        "Surgery",
+        "An operation performed on the body",
+        "Sebészet / műtét",
+        "A testen végrehajtott operáció.",
+        1,
+        true
+    ],
+    [
+        12,
+        "Operation",
+        "A medical procedure to treat a condition",
+        "Műtét / operáció",
+        "Orvosi beavatkozás egy állapot kezelésére.",
+        1,
+        true
+    ],
+    [
+        13,
+        "Emergency",
+        "A situation requiring immediate medical attention",
+        "Vészhelyzet / sürgősségi eset",
+        "Azonnali orvosi ellátást igénylő helyzet.",
+        1,
+        true
+    ],
+    [
+        14,
+        "Ambulance",
+        "A vehicle used to transport sick or injured people",
+        "Mentőautó",
+        "Beteg vagy sérült emberek szállítására használt jármű.",
+        1,
+        true
+    ],
+    [
+        15,
+        "Appointment",
+        "A scheduled meeting with a doctor",
+        "Orvosi időpont",
+        "Előre egyeztetett találkozó az orvossal.",
+        1,
+        true
+    ],
+    [
+        16,
+        "Check-up",
+        "A medical examination",
+        "Orvosi vizsgálat / kontroll",
+        "Általános orvosi kivizsgálás.",
+        1,
+        true
+    ],
+    [
+        17,
+        "Consultation",
+        "A discussion with a medical professional",
+        "Konzultáció / tanácsadás",
+        "Megbeszélés egy egészségügyi szakemberrel.",
+        1,
+        true
+    ],
+    [
+        18,
+        "Symptom",
+        "A sign of an illness",
+        "Tünet",
+        "Egy betegség jele.",
+        1,
+        true
+    ],
+    [
+        19,
+        "Disease",
+        "A condition that affects the body",
+        "Betegség / kór",
+        "A szervezetet érintő kóros állapot.",
+        1,
+        true
+    ],
+    [
+        20,
+        "Infection",
+        "Illness caused by harmful germs",
+        "Fertőzés",
+        "Káros kórokozók által okozott betegség.",
+        1,
+        true
+    ],
+    [
+        21,
+        "Injury",
+        "Damage to the body",
+        "Sérülés",
+        "A testet ért károsodás.",
+        1,
+        true
+    ],
+    [
+        22,
+        "Wound",
+        "An injury involving damaged skin",
+        "Seb",
+        "Sérült bőrfelülettel járó sérülés.",
+        1,
+        true
+    ],
+    [
+        23,
+        "Fever",
+        "An unusually high body temperature",
+        "Láz",
+        "Szokatlanul magas testhőmérséklet.",
+        1,
+        true
+    ],
+    [
+        24,
+        "Pain",
+        "An unpleasant physical sensation",
+        "Fájdalom",
+        "Kellemetlen testi érzet.",
+        1,
+        true
+    ],
+    [
+        25,
+        "Headache",
+        "Pain in the head",
+        "Fejfájás",
+        "Fájdalom a fejben.",
+        1,
+        true
+    ],
+    [
+        26,
+        "Cough",
+        "A sudden action to clear the throat or lungs",
+        "Köhögés",
+        "Hirtelen mozdulat a torok vagy a tüdő tisztítására.",
+        1,
+        true
+    ],
+    [
+        27,
+        "Cold",
+        "A common viral infection",
+        "Megfázás / nátha",
+        "Gyakori vírusos fertőzés.",
+        1,
+        true
+    ],
+    [
+        28,
+        "Flu",
+        "A contagious viral illness",
+        "Influenza",
+        "Fertőző vírusos betegség.",
+        1,
+        true
+    ],
+    [
+        29,
+        "Allergy",
+        "An immune reaction to a substance",
+        "Allergia",
+        "Immunreakció egy bizonyos anyagra.",
+        1,
+        true
+    ],
+    [
+        30,
+        "Swelling",
+        "An enlarged or puffy body part",
+        "Duzzanat / dagadás",
+        "Megnagyobbodott vagy felpuffadt testrész.",
+        1,
+        true
+    ],
+    [
+        31,
+        "Bleeding",
+        "Loss of blood from the body",
+        "Vérzés",
+        "Vérveszteség a testből.",
+        1,
+        true
+    ],
+    [
+        32,
+        "Bruise",
+        "A mark caused by bleeding",
+        "Zúzódás / véraláfutás",
+        "Bőr alatti vérzés okozta folt.",
+        1,
+        true
+    ],
+    [
+        33,
+        "Burn",
+        "An injury caused by heat",
+        "Égési sérülés",
+        "Hő által okozott sérülés.",
+        1,
+        true
+    ],
+    [
+        34,
+        "Fracture",
+        "A broken bone",
+        "Csonttörés",
+        "Eltört csont.",
+        1,
+        false
+    ],
+    [
+        35,
+        "Sprain",
+        "An injury to a ligament",
+        "Rándulás / ficam",
+        "Ínszalag-sérülés.",
+        1,
+        false
+    ],
+    [
+        36,
+        "Rash",
+        "An irritated area of skin",
+        "Kiütés",
+        "Irritált bőrfelület.",
+        1,
+        true
+    ],
+    [
+        37,
+        "Itching",
+        "An uncomfortable sensation",
+        "Viszketés",
+        "Kellemetlen, vakarásra ingerlő érzés.",
+        1,
+        true
+    ],
+    [
+        38,
+        "Nausea",
+        "A feeling of wanting to vomit",
+        "Hányinger",
+        "Hányásra való késztetés érzése.",
+        1,
+        false
+    ],
+    [
+        39,
+        "Vomiting",
+        "Forcing stomach contents out",
+        "Hányás",
+        "A gyomortartalom erőteljes kiürítése.",
+        1,
+        true
+    ],
+    [
+        40,
+        "Diarrhoea",
+        "Passing loose stools frequently",
+        "Hasmenés",
+        "Gyakori laza székletürítés.",
+        1,
+        true
+    ],
+    [
+        41,
+        "Constipation",
+        "Difficulty passing stools",
+        "Székrekedés",
+        "Nehézkes székletürítés.",
+        1,
+        false
+    ],
+    [
+        42,
+        "Dizziness",
+        "A feeling of light-headedness",
+        "Szédülés",
+        "Bizonytalanság-, szédelgésérzet.",
+        1,
+        true
+    ],
+    [
+        43,
+        "Fatigue",
+        "Extreme tiredness",
+        "Kimerültség / fáradtság",
+        "Rendkívüli fáradtság.",
+        1,
+        false
+    ],
+    [
+        44,
+        "Weakness",
+        "Lack of physical strength",
+        "Gyengeség",
+        "A testi erő hiánya.",
+        1,
+        true
+    ],
+    [
+        45,
+        "Appetite",
+        "Desire to eat food",
+        "Étvágy",
+        "Étel fogyasztása iránti vágy.",
+        1,
+        true
+    ],
+    [
+        46,
+        "Dehydration",
+        "A lack of body fluids",
+        "Kiszáradás / dehidratáció",
+        "A testfolyadékok hiánya.",
+        1,
+        false
+    ],
+    [
+        47,
+        "Recovery",
+        "The process of healing",
+        "Felépülés / gyógyulás",
+        "A gyógyulás folyamata.",
+        1,
+        true
+    ],
+    [
+        48,
+        "Prevention",
+        "Action to avoid illness",
+        "Megelőzés / prevenció",
+        "A betegség elkerülésére irányuló tevékenység.",
+        1,
+        true
+    ],
+    [
+        49,
+        "Vaccination",
+        "Giving a vaccine",
+        "Védőoltás / vakcináció",
+        "Oltóanyag beadása.",
+        1,
+        true
+    ],
+    [
+        50,
+        "Immunity",
+        "The body's ability to fight infections",
+        "Immunitás / védettség",
+        "A szervezet képessége a fertőzések leküzdésére.",
+        1,
+        true
+    ],
+    [
+        51,
+        "Anatomy",
+        "Study of the structure of the body",
+        "Anatómia / bonctan",
+        "A test felépítésének tudománya.",
+        2,
+        false
+    ],
+    [
+        52,
+        "Physiology",
+        "Study of how the body functions",
+        "Élettan / fiziológia",
+        "A test működésének tudománya.",
+        2,
+        false
+    ],
+    [
+        53,
+        "Skeleton",
+        "The framework of bones",
+        "Csontváz",
+        "A csontok alkotta vázrendszer.",
+        2,
+        true
+    ],
+    [
+        54,
+        "Skull",
+        "The bones that protect the brain",
+        "Koponya",
+        "Az agyat védő csontok.",
+        2,
+        true
+    ],
+    [
+        55,
+        "Spine",
+        "The backbone",
+        "Gerinc / gerincoszlop",
+        "A hátgerinc.",
+        2,
+        true
+    ],
+    [
+        56,
+        "Rib",
+        "A bone that protects the chest",
+        "Borda",
+        "A mellkast védő csont.",
+        2,
+        true
+    ],
+    [
+        57,
+        "Joint",
+        "A place where two bones meet",
+        "Ízület",
+        "Hely, ahol két csont találkozik.",
+        2,
+        true
+    ],
+    [
+        58,
+        "Muscle",
+        "Body tissue that produces movement",
+        "Izom",
+        "Mozgást létrehozó testszövet.",
+        2,
+        true
+    ],
+    [
+        59,
+        "Tissue",
+        "A group of similar cells",
+        "Szövet",
+        "Hasonló sejtek csoportja.",
+        2,
+        false
+    ],
+    [
+        60,
+        "Organ",
+        "A body part with a function",
+        "Szerv",
+        "Meghatározott feladatot ellátó testrész.",
+        2,
+        true
+    ],
+    [
+        61,
+        "Brain",
+        "The organ that controls the body",
+        "Agy",
+        "A testet irányító szerv.",
+        2,
+        true
+    ],
+    [
+        62,
+        "Heart",
+        "The organ that pumps blood",
+        "Szív",
+        "A vért pumpáló szerv.",
+        2,
+        true
+    ],
+    [
+        63,
+        "Lung",
+        "An organ used for breathing",
+        "Tüdő",
+        "A légzésre szolgáló szerv.",
+        2,
+        true
+    ],
+    [
+        64,
+        "Liver",
+        "Processes nutrients and removes waste",
+        "Máj",
+        "Feldolgozza a tápanyagokat és eltávolítja a salakanyagokat.",
+        2,
+        true
+    ],
+    [
+        65,
+        "Kidney",
+        "Filters waste from blood",
+        "Vese",
+        "Kiszűri a salakanyagokat a vérből.",
+        2,
+        true
+    ],
+    [
+        66,
+        "Stomach",
+        "Helps digest food",
+        "Gyomor",
+        "Segít megemészteni az ételt.",
+        2,
+        true
+    ],
+    [
+        67,
+        "Intestine",
+        "Absorbs nutrients",
+        "Bél / bélrendszer",
+        "Felszívja a tápanyagokat.",
+        2,
+        false
+    ],
+    [
+        68,
+        "Pancreas",
+        "Produces digestive enzymes",
+        "Hasnyálmirigy",
+        "Emésztőenzimeket termel.",
+        2,
+        false
+    ],
+    [
+        69,
+        "Bladder",
+        "Stores urine",
+        "Húgyhólyag",
+        "Tárolja a vizeletet.",
+        2,
+        false
+    ],
+    [
+        70,
+        "Throat",
+        "Passage for food and air",
+        "Torok",
+        "Átjáró az étel és a levegő számára.",
+        2,
+        true
+    ],
+    [
+        71,
+        "Esophagus",
+        "Carries food to stomach",
+        "Nyelőcső",
+        "A gyomorba juttatja az ételt.",
+        2,
+        false
+    ],
+    [
+        72,
+        "Trachea",
+        "The windpipe",
+        "Légcső",
+        "A levegő útja a tüdőbe.",
+        2,
+        false
+    ],
+    [
+        73,
+        "Blood",
+        "Circulates through the body",
+        "Vér",
+        "Kering a testben.",
+        2,
+        true
+    ],
+    [
+        74,
+        "Artery",
+        "Carries blood away from heart",
+        "Artéria / ütőér",
+        "Elszállítja a vért a szívtől.",
+        2,
+        false
+    ],
+    [
+        75,
+        "Vein",
+        "Carries blood towards the heart",
+        "Vénavisszér / gyűjtőér",
+        "A szív felé szállítja a vért.",
+        2,
+        false
+    ],
+    [
+        76,
+        "Capillary",
+        "Very small blood vessel",
+        "Hajszálér / kapilláris",
+        "Nagyon apró véredény.",
+        2,
+        false
+    ],
+    [
+        77,
+        "Nerve",
+        "Carries signals in the body",
+        "Ideg",
+        "Jeleket továbbít a testben.",
+        2,
+        true
+    ],
+    [
+        78,
+        "Skin",
+        "Outer covering of the body",
+        "Bőr",
+        "A test külső borítása.",
+        2,
+        true
+    ],
+    [
+        79,
+        "Epidermis",
+        "Outer layer of skin",
+        "Felhám",
+        "A bőr legkülső rétege.",
+        2,
+        false
+    ],
+    [
+        80,
+        "Dermis",
+        "Layer beneath epidermis",
+        "Irha",
+        "A felhám alatti bőrréteg.",
+        2,
+        false
+    ],
+    [
+        81,
+        "Cell",
+        "Basic unit of life",
+        "Sejt",
+        "Az élet alapvető egysége.",
+        2,
+        true
+    ],
+    [
+        82,
+        "Red blood cell",
+        "Carries oxygen",
+        "Vörösvértest",
+        "Oxigént szállít.",
+        2,
+        false
+    ],
+    [
+        83,
+        "White blood cell",
+        "Fights infection",
+        "Fehérvérsejt",
+        "Harcol a fertőzések ellen.",
+        2,
+        false
+    ],
+    [
+        84,
+        "Platelet",
+        "Helps blood clot",
+        "Vérlemezke",
+        "Segíti a véralvadást.",
+        2,
+        false
+    ],
+    [
+        85,
+        "Plasma",
+        "Liquid part of blood",
+        "Vérplazma",
+        "A vér folyékony része.",
+        2,
+        false
+    ],
+    [
+        86,
+        "Hormone",
+        "Chemical messenger",
+        "Hormon",
+        "Kémiai hírvivő anyag.",
+        2,
+        true
+    ],
+    [
+        87,
+        "Gland",
+        "Produces substances",
+        "Mirigy",
+        "Különböző anyagokat termelő szerv.",
+        2,
+        false
+    ],
+    [
+        88,
+        "Thyroid",
+        "Regulates metabolism",
+        "Pajzsmirigy",
+        "Szabályozza az anyagcserét.",
+        2,
+        false
+    ],
+    [
+        89,
+        "Diaphragm",
+        "Used in breathing",
+        "Rekeszizom",
+        "A légzésben részt vevő izom.",
+        2,
+        false
+    ],
+    [
+        90,
+        "Retina",
+        "Light-sensitive layer",
+        "Retina / ideghártya",
+        "A szem fényérzékeny rétege.",
+        2,
+        false
+    ],
+    [
+        91,
+        "Pupil",
+        "Opening in the eye",
+        "Pupilla / szembogár",
+        "Nyílás a szemen.",
+        2,
+        false
+    ],
+    [
+        92,
+        "Iris",
+        "Coloured part of the eye",
+        "Írisz / szivárványhártya",
+        "A szem színes része.",
+        2,
+        false
+    ],
+    [
+        93,
+        "Cornea",
+        "Transparent front of eye",
+        "Szaruhártya",
+        "A szem átlátszó elülső része.",
+        2,
+        false
+    ],
+    [
+        94,
+        "Eardrum",
+        "Thin membrane in ear",
+        "Dohártya",
+        "Vékony hártya a fülben.",
+        2,
+        false
+    ],
+    [
+        95,
+        "Cartilage",
+        "Flexible connective tissue",
+        "Porc",
+        "Rugalmas kötőszövet.",
+        2,
+        false
+    ],
+    [
+        96,
+        "Ligament",
+        "Connects bones",
+        "Ínszalag",
+        "Összeköti a csontokat.",
+        2,
+        false
+    ],
+    [
+        97,
+        "Tendon",
+        "Connects muscle to bone",
+        "Ín",
+        "Összeköti az izmot a csonttal.",
+        2,
+        false
+    ],
+    [
+        98,
+        "Marrow",
+        "Soft tissue in bones",
+        "Csontvelő",
+        "Lágy szövet a csontok belsejében.",
+        2,
+        false
+    ],
+    [
+        99,
+        "Pelvis",
+        "Bony structure at base",
+        "Medence / medencecsont",
+        "Csontos szerkezet a törzs alsó részén.",
+        2,
+        false
+    ],
+    [
+        100,
+        "Abdomen",
+        "Area between chest and pelvis",
+        "Has / hasüreg",
+        "A mellkas és a medence közötti terület.",
+        2,
+        false
+    ],
+    [
+        101,
+        "Diabetes",
+        "A condition involving high blood sugar",
+        "Cukorbetegség / diabétesz",
+        "Magas vércukorszinttel járó állapot.",
+        3,
+        true
+    ],
+    [
+        102,
+        "Hypertension",
+        "High blood pressure",
+        "Magas vérnyomás",
+        "Tartósan emelkedett vérnyomás.",
+        3,
+        false
+    ],
+    [
+        103,
+        "Hypotension",
+        "Low blood pressure",
+        "Alacsony vérnyomás",
+        "Szokatlanul alacsony vérnyomás.",
+        3,
+        false
+    ],
+    [
+        104,
+        "Asthma",
+        "A condition that causes narrowed airways",
+        "Asztma",
+        "A légutak beszűkülését okozó betegség.",
+        3,
+        true
+    ],
+    [
+        105,
+        "Arthritis",
+        "Inflammation of the joints",
+        "Ízületi gyulladás",
+        "Az ízületek gyulladása.",
+        3,
+        false
+    ],
+    [
+        106,
+        "Anaemia",
+        "A condition involving low red blood cells",
+        "Vérszegénység / anémia",
+        "Alacsony vörösvértestszámmal járó állapot.",
+        3,
+        false
+    ],
+    [
+        107,
+        "Migraine",
+        "A neurological condition",
+        "Migrén",
+        "Erős fejfájással járó neurológiai állapot.",
+        3,
+        true
+    ],
+    [
+        108,
+        "Epilepsy",
+        "Repeated seizures",
+        "Epilepszia",
+        "Ismétlődő görcsrohamokkal járó betegség.",
+        3,
+        false
+    ],
+    [
+        109,
+        "Pneumonia",
+        "An infection in the lungs",
+        "Tüdőgyulladás",
+        "Fertőzés a tüdőben.",
+        3,
+        false
+    ],
+    [
+        110,
+        "Bronchitis",
+        "Inflammation of bronchi",
+        "Hörghurut",
+        "A hörgők gyulladása.",
+        3,
+        false
+    ],
+    [
+        111,
+        "Tuberculosis",
+        "An infectious disease",
+        "Tuberkulózis / gümőkór",
+        "Fertőző bakteriális betegség.",
+        3,
+        false
+    ],
+    [
+        112,
+        "Cancer",
+        "Uncontrolled cell growth",
+        "Rák / daganatos betegség",
+        "Kontrollálatlan sejtnövekedés.",
+        3,
+        true
+    ],
+    [
+        113,
+        "Tumour",
+        "An abnormal growth",
+        "Daganat / tumor",
+        "Kóros szövetburjánzás.",
+        3,
+        false
+    ],
+    [
+        114,
+        "Ulcer",
+        "An open sore",
+        "Fekély",
+        "Nyílt seb a bőrön vagy nyálkahártyán.",
+        3,
+        false
+    ],
+    [
+        115,
+        "Gastritis",
+        "Inflammation of stomach",
+        "Gyomorhurut / gyomornyálkahártya-gyulladás",
+        "A gyomor gyulladása.",
+        3,
+        false
+    ],
+    [
+        116,
+        "Hepatitis",
+        "Inflammation of liver",
+        "Májgyulladás / hepatitisz",
+        "A máj gyulladása.",
+        3,
+        false
+    ],
+    [
+        117,
+        "Jaundice",
+        "Yellowing of skin and eyes",
+        "Sárgaság",
+        "A bőr és a szemfehérje besárgulása.",
+        3,
+        false
+    ],
+    [
+        118,
+        "Kidney stone",
+        "A hard deposit",
+        "Vesekő",
+        "Kemény lerakódás a vesében.",
+        3,
+        false
+    ],
+    [
+        119,
+        "Heart attack",
+        "Damage to heart",
+        "Szívroham / szívinfarktus",
+        "A szívizom károsodása.",
+        3,
+        true
+    ],
+    [
+        120,
+        "Stroke",
+        "Brain injury",
+        "Szélütés / agyvérzés / stroke",
+        "Agyi keringési zavar okozta sérülés.",
+        3,
+        true
+    ],
+    [
+        121,
+        "Paralysis",
+        "Loss of movement",
+        "Bénulás",
+        "A mozgásképesség elvesztése.",
+        3,
+        false
+    ],
+    [
+        122,
+        "Insomnia",
+        "Difficulty sleeping",
+        "Álmatlanság",
+        "Alvási nehézség.",
+        3,
+        true
+    ],
+    [
+        123,
+        "Depression",
+        "Low mood",
+        "Depresszió",
+        "Tartósan levert hangulat.",
+        3,
+        true
+    ],
+    [
+        124,
+        "Anxiety",
+        "Excessive worry",
+        "Szorongás",
+        "Túlzott aggodalom és félelem.",
+        3,
+        true
+    ],
+    [
+        125,
+        "Obesity",
+        "Excess body fat",
+        "Elhízás",
+        "Túlzott testzsír-felhalmozódás.",
+        3,
+        true
+    ],
+    [
+        126,
+        "Malnutrition",
+        "Poor nutrition",
+        "Alultápláltság",
+        "Elégtelen vagy helytelen táplálkozás.",
+        3,
+        false
+    ],
+    [
+        127,
+        "Osteoporosis",
+        "Weak bones",
+        "Csontritkulás",
+        "A csontok meggyengülése.",
+        3,
+        false
+    ],
+    [
+        128,
+        "Cataract",
+        "Clouding of eye lens",
+        "Szürkehályog",
+        "A szemlencse elhomályosodása.",
+        3,
+        false
+    ],
+    [
+        129,
+        "Glaucoma",
+        "Damage to optic nerve",
+        "Zöldhályog",
+        "A látóideg károsodása.",
+        3,
+        false
+    ],
+    [
+        130,
+        "Eczema",
+        "Inflamed itchy skin",
+        "Ekcéma",
+        "Gyulladt, viszkető bőr.",
+        3,
+        false
+    ],
+    [
+        131,
+        "Psoriasis",
+        "Scaly skin patches",
+        "Pikkelysömör",
+        "Hámló bőrfoltok.",
+        3,
+        false
+    ],
+    [
+        132,
+        "Dermatitis",
+        "Skin inflammation",
+        "Bőrgyulladás",
+        "A bőr gyulladásos állapota.",
+        3,
+        false
+    ],
+    [
+        133,
+        "Meningitis",
+        "Inflammation of membranes",
+        "Agyhártyagyulladás",
+        "Az agyhártyák gyulladása.",
+        3,
+        false
+    ],
+    [
+        134,
+        "Sepsis",
+        "Life-threatening infection",
+        "Vérmérgezés / szepszis",
+        "Életveszélyes fertőzéses állapot.",
+        3,
+        false
+    ],
+    [
+        135,
+        "Malaria",
+        "Mosquito-borne disease",
+        "Malária",
+        "Szúnyogok által terjesztett betegség.",
+        3,
+        false
+    ],
+    [
+        136,
+        "Dengue",
+        "Viral illness",
+        "Dengue-láz",
+        "Trópusi vírusos betegség.",
+        3,
+        false
+    ],
+    [
+        137,
+        "Typhoid",
+        "Bacterial infection",
+        "Tífusz / hastífusz",
+        "Bakteriális fertőzés.",
+        3,
+        false
+    ],
+    [
+        138,
+        "Cholera",
+        "Severe watery diarrhoea",
+        "Kolera",
+        "Súlyos vizes hasmenéssel járó fertőzés.",
+        3,
+        false
+    ],
+    [
+        139,
+        "Measles",
+        "Contagious viral disease",
+        "Kanyaró",
+        "Fertőző vírusos betegség.",
+        3,
+        false
+    ],
+    [
+        140,
+        "Chickenpox",
+        "Itchy rash",
+        "Bárányhimlő",
+        "Viszkető kiütésekkel járó vírusos betegség.",
+        3,
+        true
+    ],
+    [
+        141,
+        "Mumps",
+        "Swollen salivary glands",
+        "Mumpsz",
+        "A nyálmirigyek duzzanatával járó betegség.",
+        3,
+        false
+    ],
+    [
+        142,
+        "Rubella",
+        "German measles",
+        "Rubeola / rózsahimlő",
+        "Enyhe lefolyású vírusos kiütéses betegség.",
+        3,
+        false
+    ],
+    [
+        143,
+        "Whooping cough",
+        "Severe coughing",
+        "Szamárköhögés",
+        "Súlyos köhögési rohamokkal járó betegség.",
+        3,
+        false
+    ],
+    [
+        144,
+        "Tonsillitis",
+        "Inflamed tonsils",
+        "Mandulagyulladás",
+        "A mandulák gyulladása.",
+        3,
+        false
+    ],
+    [
+        145,
+        "Sinusitis",
+        "Inflamed sinuses",
+        "Arcüreggyulladás",
+        "Az orrmelléküregek gyulladása.",
+        3,
+        false
+    ],
+    [
+        146,
+        "Appendicitis",
+        "Inflamed appendix",
+        "Vakbélgyulladás",
+        "A féregnyúlvány gyulladása.",
+        3,
+        false
+    ],
+    [
+        147,
+        "Pancreatitis",
+        "Inflamed pancreas",
+        "Hasnyálmirigy-gyulladás",
+        "A hasnyálmirigy gyulladása.",
+        3,
+        false
+    ],
+    [
+        148,
+        "Endometriosis",
+        "Tissue outside uterus",
+        "Endometriózis",
+        "Méhnyálkahártya-szövet megjelenése a méhen kívül.",
+        3,
+        false
+    ],
+    [
+        149,
+        "Hypothyroidism",
+        "Underactive thyroid",
+        "Pajzsmirigy-alulműködés",
+        "Alulműködő pajzsmirigy.",
+        3,
+        false
+    ],
+    [
+        150,
+        "Hyperthyroidism",
+        "Overactive thyroid",
+        "Pajzsmirigy-túlműködés",
+        "Túlműködő pajzsmirigy.",
+        3,
+        false
+    ],
+    [
+        151,
+        "Blood test",
+        "A test performed on a blood sample",
+        "Vérvizsgálat / vérvétel",
+        "Vérmintán végzett laborvizsgálat.",
+        4,
+        true
+    ],
+    [
+        152,
+        "Urine test",
+        "An examination of urine",
+        "Vizeletvizsgálat",
+        "A vizelet laboratóriumi vizsgálata.",
+        4,
+        true
+    ],
+    [
+        153,
+        "Biopsy",
+        "Removal of tissue for examination",
+        "Biopszia / szövettani mintavétel",
+        "Szövetminta eltávolítása vizsgálat céljából.",
+        4,
+        false
+    ],
+    [
+        154,
+        "X-ray",
+        "An imaging test using radiation",
+        "Röntgen / röntgenvizsgálat",
+        "Sugárzást használó képalkotó vizsgálat.",
+        4,
+        true
+    ],
+    [
+        155,
+        "Ultrasound",
+        "Imaging using sound waves",
+        "Ultrahang",
+        "Hanghullámokat használó képalkotó vizsgálat.",
+        4,
+        true
+    ],
+    [
+        156,
+        "MRI",
+        "Magnetic resonance imaging",
+        "MRI (mágneses rezonanciás képalkotás)",
+        "Mágneses teret használó részletes képalkotó vizsgálat.",
+        4,
+        false
+    ],
+    [
+        157,
+        "CT scan",
+        "Detailed imaging using X-rays and computers",
+        "CT-vizsgálat",
+        "Röntgensugarakat és számítógépet használó részletes képalkotás.",
+        4,
+        false
+    ],
+    [
+        158,
+        "ECG",
+        "A test recording the heart's electrical activity",
+        "EKG (elektrokardiogram)",
+        "A szív elektromos aktivitását rögzítő vizsgálat.",
+        4,
+        false
+    ],
+    [
+        159,
+        "EEG",
+        "A test recording electrical activity in the brain",
+        "EEG (elektroenkefalogram)",
+        "Az agy elektromos aktivitását rögzítő vizsgálat.",
+        4,
+        false
+    ],
+    [
+        160,
+        "Endoscopy",
+        "Examination using a camera",
+        "Endoszkópia / tükrözés",
+        "Kamerával végzett belső vizsgálat.",
+        4,
+        false
+    ],
+    [
+        161,
+        "Colonoscopy",
+        "Examination of the large intestine",
+        "Kolonoszkópia / vastagbéltükrözés",
+        "A vastagbél kamerás vizsgálata.",
+        4,
+        false
+    ],
+    [
+        162,
+        "Mammogram",
+        "An X-ray of the breast",
+        "Mammográfia",
+        "Az emlő röntgenvizsgálata.",
+        4,
+        false
+    ],
+    [
+        163,
+        "Screening",
+        "Testing to detect a disease early",
+        "Szűrővizsgálat",
+        "Betegség korai felismerésére szolgáló vizsgálat.",
+        4,
+        true
+    ],
+    [
+        164,
+        "Diagnosis test",
+        "A test to identify a condition",
+        "Diagnosztikai vizsgálat",
+        "Egy állapot azonosítására szolgáló teszt.",
+        4,
+        false
+    ],
+    [
+        165,
+        "Blood pressure monitor",
+        "Measures blood pressure",
+        "Vérnyomásmérő",
+        "A vérnyomás mérésére szolgáló eszköz.",
+        4,
+        true
+    ],
+    [
+        166,
+        "Thermometer",
+        "Measures temperature",
+        "Lázmérő / hőmérő",
+        "A testhőmérséklet mérésére szolgáló eszköz.",
+        4,
+        true
+    ],
+    [
+        167,
+        "Stethoscope",
+        "Listens to body sounds",
+        "Sztetoszkóp / fonendoszkóp",
+        "A testhangok (szív, tüdő) meghallgatására szolgál.",
+        4,
+        true
+    ],
+    [
+        168,
+        "Syringe",
+        "Injects or withdraws fluids",
+        "Fecskendő",
+        "Folyadékok beadására vagy leszívására szolgáló eszköz.",
+        4,
+        true
+    ],
+    [
+        169,
+        "Needle",
+        "A sharp instrument",
+        "Tű / injekciós tű",
+        "Hegyes orvosi eszköz.",
+        4,
+        true
+    ],
+    [
+        170,
+        "Bandage",
+        "Covers an injury",
+        "Kötszer / fáslis kötés",
+        "Sérülés befedésére szolgáló anyag.",
+        4,
+        true
+    ],
+    [
+        171,
+        "Gauze",
+        "A soft dressing material",
+        "Géz / gézlap",
+        "Puha sebkötöző anyag.",
+        4,
+        false
+    ],
+    [
+        172,
+        "Cotton swab",
+        "Cleans a small area",
+        "Vattapálca / törlőpálca",
+        "Kis terület tisztítására szolgál.",
+        4,
+        true
+    ],
+    [
+        173,
+        "Surgical mask",
+        "Reduces germs",
+        "Sebészi maszk / szájmaszk",
+        "Csökkenti a kórokozók terjedését.",
+        4,
+        true
+    ],
+    [
+        174,
+        "Gloves",
+        "Protects hands",
+        "Orvosi kesztyű / gumikesztyű",
+        "Védi a kezet.",
+        4,
+        true
+    ],
+    [
+        175,
+        "Wheelchair",
+        "Helps with mobility",
+        "Kerekesszék",
+        "Segíti a mozgásban korlátozottak helyváltoztatását.",
+        4,
+        true
+    ],
+    [
+        176,
+        "Crutches",
+        "Supports for walking",
+        "Mankó",
+        "Járást segítő támasz.",
+        4,
+        true
+    ],
+    [
+        177,
+        "Stretcher",
+        "Carries injured patients",
+        "Hordágy",
+        "Sérült betegek szállítására szolgál.",
+        4,
+        false
+    ],
+    [
+        178,
+        "Ventilator",
+        "Helps a person breathe",
+        "Lélegeztetőgép",
+        "Segíti a beteg légzését.",
+        4,
+        false
+    ],
+    [
+        179,
+        "Oxygen cylinder",
+        "Stores medical oxygen",
+        "Oxigénpalack",
+        "Orvosi oxigént tárol.",
+        4,
+        false
+    ],
+    [
+        180,
+        "Nebulizer",
+        "Turns medicine into a mist",
+        "Porlasztó / inhalátor",
+        "Permetté alakítja a gyógyszert.",
+        4,
+        false
+    ],
+    [
+        181,
+        "Defibrillator",
+        "Corrects heart rhythm",
+        "Defibrillátor",
+        "Helyreállítja a szívritmust.",
+        4,
+        false
+    ],
+    [
+        182,
+        "Pacemaker",
+        "Regulates heartbeat",
+        "Szívritmus-szabályozó / pacemaker",
+        "Szabályozza a szívverést.",
+        4,
+        false
+    ],
+    [
+        183,
+        "Catheter",
+        "A thin tube",
+        "Katéter",
+        "Vékony orvosi cső.",
+        4,
+        false
+    ],
+    [
+        184,
+        "IV drip",
+        "Gives fluids through a vein",
+        "Infúziós csepegtető",
+        "Vénán keresztül juttat folyadékot a szervezetbe.",
+        4,
+        false
+    ],
+    [
+        185,
+        "Infusion",
+        "Slow delivery of medicine",
+        "Infúzió",
+        "Gyógyszer vagy folyadék lassú adagolása.",
+        4,
+        false
+    ],
+    [
+        186,
+        "Injection",
+        "Medicine given by a needle",
+        "Injekció",
+        "Tűvel beadott gyógyszer.",
+        4,
+        true
+    ],
+    [
+        187,
+        "Anesthesia",
+        "Loss of sensation",
+        "Érzéstelenítés / altatás",
+        "Az érzékelés megszüntetése.",
+        4,
+        false
+    ],
+    [
+        188,
+        "Sedation",
+        "Reduces awareness",
+        "Nyugtatás / bódítás",
+        "Csökkenti az éberséget és a szorongást.",
+        4,
+        false
+    ],
+    [
+        189,
+        "Sterilization",
+        "Removes germs",
+        "Sterilizálás / csírátlanítás",
+        "Eltávolítja az összes kórokozót.",
+        4,
+        false
+    ],
+    [
+        190,
+        "Disinfection",
+        "Reduces harmful germs",
+        "Fertőtlenítés",
+        "Csökkenti a káros kórokozók számát.",
+        4,
+        true
+    ],
+    [
+        191,
+        "Sutures",
+        "Stitches to close wounds",
+        "Sebészeti varratok / öltések",
+        "Öltések a sebek bezárására.",
+        4,
+        false
+    ],
+    [
+        192,
+        "Transfusion",
+        "Transfer of blood",
+        "Vérátömlesztés / transzfúzió",
+        "Vér átvitele egyik személyből a másikba.",
+        4,
+        false
+    ],
+    [
+        193,
+        "Dialysis",
+        "Filters waste from blood",
+        "Dialízis / művesekezelés",
+        "Kiszűri a salakanyagokat a vérből.",
+        4,
+        false
+    ],
+    [
+        194,
+        "Transplant",
+        "Moves an organ",
+        "Szervátültetés / transzplantáció",
+        "Szerv áthelyezése.",
+        4,
+        false
+    ],
+    [
+        195,
+        "Amputation",
+        "Surgical removal of a body part",
+        "Amputáció",
+        "Egy testrész sebészi eltávolítása.",
+        4,
+        false
+    ],
+    [
+        196,
+        "Endotracheal tube",
+        "Supports breathing",
+        "Légcsőtubus",
+        "Biztosítja a szabad légutat és a légzést.",
+        4,
+        false
+    ],
+    [
+        197,
+        "Pulse oximeter",
+        "Measures oxygen in blood",
+        "Pulzoximéter",
+        "Méri a vér oxigénszintjét.",
+        4,
+        false
+    ],
+    [
+        198,
+        "Glucometer",
+        "Measures blood sugar",
+        "Vércukormérő",
+        "Méri a vércukorszintet.",
+        4,
+        false
+    ],
+    [
+        199,
+        "Otoscope",
+        "Examines the ear",
+        "Otoszkóp / fültükör",
+        "A fül vizsgálatára szolgáló eszköz.",
+        4,
+        false
+    ],
+    [
+        200,
+        "Ophthalmoscope",
+        "Examines the eye",
+        "Oftalmoszkóp / szemtükör",
+        "A szem vizsgálatára szolgáló eszköz.",
+        4,
+        false
+    ],
+    [
+        201,
+        "Antibiotic",
+        "Medicine used to treat bacterial infections",
+        "Antibiotikum",
+        "Bakteriális fertőzések kezelésére használt gyógyszer.",
+        5,
+        true
+    ],
+    [
+        202,
+        "Antiviral",
+        "Medicine used to treat viral infections",
+        "Vírusellenes szer",
+        "Vírusos fertőzések kezelésére használt gyógyszer.",
+        5,
+        false
+    ],
+    [
+        203,
+        "Antifungal",
+        "Medicine used to treat fungal infections",
+        "Gombaellenes szer",
+        "Gombás fertőzések kezelésére használt gyógyszer.",
+        5,
+        false
+    ],
+    [
+        204,
+        "Painkiller",
+        "Medicine used to relieve pain",
+        "Fájdalomcsillapító",
+        "Fájdalom enyhítésére használt gyógyszer.",
+        5,
+        true
+    ],
+    [
+        205,
+        "Analgesic",
+        "A medicine that reduces pain",
+        "Fájdalomcsillapító szer (analgetikum)",
+        "Fájdalmat csökkentő gyógyszer.",
+        5,
+        false
+    ],
+    [
+        206,
+        "Antiseptic",
+        "A substance to prevent infection",
+        "Fertőtlenítőszer (antiszeptikum)",
+        "Fertőzés megelőzésére szolgáló anyag.",
+        5,
+        false
+    ],
+    [
+        207,
+        "Antacid",
+        "Medicine to neutralise stomach acid",
+        "Savlekötő",
+        "Gyomorsavat semlegesítő gyógyszer.",
+        5,
+        false
+    ],
+    [
+        208,
+        "Antihistamine",
+        "Medicine to relieve allergies",
+        "Antihisztamin",
+        "Allergiás tünetek enyhítésére szolgáló gyógyszer.",
+        5,
+        false
+    ],
+    [
+        209,
+        "Antidepressant",
+        "Medicine for depression",
+        "Antidepresszáns",
+        "Depresszió kezelésére szolgáló gyógyszer.",
+        5,
+        false
+    ],
+    [
+        210,
+        "Anticoagulant",
+        "Medicine to reduce clotting",
+        "Véralvadásgátló",
+        "A véralvadást csökkentő gyógyszer.",
+        5,
+        false
+    ],
+    [
+        211,
+        "Vaccine",
+        "A preparation to prevent disease",
+        "Vakcina / oltóanyag",
+        "Betegség megelőzésére szolgáló készítmény.",
+        5,
+        true
+    ],
+    [
+        212,
+        "Insulin",
+        "A hormone to regulate blood sugar",
+        "Inzulin",
+        "A vércukorszintet szabályozó hormon.",
+        5,
+        true
+    ],
+    [
+        213,
+        "Sedative",
+        "Medicine to calm or relax",
+        "Nyugtató",
+        "Megnyugvást vagy ellazulást segítő gyógyszer.",
+        5,
+        false
+    ],
+    [
+        214,
+        "Laxative",
+        "Medicine to relieve constipation",
+        "Hashajtó",
+        "Székrekedés enyhítésére szolgáló gyógyszer.",
+        5,
+        false
+    ],
+    [
+        215,
+        "Diuretic",
+        "Medicine to increase urine flow",
+        "Vízhajtó",
+        "A vizeletkiválasztást fokozó gyógyszer.",
+        5,
+        false
+    ],
+    [
+        216,
+        "Steroid",
+        "Medicine for inflammation",
+        "Szteroid",
+        "Gyulladáscsökkentő hatású gyógyszer.",
+        5,
+        false
+    ],
+    [
+        217,
+        "Ointment",
+        "A soft medicine for skin",
+        "Kenőcs",
+        "Bőrre kenhető lágy gyógyszerkészítmény.",
+        5,
+        true
+    ],
+    [
+        218,
+        "Cream",
+        "A soft preparation for skin",
+        "Krém",
+        "Bőrre való lágy készítmény.",
+        5,
+        true
+    ],
+    [
+        219,
+        "Tablet",
+        "Solid medicine dose",
+        "Tabletta",
+        "Szilárd gyógyszeradag.",
+        5,
+        true
+    ],
+    [
+        220,
+        "Capsule",
+        "Medicine in a shell",
+        "Kapszula",
+        "Burokba zárt gyógyszer.",
+        5,
+        true
+    ],
+    [
+        221,
+        "Syrup",
+        "A liquid medicine",
+        "Szirup",
+        "Folyékony gyógyszerkészítmény.",
+        5,
+        true
+    ],
+    [
+        222,
+        "Drops",
+        "Liquid medicine in small amounts",
+        "Cseppek",
+        "Kis mennyiségben adagolt folyékony gyógyszer.",
+        5,
+        true
+    ],
+    [
+        223,
+        "Dosage",
+        "The amount of medicine",
+        "Adagolás",
+        "A gyógyszer előírt mennyisége.",
+        5,
+        true
+    ],
+    [
+        224,
+        "Dose",
+        "A single measured amount",
+        "Adag / dózis",
+        "Egyszeri kimért mennyiség.",
+        5,
+        true
+    ],
+    [
+        225,
+        "Side effect",
+        "An unwanted effect",
+        "Mellékhatás",
+        "Nem kívánt hatás.",
+        5,
+        true
+    ],
+    [
+        226,
+        "Overdose",
+        "Taking more medicine than is safe",
+        "Túladagolás",
+        "A biztonságosnál több gyógyszer bevétele.",
+        5,
+        true
+    ],
+    [
+        227,
+        "Interaction",
+        "Effect when medicines mix",
+        "Gyógyszerkölcsönhatás",
+        "Hatás, amely gyógyszerek együttes szedésekor lép fel.",
+        5,
+        false
+    ],
+    [
+        228,
+        "Expiry date",
+        "Date after which it should not be used",
+        "Lejárati dátum",
+        "Dátum, amely után a készítmény nem használható.",
+        5,
+        true
+    ],
+    [
+        229,
+        "Generic medicine",
+        "Standard name medicine",
+        "Generikus gyógyszer",
+        "Hatóanyagneves / nem márkázott gyógyszer.",
+        5,
+        false
+    ],
+    [
+        230,
+        "Brand-name medicine",
+        "Company brand medicine",
+        "Márkázott / originális gyógyszer",
+        "Gyártói márkanévvel ellátott gyógyszer.",
+        5,
+        false
+    ],
+    [
+        231,
+        "Dispenser",
+        "A person who provides medicine",
+        "Gyógyszerkiadó / adagoló",
+        "Gyógyszert kiadó személy (vagy adagolóeszköz).",
+        5,
+        false
+    ],
+    [
+        232,
+        "Pharmacist",
+        "A professional in medicines",
+        "Gyógyszerész",
+        "Gyógyszerekkel foglalkozó szakember.",
+        5,
+        true
+    ],
+    [
+        233,
+        "Pharmacology",
+        "Study of medicines",
+        "Gyógyszertan / farmakológia",
+        "A gyógyszerek hatásának tudománya.",
+        5,
+        false
+    ],
+    [
+        234,
+        "Toxicity",
+        "The degree of harm",
+        "Toxicitás / mérgező hatás",
+        "A károsító hatás mértéke.",
+        5,
+        false
+    ],
+    [
+        235,
+        "Contraindication",
+        "A reason not to use",
+        "Ellenjavallat",
+        "Ok, amiért a gyógyszer nem alkalmazható.",
+        5,
+        false
+    ],
+    [
+        236,
+        "Placebo",
+        "A treatment with no active ingredient",
+        "Placebo",
+        "Hatóanyag nélküli készítmény.",
+        5,
+        false
+    ],
+    [
+        237,
+        "Supplement",
+        "A product to add nutrients",
+        "Étrend-kiegészítő",
+        "Tápanyagokat pótló készítmény.",
+        5,
+        true
+    ],
+    [
+        238,
+        "Vitamin",
+        "An essential nutrient",
+        "Vitamin",
+        "Nélkülözhetetlen mikrotápanyag.",
+        5,
+        true
+    ],
+    [
+        239,
+        "Mineral",
+        "An essential mineral",
+        "Ásványi anyag",
+        "Nélkülözhetetlen szervetlen tápanyag.",
+        5,
+        true
+    ],
+    [
+        240,
+        "Calcium",
+        "A mineral for bones",
+        "Kalcium",
+        "A csontok számára fontos ásványi anyag.",
+        5,
+        true
+    ],
+    [
+        241,
+        "Iron",
+        "A mineral for red blood cells",
+        "Vas",
+        "A vörösvértestek számára fontos ásványi anyag.",
+        5,
+        true
+    ],
+    [
+        242,
+        "Protein",
+        "A nutrient for growth",
+        "Fehérje / protein",
+        "A növekedéshez és regenerációhoz szükséges tápanyag.",
+        5,
+        true
+    ],
+    [
+        243,
+        "Glucose",
+        "A simple sugar for energy",
+        "Glükóz / szőlőcukor",
+        "Energiát adó egyszerű cukor.",
+        5,
+        false
+    ],
+    [
+        244,
+        "Insulin resistance",
+        "Poor response to insulin",
+        "Inzulinrezisztencia",
+        "A sejtek gyenge válasza az inzulinra.",
+        5,
+        false
+    ],
+    [
+        245,
+        "Prescription medicine",
+        "Medicine with a prescription",
+        "Vényköteles gyógyszer",
+        "Csak orvosi receptre kiváltható gyógyszer.",
+        5,
+        true
+    ],
+    [
+        246,
+        "OTC medicine",
+        "Medicine without prescription",
+        "Vény nélkül kapható gyógyszer",
+        "Recept nélkül megvásárolható gyógyszer.",
+        5,
+        false
+    ],
+    [
+        247,
+        "Dosage form",
+        "The physical form of medicine",
+        "Gyógyszerforma",
+        "A gyógyszer fizikai megjelenési formája (pl. tabletta, szirup).",
+        5,
+        false
+    ],
+    [
+        249,
+        "Oral medicine",
+        "Taken by mouth",
+        "Szájon át szedhető gyógyszer",
+        "Szájon át bevehető készítmény.",
+        5,
+        false
+    ],
+    [
+        250,
+        "Adverse reaction",
+        "An harmful response",
+        "Káros mellékhatás / nemkívánatos reakció",
+        "Káros szervezeti válaszreakció.",
+        5,
+        false
+    ],
+    [
+        251,
+        "Surgeon",
+        "A doctor who performs operations",
+        "Sebész",
+        "Műtéteket végző orvos.",
+        6,
+        true
+    ],
+    [
+        252,
+        "Cardiologist",
+        "A doctor specialising in heart diseases",
+        "Kardiológus",
+        "Szívbetegségekre szakosodott orvos.",
+        6,
+        true
+    ],
+    [
+        253,
+        "Neurologist",
+        "A doctor specialising in nervous system disorders",
+        "Neurológus / ideggyógyász",
+        "Idegrendszeri betegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        254,
+        "Dermatologist",
+        "A doctor specialising in skin conditions",
+        "Bőrgyógyász",
+        "Bőrbetegségekre szakosodott orvos.",
+        6,
+        true
+    ],
+    [
+        255,
+        "Paediatrician",
+        "A doctor specialising in children's health",
+        "Gyermekorvos",
+        "Gyermekek egészségére szakosodott orvos.",
+        6,
+        true
+    ],
+    [
+        256,
+        "Psychiatrist",
+        "A doctor specialising in mental health",
+        "Pszichiáter",
+        "Mentális egészségre szakosodott orvos.",
+        6,
+        true
+    ],
+    [
+        257,
+        "Gynaecologist",
+        "A doctor specialising in women's reproductive health",
+        "Nőgyógyász",
+        "Női reproduktív egészségre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        258,
+        "Orthopaedist",
+        "A doctor specialising in bones and joints",
+        "Ortopéd szakorvos",
+        "Csontokra és ízületekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        259,
+        "Ophthalmologist",
+        "A doctor specialising in eye diseases",
+        "Szemész szakorvos",
+        "Szembetegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        260,
+        "Dentist",
+        "A professional who treats teeth and gums",
+        "Fogorvos",
+        "Fogakat és ínyt kezelő szakember.",
+        6,
+        true
+    ],
+    [
+        261,
+        "Radiologist",
+        "A doctor specialising in medical imaging",
+        "Radiológus",
+        "Orvosi képalkotásra szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        262,
+        "Anaesthesiologist",
+        "A doctor specialising in anaesthesia",
+        "Aneszteziológus / altatóorvos",
+        "Érzéstelenítésre és altatásra szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        263,
+        "Oncologist",
+        "A doctor specialising in cancer",
+        "Onkológus",
+        "Daganatos betegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        264,
+        "Urologist",
+        "A doctor specialising in urinary and male reproductive systems",
+        "Urológus",
+        "Húgyúti és férfi nemi szervi betegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        265,
+        "Nephrologist",
+        "A doctor specialising in kidney diseases",
+        "Nefrológus",
+        "Vesebetegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        266,
+        "Pulmonologist",
+        "A doctor specialising in lung diseases",
+        "Tüdőgyógyász / pulmonológus",
+        "Tüdőbetegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        267,
+        "Gastroenterologist",
+        "A doctor specialising in digestive system disorders",
+        "Gasztroenterológus",
+        "Emésztőrendszeri betegségekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        268,
+        "Endocrinologist",
+        "A doctor specialising in hormones and glands",
+        "Endokrinológus",
+        "Hormonokra és belső elválasztású mirigyekre szakosodott orvos.",
+        6,
+        false
+    ],
+    [
+        269,
+        "Pathologist",
+        "A doctor who studies diseases using laboratory samples",
+        "Patológus",
+        "Laboratóriumi minták alapján betegségeket vizsgáló orvos.",
+        6,
+        false
+    ],
+    [
+        270,
+        "Physiotherapist",
+        "A professional who helps restore movement and function",
+        "Gyógytornász / fizioterapeuta",
+        "A mozgás és a testi funkciók helyreállítását segítő szakember.",
+        6,
+        true
+    ],
+    [
+        271,
+        "Nutritionist",
+        "A professional who advises on nutrition",
+        "Dietetikus / táplálkozási tanácsadó",
+        "Táplálkozási tanácsadást nyújtó szakember.",
+        6,
+        true
+    ],
+    [
+        272,
+        "Midwife",
+        "A trained professional who assists during childbirth",
+        "Szülésznő / bába",
+        "Szülésnél segédkező képzett szakember.",
+        6,
+        false
+    ],
+    [
+        273,
+        "Paramedic",
+        "A trained emergency medical care professional",
+        "Mentőtiszt / mentős szakember",
+        "Képzett sürgősségi egészségügyi szakember.",
+        6,
+        true
+    ],
+    [
+        274,
+        "Intern",
+        "A trainee working in a medical setting",
+        "Orvosgyakornok",
+        "Egészségügyi intézményben dolgozó gyakornok.",
+        6,
+        false
+    ],
+    [
+        275,
+        "Resident",
+        "A doctor receiving specialist training",
+        "Rezidens orvos",
+        "Szakorvosi képzésben részt vevő orvos.",
+        6,
+        false
+    ],
+    [
+        276,
+        "Ward",
+        "A hospital area for patients",
+        "Kórházi osztály / kórterem",
+        "Betegek elhelyezésére szolgáló kórházi részleg.",
+        6,
+        true
+    ],
+    [
+        277,
+        "Intensive care unit",
+        "A hospital unit for critically ill patients",
+        "Intenzív osztály (ICU)",
+        "Súlyos, kritikus állapotú betegek ellátására szolgáló részleg.",
+        6,
+        false
+    ],
+    [
+        278,
+        "Outpatient",
+        "A patient who does not stay overnight in hospital",
+        "Járóbeteg",
+        "Beteg, aki nem alszik bent a kórházban.",
+        6,
+        false
+    ],
+    [
+        279,
+        "Inpatient",
+        "A patient admitted to hospital",
+        "Fekvőbeteg",
+        "Kórházba felvett beteg.",
+        6,
+        false
+    ],
+    [
+        280,
+        "Discharge",
+        "Official release of a patient from hospital",
+        "Elbocsátás (kórházból)",
+        "A beteg hivatalos hazaengedése a kórházból.",
+        6,
+        false
+    ],
+    [
+        281,
+        "Admission",
+        "The process of accepting a patient into hospital",
+        "Kórházi felvétel",
+        "A beteg kórházba történő felvételének folyamata.",
+        6,
+        false
+    ],
+    [
+        282,
+        "Triage",
+        "Sorting patients according to the urgency of their needs",
+        "Triázs / betegosztályozás",
+        "A betegek ellátási sürgősség szerinti rangsorolása.",
+        6,
+        false
+    ],
+    [
+        283,
+        "Prognosis",
+        "The expected course or outcome of an illness",
+        "Prognózis / kórjóslat",
+        "A betegség várható lefolyása vagy kimenetele.",
+        6,
+        false
+    ],
+    [
+        284,
+        "Chronic",
+        "Continuing for a long time",
+        "Krónikus / idült",
+        "Hosszú ideig fennálló állapot.",
+        6,
+        true
+    ],
+    [
+        285,
+        "Acute",
+        "Starting suddenly or lasting a short time",
+        "Akut / heveny",
+        "Hirtelen kezdődő vagy rövid ideig tartó állapot.",
+        6,
+        false
+    ],
+    [
+        286,
+        "Benign",
+        "Not cancerous",
+        "Jóindulatú",
+        "Nem rákos elváltozás.",
+        6,
+        false
+    ],
+    [
+        287,
+        "Malignant",
+        "Cancerous or harmful",
+        "Rosszindulatú",
+        "Rákos vagy káros elváltozás.",
+        6,
+        false
+    ],
+    [
+        288,
+        "Inflammation",
+        "The body's response to injury or infection",
+        "Gyulladás",
+        "A szervezet válasza sérülésre vagy fertőzésre.",
+        6,
+        true
+    ],
+    [
+        289,
+        "Contagious",
+        "Capable of spreading from person to person",
+        "Fertőző / ragályos",
+        "Emberről emberre terjedni képes.",
+        6,
+        true
+    ],
+    [
+        290,
+        "Pathogen",
+        "A microorganism that causes disease",
+        "Kórokozó / patogén",
+        "Betegséget okozó mikroorganizmus.",
+        6,
+        false
+    ],
+    [
+        291,
+        "Bacteria",
+        "Single-celled microorganisms",
+        "Baktériumok",
+        "Egysejtű mikroorganizmusok.",
+        6,
+        true
+    ],
+    [
+        292,
+        "Virus",
+        "An infectious agent that multiplies inside living cells",
+        "Vírus",
+        "Élő sejtekben szaporodó fertőző ágens.",
+        6,
+        true
+    ],
+    [
+        293,
+        "Fungus",
+        "An organism that includes yeasts and moulds",
+        "Gomba",
+        "Élesztő- és penészgombákat magában foglaló élőlény.",
+        6,
+        false
+    ],
+    [
+        294,
+        "Parasite",
+        "An organism that lives on or inside another organism",
+        "Parazita / élősködő",
+        "Más élőlényen vagy abban élő organizmus.",
+        6,
+        false
+    ],
+    [
+        295,
+        "Microbiology",
+        "The study of microorganisms",
+        "Mikrobiológia",
+        "A mikroorganizmusok tudománya.",
+        6,
+        false
+    ],
+    [
+        296,
+        "Immunology",
+        "The study of the immune system",
+        "Immunológia",
+        "Az immunrendszer tudománya.",
+        6,
+        false
+    ],
+    [
+        297,
+        "Rehabilitation",
+        "Treatment to restore abilities after illness or injury",
+        "Rehabilitáció",
+        "Betegség vagy sérülés utáni képességek helyreállítása.",
+        6,
+        true
+    ],
+    [
+        298,
+        "Palliative care",
+        "Care focused on relieving improving quality of life",
+        "Palliatív ellátás",
+        "Az életminőség javítására és a tünetek enyhítésére összpontosító ellátás.",
+        6,
+        false
+    ],
+    [
+        299,
+        "Hospice",
+        "Care for people approaching end of life",
+        "Hospice-ellátás",
+        "Az élet végéhez közeledő betegek gondozása.",
+        6,
+        false
+    ],
+    [
+        300,
+        "Healthcare",
+        "Services provided to maintain or improve health",
+        "Egészségügy / egészségügyi ellátás",
+        "Az egészség megőrzésére vagy javítására nyújtott szolgáltatások.",
+        6,
+        true
+    ]
+];
+
+        const CATEGORIES = {
+            1: {
+                name: "Alapfogalmak, tünetek és sérülések",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Orvosi ellátás:</strong> <em>appointment</em> (időpont), <em>prescription</em> (vény), <em>check-up</em> (vizsgálat).</li>
+                        <li><strong class="text-teal-300">Tünetek:</strong> <em>fever</em> (láz), <em>cough</em> (köhögés), <em>nausea</em> (hányinger), <em>dizziness</em> (szédülés).</li>
+                        <li><strong class="text-amber-300">Sérülések:</strong> <em>bruise</em> (zúzódás), <em>sprain</em> (rándulás), <em>fracture</em> (csonttörés).</li>
+                    </ul>`,
+                tip: "Szóbeli vizsgán az orvosnál játszódó szituációban ezek a legfontosabb szavak: tünetek leírása (I have a fever / headache / rash), időpontkérés (appointment) és receptkiváltás (prescription at the pharmacy).",
+                desc: "Kórházi alapfogalmak, gyakori tünetek, megfázás, allergia és mindennapi sérülések (1–50. tétel)."
+            },
+            2: {
+                name: "Anatómia és az emberi test",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Belső szervek:</strong> <em>heart</em> (szív), <em>lung</em> (tüdő), <em>liver</em> (máj), <em>kidney</em> (vese), <em>stomach</em> (gyomor).</li>
+                        <li><strong class="text-teal-300">Mozgásszervek:</strong> <em>skeleton</em> (csontváz), <em>spine</em> (gerinc), <em>joint</em> (ízület), <em>muscle</em> (izom).</li>
+                    </ul>`,
+                tip: "Figyelj a többes számra és a kiejtésre: muscle (a 'c' néma), stomach ('k'-nak ejtjük a végét), vein (véna) vs. artery (artéria).",
+                desc: "Csontrendszer, belső szervek, keringés, idegrendszer, érzékszervek és szövetek (51–100. tétel)."
+            },
+            3: {
+                name: "Betegségek és kórképek",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Gyakori betegségek:</strong> <em>diabetes</em> (cukorbetegség), <em>asthma</em> (asztma), <em>migraine</em> (migrén).</li>
+                        <li><strong class="text-teal-300">Szóképzés (-itis):</strong> az <em>-itis</em> végződés gyulladást jelent (pl. <em>arthritis</em>, <em>gastritis</em>, <em>tonsillitis</em>).</li>
+                    </ul>`,
+                tip: "Nyelvvizsga tipp: az '-itis' végződésű orvosi szavak mindig valamely szerv gyulladását jelölik (pl. appendicitis = vakbélgyulladás, bronchitis = hörghurut).",
+                desc: "Krónikus betegségek, fertőzések, gyulladások és gyermekbetegségek (101–150. tétel)."
+            },
+            4: {
+                name: "Vizsgálatok, műszerek és beavatkozások",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Vizsgálatok:</strong> <em>blood test</em> (vérvétel), <em>X-ray</em> (röntgen), <em>ultrasound</em> (ultrahang).</li>
+                        <li><strong class="text-teal-300">Eszközök:</strong> <em>thermometer</em> (lázmérő), <em>bandage</em> (kötszer), <em>syringe</em> (fecskendő).</li>
+                    </ul>`,
+                tip: "Az alapvető diagnosztikai vizsgálatok (blood test, urine test, X-ray, ultrasound, screening) gyakran szerepelnek olvasott és hallott szövegértési feladatokban.",
+                desc: "Labor- és képalkotó vizsgálatok, orvosi műszerek, kötszerek és kórházi beavatkozások (151–200. tétel)."
+            },
+            5: {
+                name: "Gyógyszerek, készítmények és tápanyagok",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Gyógyszerformák:</strong> <em>tablet</em> (tabletta), <em>capsule</em> (kapszula), <em>ointment</em> (kenőcs), <em>syrup</em> (szirup), <em>drops</em> (cseppek).</li>
+                        <li><strong class="text-teal-300">Patikai szókincs:</strong> <em>side effect</em> (mellékhatás), <em>dosage</em> (adagolás), <em>expiry date</em> (lejárati dátum).</li>
+                    </ul>`,
+                tip: "Gyógyszertári szituációban hasznos különbség: 'prescription medicine' (vényköteles gyógyszer) vs. 'OTC / over-the-counter medicine' (vény nélkül kapható gyógyszer).",
+                desc: "Gyógyszercsoportok, gyógyszerformák, mellékhatások, vitaminok és ásványi anyagok (201–250. tétel)."
+            },
+            6: {
+                name: "Szakorvosok és kórházi ellátás",
+                tipHtml: `
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li><strong class="text-blue-300">Szakorvosok (-ist / -ian):</strong> <em>surgeon</em> (sebész), <em>cardiologist</em> (kardiológus), <em>dentist</em> (fogorvos), <em>paediatrician</em> (gyermekorvos).</li>
+                        <li><strong class="text-teal-300">Kórházi fogalmak:</strong> <em>ward</em> (osztály), <em>outpatient</em> (járóbeteg), <em>inpatient</em> (fekvőbeteg), <em>chronic</em> vs. <em>acute</em>.</li>
+                    </ul>`,
+                tip: "Figyeld meg az ellentétpárokat: inpatient (fekvőbeteg) ↔ outpatient (járóbeteg); acute (heveny/hirtelen) ↔ chronic (krónikus/hosszan tartó); benign (jóindulatú) ↔ malignant (rosszindulatú).",
+                desc: "Szakorvosi szakterületek, egészségügyi dolgozók és kórházi betegellátási fogalmak (251–300. tétel)."
+            }
+        };
+
+        // Teljes objektumlista felépítése
+        const VOCAB_DB = RAW_DATA.map(item => ({
+            id: item[0],
+            term: item[1],
+            def: item[2],
+            huTerm: item[3],
+            huDef: item[4],
+            catId: item[5],
+            category: CATEGORIES[item[5]].name,
+            tip: CATEGORIES[item[5]].tip,
+            tipHtml: CATEGORIES[item[5]].tipHtml,
+            isCore: item[6]
+        }));
+
+        // ============================================================================
+        // ALKALMAZÁS ÁLLAPOT (STATE)
+        // ============================================================================
+        let state = {
+            activeTab: 'flashcards',
+            accent: 'en-GB',
+            rate: 1.0,
+            coreOnly: false,
+            categoryFilter: 'ALL',
+            statusFilter: 'ALL',
+            searchQuery: '',
+            learnedIds: JSON.parse(localStorage.getItem('medvocab300_learned') || '[]'),
+            filteredItems: [],
+            fcIndex: 0,
+            isFlipped: false,
+            autoPlayActive: false,
+            autoPlayTimer: null,
+            quizMode: 'definition_match',
+            quizScore: 0,
+            quizTotal: 0,
+            currentQuizItem: null,
+            quizPromptText: '',
+            quizAnswered: false
+        };
+
+        // ============================================================================
+        // HANGSZINTÉZIS (WEB SPEECH API)
+        // ============================================================================
+        let availableVoices = [];
+
+        function loadVoices() {
+            if ('speechSynthesis' in window) {
+                availableVoices = window.speechSynthesis.getVoices();
+            }
+        }
+        if ('speechSynthesis' in window) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speakText(text, btnElement = null, onEndCallback = null) {
+            if (!('speechSynthesis' in window)) {
+                if (onEndCallback) onEndCallback();
+                return;
+            }
+            window.speechSynthesis.cancel();
+
+            document.querySelectorAll('.speaking-active').forEach(el => el.classList.remove('speaking-active'));
+            if (btnElement) btnElement.classList.add('speaking-active');
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = state.accent;
+            utterance.rate = state.rate;
+
+            const preferredVoice = availableVoices.find(v => v.lang === state.accent && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Daniel') || v.name.includes('Samantha')))
+                || availableVoices.find(v => v.lang.startsWith(state.accent.substring(0, 5)))
+                || availableVoices.find(v => v.lang.startsWith('en'));
+
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+
+            utterance.onend = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+            utterance.onerror = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakTermAndDef(termText, defText, btnElement = null, onAllEnd = null) {
+            speakText(termText, btnElement, () => {
+                setTimeout(() => {
+                    speakText(defText, btnElement, onAllEnd);
+                }, 400);
+            });
+        }
+
+        function setAccent(acc) {
+            state.accent = acc;
+            document.getElementById('btn-en-GB').className = acc === 'en-GB'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-en-US').className = acc === 'en-US'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function setRate(r) {
+            state.rate = r;
+            document.getElementById('btn-rate-1').className = r === 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-rate-slow').className = r < 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function toggleAutoPlay() {
+            state.autoPlayActive = !state.autoPlayActive;
+            const btn = document.getElementById('btnAutoPlay');
+            const icon = document.getElementById('autoPlayIcon');
+            const text = document.getElementById('autoPlayText');
+
+            if (state.autoPlayActive) {
+                btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-600 text-white shadow-sm transition';
+                icon.textContent = '⏹️';
+                text.textContent = 'Leállítás';
+                if (state.activeTab !== 'flashcards') {
+                    switchTab('flashcards');
+                }
+                runAutoPlayStep();
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        function stopAutoPlay() {
+            state.autoPlayActive = false;
+            clearTimeout(state.autoPlayTimer);
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const btn = document.getElementById('btnAutoPlay');
+            document.getElementById('autoPlayIcon').textContent = '▶️';
+            document.getElementById('autoPlayText').textContent = 'Hangoskönyv mód';
+            btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition';
+        }
+
+        function runAutoPlayStep() {
+            if (!state.autoPlayActive || state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            state.isFlipped = false;
+            updateFlashcardUI();
+
+            speakTermAndDef(item.term, item.def, null, () => {
+                if (!state.autoPlayActive) return;
+                state.isFlipped = true;
+                updateFlashcardUI();
+
+                state.autoPlayTimer = setTimeout(() => {
+                    if (!state.autoPlayActive) return;
+                    state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+                    runAutoPlayStep();
+                }, 2200);
+            });
+        }
+
+        // ============================================================================
+        // SZŰRÉS ÉS HALADÁS KEZELÉSE
+        // ============================================================================
+        function saveProgress() {
+            localStorage.setItem('medvocab300_learned', JSON.stringify(state.learnedIds));
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const total = VOCAB_DB.length;
+            const count = state.learnedIds.length;
+            const pct = Math.round((count / total) * 100);
+
+            document.getElementById('mobileProgressBadge').textContent = `${count}/${total}`;
+            document.getElementById('desktopProgressText').textContent = `${count} / ${total} (${pct}%)`;
+            document.getElementById('desktopProgressBar').style.width = `${pct}%`;
+        }
+
+        function toggleCoreFilter() {
+            state.coreOnly = !state.coreOnly;
+            const btn = document.getElementById('btnCoreFilter');
+            const icon = document.getElementById('coreCheckIcon');
+            if (state.coreOnly) {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm';
+                icon.textContent = '⭐';
+            } else {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100';
+                icon.textContent = '🌐';
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            state.categoryFilter = document.getElementById('categorySelect').value;
+            state.statusFilter = document.getElementById('statusSelect').value;
+            state.searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            state.filteredItems = VOCAB_DB.filter(item => {
+                if (state.coreOnly && !item.isCore) return false;
+                if (state.categoryFilter !== 'ALL' && item.category !== state.categoryFilter) return false;
+                const isLearned = state.learnedIds.includes(item.id);
+                if (state.statusFilter === 'LEARNED' && !isLearned) return false;
+                if (state.statusFilter === 'UNLEARNED' && isLearned) return false;
+
+                if (state.searchQuery) {
+                    const matchId = String(item.id) === state.searchQuery;
+                    const matchEn = item.term.toLowerCase().includes(state.searchQuery)
+                        || item.def.toLowerCase().includes(state.searchQuery);
+                    const matchHu = item.huTerm.toLowerCase().includes(state.searchQuery)
+                        || item.huDef.toLowerCase().includes(state.searchQuery);
+                    if (!matchId && !matchEn && !matchHu) return false;
+                }
+                return true;
+            });
+
+            document.getElementById('filteredCountLabel').textContent = `Szűrt tételek: ${state.filteredItems.length} db`;
+            state.fcIndex = 0;
+            state.isFlipped = false;
+
+            updateFlashcardUI();
+            renderList();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        }
+
+        // ============================================================================
+        // FÜLEK (NÉZETEK) VÁLTÁSA
+        // ============================================================================
+        function switchTab(tabName) {
+            if (tabName !== 'flashcards' && state.autoPlayActive) {
+                stopAutoPlay();
+            }
+            state.activeTab = tabName;
+
+            ['flashcards', 'list', 'quiz', 'grammar'].forEach(t => {
+                const viewEl = document.getElementById(`view-${t}`);
+                const tabEl = document.getElementById(`tab-${t}`);
+                if (t === tabName) {
+                    viewEl.classList.remove('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition';
+                } else {
+                    viewEl.classList.add('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+                }
+            });
+
+            const filterBar = document.getElementById('globalFilterBar');
+            if (tabName === 'flashcards' || tabName === 'list') {
+                filterBar.classList.remove('hidden');
+            } else {
+                filterBar.classList.add('hidden');
+            }
+
+            if (tabName === 'quiz' && !state.currentQuizItem) {
+                generateQuizQuestion();
+            }
+        }
+
+        // ============================================================================
+        // 1. TANULÓKÁRTYÁK LOGIKA
+        // ============================================================================
+        function updateFlashcardUI() {
+            const inner = document.getElementById('flashcardInner');
+            const front = document.getElementById('fcFrontFace');
+            const back = document.getElementById('fcBackFace');
+            if (state.isFlipped) {
+                inner.classList.add('rotate-y-180');
+                if (front) front.classList.add('pointer-events-none');
+                if (back) back.classList.remove('pointer-events-none');
+            } else {
+                inner.classList.remove('rotate-y-180');
+                if (front) front.classList.remove('pointer-events-none');
+                if (back) back.classList.add('pointer-events-none');
+            }
+
+            if (state.filteredItems.length === 0) {
+                document.getElementById('fcPosition').textContent = '0 / 0 kártya';
+                document.getElementById('fcTerm').textContent = 'Nincs találat';
+                document.getElementById('fcDef').textContent = 'Módosítsd a szűrőket!';
+                document.getElementById('fcBackTermHu').textContent = 'Nincs találat';
+                return;
+            }
+
+            const item = state.filteredItems[state.fcIndex];
+            const isLearned = state.learnedIds.includes(item.id);
+
+            document.getElementById('fcPosition').textContent = `${state.fcIndex + 1} / ${state.filteredItems.length}. kártya`;
+            document.getElementById('fcNumber').textContent = `#${item.id}`;
+            document.getElementById('fcBackNumber').textContent = `#${item.id} • Magyar jelentés`;
+            document.getElementById('fcCategory').textContent = item.category;
+
+            document.getElementById('fcTerm').textContent = item.term;
+            document.getElementById('fcDef').textContent = item.def;
+
+            document.getElementById('fcBackTermEn').textContent = item.term;
+            document.getElementById('fcBackTermHu').textContent = item.huTerm;
+            document.getElementById('fcBackDefHu').textContent = item.huDef;
+            document.getElementById('fcBackDefEn').textContent = `„${item.def}”`;
+            document.getElementById('fcTipHu').innerHTML = item.tipHtml;
+
+            const coreBadge = document.getElementById('fcCoreBadge');
+            if (item.isCore) {
+                coreBadge.classList.remove('hidden');
+            } else {
+                coreBadge.classList.add('hidden');
+            }
+
+            const learnedBadge = document.getElementById('fcLearnedBadge');
+            if (isLearned) {
+                learnedBadge.classList.remove('hidden');
+            } else {
+                learnedBadge.classList.add('hidden');
+            }
+        }
+
+        function flipCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = !state.isFlipped;
+            updateFlashcardUI();
+        }
+
+        function nextCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function prevCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function markCurrentCard(learned) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            if (learned) {
+                if (!state.learnedIds.includes(item.id)) {
+                    state.learnedIds.push(item.id);
+                }
+            } else {
+                state.learnedIds = state.learnedIds.filter(id => id !== item.id);
+            }
+            saveProgress();
+            renderList();
+            nextCard();
+        }
+
+        function shuffleFlashcards() {
+            for (let i = state.filteredItems.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [state.filteredItems[i], state.filteredItems[j]] = [state.filteredItems[j], state.filteredItems[i]];
+            }
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function resetOrderFlashcards() {
+            state.filteredItems.sort((a, b) => a.id - b.id);
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function speakCurrentPart(part, btn) {
+            if (state.filteredItems.length === 0) return;
+            speakText(state.filteredItems[state.fcIndex][part], btn);
+        }
+
+        function speakCurrentBoth(btn) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            speakTermAndDef(item.term, item.def, btn);
+        }
+
+        // ============================================================================
+        // 2. TELJES SZÓTÁR / LISTA RENDERELÉSE
+        // ============================================================================
+        function renderList() {
+            const container = document.getElementById('listContainer');
+            if (state.filteredItems.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+                        <p class="text-slate-500 font-medium">Nincs a szűrésnek megfelelő tétel.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = state.filteredItems.map(item => {
+                const isLearned = state.learnedIds.includes(item.id);
+                return `
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border ${isLearned ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-200'} shadow-xs hover:shadow-md transition flex flex-col justify-between gap-3">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2.5">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-xs">#${item.id}</span>
+                                <span class="px-2 py-0.5 rounded-md bg-brand-50 text-brand-700 font-medium text-xs">${item.category}</span>
+                                ${item.isCore ? '<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>' : ''}
+                            </div>
+                            <button onclick="toggleItemLearned(${item.id})" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${isLearned ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                                ${isLearned ? '✓ Tudom' : '○ Jelölés'}
+                            </button>
+                        </div>
+
+                        <div class="space-y-2 mt-2">
+                            <div class="flex items-center justify-between gap-2 bg-blue-50/70 border border-blue-100 rounded-xl px-3.5 py-2.5">
+                                <div>
+                                    <div class="text-base font-extrabold text-slate-900">${item.term}</div>
+                                    <p class="text-sm font-bold text-brand-700 mt-0.5">🇭🇺 ${item.huTerm}</p>
+                                </div>
+                                <button onclick="speakText('${escapeQuotes(item.term)}', this)" class="text-xs px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shrink-0" title="Kifejezés kiejtése">🔊</button>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-2 bg-teal-50/70 border border-teal-100 rounded-xl px-3.5 py-2.5">
+                                <div>
+                                    <p class="text-xs sm:text-sm font-semibold text-slate-800">${item.def}</p>
+                                    <p class="text-xs text-slate-600 mt-0.5">${item.huDef}</p>
+                                </div>
+                                <button onclick="speakText('${escapeQuotes(item.def)}', this)" class="text-xs px-2.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-semibold shrink-0" title="Definíció kiejtése">🔊</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-1">
+                        <button onclick="speakTermAndDef('${escapeQuotes(item.term)}', '${escapeQuotes(item.def)}', this)" class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                            <span>🎧</span> Kifejezés és definíció meghallgatása
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\'");
+        }
+
+        function toggleItemLearned(id) {
+            if (state.learnedIds.includes(id)) {
+                state.learnedIds = state.learnedIds.filter(x => x !== id);
+            } else {
+                state.learnedIds.push(id);
+            }
+            saveProgress();
+            renderList();
+            updateFlashcardUI();
+        }
+
+        // ============================================================================
+        // 3. INTERAKTÍV KVÍZ ÉS HALLÁSÉRTÉS
+        // ============================================================================
+        function setQuizMode(mode) {
+            state.quizMode = mode;
+            ['definition_match', 'meaning', 'listening'].forEach(m => {
+                const btn = document.getElementById(`qmode-${m}`);
+                btn.className = m === mode
+                    ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition'
+                    : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+            });
+            generateQuizQuestion();
+        }
+
+        function generateQuizQuestion() {
+            state.quizAnswered = false;
+            document.getElementById('quizFeedback').classList.add('hidden');
+
+            const pool = VOCAB_DB;
+            const target = pool[Math.floor(Math.random() * pool.length)];
+            state.currentQuizItem = target;
+
+            const badge = document.getElementById('quizQuestionTypeBadge');
+            const mainPrompt = document.getElementById('quizMainPrompt');
+            const subPrompt = document.getElementById('quizSubPrompt');
+            const optionsContainer = document.getElementById('quizOptions');
+
+            if (state.quizMode === 'definition_match') {
+                state.quizPromptText = target.def;
+
+                badge.textContent = '📖 Melyik angol szakkifejezés illik a meghatározáshoz?';
+                mainPrompt.textContent = `„${target.def}”`;
+                subPrompt.textContent = `Témakör: ${target.category}`;
+
+                const distractors = [];
+                while (distractors.length < 3) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    if (candidate.id !== target.id && candidate.term !== target.term && !distractors.some(d => d.term === candidate.term)) {
+                        distractors.push(candidate);
+                    }
+                }
+
+                const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswerBoolean(${opt.id === target.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-bold text-slate-800 transition flex items-center justify-between">
+                        <span>${opt.term}</span>
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'meaning') {
+                state.quizPromptText = target.term;
+
+                badge.textContent = '🇭🇺 Válaszd ki az angol kifejezés magyar jelentését!';
+                mainPrompt.textContent = target.term;
+                subPrompt.textContent = `Definíció: „${target.def}”`;
+
+                const distractors = [];
+                while (distractors.length < 3) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    if (candidate.id !== target.id && candidate.huTerm !== target.huTerm && !distractors.some(d => d.huTerm === candidate.huTerm)) {
+                        distractors.push(candidate);
+                    }
+                }
+
+                const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswerBoolean(${opt.id === target.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition">
+                        ${opt.huTerm}
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'listening') {
+                state.quizPromptText = target.term;
+
+                badge.textContent = '🎧 Hallgasd meg a kifejezést, és válaszd ki, mit hallottál!';
+                mainPrompt.textContent = '🔊 Hallgasd meg a szakkifejezést!';
+                subPrompt.textContent = 'Kattints a „Meghallgatás” gombra, ha újra hallani szeretnéd.';
+                speakText(state.quizPromptText);
+
+                const distractors = [];
+                while (distractors.length < 3) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    if (candidate.id !== target.id && candidate.term !== target.term && !distractors.some(d => d.term === candidate.term)) {
+                        distractors.push(candidate);
+                    }
+                }
+
+                const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswerBoolean(${opt.id === target.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-bold text-slate-800 transition">
+                        ${opt.term} <span class="block text-xs text-slate-500 font-normal mt-0.5">${opt.huTerm}</span>
+                    </button>
+                `).join('');
+            }
+        }
+
+        function speakQuizPrompt() {
+            if (!state.quizPromptText) return;
+            speakText(state.quizPromptText);
+        }
+
+        function checkQuizAnswerBoolean(isCorrect, btnEl) {
+            if (state.quizAnswered) return;
+            state.quizAnswered = true;
+            state.quizTotal++;
+
+            const target = state.currentQuizItem;
+            if (isCorrect) state.quizScore++;
+
+            document.getElementById('quizScore').textContent = state.quizScore;
+            document.getElementById('quizTotal').textContent = state.quizTotal;
+
+            document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-brand-400', 'hover:bg-brand-50/40');
+            });
+
+            if (isCorrect) {
+                btnEl.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+            } else {
+                btnEl.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+            }
+
+            const fb = document.getElementById('quizFeedback');
+            fb.classList.remove('hidden');
+            fb.className = isCorrect
+                ? 'rounded-2xl p-4 text-sm font-medium bg-emerald-50 border border-emerald-200 text-emerald-900'
+                : 'rounded-2xl p-4 text-sm font-medium bg-rose-50 border border-rose-200 text-rose-900';
+
+            fb.innerHTML = `
+                <p class="font-bold mb-1.5">${isCorrect ? '✅ Helyes válasz!' : '❌ Nem egészen!'}</p>
+                <ul class="text-xs space-y-1 opacity-95">
+                    <li><strong>Kifejezés:</strong> ${target.term} — <em>${target.huTerm}</em></li>
+                    <li><strong>Definíció:</strong> ${target.def} — <em>${target.huDef}</em></li>
+                </ul>
+            `;
+
+            speakTermAndDef(target.term, target.def);
+        }
+
+        // ============================================================================
+        // 4. TÉMAKÖR KISOKOS RENDERELÉSE
+        // ============================================================================
+        function renderGrammarCards() {
+            const grid = document.getElementById('grammarCardsGrid');
+            grid.innerHTML = Object.entries(CATEGORIES).map(([id, cat]) => {
+                const count = VOCAB_DB.filter(x => x.catId === Number(id)).length;
+                const coreCount = VOCAB_DB.filter(x => x.catId === Number(id) && x.isCore).length;
+                return `
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-bold text-xs">${id}. témakör</span>
+                            <span class="text-xs font-semibold text-slate-500">${coreCount} alapfokú / ${count} összes</span>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-2">${cat.name}</h3>
+                        <p class="text-sm text-slate-600 mb-3">${cat.desc}</p>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
+                            <strong>💡 Vizsgaszabály:</strong> ${cat.tip}
+                        </div>
+                    </div>
+                    <button onclick="practiceCategory('${cat.name}')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold transition">
+                        Témakör gyakorlása kártyákkal ➡️
+                    </button>
+                </div>`;
+            }).join('');
+        }
+
+        function practiceCategory(catName) {
+            document.getElementById('categorySelect').value = catName;
+            if (state.coreOnly) {
+                toggleCoreFilter();
+            }
+            applyFilters();
+            switchTab('flashcards');
+        }
+
+        // ============================================================================
+        // MODAL ÉS INICIALIZÁLÁS
+        // ============================================================================
+        function resetAllProgress() {
+            document.getElementById('modalTitle').textContent = 'Haladás törlése';
+            document.getElementById('modalText').textContent = 'Biztosan törölni szeretnéd az összes megtanultként megjelölt tételt?';
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('hidden');
+
+            document.getElementById('modalConfirmBtn').onclick = () => {
+                state.learnedIds = [];
+                saveProgress();
+                applyFilters();
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (state.activeTab !== 'flashcards') return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+            if (e.code === 'ArrowRight') nextCard();
+            else if (e.code === 'ArrowLeft') prevCard();
+            else if (e.code === 'Space') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        window.onload = () => {
+            updateProgressUI();
+            renderGrammarCards();
+            applyFilters();
+        };
+    </script>
+</body>
+</html>

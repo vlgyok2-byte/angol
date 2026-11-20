@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instead of "VERY" – 600 Angol Kifejezés Magyar Fordítással</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-2: #f1f5f9;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --primary: #ea580c;
+    --primary-dark: #c2410c;
+    --primary-light: #ffedd5;
+    --accent: #0284c7;
+    --accent-light: #e0f2fe;
+    --success: #16a34a;
+    --success-light: #dcfce7;
+    --danger: #dc2626;
+    --danger-light: #fee2e2;
+    --border: #e2e8f0;
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    --radius: 14px;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0b1120;
+    --surface: #1e293b;
+    --surface-2: #0f172a;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --primary-light: rgba(249, 115, 22, 0.16);
+    --accent: #38bdf8;
+    --accent-light: rgba(56, 189, 248, 0.15);
+    --success: #4ade80;
+    --success-light: rgba(74, 222, 128, 0.15);
+    --danger: #f87171;
+    --danger-light: rgba(248, 113, 113, 0.15);
+    --border: #334155;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    transition: background 0.25s, color 0.25s;
+    padding-bottom: 60px;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    color: #fff;
+    padding: 22px 20px 26px;
+    box-shadow: 0 4px 20px rgba(234, 88, 12, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand h1 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand h1 span.badge {
+    background: #facc15;
+    color: #1e293b;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+  }
+  .brand p {
+    font-size: 0.92rem;
+    opacity: 0.92;
+    margin-top: 2px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  .icon-btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 7px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { background: rgba(255,255,255,0.32); }
+
+  /* Container */
+  .container {
+    max-width: 1240px;
+    margin: 24px auto 0;
+    padding: 0 18px;
+  }
+
+  /* Mode Tabs */
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 160px;
+    padding: 13px 18px;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  .tab-btn:hover { border-color: var(--primary); }
+  .tab-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+
+  /* Filter Bar */
+  .controls-bar {
+    background: var(--surface);
+    padding: 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  @media (max-width: 960px) {
+    .controls-bar { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .controls-bar { grid-template-columns: 1fr; }
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus, select:focus {
+    border-color: var(--primary);
+  }
+
+  .toggles-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .toggle-chip {
+    padding: 10px 13px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .toggle-chip.active {
+    background: var(--success-light);
+    color: var(--success);
+    border-color: var(--success);
+  }
+  .toggle-chip.hu-active {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .results-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Grid View */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .word-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.15s, border-color 0.2s;
+    position: relative;
+  }
+  .word-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+  .word-card.learned {
+    border-left: 5px solid var(--success);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 6px;
+  }
+  .num-tag {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .cat-tag {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-align: right;
+  }
+
+  .very-row {
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .very-row span.strike {
+    text-decoration: line-through;
+    text-decoration-color: rgba(239, 68, 68, 0.55);
+  }
+
+  .alt-row {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .alt-word.blurred {
+    filter: blur(6px);
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .hu-row {
+    font-size: 0.9rem;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hu-row.hidden-hu {
+    display: none;
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    gap: 8px;
+  }
+  .speak-btn {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .speak-btn:hover { opacity: 0.82; }
+
+  .learn-btn {
+    background: var(--surface-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .learn-btn.done {
+    background: var(--success-light);
+    color: var(--success);
+    border-color: var(--success);
+  }
+
+  /* Flashcard Mode */
+  .flashcard-wrap {
+    max-width: 600px;
+    margin: 10px auto;
+    text-align: center;
+  }
+  .flashcard {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 22px;
+    min-height: 320px;
+    padding: 36px 28px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.25s, border-color 0.25s;
+    user-select: none;
+  }
+  .flashcard:hover { border-color: var(--primary); }
+  .fc-hint {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .fc-num {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 0.9rem;
+  }
+  .fc-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .fc-main {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .fc-sub {
+    font-size: 1.15rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .fc-hu {
+    font-size: 1.05rem;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .fc-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 0.96rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 0.96rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--primary); }
+
+  /* Quiz Mode */
+  .quiz-wrap {
+    max-width: 640px;
+    margin: 10px auto;
+  }
+  .quiz-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .quiz-scorebar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .quiz-prompt {
+    text-align: center;
+    padding: 20px;
+    background: var(--surface-2);
+    border-radius: 14px;
+    margin-bottom: 20px;
+  }
+  .quiz-prompt small {
+    display: block;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .quiz-prompt h2 {
+    font-size: 1.9rem;
+    color: var(--primary);
+  }
+  .quiz-hu-hint {
+    margin-top: 8px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 520px) {
+    .quiz-options { grid-template-columns: 1fr; }
+  }
+  .quiz-opt {
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1.08rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .quiz-opt:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+  .quiz-opt.correct {
+    background: var(--success-light);
+    border-color: var(--success);
+    color: var(--success);
+  }
+  .quiz-opt.wrong {
+    background: var(--danger-light);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <h1>INSTEAD OF <span class="badge">VERY</span></h1>
+      <p>600 választékos angol kifejezés magyar fordítással – szótár, tanulókártya és kvíz</p>
+    </div>
+    <div class="header-actions">
+      <div class="stat-pill" id="progressPill">Megtanulva: 0 / 600 (0%)</div>
+      <button class="icon-btn" id="themeToggle" title="Téma váltása">🌓 Téma</button>
+      <button class="icon-btn" id="resetProgress" title="Haladás nullázása">↺ Nullázás</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" data-mode="browse">📚 Böngésző & Kereső</button>
+    <button class="tab-btn" data-mode="flashcards">🗂️ Tanulókártyák</button>
+    <button class="tab-btn" data-mode="quiz">🎯 Feleletválasztós Kvíz</button>
+  </div>
+
+  <!-- Shared Filters -->
+  <div class="controls-bar">
+    <input type="text" id="searchInput" placeholder="Keresés angolul, magyarul vagy sorszámra (pl. 'happy', 'gyönyörű', '250')...">
+    <select id="pageFilter">
+      <option value="all">Összes kártya (1–600)</option>
+      <option value="1">1. kép (1–100)</option>
+      <option value="2">2. kép (101–200)</option>
+      <option value="3">3. kép (201–300)</option>
+      <option value="4">4. kép (301–400)</option>
+      <option value="5">5. kép (401–500)</option>
+      <option value="6">6. kép (501–600)</option>
+    </select>
+    <select id="catFilter">
+      <option value="all">Összes témakör</option>
+    </select>
+    <div class="toggles-group">
+      <button class="toggle-chip hu-active" id="huToggleBtn">🇭🇺 Magyar fordítás</button>
+      <button class="toggle-chip" id="onlyUnlearnedBtn">Csak tanulandók</button>
+      <button class="toggle-chip" id="blurToggleBtn">👁️ Kikérdező mód</button>
+    </div>
+  </div>
+
+  <!-- MODE 1: BROWSE -->
+  <section id="browseSection">
+    <div class="results-info">
+      <span id="countLabel">600 találat megjelenítve</span>
+      <span>Tipp: Kereshetsz magyar jelentésre is (pl. „eső”, „hang”, „bátor”), vagy elrejtheted a fordítást.</span>
+    </div>
+    <div class="cards-grid" id="cardsGrid"></div>
+  </section>
+
+  <!-- MODE 2: FLASHCARDS -->
+  <section id="flashcardsSection" class="hidden">
+    <div class="flashcard-wrap">
+      <div class="flashcard" id="flashcardBox">
+        <span class="fc-num" id="fcNum">#1</span>
+        <span class="fc-hint" id="fcSideBadge">Kattints a megfordításhoz</span>
+        <div class="fc-label" id="fcLabel">KERÜLD EZT (INSTEAD OF):</div>
+        <div class="fc-main" id="fcMain">Very good</div>
+        <div class="fc-sub" id="fcSub">Kattints a kártyára a megoldáshoz</div>
+        <div class="fc-hu" id="fcHu">🇭🇺 nagyon jó – kiváló</div>
+      </div>
+      <div class="fc-controls">
+        <button class="btn-secondary" id="fcPrev">⬅️ Előző</button>
+        <button class="btn-secondary" id="fcSpeak">🔊 Kiejtés</button>
+        <button class="btn-secondary" id="fcShuffle">🔀 Véletlen</button>
+        <button class="btn-primary" id="fcMarkLearned">✓ Megtanultam</button>
+        <button class="btn-secondary" id="fcNext">Következő ➡️</button>
+      </div>
+      <p style="margin-top:12px; color:var(--text-muted); font-size:0.88rem;" id="fcCounter">1 / 600</p>
+    </div>
+  </section>
+
+  <!-- MODE 3: QUIZ -->
+  <section id="quizSection" class="hidden">
+    <div class="quiz-wrap">
+      <div class="quiz-box">
+        <div class="quiz-scorebar">
+          <span id="quizScore">Pontszám: 0 / 0</span>
+          <span id="quizStreak">Sorozat: 0 🔥</span>
+        </div>
+        <div class="quiz-prompt">
+          <small id="quizNumLabel">#1 • Válaszd ki a választékosabb megfelelőjét!</small>
+          <h2 id="quizQuestion">Very good</h2>
+          <div class="quiz-hu-hint" id="quizHuHint">🇭🇺 nagyon jó – kiváló</div>
+          <button class="speak-btn" id="quizSpeakBtn" style="margin-top:10px;">🔊 Meghallgatás</button>
+        </div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div style="text-align:center; margin-top:20px;">
+          <button class="btn-primary hidden" id="quizNextBtn">Következő kérdés ➡️</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const ITEMS = [{"id": 1, "very": "Very good", "alt": "Excellent", "page": 1, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó – kiváló"}, {"id": 2, "very": "Very bad", "alt": "Awful", "page": 1, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz – borzalmas / szörnyű"}, {"id": 3, "very": "Very beautiful", "alt": "Gorgeous", "page": 1, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép – gyönyörű"}, {"id": 4, "very": "Very ugly", "alt": "Hideous", "page": 1, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon csúnya – visszataszító / förtelmes"}, {"id": 5, "very": "Very happy", "alt": "Delighted", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon boldog – elragadtatott"}, {"id": 6, "very": "Very sad", "alt": "Miserable", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon szomorú – nyomorult / keserves"}, {"id": 7, "very": "Very big", "alt": "Huge", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nagy – hatalmas"}, {"id": 8, "very": "Very small", "alt": "Tiny", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kicsi – apró / parányi"}, {"id": 9, "very": "Very fast", "alt": "Rapid", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyors – sebes / rohamos"}, {"id": 10, "very": "Very slow", "alt": "Sluggish", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon lassú – lomha / vontatott"}, {"id": 11, "very": "Very clever", "alt": "Brilliant", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon okos – ragyogó / zseniális"}, {"id": 12, "very": "Very stupid", "alt": "Idiotic", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon buta – idióta / ostoba"}, {"id": 13, "very": "Very angry", "alt": "Furious", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon mérges – dühöngő / bősz"}, {"id": 14, "very": "Very afraid", "alt": "Terrified", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon fél – rettegő / rémült"}, {"id": 15, "very": "Very tired", "alt": "Exhausted", "page": 1, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fáradt – kimerült"}, {"id": 16, "very": "Very hungry", "alt": "Starving", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon éhes – éhező / farkaséhes"}, {"id": 17, "very": "Very thirsty", "alt": "Parched", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon szomjas – kiszáradt / tikkadt"}, {"id": 18, "very": "Very cold", "alt": "Freezing", "page": 1, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon hideg – fagyos / dermesztő"}, {"id": 19, "very": "Very hot", "alt": "Scorching", "page": 1, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon meleg / forró – perzselő"}, {"id": 20, "very": "Very funny", "alt": "Hilarious", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon vicces – fergeteges / mulatságos"}, {"id": 21, "very": "Very interesting", "alt": "Fascinating", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érdekes – lenyűgöző / lebilincselő"}, {"id": 22, "very": "Very boring", "alt": "Dull", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon unalmas – egyhangú / lapos"}, {"id": 23, "very": "Very important", "alt": "Crucial", "page": 1, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos – döntő / kulcsfontosságú"}, {"id": 24, "very": "Very necessary", "alt": "Essential", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szükséges – elengedhetetlen / alapvető"}, {"id": 25, "very": "Very easy", "alt": "Effortless", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon könnyű – erőfeszítés nélküli"}, {"id": 26, "very": "Very difficult", "alt": "Arduous", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nehéz – fáradságos / küzdelmes"}, {"id": 27, "very": "Very rich", "alt": "Wealthy", "page": 1, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon gazdag – tehetős / vagyonos"}, {"id": 28, "very": "Very poor", "alt": "Destitute", "page": 1, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon szegény – nincstelen / nyomorúságos"}, {"id": 29, "very": "Very strong", "alt": "Powerful", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon erős – hatalmas erejű"}, {"id": 30, "very": "Very weak", "alt": "Feeble", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyenge – erőtlen / gyámoltalan"}, {"id": 31, "very": "Very clean", "alt": "Spotless", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tiszta – makulátlan"}, {"id": 32, "very": "Very dirty", "alt": "Filthy", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon koszos – mocskos"}, {"id": 33, "very": "Very wet", "alt": "Soaked", "page": 1, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon nedves – csuromvizes / átázott"}, {"id": 34, "very": "Very dry", "alt": "Arid", "page": 1, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon száraz – kiszáradt / sivatagos"}, {"id": 35, "very": "Very bright", "alt": "Brilliant", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fényes / világos – ragyogó"}, {"id": 36, "very": "Very dark", "alt": "Pitch-black", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon sötét – koromsötét"}, {"id": 37, "very": "Very loud", "alt": "Deafening", "page": 1, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon hangos – fülsiketítő"}, {"id": 38, "very": "Very quiet", "alt": "Silent", "page": 1, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon csendes – néma / hangtalan"}, {"id": 39, "very": "Very noisy", "alt": "Deafening", "page": 1, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon zajos – fülsiketítő"}, {"id": 40, "very": "Very soft", "alt": "Fluffy", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon puha – bolyhos / pihe-puha"}, {"id": 41, "very": "Very hard", "alt": "Solid", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kemény – szilárd / tömör"}, {"id": 42, "very": "Very sharp", "alt": "Razor-sharp", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon éles – borotvaéles"}, {"id": 43, "very": "Very blunt", "alt": "Dull", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tompa – életlen"}, {"id": 44, "very": "Very heavy", "alt": "Weighty", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nehéz (súlyú) – súlyos / vaskos"}, {"id": 45, "very": "Very light", "alt": "Lightweight", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon könnyű (súlyú) – pehelysúlyú"}, {"id": 46, "very": "Very long", "alt": "Lengthy", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hosszú – hosszadalmas / terjedelmes"}, {"id": 47, "very": "Very short", "alt": "Brief", "page": 1, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon rövid – tömör / kurta"}, {"id": 48, "very": "Very tall", "alt": "Towering", "page": 1, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon magas – égbenyúló / toronymagas"}, {"id": 49, "very": "Very low", "alt": "Minimal", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon alacsony – minimális"}, {"id": 50, "very": "Very high", "alt": "Elevated", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon magas (szint) – emelkedett"}, {"id": 51, "very": "Very old", "alt": "Ancient", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régi / öreg – ősi / ókori"}, {"id": 52, "very": "Very young", "alt": "Youthful", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fiatal – fiatalos"}, {"id": 53, "very": "Very new", "alt": "Brand-new", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon új – vadonatúj"}, {"id": 54, "very": "Very modern", "alt": "Contemporary", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon modern – kortárs / korszerű"}, {"id": 55, "very": "Very early", "alt": "Premature", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon korai – idő előtti / koraszülött"}, {"id": 56, "very": "Very late", "alt": "Overdue", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon késői – esedékes / elkésett"}, {"id": 57, "very": "Very quick", "alt": "Swift", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyors – sebes / fürge"}, {"id": 58, "very": "Very slow-moving", "alt": "Leisurely", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon lassan mozgó – komótos / ráérős"}, {"id": 59, "very": "Very warm", "alt": "Toasty", "page": 1, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon meleg (kellemes) – jó meleg / átmelegedett"}, {"id": 60, "very": "Very cool", "alt": "Chilly", "page": 1, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon hűvös – csípős / hűs"}, {"id": 61, "very": "Very sweet", "alt": "Sugary", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon édes – cukros / édeskés"}, {"id": 62, "very": "Very sour", "alt": "Tart", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon savanyú – fanyar"}, {"id": 63, "very": "Very bitter", "alt": "Acrid", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon keserű – csípős / fanyar"}, {"id": 64, "very": "Very salty", "alt": "Briny", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon sós – sós / sós vizű"}, {"id": 65, "very": "Very spicy", "alt": "Fiery", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon fűszeres / csípős – tüzes"}, {"id": 66, "very": "Very tasty", "alt": "Delicious", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon ízletes – finom / ínycsiklandó"}, {"id": 67, "very": "Very delicious", "alt": "Delectable", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon finom – ínycsiklandó / zamatos"}, {"id": 68, "very": "Very bad-tasting", "alt": "Disgusting", "page": 1, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz ízű – undorító / gusztustalan"}, {"id": 69, "very": "Very fresh", "alt": "Crisp", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon friss – ropogós / üde"}, {"id": 70, "very": "Very stale", "alt": "Musty", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon állott – dohos / penészes"}, {"id": 71, "very": "Very hungry", "alt": "Ravenous", "page": 1, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon éhes – farkaséhes / kiéhezett"}, {"id": 72, "very": "Very sleepy", "alt": "Drowsy", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon álmos – bódult / álmoskás"}, {"id": 73, "very": "Very awake", "alt": "Alert", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon éber – figyelmes / éber"}, {"id": 74, "very": "Very relaxed", "alt": "Serene", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon nyugodt – derűs / higgadt"}, {"id": 75, "very": "Very nervous", "alt": "Anxious", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon ideges – szorongó / aggódó"}, {"id": 76, "very": "Very worried", "alt": "Concerned", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon aggódó – érintett / nyugtalan"}, {"id": 77, "very": "Very confused", "alt": "Puzzled", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon zavarodott – tanácstalan / értetlen"}, {"id": 78, "very": "Very surprised", "alt": "Astonished", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon meglepett – ámuló / megdöbbent"}, {"id": 79, "very": "Very shocked", "alt": "Stunned", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon sokkolt – elkábult / megdöbbent"}, {"id": 80, "very": "Very excited", "alt": "Thrilled", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon izgatott – fellelkesült / ujjongó"}, {"id": 81, "very": "Very pleased", "alt": "Delighted", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon elégedett – boldog / örvendező"}, {"id": 82, "very": "Very proud", "alt": "Triumphant", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon büszke – diadalittas"}, {"id": 83, "very": "Very disappointed", "alt": "Disheartened", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon csalódott – elkedvetlenedett"}, {"id": 84, "very": "Very upset", "alt": "Distraught", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon zaklatott – kétségbeesett / feldúlt"}, {"id": 85, "very": "Very lonely", "alt": "Isolated", "page": 1, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon magányos – elszigetelt"}, {"id": 86, "very": "Very friendly", "alt": "Amiable", "page": 1, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon barátságos – szívélyes / nyájas"}, {"id": 87, "very": "Very unfriendly", "alt": "Hostile", "page": 1, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon barátságtalan – ellenséges"}, {"id": 88, "very": "Very kind", "alt": "Compassionate", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kedves – együttérző / könyörületes"}, {"id": 89, "very": "Very cruel", "alt": "Brutal", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kegyetlen – brutális / kíméletlen"}, {"id": 90, "very": "Very polite", "alt": "Courteous", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon udvarias – előzékeny / udvarias"}, {"id": 91, "very": "Very rude", "alt": "Impolite", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon udvariatlan – modortalan / neveletlen"}, {"id": 92, "very": "Very honest", "alt": "Truthful", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon őszinte – igazmondó / szavahihető"}, {"id": 93, "very": "Very dishonest", "alt": "Deceitful", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon becstelen – csalárd / álnok"}, {"id": 94, "very": "Very brave", "alt": "Courageous", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bátor – vakmerő / rettenthetetlen"}, {"id": 95, "very": "Very cowardly", "alt": "Timid", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyáva – félénk / gyámoltalan"}, {"id": 96, "very": "Very generous", "alt": "Charitable", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nagylelkű – jótékony / adakozó"}, {"id": 97, "very": "Very selfish", "alt": "Self-centred", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon önző – énközpontú"}, {"id": 98, "very": "Very helpful", "alt": "Supportive", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon segítőkész – támogató"}, {"id": 99, "very": "Very harmful", "alt": "Damaging", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon káros – ártalmas / romboló"}, {"id": 100, "very": "Very careful", "alt": "Cautious", "page": 1, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon óvatos – elővigyázatos"}, {"id": 101, "very": "Very careless", "alt": "Reckless", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon figyelmetlen – meggondolatlan / vakmerő"}, {"id": 102, "very": "Very intelligent", "alt": "Brilliant", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon intelligens – zseniális / ragyogó"}, {"id": 103, "very": "Very wise", "alt": "Sagacious", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bölcs – éles eszű / bölcs"}, {"id": 104, "very": "Very foolish", "alt": "Imprudent", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon ostoba – meggondolatlan / balga"}, {"id": 105, "very": "Very sensible", "alt": "Reasonable", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon észszerű – méltányos / józan"}, {"id": 106, "very": "Very unreasonable", "alt": "Absurd", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon észszerűtlen – abszurd / képtelen"}, {"id": 107, "very": "Very creative", "alt": "Imaginative", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kreatív – fantáziadús"}, {"id": 108, "very": "Very talented", "alt": "Gifted", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tehetséges – megáldott / tehetséges"}, {"id": 109, "very": "Very skilled", "alt": "Accomplished", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon képzett – jártas / kiváló"}, {"id": 110, "very": "Very unskilled", "alt": "Incompetent", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon képzetlen – hozzá nem értő"}, {"id": 111, "very": "Very hardworking", "alt": "Diligent", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szorgalmas – szorgos / igyekvő"}, {"id": 112, "very": "Very lazy", "alt": "Indolent", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon lusta – rest / henye"}, {"id": 113, "very": "Very active", "alt": "Energetic", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon aktív – energikus / lendületes"}, {"id": 114, "very": "Very inactive", "alt": "Idle", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tétlen – henyélő / üresjáratú"}, {"id": 115, "very": "Very busy", "alt": "Swamped", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon elfoglalt – elárasztott munkával / nyakig ül benne"}, {"id": 116, "very": "Very free", "alt": "Unoccupied", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szabad – elfoglatlan / szabad"}, {"id": 117, "very": "Very famous", "alt": "Renowned", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon híres – neves / elismert"}, {"id": 118, "very": "Very popular", "alt": "Celebrated", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon népszerű – ünnepelt"}, {"id": 119, "very": "Very successful", "alt": "Accomplished", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon sikeres – befutott / kiváló"}, {"id": 120, "very": "Very unsuccessful", "alt": "Failed", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon sikertelen – elbukott / sikertelen"}, {"id": 121, "very": "Very expensive", "alt": "Costly", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon drága – költséges"}, {"id": 122, "very": "Very cheap", "alt": "Inexpensive", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon olcsó – kedvező árú"}, {"id": 123, "very": "Very valuable", "alt": "Priceless", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon értékes – felbecsülhetetlen"}, {"id": 124, "very": "Very useless", "alt": "Worthless", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon haszontalan – értéktelen"}, {"id": 125, "very": "Very precious", "alt": "Invaluable", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon becses – felbecsülhetetlen értékű"}, {"id": 126, "very": "Very important person", "alt": "Influential", "page": 2, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon fontos személy – befolyásos"}, {"id": 127, "very": "Very powerful", "alt": "Mighty", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hatalmas – nagyhatalmú / vaskos"}, {"id": 128, "very": "Very influential", "alt": "Prominent", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon befolyásos – kiemelkedő / meghatározó"}, {"id": 129, "very": "Very common", "alt": "Widespread", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyakori – széles körben elterjedt"}, {"id": 130, "very": "Very rare", "alt": "Scarce", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon ritka – szűkös / ritka"}, {"id": 131, "very": "Very crowded", "alt": "Packed", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon zsúfolt – tömött / zsúfolásig telt"}, {"id": 132, "very": "Very empty", "alt": "Vacant", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon üres – betöltetlen / gazdátlan"}, {"id": 133, "very": "Very full", "alt": "Brimming", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tele – színültig telt"}, {"id": 134, "very": "Very hungry person", "alt": "Famished", "page": 2, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon éhes ember – kiéhezett"}, {"id": 135, "very": "Very attractive", "alt": "Alluring", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon vonzó – csábító / igéző"}, {"id": 136, "very": "Very handsome", "alt": "Striking", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon jóképű – megkapó / feltűnő"}, {"id": 137, "very": "Very pretty", "alt": "Lovely", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon csinos – bájos / kedves"}, {"id": 138, "very": "Very charming", "alt": "Enchanting", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon elbűvölő – varázslatos"}, {"id": 139, "very": "Very cute", "alt": "Adorable", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon aranyos – imádnivaló"}, {"id": 140, "very": "Very graceful", "alt": "Elegant", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon kecses – elegáns"}, {"id": 141, "very": "Very stylish", "alt": "Fashionable", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon stílusos – divatos"}, {"id": 142, "very": "Very fashionable", "alt": "Trendy", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon divatos – trendi / felkapott"}, {"id": 143, "very": "Very ordinary", "alt": "Mediocre", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon átlagos – középszerű"}, {"id": 144, "very": "Very special", "alt": "Exceptional", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon különleges – kivételes"}, {"id": 145, "very": "Very unusual", "alt": "Bizarre", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szokatlan – bizarr / furcsa"}, {"id": 146, "very": "Very strange", "alt": "Peculiar", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon furcsa – sajátos / különös"}, {"id": 147, "very": "Very weird", "alt": "Eccentric", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fura – különc / excentrikus"}, {"id": 148, "very": "Very normal", "alt": "Typical", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon normális – tipikus / jellegzetes"}, {"id": 149, "very": "Very perfect", "alt": "Flawless", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tökéletes – hibátlan"}, {"id": 150, "very": "Very imperfect", "alt": "Defective", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tökéletlen – hibás / selejtes"}, {"id": 151, "very": "Very beautiful view", "alt": "Breathtaking", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép kilátás – lélegzetelállító"}, {"id": 152, "very": "Very beautiful voice", "alt": "Melodious", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép hang – dallamos"}, {"id": 153, "very": "Very beautiful music", "alt": "Harmonious", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép zene – harmonikus"}, {"id": 154, "very": "Very beautiful garden", "alt": "Picturesque", "page": 2, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép kert – festői"}, {"id": 155, "very": "Very beautiful place", "alt": "Idyllic", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép hely – idilli"}, {"id": 156, "very": "Very beautiful dress", "alt": "Stunning", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép ruha – lenyűgöző / káprázatos"}, {"id": 157, "very": "Very beautiful painting", "alt": "Exquisite", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép festmény – remekmívű / kifinomult"}, {"id": 158, "very": "Very beautiful smile", "alt": "Radiant", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép mosoly – ragyogó / sugárzó"}, {"id": 159, "very": "Very beautiful flower", "alt": "Gorgeous", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép virág – pompás / gyönyörű"}, {"id": 160, "very": "Very beautiful scenery", "alt": "Spectacular", "page": 2, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép táj – látványos"}, {"id": 161, "very": "Very funny joke", "alt": "Hilarious", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon vicces vicc – fergeteges"}, {"id": 162, "very": "Very funny person", "alt": "Comical", "page": 2, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon vicces ember – komikus / mulatságos"}, {"id": 163, "very": "Very interesting story", "alt": "Gripping", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érdekes történet – lebilincselő / izgalmas"}, {"id": 164, "very": "Very interesting book", "alt": "Captivating", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érdekes könyv – magával ragadó"}, {"id": 165, "very": "Very interesting subject", "alt": "Fascinating", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érdekes téma – lenyűgöző"}, {"id": 166, "very": "Very boring lecture", "alt": "Tedious", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon unalmas előadás – fárasztó / vontatott"}, {"id": 167, "very": "Very boring movie", "alt": "Dull", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon unalmas film – unalmas / lapos"}, {"id": 168, "very": "Very boring meeting", "alt": "Monotonous", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon unalmas megbeszélés – monoton / egyhangú"}, {"id": 169, "very": "Very exciting game", "alt": "Thrilling", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon izgalmas játék – borzongató / lebilincselő"}, {"id": 170, "very": "Very exciting experience", "alt": "Exhilarating", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon izgalmas élmény – felemelő / mámorító"}, {"id": 171, "very": "Very frightening", "alt": "Terrifying", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon ijesztő – rémisztő"}, {"id": 172, "very": "Very scary", "alt": "Petrifying", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon félelmetes – megdermesztő"}, {"id": 173, "very": "Very dangerous", "alt": "Perilous", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon veszélyes – veszedelmes"}, {"id": 174, "very": "Very safe", "alt": "Secure", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon biztonságos – védett / biztos"}, {"id": 175, "very": "Very risky", "alt": "Hazardous", "page": 2, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon kockázatos – veszélyes / kockázatos"}, {"id": 176, "very": "Very serious", "alt": "Grave", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon komoly – súlyos / komor"}, {"id": 177, "very": "Very funny situation", "alt": "Absurd", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon vicces helyzet – abszurd / képtelen"}, {"id": 178, "very": "Very painful", "alt": "Excruciating", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fájdalmas – kínzó / gyötrelmes"}, {"id": 179, "very": "Very uncomfortable", "alt": "Awkward", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kényelmetlen – kínos / feszélyező"}, {"id": 180, "very": "Very comfortable", "alt": "Cozy", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kényelmes – meghitt / otthonos"}, {"id": 181, "very": "Very pleasant", "alt": "Delightful", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kellemes – elbűvölő / élvezetes"}, {"id": 182, "very": "Very unpleasant", "alt": "Distasteful", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kellemetlen – ízléstelen / visszatetsző"}, {"id": 183, "very": "Very annoying", "alt": "Irritating", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bosszantó – idegesítő"}, {"id": 184, "very": "Very irritating", "alt": "Aggravating", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon idegesítő – súlyosbító / felháborító"}, {"id": 185, "very": "Very disgusting", "alt": "Revolting", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon undorító – visszataszító / förtelmes"}, {"id": 186, "very": "Very horrible", "alt": "Horrendous", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szörnyű – iszonyatos / borzalmas"}, {"id": 187, "very": "Very terrible", "alt": "Atrocious", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon borzasztó – szörnyűséges / förtelmes"}, {"id": 188, "very": "Very disappointing", "alt": "Frustrating", "page": 2, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon kiábrándító – frusztráló"}, {"id": 189, "very": "Very satisfying", "alt": "Rewarding", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kielégítő – kifizetődő / hálás"}, {"id": 190, "very": "Very impressive", "alt": "Remarkable", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon lenyűgöző – figyelemre méltó"}, {"id": 191, "very": "Very amazing", "alt": "Astounding", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon elképesztő – megdöbbentő / ámulatba ejtő"}, {"id": 192, "very": "Very surprising", "alt": "Astonishing", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon meglepő – bámulatos"}, {"id": 193, "very": "Very unbelievable", "alt": "Incredible", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hihetetlen – elképesztő"}, {"id": 194, "very": "Very extraordinary", "alt": "Phenomenal", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon rendkívüli – fenomenális"}, {"id": 195, "very": "Very memorable", "alt": "Unforgettable", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon emlékezetes – felejthetetlen"}, {"id": 196, "very": "Very confusing", "alt": "Bewildering", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon zavarba ejtő – megdöbbentő / elképesztő"}, {"id": 197, "very": "Very complicated", "alt": "Intricate", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bonyolult – szövevényes / összetett"}, {"id": 198, "very": "Very simple", "alt": "Elementary", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon egyszerű – elemi / alapfokú"}, {"id": 199, "very": "Very clear", "alt": "Crystal-clear", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon világos / tiszta – kristálytiszta"}, {"id": 200, "very": "Very unclear", "alt": "Ambiguous", "page": 2, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon homályos / tisztázatlan – kétértelmű"}, {"id": 201, "very": "Very certain", "alt": "Definite", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon biztos – határozott / végleges"}, {"id": 202, "very": "Very uncertain", "alt": "Doubtful", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bizonytalan – kétséges"}, {"id": 203, "very": "Very accurate", "alt": "Precise", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon pontos – precíz"}, {"id": 204, "very": "Very inaccurate", "alt": "Erroneous", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon pontatlan – téves / hibás"}, {"id": 205, "very": "Very correct", "alt": "Accurate", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon helyes – pontos / szabatos"}, {"id": 206, "very": "Very incorrect", "alt": "Wrong", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon helytelen – hibás / rossz"}, {"id": 207, "very": "Very truthful", "alt": "Genuine", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon igazmondó – valódi / őszinte"}, {"id": 208, "very": "Very fake", "alt": "Counterfeit", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hamis – hamisított"}, {"id": 209, "very": "Very reliable", "alt": "Dependable", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon megbízható – szavahihető / biztos"}, {"id": 210, "very": "Very unreliable", "alt": "Untrustworthy", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon megbízhatatlan – szavahihetetlen"}, {"id": 211, "very": "Very trustworthy", "alt": "Credible", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hiteles – szavahihető"}, {"id": 212, "very": "Very suspicious", "alt": "Questionable", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyanús – megkérdőjelezhető"}, {"id": 213, "very": "Very loyal", "alt": "Faithful", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hűséges – hű / odaadó"}, {"id": 214, "very": "Very disloyal", "alt": "Treacherous", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hűtlen – áruló / csalfa"}, {"id": 215, "very": "Very obedient", "alt": "Compliant", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon engedelmes – szófogadó / engedékeny"}, {"id": 216, "very": "Very disobedient", "alt": "Rebellious", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon engedetlen – lázadó"}, {"id": 217, "very": "Very disciplined", "alt": "Orderly", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fegyelmezett – rendezett / rendszerető"}, {"id": 218, "very": "Very undisciplined", "alt": "Unruly", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fegyelmezetlen – rakoncátlan / zabolátlan"}, {"id": 219, "very": "Very patient", "alt": "Tolerant", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon türelmes – toleráns / elnéző"}, {"id": 220, "very": "Very impatient", "alt": "Restless", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon türelmetlen – nyugtalan / nyughatatlan"}, {"id": 221, "very": "Very calm", "alt": "Tranquil", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon nyugodt – békés / csendes"}, {"id": 222, "very": "Very peaceful", "alt": "Serene", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon békés – derűs / nyugodt"}, {"id": 223, "very": "Very angry", "alt": "Enraged", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon mérges – felbőszült / dühöngő"}, {"id": 224, "very": "Very annoyed", "alt": "Vexed", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon bosszús – bosszankodó / zaklatott"}, {"id": 225, "very": "Very mad", "alt": "Livid", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon dühös – tajtékzó / vörös a dühtől"}, {"id": 226, "very": "Very furious", "alt": "Incensed", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon dühöngő – felháborodott / bősz"}, {"id": 227, "very": "Very happy", "alt": "Ecstatic", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon boldog – eksztatikus / mámoros"}, {"id": 228, "very": "Very joyful", "alt": "Jubilant", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon örömteli – ujjongó"}, {"id": 229, "very": "Very cheerful", "alt": "Buoyant", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon vidám – derűs / jókedvű"}, {"id": 230, "very": "Very sad", "alt": "Heartbroken", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon szomorú – összetört szívű"}, {"id": 231, "very": "Very unhappy", "alt": "Depressed", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon boldogtalan – lehangolt / depressziós"}, {"id": 232, "very": "Very miserable", "alt": "Wretched", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon nyomorult – szerencsétlen / siralmas"}, {"id": 233, "very": "Very upset", "alt": "Agitated", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon zaklatott – izgatott / felkavart"}, {"id": 234, "very": "Very frightened", "alt": "Horrified", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon rémült – elborzadt / halálra rémült"}, {"id": 235, "very": "Very worried", "alt": "Distressed", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon aggódó – lesújtott / gyötrődő"}, {"id": 236, "very": "Very nervous", "alt": "Jittery", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon ideges – remegő / feszült"}, {"id": 237, "very": "Very shy", "alt": "Bashful", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon félénk – szégyenlős"}, {"id": 238, "very": "Very confident", "alt": "Assured", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon magabiztos – biztos magában"}, {"id": 239, "very": "Very proud", "alt": "Pleased", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon büszke – elégedett / örömteli"}, {"id": 240, "very": "Very ashamed", "alt": "Mortified", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon szégyenkező – halálosan megszégyenült"}, {"id": 241, "very": "Very embarrassed", "alt": "Humiliated", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon zavarban lévő – megalázott"}, {"id": 242, "very": "Very jealous", "alt": "Envious", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon féltékeny – irigy"}, {"id": 243, "very": "Very curious", "alt": "Inquisitive", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon kíváncsi – érdeklődő / tudásvágyó"}, {"id": 244, "very": "Very eager", "alt": "Enthusiastic", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon lelkes – buzgó / lelkesedő"}, {"id": 245, "very": "Very passionate", "alt": "Ardent", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon szenvedélyes – heves / lángoló"}, {"id": 246, "very": "Very determined", "alt": "Resolute", "page": 3, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon elszánt – határozott / rendíthetetlen"}, {"id": 247, "very": "Very stubborn", "alt": "Obstinate", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon makacs – csökönyös"}, {"id": 248, "very": "Very serious-minded", "alt": "Earnest", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon komoly gondolkodású – komoly / elszánt"}, {"id": 249, "very": "Very thoughtful", "alt": "Considerate", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon figyelmes – tapintatos / előzékeny"}, {"id": 250, "very": "Very forgetful", "alt": "Absent-minded", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon feledékeny – szórakozott"}, {"id": 251, "very": "Very messy", "alt": "Untidy", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon rendetlen – rendezetlen / zilált"}, {"id": 252, "very": "Very neat", "alt": "Immaculate", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon rendezett – makulátlan / patyolattiszta"}, {"id": 253, "very": "Very organized", "alt": "Systematic", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szervezett – szisztematikus / rendszeres"}, {"id": 254, "very": "Very disorganized", "alt": "Chaotic", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szervezetlen – kaotikus"}, {"id": 255, "very": "Very tidy", "alt": "Spotless", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon takaros – makulátlan"}, {"id": 256, "very": "Very dirty room", "alt": "Squalid", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon koszos szoba – mocskos / lepusztult"}, {"id": 257, "very": "Very beautiful house", "alt": "Magnificent", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép ház – pompás / fenséges"}, {"id": 258, "very": "Very big house", "alt": "Spacious", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nagy ház – tágas"}, {"id": 259, "very": "Very small house", "alt": "Cramped", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kicsi ház – szűkös / zsúfolt"}, {"id": 260, "very": "Very old building", "alt": "Historic", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régi épület – történelmi"}, {"id": 261, "very": "Very tall building", "alt": "Towering", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon magas épület – toronymagas"}, {"id": 262, "very": "Very strong wind", "alt": "Gale-force", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős szél – viharos erejű"}, {"id": 263, "very": "Very heavy rain", "alt": "Torrential", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon heves eső – zuhogó / özönvízszerű"}, {"id": 264, "very": "Very light rain", "alt": "Drizzly", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon gyenge eső – szitáló"}, {"id": 265, "very": "Very thick fog", "alt": "Dense", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon sűrű köd – tömör / áthatolhatatlan"}, {"id": 266, "very": "Very strong storm", "alt": "Violent", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős vihar – heves / tomboló"}, {"id": 267, "very": "Very hot weather", "alt": "Sweltering", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon meleg idő – fülledt / tikkasztó"}, {"id": 268, "very": "Very cold weather", "alt": "Freezing", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon hideg idő – fagyos"}, {"id": 269, "very": "Very dry weather", "alt": "Parched", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon száraz idő – tikkadt / aszályos"}, {"id": 270, "very": "Very wet weather", "alt": "Rain-soaked", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon esős / nedves idő – esőáztatta"}, {"id": 271, "very": "Very bright sunlight", "alt": "Blinding", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős napfény – vakító"}, {"id": 272, "very": "Very dark night", "alt": "Pitch-black", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon sötét éjszaka – koromsötét"}, {"id": 273, "very": "Very beautiful sky", "alt": "Radiant", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép égbolt – ragyogó"}, {"id": 274, "very": "Very beautiful sunset", "alt": "Glorious", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép naplemente – dicsőséges / pompás"}, {"id": 275, "very": "Very beautiful sunrise", "alt": "Spectacular", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép napkelte – látványos"}, {"id": 276, "very": "Very deep water", "alt": "Profound", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon mély víz – feneketlen / mély"}, {"id": 277, "very": "Very shallow water", "alt": "Thin", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon sekély víz – vékony / sekély"}, {"id": 278, "very": "Very wide road", "alt": "Broad", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon széles út – tágas / széles"}, {"id": 279, "very": "Very narrow road", "alt": "Constricted", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon keskeny út – beszűkült / szűk"}, {"id": 280, "very": "Very steep hill", "alt": "Precipitous", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon meredek domb – szakadékos / meredek"}, {"id": 281, "very": "Very flat land", "alt": "Level", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon sík terület – vízszintes / egyenes"}, {"id": 282, "very": "Very rough surface", "alt": "Coarse", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon érdes felület – durva"}, {"id": 283, "very": "Very smooth surface", "alt": "Silky", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon sima felület – selymes"}, {"id": 284, "very": "Very hard ground", "alt": "Solid", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon kemény talaj – szilárd"}, {"id": 285, "very": "Very soft ground", "alt": "Spongy", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon puha talaj – szivacsos"}, {"id": 286, "very": "Very slippery floor", "alt": "Slick", "page": 3, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon csúszós padló – síkos / csúszós"}, {"id": 287, "very": "Very sticky", "alt": "Tacky", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon ragacsos – enyves / tapadós"}, {"id": 288, "very": "Very dusty", "alt": "Powdery", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon poros – porszerű / lisztes"}, {"id": 289, "very": "Very smoky", "alt": "Hazy", "page": 3, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon füstös – párás / fátyolos"}, {"id": 290, "very": "Very colourful", "alt": "Vibrant", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon színes – élénk / vibráló"}, {"id": 291, "very": "Very pale", "alt": "Wan", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sápadt – fakó / elcsigázott"}, {"id": 292, "very": "Very red", "alt": "Scarlet", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon piros – skarlátvörös"}, {"id": 293, "very": "Very white", "alt": "Snow-white", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fehér – hófehér"}, {"id": 294, "very": "Very black", "alt": "Jet-black", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fekete – koromfekete"}, {"id": 295, "very": "Very green", "alt": "Verdant", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon zöld – üde zöld / haragoszöld"}, {"id": 296, "very": "Very blue", "alt": "Azure", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon kék – azúrkék"}, {"id": 297, "very": "Very yellow", "alt": "Golden", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sárga – aranysárga"}, {"id": 298, "very": "Very grey", "alt": "Ashen", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szürke – hamuszürke"}, {"id": 299, "very": "Very shiny", "alt": "Gleaming", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fényes – csillogó / fénylő"}, {"id": 300, "very": "Very dull", "alt": "Drab", "page": 3, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fakó / unalmas – egyhangú / szürke"}, {"id": 301, "very": "Very fast runner", "alt": "Fleet-footed", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon gyors futó – fürge lábú / sebes"}, {"id": 302, "very": "Very fast car", "alt": "High-speed", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyors autó – nagy sebességű"}, {"id": 303, "very": "Very fast movement", "alt": "Swift", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyors mozdulat – sebes / villámgyors"}, {"id": 304, "very": "Very slow person", "alt": "Sluggish", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon lassú ember – lomha / nehézkes"}, {"id": 305, "very": "Very quick learner", "alt": "Apt", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon gyorsan tanuló – fogékony / talpraesett"}, {"id": 306, "very": "Very strong man", "alt": "Herculean", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon erős férfi – herkulesi"}, {"id": 307, "very": "Very strong woman", "alt": "Powerful", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon erős nő – erőteljes / hatalmas"}, {"id": 308, "very": "Very weak person", "alt": "Feeble", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon gyenge ember – erőtlen / gyámoltalan"}, {"id": 309, "very": "Very muscular", "alt": "Brawny", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon izmos – izmos / vaskos"}, {"id": 310, "very": "Very thin", "alt": "Emaciated", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sovány – csontsovány / lesoványodott"}, {"id": 311, "very": "Very fat", "alt": "Obese", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon kövér – elhízott"}, {"id": 312, "very": "Very slim", "alt": "Slender", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon karcsú – sudár / vékony"}, {"id": 313, "very": "Very tall person", "alt": "Towering", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon magas ember – égimeszelő / toronymagas"}, {"id": 314, "very": "Very short person", "alt": "Petite", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon alacsony ember – apró termetű / törékeny"}, {"id": 315, "very": "Very healthy", "alt": "Robust", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon egészséges – életerős / robusztus"}, {"id": 316, "very": "Very unhealthy", "alt": "Frail", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon beteges – törékeny / gyenge"}, {"id": 317, "very": "Very fit", "alt": "Athletic", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fitt – sportos / edzett"}, {"id": 318, "very": "Very unfit", "alt": "Out of shape", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon edzetlen – formán kívüli"}, {"id": 319, "very": "Very energetic", "alt": "Vigorous", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon energikus – életerős / lendületes"}, {"id": 320, "very": "Very exhausted", "alt": "Drained", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kimerült – kifacsart / elcsigázott"}, {"id": 321, "very": "Very sleepy", "alt": "Somnolent", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon álmos – aluszékony / bódult"}, {"id": 322, "very": "Very awake", "alt": "Wide-awake", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon éber – teljesen éber"}, {"id": 323, "very": "Very hungry", "alt": "Ravenous", "page": 4, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon éhes – farkaséhes"}, {"id": 324, "very": "Very thirsty", "alt": "Dehydrated", "page": 4, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon szomjas – kiszáradt / dehidratált"}, {"id": 325, "very": "Very cold hands", "alt": "Icy", "page": 4, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon hideg kezek – jéghideg"}, {"id": 326, "very": "Very warm hands", "alt": "Toasty", "page": 4, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon meleg kezek – jó meleg"}, {"id": 327, "very": "Very painful headache", "alt": "Splitting", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fájdalmas fejfájás – hasogató"}, {"id": 328, "very": "Very bad cough", "alt": "Persistent", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon csúnya köhögés – makacs / állandó"}, {"id": 329, "very": "Very high fever", "alt": "Severe", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon magas láz – súlyos"}, {"id": 330, "very": "Very weak heartbeat", "alt": "Faint", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyenge szívverés – alig észlelhető / gyenge"}, {"id": 331, "very": "Very loud sound", "alt": "Thunderous", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon hangos zaj – mennydörgő"}, {"id": 332, "very": "Very loud music", "alt": "Deafening", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon hangos zene – fülsiketítő"}, {"id": 333, "very": "Very quiet voice", "alt": "Whispered", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon halk hang – suttogó"}, {"id": 334, "very": "Very sweet voice", "alt": "Honeyed", "page": 4, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon édes hang – mézesmázos / édes"}, {"id": 335, "very": "Very deep voice", "alt": "Sonorous", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon mély hang – zengő / öblös"}, {"id": 336, "very": "Very high voice", "alt": "Shrill", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon magas hang – éles / visító"}, {"id": 337, "very": "Very unpleasant voice", "alt": "Grating", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon kellemetlen hang – reszelős / bántó"}, {"id": 338, "very": "Very beautiful voice", "alt": "Dulcet", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép hang – lágy / dallamos"}, {"id": 339, "very": "Very musical voice", "alt": "Melodious", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon zenei hang – dallamos"}, {"id": 340, "very": "Very clear voice", "alt": "Resonant", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon tiszta hang – csengő / zengő"}, {"id": 341, "very": "Very good singer", "alt": "Exceptional", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó énekes – kivételes"}, {"id": 342, "very": "Very good dancer", "alt": "Outstanding", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó táncos – kiemelkedő"}, {"id": 343, "very": "Very good actor", "alt": "Brilliant", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó színész – zseniális / ragyogó"}, {"id": 344, "very": "Very good teacher", "alt": "Excellent", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó tanár – kiváló"}, {"id": 345, "very": "Very good student", "alt": "Exemplary", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó tanuló – példamutató"}, {"id": 346, "very": "Very good friend", "alt": "Wonderful", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó barát – csodálatos"}, {"id": 347, "very": "Very good leader", "alt": "Inspiring", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó vezető – ösztönző / lelkesítő"}, {"id": 348, "very": "Very good worker", "alt": "Efficient", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó munkaerő – hatékony"}, {"id": 349, "very": "Very good player", "alt": "Skilled", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó játékos – képzett / ügyes"}, {"id": 350, "very": "Very good performance", "alt": "Superb", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon jó teljesítmény – nagyszerű / pompás"}, {"id": 351, "very": "Very bad behaviour", "alt": "Appalling", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz viselkedés – megdöbbentő / botrányos"}, {"id": 352, "very": "Very bad manners", "alt": "Boorish", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon rossz modor – faragatlan / bárdolatlan"}, {"id": 353, "very": "Very bad language", "alt": "Vulgar", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon csúnya beszéd – közönséges / vulgáris"}, {"id": 354, "very": "Very bad habit", "alt": "Destructive", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz szokás – romboló / káros"}, {"id": 355, "very": "Very bad decision", "alt": "Foolish", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz döntés – ostoba / meggondolatlan"}, {"id": 356, "very": "Very bad mistake", "alt": "Costly", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz hiba – súlyos / sokba kerülő"}, {"id": 357, "very": "Very bad accident", "alt": "Serious", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon súlyos baleset – komoly / súlyos"}, {"id": 358, "very": "Very bad condition", "alt": "Dire", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz állapot – válságos / szörnyű"}, {"id": 359, "very": "Very bad situation", "alt": "Awful", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz helyzet – borzalmas"}, {"id": 360, "very": "Very bad experience", "alt": "Horrific", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon rossz élmény – szörnyűséges / borzalmas"}, {"id": 361, "very": "Very good opportunity", "alt": "Golden", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó lehetőség – aranyat érő / kiváló"}, {"id": 362, "very": "Very good chance", "alt": "Excellent", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó esély – kiváló"}, {"id": 363, "very": "Very good idea", "alt": "Brilliant", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó ötlet – ragyogó / zseniális"}, {"id": 364, "very": "Very good plan", "alt": "Excellent", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó terv – kiváló"}, {"id": 365, "very": "Very good suggestion", "alt": "Valuable", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó javaslat – értékes"}, {"id": 366, "very": "Very good advice", "alt": "Sound", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó tanács – józan / megbízható"}, {"id": 367, "very": "Very good reason", "alt": "Convincing", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó ok – meggyőző"}, {"id": 368, "very": "Very good result", "alt": "Outstanding", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó eredmény – kiemelkedő"}, {"id": 369, "very": "Very good news", "alt": "Wonderful", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó hír – csodálatos"}, {"id": 370, "very": "Very good achievement", "alt": "Remarkable", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó teljesítmény / eredmény – figyelemre méltó"}, {"id": 371, "very": "Very important matter", "alt": "Crucial", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos ügy – döntő / kulcsfontosságú"}, {"id": 372, "very": "Very important point", "alt": "Key", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos pont – kulcsfontosságú"}, {"id": 373, "very": "Very important role", "alt": "Pivotal", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos szerep – sarkalatos / meghatározó"}, {"id": 374, "very": "Very important task", "alt": "Essential", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos feladat – alapvető / nélkülözhetetlen"}, {"id": 375, "very": "Very important event", "alt": "Historic", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos esemény – történelmi"}, {"id": 376, "very": "Very important decision", "alt": "Critical", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos döntés – kritikus / sorsdöntő"}, {"id": 377, "very": "Very important meeting", "alt": "Significant", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos megbeszélés – jelentős"}, {"id": 378, "very": "Very important document", "alt": "Vital", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos dokumentum – létfontosságú"}, {"id": 379, "very": "Very important discovery", "alt": "Groundbreaking", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos felfedezés – úttörő"}, {"id": 380, "very": "Very important invention", "alt": "Revolutionary", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos találmány – forradalmi"}, {"id": 381, "very": "Very useful", "alt": "Invaluable", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon hasznos – felbecsülhetetlen"}, {"id": 382, "very": "Very useless", "alt": "Futile", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon haszontalan – hiábavaló / meddő"}, {"id": 383, "very": "Very practical", "alt": "Functional", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon praktikus – funkcionális / célszerű"}, {"id": 384, "very": "Very impractical", "alt": "Unworkable", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon gyakorlatiatlan – kivitelezhetetlen"}, {"id": 385, "very": "Very effective", "alt": "Potent", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon hatékony – hatásos / erős"}, {"id": 386, "very": "Very ineffective", "alt": "Ineffectual", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon hatástalan – eredménytelen"}, {"id": 387, "very": "Very productive", "alt": "Fruitful", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon termékeny – gyümölcsöző"}, {"id": 388, "very": "Very unproductive", "alt": "Barren", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon terméketlen – meddő / kopár"}, {"id": 389, "very": "Very successful business", "alt": "Thriving", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon sikeres vállalkozás – virágzó"}, {"id": 390, "very": "Very unsuccessful business", "alt": "Failing", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon sikertelen vállalkozás – bukásra ítélt / hanyatló"}, {"id": 391, "very": "Very popular singer", "alt": "Acclaimed", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon népszerű énekes – elismert / ünnepelt"}, {"id": 392, "very": "Very popular actor", "alt": "Celebrated", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon népszerű színész – ünnepelt"}, {"id": 393, "very": "Very famous writer", "alt": "Renowned", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon híres író – neves / elismert"}, {"id": 394, "very": "Very famous place", "alt": "Iconic", "page": 4, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon híres hely – ikonikus"}, {"id": 395, "very": "Very famous person", "alt": "Notable", "page": 4, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon híres ember – nevezetes / jeles"}, {"id": 396, "very": "Very respected", "alt": "Esteemed", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tisztelt – nagyra becsült"}, {"id": 397, "very": "Very admired", "alt": "Revered", "page": 4, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon csodált – mélyen tisztelt / bálványozott"}, {"id": 398, "very": "Very loved", "alt": "Adored", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szeretett – imádott"}, {"id": 399, "very": "Very hated", "alt": "Detested", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyűlölt – utált / megvetett"}, {"id": 400, "very": "Very disliked", "alt": "Loathed", "page": 4, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nem kedvelt – utált / ki nem állhatott"}, {"id": 401, "very": "Very expensive jewellery", "alt": "Costly", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon drága ékszer – költséges"}, {"id": 402, "very": "Very expensive car", "alt": "Luxurious", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon drága autó – fényűző / luxus"}, {"id": 403, "very": "Very expensive house", "alt": "Lavish", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon drága ház – pazar / fényűző"}, {"id": 404, "very": "Very cheap product", "alt": "Budget-friendly", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon olcsó termék – pénztárcabarát"}, {"id": 405, "very": "Very cheap clothing", "alt": "Affordable", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon olcsó ruházat – megfizethető"}, {"id": 406, "very": "Very rich family", "alt": "Affluent", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon gazdag család – tehetős / jómódú"}, {"id": 407, "very": "Very rich country", "alt": "Prosperous", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon gazdag ország – virágzó / jómódú"}, {"id": 408, "very": "Very poor family", "alt": "Impoverished", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon szegény család – elszegényedett / nincstelen"}, {"id": 409, "very": "Very poor country", "alt": "Underdeveloped", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon szegény ország – fejletlen / elmaradott"}, {"id": 410, "very": "Very valuable object", "alt": "Priceless", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon értékes tárgy – felbecsülhetetlen"}, {"id": 411, "very": "Very old tradition", "alt": "Ancient", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régi hagyomány – ősi"}, {"id": 412, "very": "Very old custom", "alt": "Time-honoured", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régi szokás – patinás / tiszteletre méltó"}, {"id": 413, "very": "Very old story", "alt": "Legendary", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régi történet – legendás"}, {"id": 414, "very": "Very old memory", "alt": "Distant", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régi emlék – távoli"}, {"id": 415, "very": "Very old-fashioned", "alt": "Outdated", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régimódi – elavult / idejétmúlt"}, {"id": 416, "very": "Very modern technology", "alt": "Advanced", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon modern technológia – fejlett / korszerű"}, {"id": 417, "very": "Very modern design", "alt": "Contemporary", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon modern dizájn – kortárs"}, {"id": 418, "very": "Very new product", "alt": "Innovative", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon új termék – innovatív / újszerű"}, {"id": 419, "very": "Very new idea", "alt": "Novel", "page": 5, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon új ötlet – újszerű"}, {"id": 420, "very": "Very new fashion", "alt": "Trendy", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon új divat – trendi"}, {"id": 421, "very": "Very early morning", "alt": "Dawn", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kora reggel – hajnal"}, {"id": 422, "very": "Very late night", "alt": "Midnight", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon késő éjjel – éjfél"}, {"id": 423, "very": "Very long journey", "alt": "Extensive", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hosszú utazás – kiterjedt / hosszadalmas"}, {"id": 424, "very": "Very short journey", "alt": "Brief", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon rövid utazás – rövid / kurta"}, {"id": 425, "very": "Very long speech", "alt": "Lengthy", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hosszú beszéd – hosszadalmas"}, {"id": 426, "very": "Very short speech", "alt": "Concise", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon rövid beszéd – tömör"}, {"id": 427, "very": "Very long hair", "alt": "Flowing", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon hosszú haj – omló / hosszú"}, {"id": 428, "very": "Very short hair", "alt": "Cropped", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon rövid haj – rövidre nyírt"}, {"id": 429, "very": "Very long distance", "alt": "Vast", "page": 5, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nagy távolság – hatalmas / óriási"}, {"id": 430, "very": "Very short distance", "alt": "Nearby", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon kis távolság – közeli"}, {"id": 431, "very": "Very wide smile", "alt": "Beaming", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon széles mosoly – sugárzó"}, {"id": 432, "very": "Very big smile", "alt": "Broad", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon nagy mosoly – széles"}, {"id": 433, "very": "Very beautiful eyes", "alt": "Mesmerizing", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép szemek – igéző / lenyűgöző"}, {"id": 434, "very": "Very bright eyes", "alt": "Sparkling", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fényes szemek – csillogó"}, {"id": 435, "very": "Very dark eyes", "alt": "Deep-set", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sötét szemek – mélyen ülő / sötét"}, {"id": 436, "very": "Very soft skin", "alt": "Silky", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon puha bőr – selymes"}, {"id": 437, "very": "Very smooth skin", "alt": "Velvety", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sima bőr – bársonyos"}, {"id": 438, "very": "Very rough skin", "alt": "Coarse", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon érdes bőr – durva / érdes"}, {"id": 439, "very": "Very beautiful face", "alt": "Radiant", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép arc – ragyogó"}, {"id": 440, "very": "Very pale face", "alt": "Ashen", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sápadt arc – hamuszürke / halottsápadt"}, {"id": 441, "very": "Very clean clothes", "alt": "Immaculate", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon tiszta ruhák – makulátlan"}, {"id": 442, "very": "Very dirty clothes", "alt": "Grimy", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon koszos ruhák – piszkos / maszatos"}, {"id": 443, "very": "Very wet clothes", "alt": "Soaked", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon vizes ruhák – csuromvizes / átázott"}, {"id": 444, "very": "Very dry clothes", "alt": "Parched", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon száraz ruhák – csontszáraz"}, {"id": 445, "very": "Very tight clothes", "alt": "Snug", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szűk ruhák – testhezálló / szoros"}, {"id": 446, "very": "Very loose clothes", "alt": "Baggy", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon bő ruhák – buggyos / bő"}, {"id": 447, "very": "Very expensive fabric", "alt": "Luxurious", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon drága szövet – fényűző"}, {"id": 448, "very": "Very soft fabric", "alt": "Plush", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon puha szövet – plüss / puha"}, {"id": 449, "very": "Very rough fabric", "alt": "Scratchy", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon érdes szövet – szúrós / karcos"}, {"id": 450, "very": "Very thin fabric", "alt": "Sheer", "page": 5, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon vékony szövet – áttetsző / leheletfinom"}, {"id": 451, "very": "Very strong smell", "alt": "Pungent", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon erős szag – csípős / átható"}, {"id": 452, "very": "Very pleasant smell", "alt": "Fragrant", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon kellemes illat – illatos"}, {"id": 453, "very": "Very bad smell", "alt": "Foul", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon rossz szag – bűzös / undorító"}, {"id": 454, "very": "Very sweet smell", "alt": "Perfumed", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon édes illat – illatosított / parfümös"}, {"id": 455, "very": "Very fresh smell", "alt": "Aromatic", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon friss illat – aromás / fűszeres"}, {"id": 456, "very": "Very unpleasant taste", "alt": "Nauseating", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon kellemetlen íz – émelyítő / undorító"}, {"id": 457, "very": "Very delicious food", "alt": "Scrumptious", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon finom étel – ínycsiklandó / mennyei"}, {"id": 458, "very": "Very tasty meal", "alt": "Delectable", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon ízletes fogás – zamatos / finom"}, {"id": 459, "very": "Very spicy food", "alt": "Fiery", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon csípős étel – tüzes"}, {"id": 460, "very": "Very salty food", "alt": "Brackish", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon sós étel – sós / sós ízű"}, {"id": 461, "very": "Very sour fruit", "alt": "Tart", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon savanyú gyümölcs – fanyar"}, {"id": 462, "very": "Very bitter medicine", "alt": "Acrid", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon keserű orvosság – kesernyés / csípős"}, {"id": 463, "very": "Very sweet dessert", "alt": "Luscious", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon édes desszert – zamatos / ínycsiklandó"}, {"id": 464, "very": "Very soft bread", "alt": "Fluffy", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon puha kenyér – foszlós / puha"}, {"id": 465, "very": "Very hard bread", "alt": "Crusty", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon kemény kenyér – ropogós / kérges"}, {"id": 466, "very": "Very fresh bread", "alt": "Crusty", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon friss kenyér – ropogós"}, {"id": 467, "very": "Very hot soup", "alt": "Piping hot", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon forró leves – tűzforró"}, {"id": 468, "very": "Very cold drink", "alt": "Icy", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon hideg ital – jéghideg"}, {"id": 469, "very": "Very thick soup", "alt": "Viscous", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon sűrű leves – sűrű / nyúlós"}, {"id": 470, "very": "Very thin soup", "alt": "Watery", "page": 5, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon híg leves – vizes / híg"}, {"id": 471, "very": "Very beautiful garden", "alt": "Lush", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép kert – buja / dús"}, {"id": 472, "very": "Very green forest", "alt": "Verdant", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon zöld erdő – üde zöld"}, {"id": 473, "very": "Very large tree", "alt": "Massive", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon nagy fa – hatalmas / masszív"}, {"id": 474, "very": "Very small plant", "alt": "Diminutive", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon kicsi növény – apró / törpe"}, {"id": 475, "very": "Very colourful bird", "alt": "Vibrant", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon színes madár – élénk színű"}, {"id": 476, "very": "Very fast animal", "alt": "Swift", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon gyors állat – sebes"}, {"id": 477, "very": "Very dangerous animal", "alt": "Ferocious", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon veszélyes állat – vad / vérengző"}, {"id": 478, "very": "Very gentle animal", "alt": "Docile", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szelíd állat – kezes / szelíd"}, {"id": 479, "very": "Very clever animal", "alt": "Intelligent", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon okos állat – intelligens"}, {"id": 480, "very": "Very noisy animal", "alt": "Raucous", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon hangos állat – rekedtes / lármás"}, {"id": 481, "very": "Very beautiful beach", "alt": "Picturesque", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép tengerpart – festői"}, {"id": 482, "very": "Very high mountain", "alt": "Lofty", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon magas hegy – fenséges / égbenyúló"}, {"id": 483, "very": "Very deep valley", "alt": "Profound", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon mély völgy – mély"}, {"id": 484, "very": "Very wide river", "alt": "Broad", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon széles folyó – széles"}, {"id": 485, "very": "Very strong river current", "alt": "Powerful", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős folyóáramlat – hatalmas erejű"}, {"id": 486, "very": "Very calm sea", "alt": "Tranquil", "page": 5, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon nyugodt tenger – csendes / békés"}, {"id": 487, "very": "Very rough sea", "alt": "Turbulent", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon háborgó tenger – viharos / háborgó"}, {"id": 488, "very": "Very dark cave", "alt": "Lightless", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon sötét barlang – fénytelen / koromsötét"}, {"id": 489, "very": "Very bright star", "alt": "Luminous", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon fényes csillag – fénylő / ragyogó"}, {"id": 490, "very": "Very beautiful moon", "alt": "Radiant", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép hold – sugárzó"}, {"id": 491, "very": "Very heavy snowfall", "alt": "Thick", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős havazás – sűrű / vastag"}, {"id": 492, "very": "Very strong earthquake", "alt": "Severe", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős földrengés – súlyos"}, {"id": 493, "very": "Very dangerous volcano", "alt": "Active", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon veszélyes vulkán – aktív / működő"}, {"id": 494, "very": "Very powerful waterfall", "alt": "Thunderous", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon erős vízesés – mennydörgő"}, {"id": 495, "very": "Very beautiful island", "alt": "Idyllic", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép sziget – idilli"}, {"id": 496, "very": "Very large desert", "alt": "Vast", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon nagy sivatag – hatalmas / végtelen"}, {"id": 497, "very": "Very dry desert", "alt": "Arid", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon száraz sivatag – kiszáradt / aszályos"}, {"id": 498, "very": "Very beautiful landscape", "alt": "Breathtaking", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon szép tájkép – lélegzetelállító"}, {"id": 499, "very": "Very peaceful village", "alt": "Tranquil", "page": 5, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon békés falu – nyugodt / csendes"}, {"id": 500, "very": "Very crowded city", "alt": "Bustling", "page": 5, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon zsúfolt város – nyüzsgő"}, {"id": 501, "very": "Very good at English", "alt": "Fluent", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó angolból – folyékonyan beszélő"}, {"id": 502, "very": "Very good behaviour", "alt": "Well-behaved", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó viselkedés – jól nevelt"}, {"id": 503, "very": "Very good idea", "alt": "Excellent", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon jó ötlet – kiváló"}, {"id": 504, "very": "Very great", "alt": "Wonderful", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nagyszerű – csodálatos"}, {"id": 505, "very": "Very grateful", "alt": "Thankful", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon hálás – köszönettel teli"}, {"id": 506, "very": "Very happy", "alt": "Delighted", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon boldog – elragadtatott"}, {"id": 507, "very": "Very hard", "alt": "Difficult", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nehéz – nehézkes / fáradságos"}, {"id": 508, "very": "Very high price", "alt": "Expensive", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon magas ár – drága"}, {"id": 509, "very": "Very honest person", "alt": "Trustworthy", "page": 6, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon őszinte ember – megbízható"}, {"id": 510, "very": "Very important", "alt": "Significant", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon fontos – jelentős"}, {"id": 511, "very": "Very kind", "alt": "Caring", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kedves – gondoskodó"}, {"id": 512, "very": "Very large", "alt": "Enormous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nagy – óriási / hatalmas"}, {"id": 513, "very": "Very lazy", "alt": "Indolent", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon lusta – rest / henye"}, {"id": 514, "very": "Very little", "alt": "Almost none", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kevés – szinte semmi"}, {"id": 515, "very": "Very long time", "alt": "A long time", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hosszú idő – hosszú idő"}, {"id": 516, "very": "Very lovely", "alt": "Adorable", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kedves / bájos – imádnivaló"}, {"id": 517, "very": "Very low", "alt": "Small", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon alacsony – kicsi"}, {"id": 518, "very": "Very mature", "alt": "Adult", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érett – felnőtt"}, {"id": 519, "very": "Very modern", "alt": "Contemporary", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon modern – kortárs"}, {"id": 520, "very": "Very neat", "alt": "Tidy", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon rendes – takaros / rendezett"}, {"id": 521, "very": "Very nervous", "alt": "Anxious", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon ideges – szorongó"}, {"id": 522, "very": "Very old-fashioned", "alt": "Outdated", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon régimódi – elavult"}, {"id": 523, "very": "Very open", "alt": "Frank", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nyitott – nyílt / őszinte"}, {"id": 524, "very": "Very peaceful", "alt": "Calm", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon békés – nyugodt"}, {"id": 525, "very": "Very popular", "alt": "Well-known", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon népszerű – közismert"}, {"id": 526, "very": "Very poor", "alt": "Destitute", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon szegény – nincstelen"}, {"id": 527, "very": "Very quick", "alt": "Rapid", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyors – sebes"}, {"id": 528, "very": "Very quiet", "alt": "Silent", "page": 6, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon csendes – néma"}, {"id": 529, "very": "Very successful", "alt": "Prosperous", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon sikeres – virágzó / jómódú"}, {"id": 530, "very": "Very sweet", "alt": "Kind", "page": 6, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon kedves / édes – szívélyes / kedves"}, {"id": 531, "very": "Very tall", "alt": "Towering", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon magas – toronymagas"}, {"id": 532, "very": "Very tasty", "alt": "Delicious", "page": 6, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon ízletes – finom"}, {"id": 533, "very": "Very tired", "alt": "Exhausted", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fáradt – kimerült"}, {"id": 534, "very": "Very true", "alt": "Genuine", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon igaz – valódi / őszinte"}, {"id": 535, "very": "Very useful", "alt": "Helpful", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon hasznos – segítőkész / hasznos"}, {"id": 536, "very": "Very valuable", "alt": "Precious", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon értékes – becses"}, {"id": 537, "very": "Very warm", "alt": "Cozy", "page": 6, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon meleg – meghitt / otthonos"}, {"id": 538, "very": "Very weak", "alt": "Feeble", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyenge – erőtlen"}, {"id": 539, "very": "Very well", "alt": "Extremely well", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon jól – rendkívül jól"}, {"id": 540, "very": "Very willing", "alt": "Eager", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hajlandó – buzgó / lelkes"}, {"id": 541, "very": "Very wise", "alt": "Sagacious", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bölcs – éles eszű"}, {"id": 542, "very": "Very wrong", "alt": "Mistaken", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon téves – tévedő / hibás"}, {"id": 543, "very": "Very young", "alt": "Juvenile", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fiatal – fiatalkorú / zsenge"}, {"id": 544, "very": "Very brave", "alt": "Courageous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon bátor – vakmerő / bátor"}, {"id": 545, "very": "Very bright", "alt": "Brilliant", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon fényes – ragyogó"}, {"id": 546, "very": "Very clean", "alt": "Spotless", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tiszta – makulátlan"}, {"id": 547, "very": "Very clever", "alt": "Intelligent", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon okos – intelligens"}, {"id": 548, "very": "Very confident", "alt": "Self-assured", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon magabiztos – önbizalommal teli"}, {"id": 549, "very": "Very difficult", "alt": "Arduous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon nehéz – fáradságos"}, {"id": 550, "very": "Very fresh", "alt": "Fresh", "page": 6, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon friss – friss"}, {"id": 551, "very": "Very gentle", "alt": "Kind", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon szelíd – kedves / gyengéd"}, {"id": 552, "very": "Very good-looking", "alt": "Attractive", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon jóképű / csinos – vonzó"}, {"id": 553, "very": "Very expensive", "alt": "Costly", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon drága – költséges"}, {"id": 554, "very": "Very famous", "alt": "Renowned", "page": 6, "cat": "Értékelés, Siker & Üzlet", "hu": "nagyon híres – neves / elismert"}, {"id": 555, "very": "Very fearless", "alt": "Bold", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon félelmet nem ismerő – merész"}, {"id": 556, "very": "Very beautiful", "alt": "Gorgeous", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szép – gyönyörű"}, {"id": 557, "very": "Very careful", "alt": "Cautious", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon óvatos – elővigyázatos"}, {"id": 558, "very": "Very comfortable", "alt": "Cozy", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kényelmes – meghitt / otthonos"}, {"id": 559, "very": "Very common", "alt": "Commonplace", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon gyakori – mindennapos / megszokott"}, {"id": 560, "very": "Very creative", "alt": "Innovative", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon kreatív – innovatív / újító"}, {"id": 561, "very": "Very dangerous", "alt": "Hazardous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon veszélyes – kockázatos / veszélyes"}, {"id": 562, "very": "Very dull", "alt": "Boring", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon unalmas – egyhangú / unalmas"}, {"id": 563, "very": "Very easy", "alt": "Simple", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon könnyű – egyszerű"}, {"id": 564, "very": "Very energetic", "alt": "Vigorous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon energikus – életerős"}, {"id": 565, "very": "Very funny", "alt": "Hilarious", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon vicces – fergeteges"}, {"id": 566, "very": "Very friendly", "alt": "Amiable", "page": 6, "cat": "Emberek, Hangok & Szerepek", "hu": "nagyon barátságos – szívélyes"}, {"id": 567, "very": "Very healthy", "alt": "Robust", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon egészséges – életerős / robusztus"}, {"id": 568, "very": "Very hungry", "alt": "Starving", "page": 6, "cat": "Ételek, Ízek & Illatok", "hu": "nagyon éhes – éhező / farkaséhes"}, {"id": 569, "very": "Very interesting", "alt": "Fascinating", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érdekes – lenyűgöző"}, {"id": 570, "very": "Very polite", "alt": "Courteous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon udvarias – előzékeny"}, {"id": 571, "very": "Very powerful", "alt": "Strong", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon hatalmas – erős"}, {"id": 572, "very": "Very patient", "alt": "Tolerant", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon türelmes – toleráns"}, {"id": 573, "very": "Very perfect", "alt": "Ideal", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon tökéletes – ideális"}, {"id": 574, "very": "Very serious", "alt": "Earnest", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon komoly – elszánt / komoly"}, {"id": 575, "very": "Very shy", "alt": "Bashful", "page": 6, "cat": "Érzelmek & Lelkiállapot", "hu": "nagyon félénk – szégyenlős"}, {"id": 576, "very": "Very short", "alt": "Brief", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon rövid – tömör"}, {"id": 577, "very": "Very deep", "alt": "Profound", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon mély – mélyreható / mély"}, {"id": 578, "very": "Very wide", "alt": "Broad", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon széles – tágas / széles"}, {"id": 579, "very": "Very narrow", "alt": "Constricted", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon keskeny – beszűkült / szűk"}, {"id": 580, "very": "Very steep", "alt": "Precipitous", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon meredek – szakadékos"}, {"id": 581, "very": "Very flat", "alt": "Level", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon sík – vízszintes / sík"}, {"id": 582, "very": "Very rough", "alt": "Coarse", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon érdes – durva"}, {"id": 583, "very": "Very smooth", "alt": "Silky", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon sima – selymes"}, {"id": 584, "very": "Very hard ground", "alt": "Solid", "page": 6, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon kemény talaj – szilárd"}, {"id": 585, "very": "Very soft ground", "alt": "Spongy", "page": 6, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon puha talaj – szivacsos"}, {"id": 586, "very": "Very slippery floor", "alt": "Slick", "page": 6, "cat": "Természet, Időjárás & Környezet", "hu": "nagyon csúszós padló – síkos"}, {"id": 587, "very": "Very sticky", "alt": "Tacky", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon ragacsos – tapadós"}, {"id": 588, "very": "Very dusty", "alt": "Powdery", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon poros – porszerű"}, {"id": 589, "very": "Very smoky", "alt": "Hazy", "page": 6, "cat": "Tulajdonságok & Állapotok", "hu": "nagyon füstös – párás / fátyolos"}, {"id": 590, "very": "Very colourful", "alt": "Vibrant", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon színes – élénk / vibráló"}, {"id": 591, "very": "Very pale", "alt": "Wan", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sápadt – fakó"}, {"id": 592, "very": "Very red", "alt": "Scarlet", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon piros – skarlátvörös"}, {"id": 593, "very": "Very white", "alt": "Snow-white", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fehér – hófehér"}, {"id": 594, "very": "Very black", "alt": "Jet-black", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fekete – koromfekete"}, {"id": 595, "very": "Very green", "alt": "Verdant", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon zöld – üde zöld"}, {"id": 596, "very": "Very blue", "alt": "Azure", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon kék – azúrkék"}, {"id": 597, "very": "Very yellow", "alt": "Golden", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon sárga – aranysárga"}, {"id": 598, "very": "Very grey", "alt": "Ashen", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon szürke – hamuszürke"}, {"id": 599, "very": "Very shiny", "alt": "Gleaming", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fényes – csillogó"}, {"id": 600, "very": "Very dull", "alt": "Drab", "page": 6, "cat": "Megjelenés, Színek & Külső", "hu": "nagyon fakó / unalmas – egyhangú / szürke"}];
+
+// State
+let learnedSet = new Set(JSON.parse(localStorage.getItem('insteadOfVery_learned') || '[]'));
+let showHu = true;
+let blurMode = false;
+let onlyUnlearned = false;
+let currentMode = 'browse';
+let filteredItems = [...ITEMS];
+let fcIndex = 0;
+let fcFlipped = false;
+
+// Quiz state
+let quizScore = 0;
+let quizTotal = 0;
+let quizStreak = 0;
+let currentQuizItem = null;
+let quizAnswered = false;
+
+// Elements
+const cardsGrid = document.getElementById('cardsGrid');
+const searchInput = document.getElementById('searchInput');
+const pageFilter = document.getElementById('pageFilter');
+const catFilter = document.getElementById('catFilter');
+const huToggleBtn = document.getElementById('huToggleBtn');
+const onlyUnlearnedBtn = document.getElementById('onlyUnlearnedBtn');
+const blurToggleBtn = document.getElementById('blurToggleBtn');
+const countLabel = document.getElementById('countLabel');
+const progressPill = document.getElementById('progressPill');
+
+// Populate categories
+const categories = [...new Set(ITEMS.map(i => i.cat))].sort();
+categories.forEach(c => {
+  const opt = document.createElement('option');
+  opt.value = c;
+  opt.textContent = c;
+  catFilter.appendChild(opt);
+});
+
+// Theme
+if (localStorage.getItem('insteadOfVery_theme') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('insteadOfVery_theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('insteadOfVery_theme', 'dark');
+  }
+});
+
+// Speech synthesis
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.95;
+  window.speechSynthesis.speak(u);
+}
+
+function saveProgress() {
+  localStorage.setItem('insteadOfVery_learned', JSON.stringify([...learnedSet]));
+  updateProgressUI();
+}
+
+function updateProgressUI() {
+  const pct = Math.round((learnedSet.size / ITEMS.length) * 100);
+  progressPill.textContent = `Megtanulva: ${learnedSet.size} / ${ITEMS.length} (${pct}%)`;
+}
+
+function toggleLearned(id) {
+  if (learnedSet.has(id)) {
+    learnedSet.delete(id);
+  } else {
+    learnedSet.add(id);
+  }
+  saveProgress();
+  applyFilters(false);
+}
+
+function applyFilters(resetFc = true) {
+  const q = searchInput.value.trim().toLowerCase();
+  const p = pageFilter.value;
+  const c = catFilter.value;
+
+  filteredItems = ITEMS.filter(item => {
+    if (p !== 'all' && String(item.page) !== p) return false;
+    if (c !== 'all' && item.cat !== c) return false;
+    if (onlyUnlearned && learnedSet.has(item.id)) return false;
+    if (q) {
+      const matchId = String(item.id) === q;
+      const matchText =
+        item.very.toLowerCase().includes(q) ||
+        item.alt.toLowerCase().includes(q) ||
+        item.hu.toLowerCase().includes(q);
+      if (!matchId && !matchText) return false;
+    }
+    return true;
+  });
+
+  countLabel.textContent = `${filteredItems.length} találat megjelenítve (összesen ${ITEMS.length}-ból)`;
+  renderBrowse();
+  if (resetFc) fcIndex = 0;
+  if (fcIndex >= filteredItems.length) fcIndex = 0;
+  renderFlashcard();
+  if (currentMode === 'quiz') nextQuizQuestion();
+}
+
+function renderBrowse() {
+  if (filteredItems.length === 0) {
+    cardsGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">Nincs a szűrésnek megfelelő kifejezés.</div>`;
+    return;
+  }
+
+  cardsGrid.innerHTML = filteredItems.map(item => {
+    const isDone = learnedSet.has(item.id);
+    return `
+      <div class="word-card ${isDone ? 'learned' : ''}">
+        <div>
+          <div class="card-top">
+            <span class="num-tag">#${item.id}</span>
+            <span class="cat-tag">${item.cat}</span>
+          </div>
+          <div class="very-row">
+            <span class="strike">${item.very}</span>
+          </div>
+          <div class="alt-row">
+            <span class="alt-word ${blurMode ? 'blurred' : ''}" onclick="this.classList.toggle('blurred')">${item.alt}</span>
+          </div>
+          <div class="hu-row ${showHu ? '' : 'hidden-hu'}">
+            <span>🇭🇺</span> <span>${item.hu}</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="speak-btn" onclick="speak('${item.very.replace(/'/g, "\'")} ... ${item.alt.replace(/'/g, "\'")}')">🔊 Kiejtés</button>
+          <button class="learn-btn ${isDone ? 'done' : ''}" onclick="toggleLearned(${item.id})">
+            ${isDone ? '✓ Megtanulva' : '○ Tanulandó'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Flashcards
+function renderFlashcard() {
+  const fcHu = document.getElementById('fcHu');
+  if (filteredItems.length === 0) {
+    document.getElementById('fcNum').textContent = '-';
+    document.getElementById('fcMain').textContent = 'Nincs találat a szűrőre';
+    document.getElementById('fcSub').textContent = '';
+    fcHu.classList.add('hidden');
+    document.getElementById('fcCounter').textContent = '0 / 0';
+    return;
+  }
+  const item = filteredItems[fcIndex];
+  const isDone = learnedSet.has(item.id);
+  document.getElementById('fcNum').textContent = `#${item.id} (${item.cat})`;
+  document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${filteredItems.length}`;
+  const markBtn = document.getElementById('fcMarkLearned');
+  markBtn.textContent = isDone ? '✓ Megtanulva (visszavonás)' : '✓ Megtanultam';
+
+  if (showHu) {
+    fcHu.classList.remove('hidden');
+    fcHu.textContent = `🇭🇺 ${item.hu}`;
+  } else {
+    fcHu.classList.add('hidden');
+  }
+
+  if (!fcFlipped) {
+    document.getElementById('fcLabel').textContent = 'KERÜLD EZT (INSTEAD OF):';
+    document.getElementById('fcMain').textContent = item.very;
+    document.getElementById('fcSub').textContent = 'Kattints a kártyára a megoldáshoz';
+    document.getElementById('fcSideBadge').textContent = 'Előlap';
+  } else {
+    document.getElementById('fcLabel').textContent = 'HASZNÁLD INKÁBB EZT:';
+    document.getElementById('fcMain').textContent = item.alt;
+    document.getElementById('fcSub').textContent = `(${item.very})`;
+    document.getElementById('fcSideBadge').textContent = 'Hátlap';
+  }
+}
+
+document.getElementById('flashcardBox').addEventListener('click', () => {
+  if (filteredItems.length === 0) return;
+  fcFlipped = !fcFlipped;
+  renderFlashcard();
+  if (fcFlipped) speak(filteredItems[fcIndex].alt);
+});
+
+document.getElementById('fcPrev').addEventListener('click', () => {
+  if (filteredItems.length === 0) return;
+  fcIndex = (fcIndex - 1 + filteredItems.length) % filteredItems.length;
+  fcFlipped = false;
+  renderFlashcard();
+});
+
+document.getElementById('fcNext').addEventListener('click', () => {
+  if (filteredItems.length === 0) return;
+  fcIndex = (fcIndex + 1) % filteredItems.length;
+  fcFlipped = false;
+  renderFlashcard();
+});
+
+document.getElementById('fcShuffle').addEventListener('click', () => {
+  if (filteredItems.length === 0) return;
+  fcIndex = Math.floor(Math.random() * filteredItems.length);
+  fcFlipped = false;
+  renderFlashcard();
+});
+
+document.getElementById('fcSpeak').addEventListener('click', () => {
+  if (filteredItems.length === 0) return;
+  const item = filteredItems[fcIndex];
+  speak(fcFlipped ? item.alt : item.very);
+});
+
+document.getElementById('fcMarkLearned').addEventListener('click', () => {
+  if (filteredItems.length === 0) return;
+  toggleLearned(filteredItems[fcIndex].id);
+});
+
+// Quiz
+function nextQuizQuestion() {
+  const pool = filteredItems.length >= 4 ? filteredItems : ITEMS;
+  quizAnswered = false;
+  document.getElementById('quizNextBtn').classList.add('hidden');
+
+  currentQuizItem = pool[Math.floor(Math.random() * pool.length)];
+  document.getElementById('quizNumLabel').textContent = `#${currentQuizItem.id} • ${currentQuizItem.cat}`;
+  document.getElementById('quizQuestion').textContent = currentQuizItem.very;
+
+  const qHu = document.getElementById('quizHuHint');
+  if (showHu) {
+    qHu.classList.remove('hidden');
+    qHu.textContent = `🇭🇺 ${currentQuizItem.hu}`;
+  } else {
+    qHu.classList.add('hidden');
+  }
+
+  // Pick 3 unique distractors with different alt words
+  const distractors = [];
+  const usedAlts = new Set([currentQuizItem.alt.toLowerCase()]);
+  while (distractors.length < 3) {
+    const cand = ITEMS[Math.floor(Math.random() * ITEMS.length)];
+    if (!usedAlts.has(cand.alt.toLowerCase())) {
+      usedAlts.add(cand.alt.toLowerCase());
+      distractors.push(cand.alt);
+    }
+  }
+
+  const options = [currentQuizItem.alt, ...distractors].sort(() => Math.random() - 0.5);
+  const optContainer = document.getElementById('quizOptions');
+  optContainer.innerHTML = options.map(opt => `
+    <button class="quiz-opt" data-val="${opt.replace(/"/g, '&quot;')}">${opt}</button>
+  `).join('');
+
+  optContainer.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => handleQuizAnswer(btn));
+  });
+}
+
+function handleQuizAnswer(selectedBtn) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  quizTotal++;
+
+  const chosen = selectedBtn.getAttribute('data-val');
+  const correct = currentQuizItem.alt;
+  const allBtns = document.querySelectorAll('#quizOptions .quiz-opt');
+
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.getAttribute('data-val') === correct) {
+      b.classList.add('correct');
+    }
+  });
+
+  if (chosen === correct) {
+    quizScore++;
+    quizStreak++;
+  } else {
+    selectedBtn.classList.add('wrong');
+    quizStreak = 0;
+  }
+
+  // Reveal Hungarian translation upon answer even if toggled off
+  const qHu = document.getElementById('quizHuHint');
+  qHu.classList.remove('hidden');
+  qHu.textContent = `🇭🇺 ${currentQuizItem.hu}`;
+
+  speak(correct);
+  document.getElementById('quizScore').textContent = `Pontszám: ${quizScore} / ${quizTotal}`;
+  document.getElementById('quizStreak').textContent = `Sorozat: ${quizStreak} 🔥`;
+  document.getElementById('quizNextBtn').classList.remove('hidden');
+}
+
+document.getElementById('quizNextBtn').addEventListener('click', nextQuizQuestion);
+document.getElementById('quizSpeakBtn').addEventListener('click', () => {
+  if (currentQuizItem) speak(currentQuizItem.very);
+});
+
+// Mode switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentMode = btn.getAttribute('data-mode');
+
+    document.getElementById('browseSection').classList.toggle('hidden', currentMode !== 'browse');
+    document.getElementById('flashcardsSection').classList.toggle('hidden', currentMode !== 'flashcards');
+    document.getElementById('quizSection').classList.toggle('hidden', currentMode !== 'quiz');
+
+    if (currentMode === 'flashcards') renderFlashcard();
+    if (currentMode === 'quiz' && !currentQuizItem) nextQuizQuestion();
+  });
+});
+
+// Filter events
+searchInput.addEventListener('input', () => applyFilters(true));
+pageFilter.addEventListener('change', () => applyFilters(true));
+catFilter.addEventListener('change', () => applyFilters(true));
+
+huToggleBtn.addEventListener('click', () => {
+  showHu = !showHu;
+  huToggleBtn.classList.toggle('hu-active', showHu);
+  renderBrowse();
+  renderFlashcard();
+  if (currentQuizItem && !quizAnswered) {
+    const qHu = document.getElementById('quizHuHint');
+    qHu.classList.toggle('hidden', !showHu);
+  }
+});
+
+onlyUnlearnedBtn.addEventListener('click', () => {
+  onlyUnlearned = !onlyUnlearned;
+  onlyUnlearnedBtn.classList.toggle('active', onlyUnlearned);
+  applyFilters(true);
+});
+
+blurToggleBtn.addEventListener('click', () => {
+  blurMode = !blurMode;
+  blurToggleBtn.classList.toggle('active', blurMode);
+  renderBrowse();
+});
+
+document.getElementById('resetProgress').addEventListener('click', () => {
+  if (confirm('Biztosan törlöd az eddig megtanultként jelölt szavakat?')) {
+    learnedSet.clear();
+    saveProgress();
+    applyFilters(false);
+  }
+});
+
+// Init
+updateProgressUI();
+applyFilters(true);
+</script>
+</body>
+</html>
