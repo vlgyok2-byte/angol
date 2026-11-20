@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alapfokú (A2–B1) Angol Nyelvvizsga Felkészítő – Tananyag Központ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans antialiased">
+
+    <!-- Fejléc -->
+    <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-700 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+                    A2–B1
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Angol Nyelvvizsga Felkészítő</h1>
+                    <p class="text-xs text-slate-500">1650 interaktív tanulókártya • Brit & Amerikai kiejtéssel</p>
+                </div>
+            </div>
+
+            <!-- Összesített haladás -->
+            <div class="flex items-center gap-3 bg-slate-100/80 border border-slate-200 px-4 py-2 rounded-2xl">
+                <div>
+                    <div class="flex items-center justify-between text-xs gap-4 mb-1">
+                        <span class="font-semibold text-slate-600">Összesített haladás:</span>
+                        <span id="totalProgressText" class="font-extrabold text-emerald-700">0 / 1650 (0%)</span>
+                    </div>
+                    <div class="w-44 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div id="totalProgressBar" class="h-full bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Bevezető szekció -->
+    <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white py-12 sm:py-16 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto text-center space-y-4">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-semibold text-amber-300">
+                <span>🎧</span> Interaktív hangos tananyagok • Offline haladásmentéssel
+            </span>
+            <h2 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
+                Válaszd ki a gyakorolni kívánt tananyagmodult!
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                A modulok 200–400 válogatott tételt tartalmaznak példamondatokkal, magyar fordítással, vizsgatippekkel, kvízzel és beépített hangszintézissel.
+            </p>
+        </div>
+    </section>
+
+    <!-- Kártyák (Modulok) -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 -mt-8 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- 1. MODUL: NÉVMÁSOK -->
+            <a href="400_as_felkeszito_01.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-blue-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                <div class="p-6 sm:p-7 space-y-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-extrabold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                            400
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 font-bold text-xs">
+                            1. Modul • Nyelvtan
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors mb-2">
+                            Angol Névmások Mesterfokon
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Személyes, visszaható (<span class="font-medium text-slate-800">-self</span>), birtokos (<span class="font-medium text-slate-800">mine/yours</span>), kérdő, mutató, határozatlan (<span class="font-medium text-slate-800">some/any/no</span>) és mennyiségjelző névmások 9 kategóriában.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-600">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🗂️ Tanulókártyák</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🎯 3 Kvíz mód</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">📘 Kisokos</span>
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 py-4 bg-slate-50 border-t border-slate-100 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-500">Elsajátítva:</span>
+                            <span id="prog-text-1" class="font-bold text-slate-700">0 / 400 (0%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="prog-bar-1" class="h-full bg-blue-600 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full py-3 px-4 rounded-xl bg-blue-600 group-hover:bg-blue-700 text-white font-bold text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                        <span>Tananyag megnyitása</span>
+                        <span class="group-hover:translate-x-1 transition-transform">➡️</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 2. MODUL: ELÖLJÁRÓSZAVAK -->
+            <a href="400_eloljaroszo_01.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-violet-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                <div class="p-6 sm:p-7 space-y-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600 to-slate-800 text-white flex items-center justify-center font-extrabold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                            400
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-violet-50 text-violet-700 font-bold text-xs">
+                            2. Modul • Vonzatok
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-violet-600 transition-colors mb-2">
+                            Fontos Angol Elöljárószavak
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Idő- és helyhatározók (<span class="font-medium text-slate-800">in/on/at</span>), irányok, valamint igei, melléknévi és főnévi vonzatok (<span class="font-medium text-slate-800">interested in, depend on</span>) 8 logikus témakörben.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-600">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🗂️ Tanulókártyák</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🎧 Hangoskönyv</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">📘 Kisokos</span>
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 py-4 bg-slate-50 border-t border-slate-100 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-500">Elsajátítva:</span>
+                            <span id="prog-text-2" class="font-bold text-slate-700">0 / 400 (0%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="prog-bar-2" class="h-full bg-violet-600 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full py-3 px-4 rounded-xl bg-violet-600 group-hover:bg-violet-700 text-white font-bold text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                        <span>Tananyag megnyitása</span>
+                        <span class="group-hover:translate-x-1 transition-transform">➡️</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 3. MODUL: TÁRSALGÁSI KIFEJEZÉSEK -->
+            <a href="400_tarsalgasi_kifejezes_01.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-rose-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                <div class="p-6 sm:p-7 space-y-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-600 to-slate-800 text-white flex items-center justify-center font-extrabold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                            400
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-rose-50 text-rose-700 font-bold text-xs">
+                            3. Modul • Kommunikáció
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-rose-600 transition-colors mb-2">
+                            Angol Társalgási Kifejezések
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Bemutatkozás, véleményalkotás, vásárlás, étterem, utazás, orvosi helyzetek, telefonálás, levélírás és szóbeli képleírási panelek 8 témakörben.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-600">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">💬 Szituációk</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">✉️ Levélpanelek</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🖼️ Képleírás</span>
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 py-4 bg-slate-50 border-t border-slate-100 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-500">Elsajátítva:</span>
+                            <span id="prog-text-3" class="font-bold text-slate-700">0 / 400 (0%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="prog-bar-3" class="h-full bg-rose-600 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full py-3 px-4 rounded-xl bg-rose-600 group-hover:bg-rose-700 text-white font-bold text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                        <span>Tananyag megnyitása</span>
+                        <span class="group-hover:translate-x-1 transition-transform">➡️</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 4. MODUL: MEGSZÁMLÁLHATATLAN FŐNEVEK -->
+            <a href="250_megszamlalhatatlan_fonev_felkeszito-v2.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-amber-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                <div class="p-6 sm:p-7 space-y-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center font-extrabold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                            250
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-800 font-bold text-xs">
+                            4. Modul • Szókincs & Nyelvtan
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors mb-2">
+                            Megszámlálhatatlan Főnevek Mesterfokon
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            250 alapvető megszámlálhatatlan főnév (<span class="font-medium text-slate-800">information, advice, luggage, furniture, weather</span>) példamondatokkal és vizsgatippekkel 8 kategóriában.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-600">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🗂️ Tanulókártyák</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🎯 3 Kvíz mód</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">📘 Kisokos</span>
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 py-4 bg-slate-50 border-t border-slate-100 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-500">Elsajátítva:</span>
+                            <span id="prog-text-4" class="font-bold text-slate-700">0 / 250 (0%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="prog-bar-4" class="h-full bg-amber-500 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full py-3 px-4 rounded-xl bg-amber-500 group-hover:bg-amber-600 text-slate-950 font-bold text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                        <span>Tananyag megnyitása</span>
+                        <span class="group-hover:translate-x-1 transition-transform">➡️</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 5. MODUL: IGEIDŐ MONDATPÁROK -->
+            <a href="200_igeido_mondatpar_felkeszito.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-emerald-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden md:col-span-2">
+                <div class="p-6 sm:p-7 space-y-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center font-extrabold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                            200
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold text-xs">
+                            5. Modul • Igeidők
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-emerald-600 transition-colors mb-2">
+                            Jelen, Múlt és Jövő Igeidők Mesterfokon
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            200 × 3 mondat (jelen, múlt, jövő alakban): szabályos és rendhagyó igék (<span class="font-medium text-slate-800">go → went → will go</span>), folyamatos (<span class="font-medium text-slate-800">be + -ing</span>), befejezett (<span class="font-medium text-slate-800">have/had + V3</span>) és állapotigék 5 nyelvtani csoportban.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-600">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🗂️ 3D Kártyák</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🔄 Igeidő-átalakító kvíz</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🎧 Hangoskönyv</span>
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 py-4 bg-slate-50 border-t border-slate-100 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-500">Elsajátítva:</span>
+                            <span id="prog-text-5" class="font-bold text-slate-700">0 / 200 (0%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="prog-bar-5" class="h-full bg-emerald-600 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full py-3 px-4 rounded-xl bg-emerald-600 group-hover:bg-emerald-700 text-white font-bold text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                        <span>Tananyag megnyitása</span>
+                        <span class="group-hover:translate-x-1 transition-transform">➡️</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Használati tipp sáv -->
+        <div class="mt-8 bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-start gap-3.5">
+                <span class="text-2xl">💡</span>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900">Tipp a hatékony használathoz</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
+                        Helyezd ezt a <code class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-xs">400index.html</code> fájlt ugyanabba a mappába, ahol az öt másik HTML-fájl található. A böngésző automatikusan megjegyzi a haladásodat minden modulban!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lábléc -->
+    <footer class="bg-white border-t border-slate-200 py-4">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
+            Alapfokú (A2–B1) Angol Nyelvvizsga Felkészítő Csomag • 1650 Interaktív Tananyag (3 × 400 + 250 + 200)
+        </div>
+    </footer>
+
+    <script>
+        function loadModuleProgress() {
+            const modules = [
+                { key: 'pronouns400_learned', total: 400, textId: 'prog-text-1', barId: 'prog-bar-1' },
+                { key: 'preps400_learned', total: 400, textId: 'prog-text-2', barId: 'prog-bar-2' },
+                { key: 'conv400_learned', total: 400, textId: 'prog-text-3', barId: 'prog-bar-3' },
+                { key: 'uncountable250_learned', total: 250, textId: 'prog-text-4', barId: 'prog-bar-4' },
+                { key: 'tenses200_learned', total: 200, textId: 'prog-text-5', barId: 'prog-bar-5' }
+            ];
+
+            let totalLearned = 0;
+            let grandTotal = 0;
+
+            modules.forEach(mod => {
+                let count = 0;
+                try {
+                    const saved = JSON.parse(localStorage.getItem(mod.key) || '[]');
+                    if (Array.isArray(saved)) count = saved.length;
+                } catch (e) {
+                    count = 0;
+                }
+                totalLearned += count;
+                grandTotal += mod.total;
+                const pct = Math.round((count / mod.total) * 100);
+                document.getElementById(mod.textId).textContent = `${count} / ${mod.total} (${pct}%)`;
+                document.getElementById(mod.barId).style.width = `${pct}%`;
+            });
+
+            const totalPct = Math.round((totalLearned / grandTotal) * 100);
+            document.getElementById('totalProgressText').textContent = `${totalLearned} / ${grandTotal} (${totalPct}%)`;
+            document.getElementById('totalProgressBar').style.width = `${totalPct}%`;
+        }
+
+        window.addEventListener('DOMContentLoaded', loadModuleProgress);
+        window.addEventListener('focus', loadModuleProgress);
+    </script>
+</body>
+</html>
