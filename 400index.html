@@ -31,7 +31,7 @@
                 </div>
                 <div>
                     <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Angol Nyelvvizsga Felkészítő</h1>
-                    <p class="text-xs text-slate-500">1200 interaktív tanulókártya • Brit & Amerikai kiejtéssel</p>
+                    <p class="text-xs text-slate-500">1450 interaktív tanulókártya • Brit & Amerikai kiejtéssel</p>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                 <div>
                     <div class="flex items-center justify-between text-xs gap-4 mb-1">
                         <span class="font-semibold text-slate-600">Összesített haladás:</span>
-                        <span id="totalProgressText" class="font-extrabold text-emerald-700">0 / 1200 (0%)</span>
+                        <span id="totalProgressText" class="font-extrabold text-emerald-700">0 / 1450 (0%)</span>
                     </div>
                     <div class="w-44 h-2 bg-slate-200 rounded-full overflow-hidden">
                         <div id="totalProgressBar" class="h-full bg-emerald-500 transition-all duration-500" style="width: 0%"></div>
@@ -60,14 +60,14 @@
                 Válaszd ki a gyakorolni kívánt tananyagmodult!
             </h2>
             <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Mindegyik modul 400 válogatott tételt tartalmaz példamondatokkal, magyar fordítással, vizsgatippekkel, kvízzel és beépített hangszintézissel.
+                A modulok 250–400 válogatott tételt tartalmaznak példamondatokkal, magyar fordítással, vizsgatippekkel, kvízzel és beépített hangszintézissel.
             </p>
         </div>
     </section>
 
     <!-- Kártyák (Modulok) -->
     <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 -mt-8 pb-12">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <!-- 1. MODUL: NÉVMÁSOK -->
             <a href="400_as_felkeszito_01.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-blue-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
@@ -207,6 +207,52 @@
                 </div>
             </a>
 
+            <!-- 4. MODUL: MEGSZÁMLÁLHATATLAN FŐNEVEK -->
+            <a href="250_megszamlalhatatlan_fonev_felkeszito-v2.html" class="group bg-white rounded-3xl border-2 border-slate-200 hover:border-amber-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                <div class="p-6 sm:p-7 space-y-5">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center font-extrabold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                            250
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-800 font-bold text-xs">
+                            4. Modul • Szókincs & Nyelvtan
+                        </span>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors mb-2">
+                            Megszámlálhatatlan Főnevek Mesterfokon
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            250 alapvető megszámlálhatatlan főnév (<span class="font-medium text-slate-800">information, advice, luggage, furniture, weather</span>) példamondatokkal és vizsgatippekkel 8 kategóriában.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium text-slate-600">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🗂️ Tanulókártyák</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">🎯 3 Kvíz mód</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100">📘 Kisokos</span>
+                    </div>
+                </div>
+
+                <div class="px-6 sm:px-7 py-4 bg-slate-50 border-t border-slate-100 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-500">Elsajátítva:</span>
+                            <span id="prog-text-4" class="font-bold text-slate-700">0 / 250 (0%)</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="prog-bar-4" class="h-full bg-amber-500 transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full py-3 px-4 rounded-xl bg-amber-500 group-hover:bg-amber-600 text-slate-950 font-bold text-sm text-center shadow-xs transition flex items-center justify-center gap-2">
+                        <span>Tananyag megnyitása</span>
+                        <span class="group-hover:translate-x-1 transition-transform">➡️</span>
+                    </div>
+                </div>
+            </a>
+
         </div>
 
         <!-- Használati tipp sáv -->
@@ -216,7 +262,7 @@
                 <div>
                     <h4 class="text-sm font-bold text-slate-900">Tipp a hatékony használathoz</h4>
                     <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
-                        Helyezd ezt az <code class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-xs">index.html</code> fájlt ugyanabba a mappába, ahol a három másik HTML-fájl található. A böngésző automatikusan megjegyzi a haladásodat minden modulban!
+                        Helyezd ezt az <code class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-xs">index.html</code> fájlt ugyanabba a mappába, ahol a négy másik HTML-fájl található. A böngésző automatikusan megjegyzi a haladásodat minden modulban!
                     </p>
                 </div>
             </div>
@@ -226,19 +272,21 @@
     <!-- Lábléc -->
     <footer class="bg-white border-t border-slate-200 py-4">
         <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
-            Alapfokú (A2–B1) Angol Nyelvvizsga Felkészítő Csomag • 3 × 400 Interaktív Tananyag
+            Alapfokú (A2–B1) Angol Nyelvvizsga Felkészítő Csomag • 1450 Interaktív Tananyag (3 × 400 + 250)
         </div>
     </footer>
 
     <script>
         function loadModuleProgress() {
             const modules = [
-                { key: 'pronouns400_learned', textId: 'prog-text-1', barId: 'prog-bar-1' },
-                { key: 'preps400_learned', textId: 'prog-text-2', barId: 'prog-bar-2' },
-                { key: 'conv400_learned', textId: 'prog-text-3', barId: 'prog-bar-3' }
+                { key: 'pronouns400_learned', total: 400, textId: 'prog-text-1', barId: 'prog-bar-1' },
+                { key: 'preps400_learned', total: 400, textId: 'prog-text-2', barId: 'prog-bar-2' },
+                { key: 'conv400_learned', total: 400, textId: 'prog-text-3', barId: 'prog-bar-3' },
+                { key: 'uncountable250_learned', total: 250, textId: 'prog-text-4', barId: 'prog-bar-4' }
             ];
 
             let totalLearned = 0;
+            let grandTotal = 0;
 
             modules.forEach(mod => {
                 let count = 0;
@@ -249,13 +297,14 @@
                     count = 0;
                 }
                 totalLearned += count;
-                const pct = Math.round((count / 400) * 100);
-                document.getElementById(mod.textId).textContent = `${count} / 400 (${pct}%)`;
+                grandTotal += mod.total;
+                const pct = Math.round((count / mod.total) * 100);
+                document.getElementById(mod.textId).textContent = `${count} / ${mod.total} (${pct}%)`;
                 document.getElementById(mod.barId).style.width = `${pct}%`;
             });
 
-            const totalPct = Math.round((totalLearned / 1200) * 100);
-            document.getElementById('totalProgressText').textContent = `${totalLearned} / 1200 (${totalPct}%)`;
+            const totalPct = Math.round((totalLearned / grandTotal) * 100);
+            document.getElementById('totalProgressText').textContent = `${totalLearned} / ${grandTotal} (${totalPct}%)`;
             document.getElementById('totalProgressBar').style.width = `${totalPct}%`;
         }
 

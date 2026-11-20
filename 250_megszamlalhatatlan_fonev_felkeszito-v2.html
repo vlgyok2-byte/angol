@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>250 Angol Megszámlálhatatlan Főnév – Alapfokú Nyelvvizsga Felkészítő</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .card-transition {
+            transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        .speaking-active {
+            animation: pulse-ring 1.5s infinite;
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Felső navigációs és hangbeállítási sáv -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                <!-- Cím és haladás -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-indigo-700 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+                            250
+                        </div>
+                        <div>
+                            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Megszámlálhatatlan Főnevek Mesterfokon</h1>
+                            <p class="text-xs text-slate-500">Alapfokú (A2–B1) nyelvvizsga felkészítő • Hangos tananyag</p>
+                        </div>
+                    </div>
+
+                    <!-- Mobil haladás jelvény -->
+                    <div class="lg:hidden flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span id="mobileProgressBadge" class="text-xs font-bold text-emerald-800">0/250</span>
+                    </div>
+                </div>
+
+                <!-- Hangbeállítások és Haladás -->
+                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2 sm:gap-3">
+                    <!-- Akcentus választó -->
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setAccent('en-GB')" id="btn-en-GB" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            🇬🇧 Brit (UK)
+                        </button>
+                        <button onclick="setAccent('en-US')" id="btn-en-US" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🇺🇸 Amerikai (US)
+                        </button>
+                    </div>
+
+                    <!-- Sebesség választó -->
+                    <div class="flex items-center bg-slate-100 rounded-xl p-1 border border-slate-200">
+                        <button onclick="setRate(1.0)" id="btn-rate-1" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm">
+                            1.0x Normál
+                        </button>
+                        <button onclick="setRate(0.72)" id="btn-rate-slow" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            🐢 0.75x Lassú
+                        </button>
+                    </div>
+
+                    <!-- Asztali haladásjelző -->
+                    <div class="hidden lg:flex items-center gap-3 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl">
+                        <div>
+                            <div class="flex items-center justify-between text-xs gap-4 mb-1">
+                                <span class="font-medium text-slate-600">Elsajátítva:</span>
+                                <span id="desktopProgressText" class="font-bold text-emerald-700">0 / 250 (0%)</span>
+                            </div>
+                            <div class="w-36 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                <div id="desktopProgressBar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fő menüfülek -->
+            <nav class="flex items-center gap-1.5 sm:gap-2 mt-3 pt-2.5 border-t border-slate-100 overflow-x-auto pb-1">
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition">
+                    <span>🗂️</span> Tanulókártyák
+                </button>
+                <button onclick="switchTab('list')" id="tab-list" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📋</span> Teljes Lista (1–250)
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>🎯</span> Kvíz & Hallásértés
+                </button>
+                <button onclick="switchTab('grammar')" id="tab-grammar" class="nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <span>📘</span> Nyelvtani Kisokos
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Globális Szűrő Sáv (Tanulókártyákhoz és Listához) -->
+    <section id="globalFilterBar" class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Vizsga fókusz kapcsoló -->
+                <button onclick="toggleCoreFilter()" id="btnCoreFilter" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm">
+                    <span id="coreCheckIcon">⭐</span>
+                    <span>Alapfokú vizsga törzsanyag (A2–B1)</span>
+                </button>
+
+                <!-- Kategória választó -->
+                <select id="categorySelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Összes kategória</option>
+                    <option value="Ételek, italok és alapanyagok">1. Ételek, italok és alapanyagok</option>
+                    <option value="Természet, időjárás és elemek">2. Természet, időjárás és elemek</option>
+                    <option value="Anyagok, fémek és energia">3. Anyagok, fémek és energia</option>
+                    <option value="Tudás, oktatás és tantárgyak">4. Tudás, oktatás és tantárgyak</option>
+                    <option value="Érzelmek, tulajdonságok és fogalmak">5. Érzelmek, tulajdonságok és elvont fogalmak</option>
+                    <option value="Gyűjtőnevek és mindennapi tárgyak">6. Gyűjtőnevek és mindennapi tárgyak</option>
+                    <option value="Munka, üzlet és technológia">7. Munka, üzlet és technológia</option>
+                    <option value="Tevékenységek, sport és szabadidő">8. Tevékenységek, sport és szabadidő</option>
+                </select>
+
+                <!-- Státusz szűrő -->
+                <select id="statusSelect" onchange="applyFilters()" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="ALL">Minden állapot</option>
+                    <option value="UNLEARNED">Még gyakorlandó</option>
+                    <option value="LEARNED">Már megtanultam ✓</option>
+                </select>
+            </div>
+
+            <!-- Találatok száma + Hangoskönyv mód -->
+            <div class="flex items-center justify-between md:justify-end gap-3">
+                <span id="filteredCountLabel" class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">
+                    Szűrt tételek: 250 db
+                </span>
+                <button onclick="toggleAutoPlay()" id="btnAutoPlay" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition">
+                    <span id="autoPlayIcon">▶️</span>
+                    <span id="autoPlayText">Hangoskönyv mód</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FŐ TARTALMI TERÜLET -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+
+        <!-- 1. NÉZET: TANULÓKÁRTYÁK (FLASHCARDS) -->
+        <div id="view-flashcards" class="space-y-6">
+            <!-- Kártya vezérlő fejléc -->
+            <div class="max-w-2xl mx-auto flex items-center justify-between text-sm text-slate-600">
+                <span id="fcPosition" class="font-bold text-slate-800 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
+                    1 / 250. kártya
+                </span>
+                <div class="flex items-center gap-2">
+                    <button onclick="shuffleFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔀 Keverés
+                    </button>
+                    <button onclick="resetOrderFlashcards()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shadow-sm transition">
+                        🔢 Sorrendben
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3D Megfordítható Kártya -->
+            <div id="flashcardContainer" class="max-w-2xl mx-auto perspective-1000">
+                <div id="flashcardInner" onclick="flipCard()" class="relative w-full min-h-[445px] sm:min-h-[470px] cursor-pointer transform-style-3d card-transition">
+                    
+                    <!-- ELŐLAP (ANGOL) -->
+                    <div id="fcFrontFace" class="absolute inset-0 backface-hidden bg-white rounded-3xl border-2 border-slate-200 shadow-lg p-6 sm:p-8 flex flex-col justify-between">
+                        <div class="flex items-start justify-between gap-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="fcNumber" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs">#1</span>
+                                <span id="fcCategory" class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-semibold text-xs">Ételek, italok és alapanyagok</span>
+                                <span id="fcCoreBadge" class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>
+                            </div>
+                            <span id="fcLearnedBadge" class="hidden px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs">✓ Megtanulva</span>
+                        </div>
+
+                        <div class="my-auto text-center space-y-5 py-4">
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Megszámlálhatatlan főnév</p>
+                                <h2 id="fcNounEn" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Water</h2>
+                            </div>
+
+                            <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-100">
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1.5">Példamondat</p>
+                                <p id="fcSentenceEn" class="text-lg sm:text-2xl font-medium text-slate-800 leading-relaxed">We should drink plenty of water.</p>
+                            </div>
+                        </div>
+
+                        <!-- Hang gombok az előlapon -->
+                        <div class="flex flex-wrap items-center justify-center gap-2 pt-2" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentNoun(this)" class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold text-xs sm:text-sm transition">
+                                <span>🔊</span> Főnév
+                            </button>
+                            <button onclick="speakCurrentSentence(this)" class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold text-xs sm:text-sm transition">
+                                <span>🗣️</span> Mondat
+                            </button>
+                            <button onclick="speakCurrentBoth(this)" class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition">
+                                <span>🎧</span> Mindkettő
+                            </button>
+                        </div>
+
+                        <p class="text-center text-xs text-slate-400 mt-3">Kattints a kártyára a magyar fordításhoz ↻</p>
+                    </div>
+
+                    <!-- HÁTLAP (MAGYAR FORDÍTÁS & MAGYARÁZAT) -->
+                    <div id="fcBackFace" class="absolute inset-0 backface-hidden rotate-y-180 pointer-events-none bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl border-2 border-slate-700 shadow-xl p-6 sm:p-8 flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <span id="fcBackNumber" class="px-2.5 py-1 rounded-lg bg-white/10 text-slate-200 font-bold text-xs">#1 • Magyar jelentés</span>
+                            <span class="text-xs text-slate-400">Kattints a visszafordításhoz ↺</span>
+                        </div>
+
+                        <div class="my-auto text-center space-y-3.5 py-2">
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-brand-200 font-semibold mb-1">Magyar megfelelője</p>
+                                <h2 id="fcNounHu" class="text-2xl sm:text-4xl font-extrabold text-amber-300">víz</h2>
+                            </div>
+
+                            <div class="bg-white/10 rounded-2xl p-3.5 sm:p-4 border border-white/10">
+                                <p class="text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">Mondat fordítása</p>
+                                <p id="fcSentenceHu" class="text-base sm:text-xl font-medium text-white leading-relaxed">Sok vizet kellene innunk.</p>
+                                <p id="fcSentenceEnSmall" class="text-xs text-slate-300 mt-1.5 italic">„We should drink plenty of water.”</p>
+                            </div>
+
+                            <div class="bg-brand-900/60 rounded-xl px-4 py-2.5 border border-brand-400/30 text-left">
+                                <p class="text-xs text-brand-100 leading-relaxed"><strong class="text-white">💡 Vizsgatipp:</strong> <span id="fcTipHu">Megszámlálhatatlan főnév: nem kap -s többes számot és 'a/an' névelőt.</span></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center gap-3 pt-2" onclick="event.stopPropagation()">
+                            <button onclick="speakCurrentBoth(this)" class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition">
+                                <span>🔊</span> Angol kiejtés meghallgatása
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Kártya léptető és állapotjelölő gombok -->
+            <div class="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                <button onclick="prevCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    <span>⬅️</span> Előző
+                </button>
+
+                <button onclick="markCurrentCard(false)" class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 hover:bg-amber-100 text-amber-900 font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>🔄</span> Még gyakorlom
+                </button>
+
+                <button onclick="markCurrentCard(true)" class="p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition flex items-center justify-center gap-1.5">
+                    <span>✅</span> Tudom!
+                </button>
+
+                <button onclick="nextCard()" class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2">
+                    Következő <span>➡️</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. NÉZET: TELJES LISTA & KERESŐ -->
+        <div id="view-list" class="hidden space-y-4">
+            <!-- Kereső mező -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Keresés angol vagy magyar szóra, sorszámra (pl. 'luggage', 'időjárás', '153')..." class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <button onclick="clearSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
+                </div>
+                <button onclick="resetAllProgress()" class="px-4 py-2.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition whitespace-nowrap">
+                    🗑️ Haladás nullázása
+                </button>
+            </div>
+
+            <!-- Lista kártyák / sorok -->
+            <div id="listContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <!-- JavaScript tölti fel -->
+            </div>
+        </div>
+
+        <!-- 3. NÉZET: INTERAKTÍV KVÍZ & HALLÁSÉRTÉS -->
+        <div id="view-quiz" class="hidden max-w-2xl mx-auto space-y-6">
+            <!-- Kvíz mód választó -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setQuizMode('meaning')" id="qmode-meaning" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition">
+                        🇭🇺 Jelentés & Mondat kvíz
+                    </button>
+                    <button onclick="setQuizMode('fill')" id="qmode-fill" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        ✍️ Mondatkiegészítés
+                    </button>
+                    <button onclick="setQuizMode('listening')" id="qmode-listening" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        🎧 Hallás utáni értés
+                    </button>
+                </div>
+
+                <div class="text-xs font-bold bg-slate-100 px-3 py-1.5 rounded-xl text-slate-700">
+                    Pontszám: <span id="quizScore" class="text-emerald-600">0</span> / <span id="quizTotal">0</span>
+                </div>
+            </div>
+
+            <!-- Kvíz Kártya -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span id="quizQuestionTypeBadge" class="px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold">
+                        Válaszd ki a helyes magyar jelentést!
+                    </span>
+                    <button onclick="speakQuizPrompt()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">
+                        <span>🔊</span> Meghallgatás
+                    </button>
+                </div>
+
+                <!-- Kérdés szövege -->
+                <div id="quizPromptBox" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 text-center space-y-2">
+                    <h3 id="quizMainPrompt" class="text-2xl sm:text-3xl font-extrabold text-slate-900">Advice</h3>
+                    <p id="quizSubPrompt" class="text-sm sm:text-base text-slate-600">My teacher gave me useful advice.</p>
+                </div>
+
+                <!-- 4 Válaszlehetőség -->
+                <div id="quizOptions" class="grid grid-cols-1 gap-3">
+                    <!-- JS tölti fel -->
+                </div>
+
+                <!-- Visszajelzés és Következő gomb -->
+                <div id="quizFeedback" class="hidden rounded-2xl p-4 text-sm font-medium"></div>
+
+                <div class="flex justify-end">
+                    <button onclick="generateQuizQuestion()" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-sm transition">
+                        Következő kérdés ➡️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. NÉZET: NYELVTANI KISOKOS (MAGYARUL) -->
+        <div id="view-grammar" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-brand-600 to-indigo-700 rounded-3xl p-6 sm:p-8 text-white shadow-md">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-2">📘 Alapfokú (A2–B1) Megszámlálhatatlan Főnevek Kisokos</h2>
+                <p class="text-sm sm:text-base text-brand-100 max-w-3xl">
+                    A megszámlálhatatlan főnevek (uncountable nouns) az angol nyelvtan egyik legfontosabb vizsgatémái. Ezeknek nincs többes számuk (pl. <em>information, advice, furniture, luggage</em> – SOHA nem kapnak <em>-s</em> végződést!), és egyes számú igével állnak (<em>The news <strong>is</strong> good</em>). Kattints bármelyik kártyára a kategória gyakorlásához!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grammarCardsGrid">
+                <!-- JS tölti fel -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Lábléc -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            250 Uncountable Nouns with Sentences • Alapfokú nyelvvizsga felkészítő webalkalmazás • Web Speech API hangszintézissel
+        </div>
+    </footer>
+
+    <!-- Megerősítő üzenetablak -->
+    <div id="customModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-slate-200 space-y-4">
+            <h3 id="modalTitle" class="text-lg font-bold text-slate-900">Megerősítés</h3>
+            <p id="modalText" class="text-sm text-slate-600">Biztosan törölni szeretnéd az eddigi tanulási haladásodat?</p>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold">Mégse</button>
+                <button id="modalConfirmBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold">Igen, törlés</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // TELJES 250 TÉTELES ADATBÁZIS (AZ 5 KÉP PONTOS TARTALMA + MAGYAR FORDÍTÁSOK)
+        // Formátum: [id, angol_fonev, angol_mondat, magyar_fonev, magyar_mondat, kategoria_kod, alapfok_e]
+        // Kategória kódok:
+        // 1: Ételek, italok és alapanyagok
+        // 2: Természet, időjárás és elemek
+        // 3: Anyagok, fémek és energia
+        // 4: Tudás, oktatás és tantárgyak
+        // 5: Érzelmek, tulajdonságok és fogalmak
+        // 6: Gyűjtőnevek és mindennapi tárgyak
+        // 7: Munka, üzlet és technológia
+        // 8: Tevékenységek, sport és szabadidő
+        // ============================================================================
+        const RAW_DATA = [
+            // --- 1. KÉP (1 - 50) ---
+            [1, "Water", "We should drink plenty of water.", "víz", "Sok vizet kellene innunk.", 1, true],
+            [2, "Milk", "My mother buys fresh milk.", "tej", "Édesanyám friss tejet vásárol.", 1, true],
+            [3, "Rice", "We eat rice for lunch.", "rizs", "Ebédre rizst eszünk.", 1, true],
+            [4, "Sugar", "Please add some sugar to tea.", "cukor", "Kérlek, tegyél egy kis cukrot a teába!", 1, true],
+            [5, "Salt", "Too much salt is harmful.", "só", "A túl sok só káros.", 1, true],
+            [6, "Flour", "She needs flour to make bread.", "liszt", "Lisztre van szüksége a kenyérsütéshez.", 1, true],
+            [7, "Oil", "We use oil for cooking.", "olaj", "Olajat használunk a főzéshez.", 1, true],
+            [8, "Butter", "I put butter on my bread.", "vaj", "Vajat kenek a kenyeremre.", 1, true],
+            [9, "Cheese", "Cheese is rich in calcium.", "sajt", "A sajt kalciumban gazdag.", 1, true],
+            [10, "Bread", "We need bread for breakfast.", "kenyér", "Kenyérre van szükségünk a reggelihez.", 1, true],
+            [11, "Honey", "Honey tastes sweet.", "méz", "A méz édes ízű.", 1, true],
+            [12, "Tea", "My father drinks tea.", "tea", "Édesapám teát iszik.", 1, true],
+            [13, "Coffee", "She likes drinking coffee.", "kávé", "Szeret kávét inni.", 1, true],
+            [14, "Juice", "I drink orange juice.", "gyümölcslé", "Narancslevet iszom.", 1, true],
+            [15, "Soup", "The soup is very hot.", "leves", "A leves nagyon forró.", 1, true],
+            [16, "Food", "We should never waste food.", "étel / élelmiszer", "Soha nem szabad pazarolnunk az ételt.", 1, true],
+            [17, "Meat", "He does not eat meat.", "hús", "Ő nem eszik húst.", 1, true],
+            [18, "Fish", "We had fish for dinner.", "hal", "Halat ettünk vacsorára.", 1, true],
+            [19, "Chicken", "Chicken is my favourite food.", "csirkehús", "A csirkehús a kedvenc ételem.", 1, true],
+            [20, "Egg", "I had egg for breakfast.", "tojás (anyagnévként)", "Tojást ettem reggelire.", 1, true],
+            [21, "Pasta", "Pasta is easy to cook.", "tészta", "A tésztát könnyű megfőzni.", 1, true],
+            [22, "Chocolate", "I love eating are chocolate.", "csokoládé", "Imádok csokoládét enni.", 1, true],
+            [23, "Ice cream", "The children are eating ice cream.", "fagylalt", "A gyerekek fagylaltot esznek.", 1, true],
+            [24, "Yogurt", "Yogurt is good for digestion.", "joghurt", "A joghurt jót tesz az emésztésnek.", 1, true],
+            [25, "Cream", "Add some cream to coffee.", "tejszín", "Adj egy kis tejszínt a kávéhoz!", 1, true],
+            [26, "Jam", "I like strawberry jam.", "lekvár", "Szeretem az eperlekvárt.", 1, true],
+            [27, "Pepper", "Please add some pepper.", "bors", "Kérlek, tegyél bele egy kis borsot!", 1, true],
+            [28, "Vinegar", "Vinegar is used in cooking.", "ecet", "Az ecetet a főzésben használják.", 1, false],
+            [29, "Buttercream", "The cake has buttercream.", "vajkrém", "A tortán vajkrém van.", 1, false],
+            [30, "Air", "We need clean air to breathe.", "levegő", "Tiszta levegőre van szükségünk a légzéshez.", 2, true],
+            [31, "Oxygen", "Humans need oxygen.", "oxigén", "Az embereknek oxigénre van szükségük.", 2, false],
+            [32, "Smoke", "Smoke filled the room.", "füst", "Füst töltötte meg a szobát.", 2, true],
+            [33, "Steam", "Steam was coming out.", "gőz", "Gőz jött ki belőle.", 2, false],
+            [34, "Fire", "Fire can destroy forests.", "tűz", "A tűz elpusztíthatja az erdőket.", 2, true],
+            [35, "Rain", "Heavy rain flooded the streets.", "eső", "A heves esőzés elöntötte az utcákat.", 2, true],
+            [36, "Snow", "Snow covered the mountains.", "hó", "Hó borította a hegyeket.", 2, true],
+            [37, "Ice", "The ice melted quickly.", "jég", "A jég gyorsan elolvadt.", 2, true],
+            [38, "Wind", "The wind is blowing strongly.", "szél", "Erősen fúj a szél.", 2, true],
+            [39, "Sunshine", "We enjoyed sunshine.", "napsütés", "Élveztük a napsütést.", 2, true],
+            [40, "Weather", "The weather is pleasant.", "időjárás", "Kellemes az időjárás.", 2, true],
+            [41, "Thunder", "We heard thunder last night.", "mennydörgés", "Mennydörgést hallottunk tegnap este.", 2, false],
+            [42, "Lightning", "Lightning lit up the sky.", "villámlás", "Villámlás világította meg az eget.", 2, false],
+            [43, "Fog", "Thick fog covered the road.", "köd", "Sűrű köd borította az utat.", 2, true],
+            [44, "Mist", "The hills were covered with mist.", "pára / ködfátyol", "A dombokat pára borította.", 2, false],
+            [45, "Cloud", "There is a lot of cloud.", "felhőzet", "Sok a felhő az égen.", 2, true],
+            [46, "Dew", "Dew covered the grass.", "harmat", "Harmat borította a füvet.", 2, false],
+            [47, "Hail", "Hail damaged the crops.", "jégeső", "A jégeső megrongálta a termést.", 2, false],
+            [48, "Humidity", "The humidity is high.", "páratartalom", "Magas a páratartalom.", 2, false],
+            [49, "Heat", "The heat made us tired.", "hőség / meleg", "A hőség kifárasztott minket.", 2, true],
+            [50, "Cold", "I cannot tolerate extreme cold.", "hideg", "Nem bírom a rendkívüli hideget.", 2, true],
+
+            // --- 2. KÉP (51 - 100) ---
+            [51, "Cold", "I cannot tolerate extreme cold.", "hideg", "Nem bírom a rendkívüli hideget.", 2, false],
+            [52, "Darkness", "Darkness covered the village.", "sötétség", "Sötétség borította be a falut.", 2, true],
+            [53, "Light", "Plants need light to grow.", "fény", "A növényeknek fényre van szükségük a növekedéshez.", 2, true],
+            [54, "Energy", "We need energy to work.", "energia", "Energiára van szükségünk a munkához.", 3, true],
+            [55, "Electricity", "Electricity is essential in modern life.", "elektromosság / áram", "Az elektromosság elengedhetetlen a modern életben.", 3, true],
+            [56, "Power", "The storm cut off the power.", "áramellátás / erő", "A vihar elvágta az áramellátást.", 3, true],
+            [57, "Gas", "We use gas for cooking.", "gáz", "Gázt használunk a főzéshez.", 3, true],
+            [58, "Petrol", "Petrol is expensive these days.", "benzin", "Manapság drága a benzin.", 3, true],
+            [59, "Diesel", "This bus runs on diesel.", "gázolaj / dízel", "Ez a busz gázolajjal működik.", 3, false],
+            [60, "Coal", "Coal is used to produce electricity.", "szén", "A szenet áramtermelésre használják.", 3, false],
+            [61, "Gold", "Gold is a valuable metal.", "arany", "Az arany értékes fém.", 3, true],
+            [62, "Silver", "Silver is used to make jewellery.", "ezüst", "Az ezüstöt ékszerkészítésre használják.", 3, true],
+            [63, "Iron", "Iron is used to make tools.", "vas", "A vasat szerszámok készítésére használják.", 3, false],
+            [64, "Copper", "Copper is a good conductor of electricity.", "réz", "A réz jó elektromos vezető.", 3, false],
+            [65, "Steel", "Steel is used in construction.", "acél", "Az acélt az építőiparban használják.", 3, false],
+            [66, "Aluminium", "Aluminium is used to make cans.", "alumínium", "Az alumíniumot üdítősdobozok készítésére használják.", 3, false],
+            [67, "Wood", "This table is made of wood.", "fa (mint anyag)", "Ez az asztal fából készült.", 3, true],
+            [68, "Plastic", "Plastic causes environmental pollution.", "műanyag", "A műanyag környezetszennyezést okoz.", 3, true],
+            [69, "Glass", "Glass can break easily.", "üveg", "Az üveg könnyen eltörhet.", 3, true],
+            [70, "Paper", "Please give me some paper.", "papír", "Kérlek, adj nekem egy kis papírt!", 3, true],
+            [71, "Cardboard", "Cardboard is used for packaging.", "kartonpapír", "A kartonpapírt csomagolásra használják.", 3, false],
+            [72, "Rubber", "Rubber is used to make tyres.", "gumi", "A gumit gumiabroncsok készítésére használják.", 3, false],
+            [73, "Cotton", "Cotton is used to make clothes.", "pamut / gyapot", "A pamutot ruhakészítésre használják.", 3, true],
+            [74, "Silk", "Silk feels soft and smooth.", "selyem", "A selyem puha és sima tapintású.", 3, false],
+            [75, "Wool", "Wool keeps us warm in winter.", "gyapjú", "A gyapjú melegen tart minket télen.", 3, true],
+            [76, "Leather", "This bag is made of leather.", "bőr (mint anyag)", "Ez a táska bőrből készült.", 3, true],
+            [77, "Cement", "Cement is used to build houses.", "cement", "A cementet házépítésre használják.", 3, false],
+            [78, "Concrete", "Concrete is a strong building material.", "beton", "A beton erős építőanyag.", 3, false],
+            [79, "Brick", "Brick is used in construction.", "tégla", "A téglát az építkezésben használják.", 3, false],
+            [80, "Sand", "Children were playing with sand.", "homok", "A gyerekek homokkal játszottak.", 2, true],
+            [81, "Soil", "Plants grow well in fertile soil.", "talaj / termőföld", "A növények jól nőnek a termékeny talajban.", 2, false],
+            [82, "Mud", "The children got mud on their clothes.", "sár", "A gyerekek összekenték sárral a ruhájukat.", 2, true],
+            [83, "Dust", "There is dust on the furniture.", "por", "Por van a bútorokon.", 2, true],
+            [84, "Dirt", "Please clean the dirt from your shoes.", "piszok / kosz", "Kérlek, tisztítsd le a koszt a cipődről!", 2, true],
+            [85, "Clay", "Clay is used to make pots.", "agyag", "Az agyagot edények készítésére használják.", 3, false],
+            [86, "Stone", "This wall is made of stone.", "kő", "Ez a fal kőből épült.", 3, true],
+            [87, "Marble", "The floor is made of marble.", "márvány", "A padló márványból készült.", 3, false],
+            [88, "Granite", "Granite is a hard natural stone.", "gránit", "A gránit kemény természetes kőzet.", 3, false],
+            [89, "Metal", "Metal is used to make machines.", "fém", "A fémet gépek készítésére használják.", 3, true],
+            [90, "Mineral", "Our bodies need mineral nutrients.", "ásványi anyag", "A szervezetünknek ásványi tápanyagokra van szüksége.", 3, false],
+            [91, "Knowledge", "Knowledge gives us confidence.", "tudás", "A tudás önbizalmat ad nekünk.", 4, true],
+            [92, "Wisdom", "Wisdom comes with experience.", "bölcsesség", "A bölcsesség a tapasztalattal jár.", 4, false],
+            [93, "Information", "I need some information about the course.", "információ", "Szükségem van némi információra a tanfolyamról.", 4, true],
+            [94, "Advice", "My teacher gave me useful advice.", "tanács", "A tanárom hasznos tanácsot adott nekem.", 4, true],
+            [95, "Education", "Education is important for everyone.", "oktatás / műveltség", "Az oktatás mindenki számára fontos.", 4, true],
+            [96, "Intelligence", "Intelligence helps us solve problems.", "intelligencia", "Az intelligencia segít megoldani a problémákat.", 4, false],
+            [97, "Experience", "She has a lot of experience in teaching.", "tapasztalat", "Sok tapasztalata van a tanításban.", 4, true],
+            [98, "Understanding", "Understanding is important in friendship.", "megértés", "A megértés fontos a barátságban.", 4, false],
+            [99, "Research", "The scientist is doing important research.", "kutatás", "A tudós fontos kutatást végez.", 4, true],
+            [100, "Evidence", "The police found enough evidence.", "bizonyíték", "A rendőrség elegendő bizonyítékot talált.", 4, false],
+
+            // --- 3. KÉP (101 - 150) ---
+            [101, "News", "I have some good news for you.", "hír / hírek (egyes számú igével!)", "Van egy jó hírem számodra.", 4, true],
+            [102, "Progress", "You are making good progress.", "haladás / fejlődés", "Jól haladsz (jó fejlődést mutatsz).", 4, true],
+            [103, "Success", "Hard work is the key to success.", "siker", "A kemény munka a siker kulcsa.", 5, true],
+            [104, "Failure", "Failure teaches us lessons.", "kudarc", "A kudarc leckékre tanít minket.", 5, false],
+            [105, "Confidence", "Confidence helps us succeed.", "önbizalom", "Az önbizalom segít a siker elérésében.", 5, true],
+            [106, "Patience", "You need patience to learn.", "türelem", "Türelemre van szükséged a tanuláshoz.", 5, true],
+            [107, "Honesty", "Honesty is the best policy.", "őszinteség / becsületesség", "Az őszinteség a legjobb politika.", 5, true],
+            [108, "Kindness", "Kindness makes the world better.", "kedvesség", "A kedvesség jobbá teszi a világot.", 5, true],
+            [109, "Happiness", "Happiness is priceless.", "boldogság", "A boldogság felbecsülhetetlen.", 5, true],
+            [110, "Sadness", "She could not hide her sadness.", "szomorúság", "Nem tudta elrejteni a szomorúságát.", 5, true],
+            [111, "Anger", "He could not control his anger.", "düh / harag", "Nem tudta uralni a haragját.", 5, true],
+            [112, "Fear", "Fear stopped him from speaking.", "félelem", "A félelem megakadályozta abban, hogy megszólaljon.", 5, true],
+            [113, "Love", "Love makes life beautiful.", "szeretet / szerelem", "A szeretet széppé teszi az életet.", 5, true],
+            [114, "Hate", "Hate creates problems.", "gyűlölet", "A gyűlölet problémákat szül.", 5, true],
+            [115, "Peace", "Everyone wants peace.", "béke", "Mindenki békét akar.", 5, true],
+            [116, "Friendship", "Friendship is based on trust.", "barátság", "A barátság bizalmon alapul.", 5, true],
+            [117, "Respect", "We should show respect.", "tisztelet", "Tiszteletet kell mutatnunk.", 5, true],
+            [118, "Freedom", "Everyone deserves freedom.", "szabadság", "Mindenki megérdemli a szabadságot.", 5, true],
+            [119, "Justice", "Justice should be equal.", "igazságosság", "Az igazságosságnak egyenlőnek kell lennie.", 5, false],
+            [120, "Pride", "She felt pride in her achievement.", "büszkeség", "Büszkeséget érzett az eredménye miatt.", 5, false],
+            [121, "Courage", "Courage helps us overcome.", "bátorság", "A bátorság segít legyőzni az akadályokat.", 5, false],
+            [122, "Bravery", "His bravery saved lives.", "vitézség / bátorság", "A bátorsága életeket mentett.", 5, false],
+            [123, "Hope", "Never lose hope.", "remény", "Soha ne veszítsd el a reményt!", 5, true],
+            [124, "Faith", "Faith gives people strength.", "hit / bizalom", "A hit erőt ad az embereknek.", 5, false],
+            [125, "Trust", "Trust is important in life.", "bizalom", "A bizalom fontos az életben.", 5, true],
+            [126, "Beauty", "The beauty of nature is amazing.", "szépség", "A természet szépsége lenyűgöző.", 5, true],
+            [127, "Peacefulness", "I enjoy the peacefulness.", "nyugalom / békesség", "Élvezem a nyugalmat.", 5, false],
+            [128, "Hunger", "Hunger made him restless.", "éhség", "Az éhség nyugtalanná tette.", 5, true],
+            [129, "Thirst", "I was suffering from thirst.", "szomjúság", "Szomjúságtól szenvedtem.", 5, true],
+            [130, "Sleep", "I need more sleep.", "alvás", "Több alvásra van szükségem.", 5, true],
+            [131, "Rest", "You should get some rest.", "pihenés", "Pihenned kellene egy keveset.", 5, true],
+            [132, "Health", "Good health is a blessing.", "egészség", "A jó egészség áldás.", 5, true],
+            [133, "Wealth", "Wealth cannot buy happiness.", "gazdagság / vagyon", "A gazdagság nem tud boldogságot venni.", 5, false],
+            [134, "Poverty", "Poverty is a serious problem.", "szegénység", "A szegénység komoly probléma.", 5, false],
+            [135, "Laughter", "Her laughter filled the room.", "nevetés", "A nevetése betöltötte a szobát.", 5, false],
+            [136, "Music", "I enjoy listening to music.", "zene", "Szeretek zenét hallgatni.", 8, true],
+            [137, "Art", "Art expresses creativity.", "művészet", "A művészet kreativitást fejez ki.", 4, true],
+            [138, "Literature", "She loves reading literature.", "irodalom", "Szeret irodalmat olvasni.", 4, true],
+            [139, "Poetry", "Poetry touches our hearts.", "költészet", "A költészet megérinti a szívünket.", 4, false],
+            [140, "Grammar", "Grammar is important.", "nyelvtan", "A nyelvtan fontos.", 4, true],
+            [141, "Vocabulary", "A rich vocabulary helps.", "szókincs", "A gazdag szókincs sokat segít.", 4, true],
+            [142, "Language", "Language connects people.", "nyelv", "A nyelv összeköti az embereket.", 4, true],
+            [143, "Mathematics", "Mathematics is essential.", "matematika", "A matematika elengedhetetlen.", 4, true],
+            [144, "Science", "Science makes life easier.", "tudomány / természettudomány", "A tudomány könnyebbé teszi az életet.", 4, true],
+            [145, "History", "I enjoy learning history.", "történelem", "Szeretek történelmet tanulni.", 4, true],
+            [146, "Geography", "Geography teaches us.", "földrajz", "A földrajz tanít minket.", 4, true],
+            [147, "Physics", "Physics explains the universe.", "fizika", "A fizika megmagyarázza az univerzumot.", 4, true],
+            [148, "Chemistry", "Chemistry is interesting.", "kémia", "A kémia érdekes.", 4, true],
+            [149, "Biology", "Biology is the study of life.", "biológia", "A biológia az élet tudománya.", 4, true],
+            [150, "Economics", "Economics helps us understand.", "közgazdaságtan", "A közgazdaságtan segít megérteni a folyamatokat.", 4, false],
+
+            // --- 4. KÉP (151 - 200) ---
+            [151, "Traffic", "There is heavy traffic on the road.", "forgalom / közlekedés", "Nagy a forgalom az úton.", 6, true],
+            [152, "Transportation", "Public transportation is useful.", "közlekedés / szállítás", "A tömegközlekedés hasznos.", 6, true],
+            [153, "Luggage", "My luggage is very heavy.", "poggyász / csomagok", "Nagyon nehéz a poggyászom.", 6, true],
+            [154, "Baggage", "The airline lost our baggage.", "poggyász / csomagok", "A légitársaság elvesztette a poggyászunkat.", 6, true],
+            [155, "Furniture", "We bought new furniture.", "bútor / bútorzat", "Új bútorokat vettünk.", 6, true],
+            [156, "Equipment", "The school needs equipment.", "felszerelés / berendezés", "Az iskolának felszerelésre van szüksége.", 6, true],
+            [157, "Machinery", "The factory uses machinery.", "gépezet / géppark", "A gyár gépeket használ.", 6, false],
+            [158, "Jewellery", "She wears beautiful jewellery.", "ékszer / ékszerek", "Gyönyörű ékszereket visel.", 6, true],
+            [159, "Clothing", "Warm clothing is necessary.", "ruházat", "Meleg ruházatra van szükség.", 6, true],
+            [160, "Footwear", "Proper footwear protects feet.", "lábbeli", "A megfelelő lábbeli védi a lábat.", 6, false],
+            [161, "Stationery", "I need some stationery.", "írószer / papíráru", "Szükségem van némi írószerre.", 6, false],
+            [162, "Cutlery", "The cutlery is kept in the kitchen.", "evőeszköz", "Az evőeszközöket a konyhában tartják.", 6, false],
+            [163, "Crockery", "The crockery is expensive.", "étkészlet / porcelánáru", "Az étkészlet drága.", 6, false],
+            [164, "Bedding", "The hotel provides clean bedding.", "ágynemű", "A szálloda tiszta ágyneműt biztosít.", 6, false],
+            [165, "Accommodation", "We need accommodation.", "szállás", "Szállásra van szükségünk.", 6, true],
+            [166, "Housing", "Housing is expensive.", "lakhatás", "A lakhatás drága.", 6, false],
+            [167, "Scenery", "The scenery here is beautiful.", "táj / látkép", "Gyönyörű itt a táj.", 2, true],
+            [168, "Landscape", "The landscape looks amazing.", "tájkép", "Lenyűgözően néz ki a táj.", 2, false],
+            [169, "Nature", "We should protect nature.", "természet", "Meg kell védenünk a természetet.", 2, true],
+            [170, "Wildlife", "Wildlife needs protection.", "vadvilág / élővilág", "A vadvilágnak védelemre van szüksége.", 2, true],
+            [171, "Vegetation", "This region has dense vegetation.", "növényzet", "Ennek a régiónak sűrű a növényzete.", 2, false],
+            [172, "Grass", "The grass is wet after rain.", "fű", "Eső után nedves a fű.", 2, true],
+            [173, "Hay", "Farmers use hay to feed animals.", "széna", "A gazdák szénát használnak az állatok etetésére.", 2, false],
+            [174, "Foliage", "The garden has green foliage.", "lombozat", "A kertnek zöld lombozata van.", 2, false],
+            [175, "Fruit", "Fruit is good for our health.", "gyümölcs", "A gyümölcs jót tesz az egészségünknek.", 1, true],
+            [176, "Vegetables", "Eating vegetables is good for you.", "zöldségek (gyűjtőfogalomként)", "A zöldségfogyasztás jót tesz neked.", 1, true],
+            [177, "Meat", "Meat should be stored properly.", "hús", "A húst megfelelően kell tárolni.", 1, true],
+            [178, "Seafood", "Seafood is popular in coastal areas.", "tenger gyümölcsei", "A tenger gyümölcsei népszerűek a tengerparti területeken.", 1, true],
+            [179, "Cereal", "Cereal is a common food.", "gabonapehely / müzli", "A gabonapehely elterjedt étel.", 1, true],
+            [180, "Oatmeal", "Oatmeal is a healthy breakfast.", "zabkása", "A zabkása egészséges reggeli.", 1, false],
+            [181, "Porridge", "My grandmother makes porridge.", "kása / zabkása", "A nagymamám kását főz.", 1, false],
+            [182, "Sausage", "Sausage is often served with breakfast.", "kolbász / virsli", "A kolbászt gyakran reggelihez szolgálják fel.", 1, true],
+            [183, "Bacon", "He likes bacon with eggs.", "szalonna / bacon", "Szereti a szalonnát tojással.", 1, true],
+            [184, "Tofu", "Tofu is a source of protein.", "tofu", "A tofu fehérjeforrás.", 1, false],
+            [185, "Lentil", "Lentil is rich in protein.", "lencse", "A lencse gazdag fehérjében.", 1, false],
+            [186, "Peanut butter", "I spread peanut butter.", "mogyoróvaj", "Mogyoróvajat kenek a kenyérre.", 1, true],
+            [187, "Mayonnaise", "Add some mayonnaise.", "majonéz", "Adj hozzá egy kis majonézt!", 1, true],
+            [188, "Mustard", "Mustard gives strong flavour.", "mustár", "A mustár erős ízt ad.", 1, true],
+            [189, "Ketchup", "Children like ketchup.", "ketchup", "A gyerekek szeretik a ketchupot.", 1, true],
+            [190, "Sauce", "This sauce tastes delicious.", "szósz / mártás", "Ennek a szósznak finom az íze.", 1, true],
+            [191, "Dough", "She is preparing dough.", "tészta (nyers/gyúrt)", "Éppen a tésztát készíti elő.", 1, false],
+            [192, "Batter", "The batter is ready.", "palacsintatészta / massza", "A tésztamassza elkészült.", 1, false],
+            [193, "Cocoa", "Cocoa is used to make chocolate.", "kakaó", "A kakaót csokoládékészítésre használják.", 1, false],
+            [194, "Spice", "This dish contains a lot of spice.", "fűszer", "Ez az étel sok fűszert tartalmaz.", 1, false],
+            [195, "Garlic", "Garlic adds flavour to food.", "fokhagyma", "A fokhagyma ízt ad az ételnek.", 1, true],
+            [196, "Ginger", "Ginger is used in dishes.", "gyömbér", "A gyömbért ételekben használják.", 1, false],
+            [197, "Turmeric", "Turmeric gives a yellow colour.", "kurkuma", "A kurkuma sárga színt ad.", 1, false],
+            [198, "Cinnamon", "Cinnamon has a pleasant smell.", "fahéj", "A fahéjnak kellemes illata van.", 1, false],
+            [199, "Saffron", "Saffron is an expensive spice.", "sáfrány", "A sáfrány drága fűszer.", 1, false],
+            [200, "Chilli", "Chilli makes the food spicy.", "chili", "A chili csípőssé teszi az ételt.", 1, true],
+
+            // --- 5. KÉP (201 - 250) ---
+            [201, "Work", "I have a lot of work today.", "munka", "Sok munkám van ma.", 7, true],
+            [202, "Homework", "I have finished my homework.", "házi feladat", "Befejeztem a házi feladatomat.", 4, true],
+            [203, "Housework", "My mother does the housework.", "házimunka", "Édesanyám végzi a házimunkát.", 8, true],
+            [204, "Business", "She wants to start her own business.", "üzlet / vállalkozás", "Saját vállalkozást szeretne indítani.", 7, true],
+            [205, "Employment", "Employment opportunities are increasing.", "foglalkoztatás / munkalehetőség", "Nőnek a foglalkoztatási lehetőségek.", 7, false],
+            [206, "Unemployment", "Unemployment is a major concern.", "munkanélküliség", "A munkanélküliség komoly gond.", 7, false],
+            [207, "Management", "Good management is essential for success.", "vezetés / menedzsment", "A jó vezetés elengedhetetlen a sikerhez.", 7, false],
+            [208, "Leadership", "Leadership requires responsibility.", "vezetői képesség / vezetés", "A vezetés felelősséggel jár.", 7, false],
+            [209, "Communication", "Good communication prevents misunderstandings.", "kommunikáció", "A jó kommunikáció megelőzi a félreértéseket.", 7, true],
+            [210, "Technology", "Technology has changed our lives.", "technológia", "A technológia megváltoztatta az életünket.", 7, true],
+            [211, "Software", "This computer needs new software.", "szoftver", "Ennek a számítógépnek új szoftverre van szüksége.", 7, true],
+            [212, "Hardware", "Computer hardware can be expensive.", "hardver", "A számítógépes hardver drága lehet.", 7, false],
+            [213, "Internet", "The internet provides useful information.", "internet", "Az internet hasznos információkkal szolgál.", 7, true],
+            [214, "Research", "Research takes time and effort.", "kutatás", "A kutatás időt és erőfeszítést igényel.", 7, true],
+            [215, "Training", "Employees need proper training.", "képzés / tréning", "A munkavállalóknak megfelelő képzésre van szükségük.", 7, true],
+            [216, "Practice", "Practice makes a person perfect.", "gyakorlás", "Gyakorlat teszi a mestert.", 4, true],
+            [217, "Exercise", "Regular exercise keeps us healthy.", "testmozgás / edzés", "A rendszeres testmozgás egészségesen tart minket.", 8, true],
+            [218, "Fitness", "Fitness is important for a healthy life.", "edzettség / fittség", "A fittség fontos az egészséges élethez.", 8, true],
+            [219, "Football", "Football is popular around the world.", "labdarúgás / foci", "A foci világszerte népszerű.", 8, true],
+            [220, "Cricket", "Cricket is very popular in India.", "krikett", "A krikett nagyon népszerű Indiában.", 8, false],
+            [221, "Tennis", "Tennis requires physical fitness.", "tenisz", "A tenisz fizikai erőnlétet igényel.", 8, true],
+            [222, "Swimming", "Swimming is good exercise.", "úszás", "Az úszás jó testmozgás.", 8, true],
+            [223, "Running", "Running improves our stamina.", "futás", "A futás javítja az állóképességünket.", 8, true],
+            [224, "Cycling", "Cycling is good for health.", "kerékpározás", "A kerékpározás jót tesz az egészségnek.", 8, true],
+            [225, "Walking", "Walking is a simple form of exercise.", "gyaloglás / séta", "A gyaloglás a testmozgás egyszerű formája.", 8, true],
+            [226, "Shopping", "Shopping can be enjoyable.", "vásárlás", "A vásárlás élvezetes lehet.", 8, true],
+            [227, "Fishing", "Fishing is his favourite hobby.", "horgászat", "A horgászat a kedvenc hobbija.", 8, true],
+            [228, "Gardening", "Gardening makes me feel relaxed.", "kertészkedés", "A kertészkedés megnyugtat.", 8, true],
+            [229, "Cooking", "Cooking is an important life skill.", "főzés", "A főzés fontos életvezetési készség.", 8, true],
+            [230, "Baking", "Baking requires patience.", "sütés", "A sütés türelmet igényel.", 8, true],
+            [231, "Cleaning", "Cleaning keeps our surroundings healthy.", "takarítás", "A takarítás egészségesen tartja a környezetünket.", 8, true],
+            [232, "Washing", "Washing is necessary to keep clothes clean.", "mosás", "A mosás szükséges a ruhák tisztán tartásához.", 8, true],
+            [233, "Ironing", "Ironing makes clothes look neat.", "vasalás", "A vasalás rendezetté teszi a ruhákat.", 8, true],
+            [234, "Painting", "Painting is a relaxing activity.", "festés", "A festés pihentető tevékenység.", 8, true],
+            [235, "Drawing", "Drawing improves creativity.", "rajzolás", "A rajzolás fejleszti a kreativitást.", 8, true],
+            [236, "Dancing", "Dancing is a wonderful form of exercise.", "tánc", "A tánc a mozgás csodálatos formája.", 8, true],
+            [237, "Travelling", "Travelling helps us explore new places.", "utazás", "Az utazás segít új helyeket felfedezni.", 8, true],
+            [238, "Camping", "Camping is an enjoyable outdoor activity.", "kempingezés", "A kempingezés élvezetes szabadtéri tevékenység.", 8, true],
+            [239, "Reading", "Reading improves our knowledge.", "olvasás", "Az olvasás bővíti a tudásunkat.", 8, true],
+            [240, "Writing", "Writing helps us express our thoughts.", "írás", "Az írás segít kifejezni a gondolatainkat.", 8, true],
+            [241, "Speaking", "Speaking English requires regular practice.", "beszéd", "Az angol beszéd rendszeres gyakorlást igényel.", 8, true],
+            [242, "Listening", "Listening carefully improves communication.", "hallgatás / figyelés", "A figyelmes hallgatás javítja a kommunikációt.", 8, true],
+            [243, "Thinking", "Thinking clearly helps us make good decisions.", "gondolkodás", "A tiszta gondolkodás segít jó döntéseket hozni.", 8, true],
+            [244, "Planning", "Planning makes our work easier.", "tervezés", "A tervezés megkönnyíti a munkánkat.", 7, true],
+            [245, "Decision-making", "Decision-making is an important skill.", "döntéshozatal", "A döntéshozatal fontos készség.", 7, false],
+            [246, "Advertising", "Advertising helps companies promote products.", "reklámozás / hirdetés", "A reklámozás segít a cégeknek a termékek népszerűsítésében.", 7, false],
+            [247, "Marketing", "Marketing plays an important role in business.", "marketing", "A marketing fontos szerepet játszik az üzleti életben.", 7, false],
+            [248, "Finance", "Finance is important for every organisation.", "pénzügy", "A pénzügy minden szervezet számára fontos.", 7, false],
+            [249, "Weathering", "Weathering slowly breaks down rocks.", "mállás / erózió", "Az erózió lassan lebontja a sziklákat.", 2, false],
+            [250, "Pollution", "Pollution is harmful to the environment.", "környezetszennyezés", "A környezetszennyezés káros a környezetre.", 2, true]
+        ];
+
+        const CATEGORIES = {
+            1: { name: "Ételek, italok és alapanyagok", tip: "Az élelmiszerek és folyadékok (water, milk, bread, rice, sugar) megszámlálhatatlanok. Mennyiségüket csomagolással vagy mértékegységgel adjuk meg (pl. a glass of water, a loaf of bread).", desc: "Alapvető élelmiszerek, italok, fűszerek és alapanyagok (water, milk, bread, cheese, sugar)." },
+            2: { name: "Természet, időjárás és elemek", tip: "A 'weather' és a 'news' klasszikus vizsgacsapdák: SOHA nem állhat előttük 'a/an' névelő (pl. What lovely weather!).", desc: "Időjárási jelenségek és természeti elemek (weather, rain, snow, air, sunshine, pollution)." },
+            3: { name: "Anyagok, fémek és energia", tip: "Az anyagok (wood, glass, paper, gold) megszámlálhatatlanok, ha magára az anyagra utalsz (pl. This table is made of wood).", desc: "Nyersanyagok, fémek, textíliák és energiaforrások (electricity, petrol, wood, glass, cotton)." },
+            4: { name: "Tudás, oktatás és tantárgyak", tip: "Az 'information', 'advice', 'homework', 'knowledge' és 'news' szavaknak NINCS többes számuk! Helyesen: a piece of advice / some information.", desc: "Tanulással kapcsolatos fogalmak és tantárgyak (information, advice, homework, news, mathematics)." },
+            5: { name: "Érzelmek, tulajdonságok és fogalmak", tip: "Az elvont főnevek (happiness, love, patience, health) általános értelemben névelő nélkül állnak (pl. Health is important).", desc: "Érzelmek, belső tulajdonságok és elvont fogalmak (happiness, patience, confidence, health, freedom)." },
+            6: { name: "Gyűjtőnevek és mindennapi tárgyak", tip: "Nagyon fontos vizsgaanyag: luggage, baggage, furniture, equipment, traffic, accommodation mindig egyes számban állnak!", desc: "Kategóriákat összefoglaló főnevek (luggage, furniture, traffic, equipment, accommodation, jewellery)." },
+            7: { name: "Munka, üzlet és technológia", tip: "A 'work' (munka) megszámlálhatatlan (I have a lot of work), míg a 'job' (állás) megszámlálható (I have a good job)!", desc: "Munkahelyi, üzleti és informatikai kifejezések (work, business, software, internet, training)." },
+            8: { name: "Tevékenységek, sport és szabadidő", tip: "Az '-ing' végű igéből képzett főnevek (swimming, reading, cooking, shopping) mindig megszámlálhatatlanok.", desc: "Sportágak, hobbik és házimunkák (swimming, cycling, reading, cooking, housework, shopping)." }
+        };
+
+        // Teljes objektumlista felépítése
+        const NOUNS_DB = RAW_DATA.map(item => ({
+            id: item[0],
+            en: item[1],
+            sentenceEn: item[2],
+            hu: item[3],
+            sentenceHu: item[4],
+            catId: item[5],
+            category: CATEGORIES[item[5]].name,
+            tip: CATEGORIES[item[5]].tip,
+            isCore: item[6]
+        }));
+
+        // ============================================================================
+        // ALKALMAZÁS ÁLLAPOT (STATE)
+        // ============================================================================
+        let state = {
+            activeTab: 'flashcards',
+            accent: 'en-GB',
+            rate: 1.0,
+            coreOnly: true,
+            categoryFilter: 'ALL',
+            statusFilter: 'ALL',
+            searchQuery: '',
+            learnedIds: JSON.parse(localStorage.getItem('uncountable250_learned') || '[]'),
+            filteredItems: [],
+            fcIndex: 0,
+            isFlipped: false,
+            autoPlayActive: false,
+            autoPlayTimer: null,
+            quizMode: 'meaning',
+            quizScore: 0,
+            quizTotal: 0,
+            currentQuizItem: null,
+            quizAnswered: false
+        };
+
+        // ============================================================================
+        // HANGSZINTÉZIS (WEB SPEECH API)
+        // ============================================================================
+        let availableVoices = [];
+
+        function loadVoices() {
+            if ('speechSynthesis' in window) {
+                availableVoices = window.speechSynthesis.getVoices();
+            }
+        }
+        if ('speechSynthesis' in window) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speakText(text, btnElement = null, onEndCallback = null) {
+            if (!('speechSynthesis' in window)) {
+                if (onEndCallback) onEndCallback();
+                return;
+            }
+            window.speechSynthesis.cancel();
+
+            document.querySelectorAll('.speaking-active').forEach(el => el.classList.remove('speaking-active'));
+            if (btnElement) btnElement.classList.add('speaking-active');
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = state.accent;
+            utterance.rate = state.rate;
+
+            const preferredVoice = availableVoices.find(v => v.lang === state.accent && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Daniel') || v.name.includes('Samantha')))
+                || availableVoices.find(v => v.lang.startsWith(state.accent.substring(0, 5)))
+                || availableVoices.find(v => v.lang.startsWith('en'));
+
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+
+            utterance.onend = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+            utterance.onerror = () => {
+                if (btnElement) btnElement.classList.remove('speaking-active');
+                if (onEndCallback) onEndCallback();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakPair(nounText, sentenceText, btnElement = null, onBothEnd = null) {
+            speakText(nounText, btnElement, () => {
+                setTimeout(() => {
+                    speakText(sentenceText, btnElement, onBothEnd);
+                }, 400);
+            });
+        }
+
+        function setAccent(acc) {
+            state.accent = acc;
+            document.getElementById('btn-en-GB').className = acc === 'en-GB'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-en-US').className = acc === 'en-US'
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function setRate(r) {
+            state.rate = r;
+            document.getElementById('btn-rate-1').className = r === 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+            document.getElementById('btn-rate-slow').className = r < 1.0
+                ? 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm'
+                : 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+        }
+
+        function toggleAutoPlay() {
+            state.autoPlayActive = !state.autoPlayActive;
+            const btn = document.getElementById('btnAutoPlay');
+            const icon = document.getElementById('autoPlayIcon');
+            const text = document.getElementById('autoPlayText');
+
+            if (state.autoPlayActive) {
+                btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-600 text-white shadow-sm transition';
+                icon.textContent = '⏹️';
+                text.textContent = 'Leállítás';
+                if (state.activeTab !== 'flashcards') {
+                    switchTab('flashcards');
+                }
+                runAutoPlayStep();
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        function stopAutoPlay() {
+            state.autoPlayActive = false;
+            clearTimeout(state.autoPlayTimer);
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const btn = document.getElementById('btnAutoPlay');
+            document.getElementById('autoPlayIcon').textContent = '▶️';
+            document.getElementById('autoPlayText').textContent = 'Hangoskönyv mód';
+            btn.className = 'flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition';
+        }
+
+        function runAutoPlayStep() {
+            if (!state.autoPlayActive || state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            state.isFlipped = false;
+            updateFlashcardUI();
+
+            speakPair(item.en, item.sentenceEn, null, () => {
+                if (!state.autoPlayActive) return;
+                state.isFlipped = true;
+                updateFlashcardUI();
+
+                state.autoPlayTimer = setTimeout(() => {
+                    if (!state.autoPlayActive) return;
+                    state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+                    runAutoPlayStep();
+                }, 2200);
+            });
+        }
+
+        // ============================================================================
+        // SZŰRÉS ÉS HALADÁS KEZELÉSE
+        // ============================================================================
+        function saveProgress() {
+            localStorage.setItem('uncountable250_learned', JSON.stringify(state.learnedIds));
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const total = NOUNS_DB.length;
+            const count = state.learnedIds.length;
+            const pct = Math.round((count / total) * 100);
+
+            document.getElementById('mobileProgressBadge').textContent = `${count}/${total}`;
+            document.getElementById('desktopProgressText').textContent = `${count} / ${total} (${pct}%)`;
+            document.getElementById('desktopProgressBar').style.width = `${pct}%`;
+        }
+
+        function toggleCoreFilter() {
+            state.coreOnly = !state.coreOnly;
+            const btn = document.getElementById('btnCoreFilter');
+            const icon = document.getElementById('coreCheckIcon');
+            if (state.coreOnly) {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-amber-50 border-amber-300 text-amber-900 shadow-sm';
+                icon.textContent = '⭐';
+            } else {
+                btn.className = 'flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100';
+                icon.textContent = '🌐';
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            state.categoryFilter = document.getElementById('categorySelect').value;
+            state.statusFilter = document.getElementById('statusSelect').value;
+            state.searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            state.filteredItems = NOUNS_DB.filter(item => {
+                if (state.coreOnly && !item.isCore) return false;
+                if (state.categoryFilter !== 'ALL' && item.category !== state.categoryFilter) return false;
+                const isLearned = state.learnedIds.includes(item.id);
+                if (state.statusFilter === 'LEARNED' && !isLearned) return false;
+                if (state.statusFilter === 'UNLEARNED' && isLearned) return false;
+
+                if (state.searchQuery) {
+                    const matchId = String(item.id) === state.searchQuery;
+                    const matchEn = item.en.toLowerCase().includes(state.searchQuery) || item.sentenceEn.toLowerCase().includes(state.searchQuery);
+                    const matchHu = item.hu.toLowerCase().includes(state.searchQuery) || item.sentenceHu.toLowerCase().includes(state.searchQuery);
+                    if (!matchId && !matchEn && !matchHu) return false;
+                }
+                return true;
+            });
+
+            document.getElementById('filteredCountLabel').textContent = `Szűrt tételek: ${state.filteredItems.length} db`;
+            state.fcIndex = 0;
+            state.isFlipped = false;
+
+            updateFlashcardUI();
+            renderList();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        }
+
+        // ============================================================================
+        // FÜLEK (NÉZETEK) VÁLTÁSA
+        // ============================================================================
+        function switchTab(tabName) {
+            if (tabName !== 'flashcards' && state.autoPlayActive) {
+                stopAutoPlay();
+            }
+            state.activeTab = tabName;
+
+            ['flashcards', 'list', 'quiz', 'grammar'].forEach(t => {
+                const viewEl = document.getElementById(`view-${t}`);
+                const tabEl = document.getElementById(`tab-${t}`);
+                if (t === tabName) {
+                    viewEl.classList.remove('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-600 text-white shadow-sm transition';
+                } else {
+                    viewEl.classList.add('hidden');
+                    tabEl.className = 'nav-tab flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+                }
+            });
+
+            const filterBar = document.getElementById('globalFilterBar');
+            if (tabName === 'flashcards' || tabName === 'list') {
+                filterBar.classList.remove('hidden');
+            } else {
+                filterBar.classList.add('hidden');
+            }
+
+            if (tabName === 'quiz' && !state.currentQuizItem) {
+                generateQuizQuestion();
+            }
+        }
+
+        // ============================================================================
+        // 1. TANULÓKÁRTYÁK LOGIKA
+        // ============================================================================
+        function updateFlashcardUI() {
+            const inner = document.getElementById('flashcardInner');
+            const front = document.getElementById('fcFrontFace');
+            const back = document.getElementById('fcBackFace');
+            if (state.isFlipped) {
+                inner.classList.add('rotate-y-180');
+                if (front) front.classList.add('pointer-events-none');
+                if (back) back.classList.remove('pointer-events-none');
+            } else {
+                inner.classList.remove('rotate-y-180');
+                if (front) front.classList.remove('pointer-events-none');
+                if (back) back.classList.add('pointer-events-none');
+            }
+
+            if (state.filteredItems.length === 0) {
+                document.getElementById('fcPosition').textContent = '0 / 0 kártya';
+                document.getElementById('fcNounEn').textContent = 'Nincs találat';
+                document.getElementById('fcSentenceEn').textContent = 'Módosítsd a szűrőket a felső sávban!';
+                document.getElementById('fcNounHu').textContent = 'Nincs találat';
+                document.getElementById('fcSentenceHu').textContent = '';
+                return;
+            }
+
+            const item = state.filteredItems[state.fcIndex];
+            const isLearned = state.learnedIds.includes(item.id);
+
+            document.getElementById('fcPosition').textContent = `${state.fcIndex + 1} / ${state.filteredItems.length}. kártya`;
+            document.getElementById('fcNumber').textContent = `#${item.id}`;
+            document.getElementById('fcBackNumber').textContent = `#${item.id} • Magyar jelentés`;
+            document.getElementById('fcCategory').textContent = item.category;
+            document.getElementById('fcNounEn').textContent = item.en;
+            document.getElementById('fcSentenceEn').textContent = item.sentenceEn;
+            document.getElementById('fcNounHu').textContent = item.hu;
+            document.getElementById('fcSentenceHu').textContent = item.sentenceHu;
+            document.getElementById('fcSentenceEnSmall').textContent = `„${item.sentenceEn}”`;
+            document.getElementById('fcTipHu').textContent = item.tip;
+
+            const coreBadge = document.getElementById('fcCoreBadge');
+            if (item.isCore) {
+                coreBadge.classList.remove('hidden');
+            } else {
+                coreBadge.classList.add('hidden');
+            }
+
+            const learnedBadge = document.getElementById('fcLearnedBadge');
+            if (isLearned) {
+                learnedBadge.classList.remove('hidden');
+            } else {
+                learnedBadge.classList.add('hidden');
+            }
+        }
+
+        function flipCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = !state.isFlipped;
+            updateFlashcardUI();
+        }
+
+        function nextCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex + 1) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function prevCard() {
+            if (state.filteredItems.length === 0) return;
+            state.isFlipped = false;
+            state.fcIndex = (state.fcIndex - 1 + state.filteredItems.length) % state.filteredItems.length;
+            updateFlashcardUI();
+        }
+
+        function markCurrentCard(learned) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            if (learned) {
+                if (!state.learnedIds.includes(item.id)) {
+                    state.learnedIds.push(item.id);
+                }
+            } else {
+                state.learnedIds = state.learnedIds.filter(id => id !== item.id);
+            }
+            saveProgress();
+            renderList();
+            nextCard();
+        }
+
+        function shuffleFlashcards() {
+            for (let i = state.filteredItems.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [state.filteredItems[i], state.filteredItems[j]] = [state.filteredItems[j], state.filteredItems[i]];
+            }
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function resetOrderFlashcards() {
+            state.filteredItems.sort((a, b) => a.id - b.id);
+            state.fcIndex = 0;
+            state.isFlipped = false;
+            updateFlashcardUI();
+        }
+
+        function speakCurrentNoun(btn) {
+            if (state.filteredItems.length === 0) return;
+            speakText(state.filteredItems[state.fcIndex].en, btn);
+        }
+
+        function speakCurrentSentence(btn) {
+            if (state.filteredItems.length === 0) return;
+            speakText(state.filteredItems[state.fcIndex].sentenceEn, btn);
+        }
+
+        function speakCurrentBoth(btn) {
+            if (state.filteredItems.length === 0) return;
+            const item = state.filteredItems[state.fcIndex];
+            speakPair(item.en, item.sentenceEn, btn);
+        }
+
+        // ============================================================================
+        // 2. TELJES LISTA RENDERELÉSE
+        // ============================================================================
+        function renderList() {
+            const container = document.getElementById('listContainer');
+            if (state.filteredItems.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+                        <p class="text-slate-500 font-medium">Nincs a szűrésnek megfelelő tétel.</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = state.filteredItems.map(item => {
+                const isLearned = state.learnedIds.includes(item.id);
+                return `
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border ${isLearned ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-200'} shadow-xs hover:shadow-md transition flex flex-col justify-between gap-3">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="flex flex-wrap items-center gap-1.5">
+                                <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-bold text-xs">#${item.id}</span>
+                                <span class="px-2 py-0.5 rounded-md bg-brand-50 text-brand-700 font-medium text-xs">${item.category}</span>
+                                ${item.isCore ? '<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold text-xs">⭐ Alapfok</span>' : ''}
+                            </div>
+                            <button onclick="toggleItemLearned(${item.id})" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${isLearned ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                                ${isLearned ? '✓ Tudom' : '○ Jelölés'}
+                            </button>
+                        </div>
+
+                        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1.5">
+                            <h3 class="text-lg font-extrabold text-slate-900">${item.en}</h3>
+                            <span class="text-sm font-bold text-brand-700">${item.hu}</span>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 space-y-1">
+                            <p class="text-sm font-medium text-slate-800">${item.sentenceEn}</p>
+                            <p class="text-xs text-slate-500">${item.sentenceHu}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-1">
+                        <button onclick="speakText('${escapeQuotes(item.en)}', this)" class="flex-1 py-2 px-2.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1">
+                            <span>🔊</span> Főnév
+                        </button>
+                        <button onclick="speakText('${escapeQuotes(item.sentenceEn)}', this)" class="flex-1 py-2 px-2.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1">
+                            <span>🗣️</span> Mondat
+                        </button>
+                        <button onclick="speakPair('${escapeQuotes(item.en)}', '${escapeQuotes(item.sentenceEn)}', this)" class="py-2 px-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition flex items-center justify-center gap-1">
+                            <span>🎧</span> Együtt
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'");
+        }
+
+        function toggleItemLearned(id) {
+            if (state.learnedIds.includes(id)) {
+                state.learnedIds = state.learnedIds.filter(x => x !== id);
+            } else {
+                state.learnedIds.push(id);
+            }
+            saveProgress();
+            renderList();
+            updateFlashcardUI();
+        }
+
+        // ============================================================================
+        // 3. INTERAKTÍV KVÍZ ÉS HALLÁSÉRTÉS
+        // ============================================================================
+        function setQuizMode(mode) {
+            state.quizMode = mode;
+            ['meaning', 'fill', 'listening'].forEach(m => {
+                const btn = document.getElementById(`qmode-${m}`);
+                btn.className = m === mode
+                    ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 text-white transition'
+                    : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+            });
+            generateQuizQuestion();
+        }
+
+        function generateQuizQuestion() {
+            state.quizAnswered = false;
+            document.getElementById('quizFeedback').classList.add('hidden');
+
+            const pool = NOUNS_DB.filter(x => x.isCore);
+            const target = pool[Math.floor(Math.random() * pool.length)];
+            state.currentQuizItem = target;
+
+            const distractors = [];
+            while (distractors.length < 3) {
+                const candidate = pool[Math.floor(Math.random() * pool.length)];
+                if (candidate.id !== target.id && candidate.hu !== target.hu && !distractors.some(d => d.hu === candidate.hu || d.en === candidate.en)) {
+                    distractors.push(candidate);
+                }
+            }
+
+            const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+            const badge = document.getElementById('quizQuestionTypeBadge');
+            const mainPrompt = document.getElementById('quizMainPrompt');
+            const subPrompt = document.getElementById('quizSubPrompt');
+            const optionsContainer = document.getElementById('quizOptions');
+
+            if (state.quizMode === 'meaning') {
+                badge.textContent = '🇭🇺 Válaszd ki a kiemelt főnév magyar jelentését!';
+                mainPrompt.textContent = target.en;
+                subPrompt.textContent = `Példamondat: „${target.sentenceEn}”`;
+
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswer(${opt.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition flex items-center justify-between">
+                        <span>${opt.hu}</span>
+                        <span class="text-xs text-slate-400 font-normal">(${opt.category})</span>
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'fill') {
+                badge.textContent = '✍️ Egészítsd ki a mondatot a megfelelő angol főnévvel!';
+                const regex = new RegExp(`\\b${target.en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+                const maskedSentence = regex.test(target.sentenceEn)
+                    ? target.sentenceEn.replace(regex, '________')
+                    : `${target.sentenceEn} (Jelentés: ${target.hu})`;
+
+                mainPrompt.textContent = maskedSentence;
+                subPrompt.textContent = `Magyarul: „${target.sentenceHu}”`;
+
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswer(${opt.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-bold text-slate-800 transition">
+                        ${opt.en}
+                    </button>
+                `).join('');
+            } else if (state.quizMode === 'listening') {
+                badge.textContent = '🎧 Hallgasd meg a mondatot, és válaszd ki a magyar jelentését!';
+                mainPrompt.textContent = '🔊 Hallgasd meg a hanganyagot!';
+                subPrompt.textContent = 'Kattints a „Meghallgatás” gombra, ha újra hallani szeretnéd.';
+                speakPair(target.en, target.sentenceEn);
+
+                optionsContainer.innerHTML = options.map(opt => `
+                    <button onclick="checkQuizAnswer(${opt.id}, this)" class="quiz-opt-btn w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-brand-400 hover:bg-brand-50/40 font-semibold text-slate-800 transition">
+                        ${opt.sentenceHu} <span class="text-xs text-brand-600 font-bold">(${opt.hu})</span>
+                    </button>
+                `).join('');
+            }
+        }
+
+        function speakQuizPrompt() {
+            if (!state.currentQuizItem) return;
+            speakPair(state.currentQuizItem.en, state.currentQuizItem.sentenceEn);
+        }
+
+        function checkQuizAnswer(selectedId, btnEl) {
+            if (state.quizAnswered) return;
+            state.quizAnswered = true;
+            state.quizTotal++;
+
+            const target = state.currentQuizItem;
+            const isCorrect = selectedId === target.id;
+            if (isCorrect) state.quizScore++;
+
+            document.getElementById('quizScore').textContent = state.quizScore;
+            document.getElementById('quizTotal').textContent = state.quizTotal;
+
+            document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-brand-400', 'hover:bg-brand-50/40');
+            });
+
+            if (isCorrect) {
+                btnEl.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+            } else {
+                btnEl.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+            }
+
+            const fb = document.getElementById('quizFeedback');
+            fb.classList.remove('hidden');
+            fb.className = isCorrect
+                ? 'rounded-2xl p-4 text-sm font-medium bg-emerald-50 border border-emerald-200 text-emerald-900'
+                : 'rounded-2xl p-4 text-sm font-medium bg-rose-50 border border-rose-200 text-rose-900';
+
+            fb.innerHTML = `
+                <p class="font-bold mb-1">${isCorrect ? '✅ Helyes válasz!' : '❌ Nem egészen!'}</p>
+                <p><strong>${target.en}</strong> = ${target.hu}</p>
+                <p class="text-xs mt-1 opacity-90">„${target.sentenceEn}” — <em>${target.sentenceHu}</em></p>
+            `;
+
+            speakText(target.sentenceEn);
+        }
+
+        // ============================================================================
+        // 4. NYELVTANI KISOKOS RENDERELÉSE
+        // ============================================================================
+        function renderGrammarCards() {
+            const grid = document.getElementById('grammarCardsGrid');
+            grid.innerHTML = Object.entries(CATEGORIES).map(([id, cat]) => {
+                const count = NOUNS_DB.filter(x => x.catId === Number(id)).length;
+                const coreCount = NOUNS_DB.filter(x => x.catId === Number(id) && x.isCore).length;
+                return `
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between gap-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 font-bold text-xs">${id}. kategória</span>
+                            <span class="text-xs font-semibold text-slate-500">${coreCount} alapfokú / ${count} összes</span>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-2">${cat.name}</h3>
+                        <p class="text-sm text-slate-600 mb-3">${cat.desc}</p>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
+                            <strong>💡 Vizsgaszabály:</strong> ${cat.tip}
+                        </div>
+                    </div>
+                    <button onclick="practiceCategory('${cat.name}')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold transition">
+                        Kategória gyakorlása kártyákkal ➡️
+                    </button>
+                </div>`;
+            }).join('');
+        }
+
+        function practiceCategory(catName) {
+            document.getElementById('categorySelect').value = catName;
+            applyFilters();
+            switchTab('flashcards');
+        }
+
+        // ============================================================================
+        // MODAL ÉS INICIALIZÁLÁS
+        // ============================================================================
+        function resetAllProgress() {
+            document.getElementById('modalTitle').textContent = 'Haladás törlése';
+            document.getElementById('modalText').textContent = 'Biztosan törölni szeretnéd az összes megtanultként megjelölt tételt?';
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('hidden');
+
+            document.getElementById('modalConfirmBtn').onclick = () => {
+                state.learnedIds = [];
+                saveProgress();
+                applyFilters();
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (state.activeTab !== 'flashcards') return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+            if (e.code === 'ArrowRight') nextCard();
+            else if (e.code === 'ArrowLeft') prevCard();
+            else if (e.code === 'Space') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        window.onload = () => {
+            updateProgressUI();
+            renderGrammarCards();
+            applyFilters();
+        };
+    </script>
+</body>
+</html>
