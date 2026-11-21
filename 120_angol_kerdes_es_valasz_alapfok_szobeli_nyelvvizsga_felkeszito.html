@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angol Alapfokú Szóbeli Vizsga • 120 Kérdés &amp; Válasz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           ALAP BEÁLLÍTÁSOK ÉS DESIGN TOKENEK
+           ========================================================================== */
+        :root {
+            --bg-app: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-subtle: #f8fafc;
+            --text-main: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --primary-border: #bfdbfe;
+            --success: #059669;
+            --success-hover: #047857;
+            --success-light: #f0fdf4;
+            --success-border: #bbf7d0;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --warning-border: #fde68a;
+            --danger: #dc2626;
+            --danger-light: #fef2f2;
+            --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.06);
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        }
+
+        button, select, input {
+            font-family: inherit;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ==========================================================================
+           FŐ KONTÉNER (MAX 960PX, KÖZÉPRE IGAZÍTOTT, STABIL FLEXBOX)
+           ========================================================================== */
+        .app-container {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px 16px 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+
+        /* ==========================================================================
+           1. KOMPAKT, ELEGÁNS FEJLÉC
+           ========================================================================== */
+        .app-header {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 20px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 240px;
+            flex: 1;
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 340px;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--success);
+            white-space: nowrap;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--success);
+            border-radius: 999px;
+            transition: width 0.3s ease;
+        }
+
+        .header-right {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-capsule {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .capsule-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .capsule-btn:hover {
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .capsule-btn.active {
+            background-color: var(--bg-card);
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-autoplay {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--primary-border);
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 9px 14px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-autoplay:hover {
+            background-color: #dbeafe;
+        }
+
+        .btn-autoplay.playing {
+            background-color: var(--danger);
+            border-color: var(--danger);
+            color: #ffffff;
+        }
+
+        /* ==========================================================================
+           2. NAVIGÁCIÓS FÜLEK (EGY SOROS, TISZTA FÜLSÁV)
+           ========================================================================== */
+        .nav-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-tab-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 11px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-align: center;
+        }
+
+        .nav-tab-btn:hover {
+            background-color: var(--bg-subtle);
+            color: var(--text-main);
+        }
+
+        .nav-tab-btn.active {
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        /* ==========================================================================
+           3. KOMPAKT ÉLŐ FELIRAT / HANG-SÁV
+           ========================================================================== */
+        .live-subtitle-card {
+            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+            border: 1px solid var(--primary-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 16px 22px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .live-text-area {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .live-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+
+        .status-dot.speaking {
+            background-color: var(--success);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+
+        .live-en {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .live-hu {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .live-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .audio-pill-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 8px 13px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.15s ease;
+        }
+
+        .audio-pill-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .audio-pill-btn.primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .audio-pill-btn.primary:hover {
+            background-color: var(--primary-hover);
+            color: #ffffff;
+        }
+
+        /* ==========================================================================
+           4. NÉZETEK ÉS KÁRTYA STÍLUSOK
+           ========================================================================== */
+        .view-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Szűrősáv */
+        .filter-bar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .select-control, .input-control {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 9px 14px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .select-control:focus, .input-control:focus {
+            border-color: var(--primary);
+            background-color: #ffffff;
+        }
+
+        .input-control {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .toggle-answers-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--success-border);
+            background-color: var(--success-light);
+            color: var(--success);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 9px 14px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .toggle-answers-btn.off {
+            border-color: var(--border-color);
+            background-color: var(--bg-subtle);
+            color: var(--text-secondary);
+        }
+
+        /* NÉZET 1: FŐ TANULÓKÁRTYA */
+        .flashcard-wrapper {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .flashcard {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-badges {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-num {
+            background-color: var(--text-main);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .badge-topic {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary-border);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 999px;
+        }
+
+        .badge-status {
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 999px;
+        }
+
+        .badge-status.learned {
+            background-color: var(--success-light);
+            color: var(--success);
+            border: 1px solid var(--success-border);
+        }
+
+        .badge-status.unlearned {
+            background-color: var(--bg-subtle);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-order-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mini-btn {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-subtle);
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        }
+
+        .mini-btn:hover {
+            background-color: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        /* KÉRDÉS SZEKCIÓ */
+        .question-box {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: 20px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .box-top-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .box-label-q {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .box-label-a {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: var(--success);
+            text-transform: uppercase;
+        }
+
+        .sentence-en {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.35;
+        }
+
+        .sentence-hu {
+            font-size: 1.02rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* VÁLASZ SZEKCIÓ */
+        .answer-box {
+            background-color: var(--success-light);
+            border: 1px solid var(--success-border);
+            border-left: 5px solid var(--success);
+            border-radius: var(--radius-md);
+            padding: 20px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .answer-hidden-placeholder {
+            background-color: var(--bg-subtle);
+            border: 2px dashed #cbd5e1;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        /* VIZSGATIPP SZEKCIÓ */
+        .tip-box {
+            background-color: var(--warning-light);
+            border: 1px solid var(--warning-border);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #78350f;
+        }
+
+        /* KÁRTYA LÁBLÉC (4 EGYENLŐ SZÉLESSÉGŰ GOMB EGY SORBAN) */
+        .card-footer-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding-top: 6px;
+        }
+
+        .action-btn {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 13px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background-color: var(--bg-subtle);
+            transform: translateY(-1px);
+        }
+
+        .action-btn.practice {
+            background-color: var(--warning-light);
+            border-color: var(--warning-border);
+            color: #92400e;
+        }
+
+        .action-btn.practice:hover {
+            background-color: #fef3c7;
+        }
+
+        .action-btn.know {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: #ffffff;
+        }
+
+        .action-btn.know:hover {
+            background-color: var(--success-hover);
+        }
+
+        /* ==========================================================================
+           NÉZET 2: TELJES 120-AS LISTA
+           ========================================================================== */
+        .list-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .list-item-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 18px 22px;
+            box-shadow: var(--shadow-sm);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .list-item-card.learned-row {
+            border-left: 4px solid var(--success);
+        }
+
+        .list-item-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .list-item-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .list-col {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .list-en {
+            font-weight: 700;
+            font-size: 0.98rem;
+            color: var(--text-main);
+        }
+
+        .list-en.ans {
+            color: var(--success);
+        }
+
+        .list-hu {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .list-item-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: flex-end;
+        }
+
+        /* ==========================================================================
+           NÉZET 3: SZÓBELI SZIMULÁTOR
+           ========================================================================== */
+        .sim-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sim-timer-bar {
+            background-color: var(--primary-light);
+            border: 1px solid var(--primary-border);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .timer-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* ==========================================================================
+           NÉZET 4: KVÍZ & HALLÁSÉRTÉS
+           ========================================================================== */
+        .quiz-modes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .quiz-mode-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .quiz-mode-btn.active {
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .quiz-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quiz-options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            text-align: left;
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 15px 18px;
+            font-size: 0.96rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .quiz-option.correct {
+            background-color: var(--success-light);
+            border-color: var(--success);
+            color: #065f46;
+        }
+
+        .quiz-option.wrong {
+            background-color: var(--danger-light);
+            border-color: var(--danger);
+            color: #991b1b;
+        }
+
+        .quiz-feedback {
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .quiz-feedback.success {
+            background-color: var(--success-light);
+            border: 1px solid var(--success-border);
+            color: #065f46;
+        }
+
+        .quiz-feedback.error {
+            background-color: var(--danger-light);
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        /* ==========================================================================
+           RESZPONZÍV MOBIL BEÁLLÍTÁSOK
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 16px;
+            }
+            .nav-tabs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .flashcard, .sim-card, .quiz-card {
+                padding: 20px 16px;
+            }
+            .sentence-en {
+                font-size: 1.2rem;
+            }
+            .card-footer-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .list-item-card {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .list-item-content {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .list-item-btns {
+                justify-content: flex-start;
+            }
+            .quiz-modes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- 1. KOMPAKT, ELEGÁNS FEJLÉC -->
+    <header class="app-header">
+        <div class="header-left">
+            <h1 class="app-title">🎓 Angol Alapfokú Szóbeli Vizsga • 120 Kérdés &amp; Válasz</h1>
+            <div class="progress-wrapper">
+                <span class="progress-text" id="progressText">Tudom: 0 / 120</span>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- Akcentus váltó -->
+            <div class="control-capsule" title="Kiejtés kiválasztása">
+                <button class="capsule-btn active" id="btnUk" onclick="setAccent('en-GB')">🇬🇧 Brit</button>
+                <button class="capsule-btn" id="btnUs" onclick="setAccent('en-US')">🇺🇸 Amerikai</button>
+            </div>
+
+            <!-- Sebesség váltó -->
+            <div class="control-capsule" title="Beszédsebesség">
+                <button class="capsule-btn active" id="btnRate10" onclick="setRate(1.0)">1.0x</button>
+                <button class="capsule-btn" id="btnRate08" onclick="setRate(0.8)">0.8x</button>
+                <button class="capsule-btn" id="btnRate065" onclick="setRate(0.65)">0.65x</button>
+            </div>
+
+            <!-- Hangoskönyv mód -->
+            <button class="btn-autoplay" id="btnAutoPlay" onclick="toggleAutoPlay()">
+                ▶ Automata lejátszás
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. NAVIGÁCIÓS FÜLEK -->
+    <nav class="nav-tabs" aria-label="Fő navigáció">
+        <button class="nav-tab-btn active" id="tabBtn-flashcards" onclick="switchTab('flashcards')">1. Tanulókártyák</button>
+        <button class="nav-tab-btn" id="tabBtn-list" onclick="switchTab('list')">2. Teljes 120-as Lista</button>
+        <button class="nav-tab-btn" id="tabBtn-simulator" onclick="switchTab('simulator')">3. Szóbeli Szimulátor</button>
+        <button class="nav-tab-btn" id="tabBtn-quiz" onclick="switchTab('quiz')">4. Kvíz &amp; Hallásértés</button>
+    </nav>
+
+    <!-- 3. KOMPAKT ÉLŐ FELIRAT / HANG-SÁV -->
+    <section class="live-subtitle-card" aria-live="polite">
+        <div class="live-text-area">
+            <div class="live-status-badge">
+                <span class="status-dot" id="liveDot"></span>
+                <span id="liveStatusLabel">Aktuális tétel (#1) • Kattints a hallgatáshoz</span>
+            </div>
+            <div class="live-en" id="liveEnText">What is your name? → My name is Alex.</div>
+            <div class="live-hu" id="liveHuText">🇭🇺 Mi a neved? → A nevem Alex.</div>
+        </div>
+        <div class="live-actions">
+            <button class="audio-pill-btn" onclick="speakLiveQuestion()">🔊 Kérdés</button>
+            <button class="audio-pill-btn" onclick="speakLiveAnswer()">🔊 Válasz</button>
+            <button class="audio-pill-btn primary" onclick="speakLiveDialogue()">🔁 Párbeszéd</button>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         NÉZET 1: TANULÓKÁRTYÁK
+         ========================================================================== -->
+    <main id="view-flashcards" class="view-section">
+        <!-- Felső szűrősáv -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <select id="fcTopicSelect" class="select-control" onchange="applyFlashcardFilters()">
+                    <option value="ALL">Összes témakör (120)</option>
+                    <option value="Bemutatkozás">1. Bemutatkozás (1–15)</option>
+                    <option value="Napi rutin">2. Napi rutin (16–30)</option>
+                    <option value="Szabadidő">3. Szabadidő (31–50)</option>
+                    <option value="Kedvencek">4. Kedvencek (51–70)</option>
+                    <option value="Mindennapi helyzetek">5. Mindennapi helyzetek (71–90)</option>
+                    <option value="Munka & Tanulás">6. Munka &amp; Tanulás (91–105)</option>
+                    <option value="Érzések & Kapcsolatok">7. Érzések &amp; Kapcsolatok (106–120)</option>
+                </select>
+
+                <select id="fcStatusSelect" class="select-control" onchange="applyFlashcardFilters()">
+                    <option value="ALL">Állapot: Mind</option>
+                    <option value="UNLEARNED">Még gyakorlom</option>
+                    <option value="LEARNED">Tudom ✅</option>
+                </select>
+            </div>
+
+            <button class="toggle-answers-btn" id="btnToggleAnswers" onclick="toggleShowAnswers()">
+                👁️ Válaszok mutatása: BE
+            </button>
+        </div>
+
+        <!-- Fő Tanulókártya -->
+        <div class="flashcard-wrapper">
+            <article class="flashcard">
+                <!-- Kártya fejléc -->
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge-num" id="fcNumBadge">#1 / 120</span>
+                        <span class="badge-topic" id="fcTopicBadge">Bemutatkozás</span>
+                        <span class="badge-status unlearned" id="fcStatusBadge">Még gyakorlom</span>
+                    </div>
+                    <div class="card-order-controls">
+                        <button class="mini-btn" onclick="shuffleFlashcards()" title="Véletlenszerű sorrend">🔀 Keverés</button>
+                        <button class="mini-btn" onclick="resetFlashcardOrder()" title="Eredeti sorszám szerint">🔢 Sorrend</button>
+                    </div>
+                </div>
+
+                <!-- KÉRDÉS SZEKCIÓ -->
+                <div class="question-box">
+                    <div class="box-top-row">
+                        <span class="box-label-q">KÉRDÉS (QUESTION)</span>
+                        <button class="audio-pill-btn" onclick="speakCurrentFcQuestion()">🔊 Kérdés meghallgatása</button>
+                    </div>
+                    <div class="sentence-en" id="fcQuestionEn">What is your name?</div>
+                    <div class="sentence-hu" id="fcQuestionHu">🇭🇺 Mi a neved?</div>
+                </div>
+
+                <!-- VÁLASZ SZEKCIÓ (LÁTHATÓ ÁLLAPOT) -->
+                <div class="answer-box" id="fcAnswerVisibleBox">
+                    <div class="box-top-row">
+                        <span class="box-label-a">MINTAVÁLASZ (ANSWER)</span>
+                        <button class="audio-pill-btn" onclick="speakCurrentFcAnswer()">🔊 Válasz meghallgatása</button>
+                    </div>
+                    <div class="sentence-en" id="fcAnswerEn">My name is Alex.</div>
+                    <div class="sentence-hu" id="fcAnswerHu">🇭🇺 A nevem Alex.</div>
+                </div>
+
+                <!-- VÁLASZ SZEKCIÓ (REJTETT ÁLLAPOT) -->
+                <div class="answer-hidden-placeholder hidden" id="fcAnswerHiddenBox">
+                    <span style="font-size: 0.92rem; color: var(--text-secondary); font-weight: 500;">
+                        A válasz jelenleg el van rejtve az önellenőrzéshez.
+                    </span>
+                    <button class="audio-pill-btn primary" onclick="revealSingleAnswer()">👁️ Válasz megjelenítése</button>
+                </div>
+
+                <!-- VIZSGATIPP SZEKCIÓ -->
+                <div class="tip-box">
+                    <span style="font-size: 1.1rem;">💡</span>
+                    <div>
+                        <strong>Vizsgatipp:</strong> <span id="fcTipText">Mindig teljes mondattal válaszolj! Hozzáteheted: „My name is ..., but my friends call me ...”</span>
+                    </div>
+                </div>
+
+                <!-- KÁRTYA LÁBLÉC: 4 EGYENLŐ SZÉLESSÉGŰ GOMB -->
+                <div class="card-footer-actions">
+                    <button class="action-btn" onclick="prevFlashcard()">← Előző</button>
+                    <button class="action-btn practice" onclick="markFlashcard(false)">🔄 Még gyakorlom</button>
+                    <button class="action-btn know" onclick="markFlashcard(true)">✅ Tudom!</button>
+                    <button class="action-btn" onclick="nextFlashcard()">Következő →</button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- ==========================================================================
+         NÉZET 2: TELJES 120-AS LISTA
+         ========================================================================== -->
+    <section id="view-list" class="view-section hidden">
+        <div class="filter-bar">
+            <div class="filter-group">
+                <input type="text" id="listSearchInput" class="input-control" placeholder="🔍 Keresés angol vagy magyar szóra, sorszámra..." oninput="renderFullList()">
+                <select id="listTopicSelect" class="select-control" onchange="renderFullList()">
+                    <option value="ALL">Összes témakör (120)</option>
+                    <option value="Bemutatkozás">1. Bemutatkozás</option>
+                    <option value="Napi rutin">2. Napi rutin</option>
+                    <option value="Szabadidő">3. Szabadidő</option>
+                    <option value="Kedvencek">4. Kedvencek</option>
+                    <option value="Mindennapi helyzetek">5. Mindennapi helyzetek</option>
+                    <option value="Munka & Tanulás">6. Munka &amp; Tanulás</option>
+                    <option value="Érzések & Kapcsolatok">7. Érzések &amp; Kapcsolatok</option>
+                </select>
+            </div>
+            <span id="listCountLabel" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">120 tétel</span>
+        </div>
+
+        <div class="list-grid" id="fullListContainer"></div>
+    </section>
+
+    <!-- ==========================================================================
+         NÉZET 3: SZÓBELI SZIMULÁTOR
+         ========================================================================== -->
+    <section id="view-simulator" class="view-section hidden">
+        <div class="filter-bar">
+            <div class="filter-group">
+                <select id="simTopicSelect" class="select-control">
+                    <option value="ALL">Témakör: Összes vizsgakérdés (120)</option>
+                    <option value="Bemutatkozás">1. Bemutatkozás</option>
+                    <option value="Napi rutin">2. Napi rutin</option>
+                    <option value="Szabadidő">3. Szabadidő</option>
+                    <option value="Kedvencek">4. Kedvencek</option>
+                    <option value="Mindennapi helyzetek">5. Mindennapi helyzetek</option>
+                    <option value="Munka & Tanulás">6. Munka &amp; Tanulás</option>
+                    <option value="Érzések & Kapcsolatok">7. Érzések &amp; Kapcsolatok</option>
+                </select>
+                <select id="simTimeSelect" class="select-control">
+                    <option value="15">Válaszidő: 15 másodperc</option>
+                    <option value="25" selected>Válaszidő: 25 másodperc</option>
+                    <option value="40">Válaszidő: 40 másodperc</option>
+                </select>
+            </div>
+            <button class="audio-pill-btn primary" onclick="startNewSimQuestion()">🎲 Új vizsgakérdés indítása</button>
+        </div>
+
+        <div class="sim-card">
+            <div class="sim-timer-bar">
+                <div>
+                    <div style="font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Szóbeli vizsga szimuláció</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);" id="simInstruction">Hallgasd meg a vizsgáztató kérdését, és válaszolj hangosan!</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="timer-display" id="simTimerText">00:25</span>
+                    <button class="audio-pill-btn" id="simTimerBtn" onclick="toggleSimTimer()">⏸ Szünet</button>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <div class="box-top-row">
+                    <span class="box-label-q" id="simMetaLabel">VIZSGÁZTATÓ KÉRDÉSE (#1 • Bemutatkozás)</span>
+                    <button class="audio-pill-btn" onclick="speakSimQuestion()">🔊 Kérdés ismétlése</button>
+                </div>
+                <div class="sentence-en" id="simQuestionEn">What is your name?</div>
+                <div class="sentence-hu" id="simQuestionHu">🇭🇺 Mi a neved?</div>
+            </div>
+
+            <div id="simAnswerBox" class="answer-box">
+                <div class="box-top-row">
+                    <span class="box-label-a">MINTAVÁLASZ (ANSWER)</span>
+                    <button class="audio-pill-btn" onclick="speakSimAnswer()">🔊 Mintaválasz meghallgatása</button>
+                </div>
+                <div class="sentence-en" id="simAnswerEn">My name is Alex.</div>
+                <div class="sentence-hu" id="simAnswerHu">🇭🇺 A nevem Alex.</div>
+            </div>
+
+            <div class="tip-box">
+                <span style="font-size: 1.1rem;">💡</span>
+                <div>
+                    <strong>Vizsgatipp:</strong> <span id="simTipText">Mindig teljes mondattal válaszolj!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         NÉZET 4: KVÍZ & HALLÁSÉRTÉS
+         ========================================================================== -->
+    <section id="view-quiz" class="view-section hidden">
+        <div class="quiz-modes">
+            <button class="quiz-mode-btn active" id="qMode-choice" onclick="setQuizMode('choice')">📝 Válaszválasztó kvíz</button>
+            <button class="quiz-mode-btn" id="qMode-listening" onclick="setQuizMode('listening')">🎧 Hallásértés teszt</button>
+            <button class="quiz-mode-btn" id="qMode-match" onclick="setQuizMode('match')">🇭🇺 Magyar–Angol párosító</button>
+        </div>
+
+        <div class="quiz-card">
+            <div class="card-header">
+                <div class="card-badges">
+                    <span class="badge-topic" id="quizModeBadge">Válaszválasztó kvíz</span>
+                    <span class="badge-status learned" id="quizScoreBadge">Pontszám: 0 / 0</span>
+                </div>
+                <button class="audio-pill-btn" onclick="speakQuizAudio()">🔊 Hang lejátszása</button>
+            </div>
+
+            <div class="question-box">
+                <div class="box-top-row">
+                    <span class="box-label-q" id="quizPromptLabel">FELADAT</span>
+                </div>
+                <div class="sentence-en" id="quizPromptEn">What is your name?</div>
+                <div class="sentence-hu" id="quizPromptHu">🇭🇺 Válaszd ki a megfelelő angol választ!</div>
+            </div>
+
+            <div class="quiz-options-grid" id="quizOptionsContainer"></div>
+
+            <div class="quiz-feedback hidden" id="quizFeedbackBox"></div>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button class="audio-pill-btn primary" onclick="generateQuizQuestion()">Következő kérdés →</button>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+/* ==========================================================================
+   1. TELJES 120 TÉTELES ADATBÁZIS (A 6 FELTÖLTÖTT KÉP PONTOS TARTALMA)
+   ========================================================================== */
+const QA_DATA = [
+    // --- 1. KÉP (1 - 20) ---
+    { id: 1, topic: "Bemutatkozás", qEn: "What is your name?", qHu: "Mi a neved?", aEn: "My name is Alex.", aHu: "A nevem Alex.", tip: "Mondd ki a teljes neved, és ha van beceneved, azt is említsd meg: 'You can call me...'" },
+    { id: 2, topic: "Bemutatkozás", qEn: "Where are you from?", qHu: "Honnan származol?", aEn: "I'm from Canada.", aHu: "Kanadából származom.", tip: "Magyarországnál mondd: 'I'm from Hungary, from a small/big city called...'" },
+    { id: 3, topic: "Bemutatkozás", qEn: "How are you today?", qHu: "Hogy vagy ma?", aEn: "I'm doing well, thank you.", aHu: "Jól vagyok, köszönöm.", tip: "Alapfokú vizsgán jó válasz az 'I'm fine, thank you, and you?' is." },
+    { id: 4, topic: "Munka & Tanulás", qEn: "What do you do?", qHu: "Mivel foglalkozol? (Mi a munkád/tanulsz?)", aEn: "I'm a teacher.", aHu: "Tanár vagyok.", tip: "Ha diák vagy: 'I'm a student.' Foglalkozás előtt mindig kell a határozatlan névelő (a/an)!" },
+    { id: 5, topic: "Bemutatkozás", qEn: "Where do you live?", qHu: "Hol laksz?", aEn: "I live in Toronto.", aHu: "Torontóban élek.", tip: "Egészítsd ki azzal, hogy kivel élsz együtt: 'I live in Budapest with my family.'" },
+    { id: 6, topic: "Szabadidő", qEn: "What do you like to do?", qHu: "Mit szeretsz csinálni?", aEn: "I like to read books.", aHu: "Szeretek könyveket olvasni.", tip: "A 'like' után használhatsz 'to + ige' vagy '-ing' alakot is (pl. reading)." },
+    { id: 7, topic: "Kedvencek", qEn: "What is your favorite food?", qHu: "Mi a kedvenc ételed?", aEn: "My favorite food is pizza.", aHu: "A kedvenc ételem a pizza.", tip: "Indokold is meg röviden: '...because it is delicious and easy to make.'" },
+    { id: 8, topic: "Munka & Tanulás", qEn: "Do you speak English?", qHu: "Beszélsz angolul?", aEn: "Yes, I speak English.", aHu: "Igen, beszélek angolul.", tip: "Szóbeli vizsgán mondhatod: 'Yes, I speak a little English, and I am learning more every day.'" },
+    { id: 9, topic: "Mindennapi helyzetek", qEn: "Can you help me?", qHu: "Tudsz nekem segíteni?", aEn: "Sure, I can help you.", aHu: "Persze, tudok neked segíteni.", tip: "Udvarias segítségnyújtás: 'Of course! How can I help you?'" },
+    { id: 10, topic: "Munka & Tanulás", qEn: "What are you doing?", qHu: "Mit csinálsz éppen?", aEn: "I'm studying English.", aHu: "Angolul tanulok.", tip: "Jelenleg zajló cselekvésnél folyamatos jelent (am/is/are + -ing) használunk." },
+    { id: 11, topic: "Mindennapi helyzetek", qEn: "Where are you going?", qHu: "Hová mész?", aEn: "I'm going to the market.", aHu: "A piacra megyek.", tip: "Irány kifejezésére a 'go to...' szerkezetet használjuk (pl. go to school, go to work)." },
+    { id: 12, topic: "Napi rutin", qEn: "What time do you wake up?", qHu: "Hány órakor ébredsz?", aEn: "I wake up at 7 a.m.", aHu: "Reggel 7-kor ébredek.", tip: "Pontos időpont előtt mindig az 'at' elöljárószót használjuk (at 7 a.m.)." },
+    { id: 13, topic: "Kedvencek", qEn: "Do you like coffee?", qHu: "Szereted a kávét?", aEn: "Yes, I really like coffee.", aHu: "Igen, nagyon szeretem a kávét.", tip: "Elmondhatod azt is, mikor iszod: 'Yes, I drink a cup of coffee every morning.'" },
+    { id: 14, topic: "Szabadidő", qEn: "What is your hobby?", qHu: "Mi a hobbid?", aEn: "My hobby is reading.", aHu: "A hobbim az olvasás.", tip: "Több hobbinál: 'My hobbies are reading and swimming.'" },
+    { id: 15, topic: "Napi rutin", qEn: "Are you busy right now?", qHu: "Elfoglalt vagy most?", aEn: "No, I'm free right now.", aHu: "Nem, most szabad vagyok.", tip: "Ha igen: 'Yes, I am a bit busy at the moment.'" },
+    { id: 16, topic: "Napi rutin", qEn: "What did you do yesterday?", qHu: "Mit csináltál tegnap?", aEn: "I visited my friend yesterday.", aHu: "Tegnap meglátogattam a barátomat.", tip: "Figyelj a múlt időre! A 'did' kérdőszó miatt a válaszban múlt idejű ige kell (visited, went, watched)." },
+    { id: 17, topic: "Munka & Tanulás", qEn: "What are your plans for tomorrow?", qHu: "Mik a terveid holnapra?", aEn: "I'm going to study tomorrow.", aHu: "Holnap tanulni fogok.", tip: "Tervek kifejezésére kiváló a 'be going to + ige' szerkezet." },
+    { id: 18, topic: "Szabadidő", qEn: "Do you like traveling?", qHu: "Szeretsz utazni?", aEn: "Yes, I love traveling.", aHu: "Igen, imádok utazni.", tip: "Tedd hozzá, hová utazol szívesen: '...especially to new cities or the beach.'" },
+    { id: 19, topic: "Érzések & Kapcsolatok", qEn: "What makes you happy?", qHu: "Mi tesz boldoggá?", aEn: "Spending time with my family makes me happy.", aHu: "A családommal töltött idő tesz boldoggá.", tip: "A mondat elején álló '-ing' alak (Spending time...) főnévi igenévként működik." },
+    { id: 20, topic: "Érzések & Kapcsolatok", qEn: "What is your goal in life?", qHu: "Mi az életcélod?", aEn: "My goal is to become successful and help others.", aHu: "Az a célom, hogy sikeres legyek és segítsek másoknak.", tip: "Szép, választékos vizsgamondat, amely bemutatja a célhatározói főnévi igenevet (to become)." },
+
+    // --- 2. KÉP (21 - 40) ---
+    { id: 21, topic: "Bemutatkozás", qEn: "Do you have a brother or sister?", qHu: "Van fiú- vagy lánytestvéred?", aEn: "Yes, I have a younger sister.", aHu: "Igen, van egy húgom.", tip: "Húg = younger sister, nővér = older sister, öcs = younger brother, báty = older brother." },
+    { id: 22, topic: "Kedvencek", qEn: "What is your favorite season?", qHu: "Mi a kedvenc évszakod?", aEn: "Summer is my favorite season.", aHu: "A nyár a kedvenc évszakom.", tip: "Az évszakok: spring (tavasz), summer (nyár), autumn/fall (ősz), winter (tél)." },
+    { id: 23, topic: "Kedvencek", qEn: "Do you like rain?", qHu: "Szereted az esőt?", aEn: "Yes, I love rain.", aHu: "Igen, szeretem az esőt.", tip: "Tagadó válasz: 'No, I don't like rainy weather because I prefer sunshine.'" },
+    { id: 24, topic: "Napi rutin", qEn: "What time do you start work?", qHu: "Hánykor kezded a munkát?", aEn: "I start work at 9 a.m.", aHu: "Reggel 9-kor kezdem a munkát.", tip: "Ha iskolába jársz: 'My classes start at 8 a.m.'" },
+    { id: 25, topic: "Napi rutin", qEn: "Do you finish work early?", qHu: "Korán végzel a munkával?", aEn: "Yes, I finish early on Fridays.", aHu: "Igen, péntekenként korán végzek.", tip: "A hét napjai előtt mindig 'on' elöljárószót használunk, és nagybetűvel írjuk őket (on Fridays)." },
+    { id: 26, topic: "Napi rutin", qEn: "What do you usually do on weekends?", qHu: "Mit szoktál csinálni hétvégén?", aEn: "I usually spend time with my family.", aHu: "Általában a családommal töltöm az időt.", tip: "Az 'usually' (általában) gyakorisághatározó az alany és a főige között áll." },
+    { id: 27, topic: "Szabadidő", qEn: "Can you cook?", qHu: "Tudsz főzni?", aEn: "Yes, I can cook simple meals.", aHu: "Igen, egyszerű ételeket tudok főzni.", tip: "Képesség kifejezése: 'I can cook well' vagy 'I can't cook very well yet.'" },
+    { id: 28, topic: "Kedvencek", qEn: "Do you like spicy food?", qHu: "Szereted a csípős ételeket?", aEn: "Yes, I love spicy food.", aHu: "Igen, imádom a csípős ételeket.", tip: "Ízek: spicy (csípős), sweet (édes), salty (sós), sour (savanyú)." },
+    { id: 29, topic: "Kedvencek", qEn: "What is your favorite movie?", qHu: "Mi a kedvenc filmed?", aEn: "My favorite movie is Inception.", aHu: "A kedvenc filmem az Eredet.", tip: "Mondd el a műfaját is: 'It's an action / comedy / sci-fi movie.'" },
+    { id: 30, topic: "Szabadidő", qEn: "Do you like reading?", qHu: "Szeretsz olvasni?", aEn: "Yes, I really like reading.", aHu: "Igen, nagyon szeretek olvasni.", tip: "Emeld ki, mit olvasol: 'I usually read novels or news articles.'" },
+    { id: 31, topic: "Kedvencek", qEn: "What kind of music do you like?", qHu: "Milyen zenét szeretsz?", aEn: "I like pop music.", aHu: "A popzenét szeretem.", tip: "A 'What kind of...?' jelentése: 'Milyen fajta...?'." },
+    { id: 32, topic: "Szabadidő", qEn: "Do you play any sports?", qHu: "Sportolsz valamit?", aEn: "Yes, I play badminton.", aHu: "Igen, tollaslabdázom.", tip: "Labdajátékoknál 'play' (play football/tennis), egyéni sportoknál 'go' (go swimming/running)." },
+    { id: 33, topic: "Mindennapi helyzetek", qEn: "Can you drive?", qHu: "Tudsz autót vezetni?", aEn: "Yes, I can drive.", aHu: "Igen, tudok vezetni.", tip: "Ha nincs jogosítványod: 'No, I can't drive, so I use public transport.'" },
+    { id: 34, topic: "Bemutatkozás", qEn: "Do you have a pet?", qHu: "Van háziállatod?", aEn: "Yes, I have a cat.", aHu: "Igen, van egy macskám.", tip: "Ha nincs: 'No, I don't have a pet, but I would love to have a dog.'" },
+    { id: 35, topic: "Kedvencek", qEn: "What is your favorite color?", qHu: "Mi a kedvenc színed?", aEn: "My favorite color is blue.", aHu: "A kedvenc színem a kék.", tip: "Egyszerű bemelegítő kérdés, válaszolj határozottan és mosolyogva." },
+    { id: 36, topic: "Kedvencek", qEn: "Do you prefer tea or coffee?", qHu: "A teát vagy a kávét szereted jobban?", aEn: "I prefer coffee.", aHu: "A kávét szeretem jobban.", tip: "A 'prefer X to Y' szerkezettel összehasonlíthatsz: 'I prefer coffee to tea.'" },
+    { id: 37, topic: "Szabadidő", qEn: "How do you relax?", qHu: "Hogyan szoktál kikapcsolódni?", aEn: "I relax by listening to music.", aHu: "Zenehallgatással kapcsolódom ki.", tip: "A 'by + -ing' szerkezet (by listening) fejezi ki a módot ('-val/-vel')." },
+    { id: 38, topic: "Munka & Tanulás", qEn: "What are you good at?", qHu: "Miben vagy jó?", aEn: "I am good at communication.", aHu: "Jó vagyok a kommunikációban.", tip: "A 'good at' után főnév vagy '-ing' alak áll (pl. good at speaking English)." },
+    { id: 39, topic: "Érzések & Kapcsolatok", qEn: "Do you like meeting new people?", qHu: "Szeretsz új emberekkel megismerkedni?", aEn: "Yes, I enjoy meeting new people.", aHu: "Igen, élvezem, ha új emberekkel ismerkedhetek meg.", tip: "Az 'enjoy' ige után mindig '-ing' alakot használunk (enjoy meeting)." },
+    { id: 40, topic: "Munka & Tanulás", qEn: "What are your future plans?", qHu: "Mik a jövőbeli terveid?", aEn: "I plan to travel and grow my career.", aHu: "Azt tervezem, hogy utazom és építem a karrieremet.", tip: "Használhatod az 'I would like to...' vagy az 'I hope to...' kifejezést is." },
+
+    // --- 3. KÉP (41 - 60) ---
+    { id: 41, topic: "Érzések & Kapcsolatok", qEn: "Are you okay?", qHu: "Jól vagy? Minden rendben?", aEn: "Yes, I am okay.", aHu: "Igen, jól vagyok.", tip: "Udvarias visszakérdezés: 'Yes, I'm fine, thanks for asking.'" },
+    { id: 42, topic: "Mindennapi helyzetek", qEn: "Can you explain this?", qHu: "El tudod ezt magyarázni?", aEn: "Yes, I can explain it.", aHu: "Igen, el tudom magyarázni.", tip: "Vizsgán is hasznos, ha te kéred: 'Could you explain this word, please?'" },
+    { id: 43, topic: "Mindennapi helyzetek", qEn: "What is the weather like today?", qHu: "Milyen ma az időjárás?", aEn: "It is sunny and warm today.", aHu: "Ma napos és meleg idő van.", tip: "Időjárásnál mindig 'It is...' szerkezetet használunk (sunny, rainy, cloudy, windy)." },
+    { id: 44, topic: "Napi rutin", qEn: "Do you need a break?", qHu: "Szükséged van egy kis szünetre?", aEn: "Yes, I need a break.", aHu: "Igen, szükségem van egy szünetre.", tip: "A 'take a break' / 'have a break' jelentése: szünetet tart." },
+    { id: 45, topic: "Mindennapi helyzetek", qEn: "Can you speak slowly?", qHu: "Tudnál lassabban beszélni?", aEn: "Yes, I can speak slowly.", aHu: "Igen, tudok lassabban beszélni.", tip: "Aranyat érő mondat a szóbeli vizsgán, ha a vizsgáztató túl gyorsan beszél!" },
+    { id: 46, topic: "Mindennapi helyzetek", qEn: "Do you understand?", qHu: "Érted?", aEn: "Yes, I understand now.", aHu: "Igen, most már értem.", tip: "Ha nem értesz valamit: 'Sorry, I don't quite understand. Could you repeat that?'" },
+    { id: 47, topic: "Mindennapi helyzetek", qEn: "Can you give me an example?", qHu: "Tudnál mondani egy példát?", aEn: "Sure, here is an example.", aHu: "Persze, íme egy példa.", tip: "A 'for example' (például) kötőszóval bármikor színesítheted a válaszaidat." },
+    { id: 48, topic: "Bemutatkozás", qEn: "What is your address?", qHu: "Mi a lakcímed?", aEn: "My address is 25, Maple Street, Toronto.", aHu: "A lakcímem: Toronto, Maple utca 25.", tip: "Angolban a házszám mindig az utcanév ELŐTT áll!" },
+    { id: 49, topic: "Mindennapi helyzetek", qEn: "Do you have an account here?", qHu: "Van itt fiókod / számlád?", aEn: "No, I don't have an account here.", aHu: "Nem, nincs itt fiókom.", tip: "Ügyintézésnél (bank, weboldal) gyakori alapfokú szituációs kérdés." },
+    { id: 50, topic: "Napi rutin", qEn: "What time do you go to bed?", qHu: "Hány órakor fekszel le aludni?", aEn: "I go to bed at 10 p.m.", aHu: "Este 10-kor fekszem le.", tip: "A 'go to bed' előtt nincs névelő ('the')." },
+    { id: 51, topic: "Szabadidő", qEn: "Do you like cooking?", qHu: "Szeretsz főzni?", aEn: "Yes, I enjoy cooking.", aHu: "Igen, szeretek főzni.", tip: "Megnevezheted, mit főzöl legszívesebben: 'I especially like making pasta.'" },
+    { id: 52, topic: "Napi rutin", qEn: "What do you usually do at night?", qHu: "Mit szoktál csinálni este / éjszaka?", aEn: "I usually watch movies.", aHu: "Általában filmeket nézek.", tip: "Az 'at night' kivétel: a többi napszakkal (in the morning/afternoon/evening) ellentétben 'at'-tel áll." },
+    { id: 53, topic: "Mindennapi helyzetek", qEn: "Can you solve this problem?", qHu: "Meg tudod oldani ezt a problémát?", aEn: "Yes, I can solve it.", aHu: "Igen, meg tudom oldani.", tip: "Ha segítség kell: 'I will try to solve it, or ask for help.'" },
+    { id: 54, topic: "Bemutatkozás", qEn: "Do you have a driving license?", qHu: "Van jogosítványod?", aEn: "Yes, I have a driving license.", aHu: "Igen, van jogosítványom.", tip: "Brit angolban 'driving licence', amerikaiban 'driver's license'." },
+    { id: 55, topic: "Érzések & Kapcsolatok", qEn: "What are you afraid of?", qHu: "Mitől félsz?", aEn: "I am afraid of spiders.", aHu: "Félek a pókoktól.", tip: "A 'be afraid of' (fél valamitől) állandó elöljárós szerkezet." },
+    { id: 56, topic: "Érzések & Kapcsolatok", qEn: "Do you believe in God?", qHu: "Hiszel Istenben?", aEn: "Yes, I believe in God.", aHu: "Igen, hiszek Istenben.", tip: "A 'believe in' jelentése: hisz valakiben / valamiben." },
+    { id: 57, topic: "Érzések & Kapcsolatok", qEn: "What makes you sad?", qHu: "Mi tesz szomorúvá?", aEn: "Losing people makes me sad.", aHu: "Az emberek elvesztése szomorúvá tesz.", tip: "Használhatsz egyszerűbb választ is: 'Bad news or rainy days make me feel sad.'" },
+    { id: 58, topic: "Érzések & Kapcsolatok", qEn: "Can you keep a secret?", qHu: "Tudsz titkot tartani?", aEn: "Yes, you can trust me.", aHu: "Igen, megbízhatsz bennem.", tip: "A 'keep a secret' (titkot tart) fontos állandó szókapcsolat." },
+    { id: 59, topic: "Kedvencek", qEn: "Do you like horror movies?", qHu: "Szereted a horrorfilmeket?", aEn: "Not really, I don't like horror movies.", aHu: "Nem igazán, nem szeretem a horrorfilmeket.", tip: "A 'Not really' udvarias, természetes módja a nemleges válasznak." },
+    { id: 60, topic: "Érzések & Kapcsolatok", qEn: "Who is your best friend?", qHu: "Ki a legjobb barátod?", aEn: "My best friend is my classmate.", aHu: "A legjobb barátom az osztálytársam.", tip: "Mondj róla 1–2 tulajdonságot: 'He/She is very funny and helpful.'" },
+
+    // --- 4. KÉP (61 - 80) ---
+    { id: 61, topic: "Bemutatkozás", qEn: "What is your nationality?", qHu: "Mi az állampolgárságod / nemzetiséged?", aEn: "I am Canadian.", aHu: "Kanadai vagyok.", tip: "Magyarul: 'I am Hungarian.' A nemzetiségeket angolul mindig nagy kezdőbetűvel írjuk!" },
+    { id: 62, topic: "Bemutatkozás", qEn: "Are you married?", qHu: "Házas vagy?", aEn: "Yes, I am married.", aHu: "Igen, házas vagyok.", tip: "Egyéb családi állapotok: 'No, I am single.' (egyedülálló) / 'I have a partner.'" },
+    { id: 63, topic: "Bemutatkozás", qEn: "Do you have children?", qHu: "Vannak gyerekeid?", aEn: "Yes, I have two children.", aHu: "Igen, két gyerekem van.", tip: "Figyelj a rendhagyó többes számra: 1 child → 2 children (nem childs!)." },
+    { id: 64, topic: "Szabadidő", qEn: "What do you do in your free time?", qHu: "Mit csinálsz a szabadidődben?", aEn: "In my free time, I like to read books and watch movies.", aHu: "A szabadidőmben szeretek könyveket olvasni és filmeket nézni.", tip: "Az egyik leggyakoribb szóbeli vizsgakérdés! Készülj legalább 2–3 tevékenységgel." },
+    { id: 65, topic: "Szabadidő", qEn: "Do you like shopping?", qHu: "Szeretsz vásárolni?", aEn: "Yes, I love shopping.", aHu: "Igen, szeretek vásárolni.", tip: "Különbség: 'go shopping' (ruhát/egyebet vásárolni) vs. 'do the shopping' (nagybevásárlás)." },
+    { id: 66, topic: "Munka & Tanulás", qEn: "What is your dream job?", qHu: "Mi az álommunkád?", aEn: "My dream job is to be a teacher.", aHu: "Az álommunkám, hogy tanár legyek.", tip: "Bármilyen szakmát behelyettesíthetsz: doctor, engineer, chef, designer." },
+    { id: 67, topic: "Szabadidő", qEn: "Can you swim?", qHu: "Tudsz úszni?", aEn: "Yes, I can swim.", aHu: "Igen, tudok úszni.", tip: "Bővítheted: 'Yes, I learned to swim when I was a child.'" },
+    { id: 68, topic: "Kedvencek", qEn: "Do you like winter?", qHu: "Szereted a telet?", aEn: "Yes, I like winter very much.", aHu: "Igen, nagyon szeretem a telet.", tip: "A 'very much' mindig a mondat végére kerül (nem az ige elé!)." },
+    { id: 69, topic: "Kedvencek", qEn: "What is your favorite city?", qHu: "Mi a kedvenc városod?", aEn: "My favorite city is Toronto.", aHu: "A kedvenc városom Toronto.", tip: "Indokold meg: '...because it has beautiful buildings and friendly people.'" },
+    { id: 70, topic: "Szabadidő", qEn: "Have you ever been abroad?", qHu: "Voltál már külföldön?", aEn: "Yes, I have been to the USA.", aHu: "Igen, voltam már az USA-ban.", tip: "Tapasztalatnál 'have been to...' szerkezetet használunk (ha még nem: 'No, I haven't been abroad yet.')." },
+    { id: 71, topic: "Napi rutin", qEn: "How do you go to work?", qHu: "Hogyan jársz munkába?", aEn: "I go to work by car.", aHu: "Autóval járok munkába.", tip: "Közlekedési eszközök előtt 'by' áll: by car, by bus, by train — kivéve: 'on foot' (gyalog)!" },
+    { id: 72, topic: "Kedvencek", qEn: "Do you like coffee or tea?", qHu: "Kávét vagy teát kérsz / szeretsz?", aEn: "I prefer coffee.", aHu: "A kávét szeretem jobban.", tip: "Vendégségben udvarias válasz: 'I would like a cup of tea, please.'" },
+    { id: 73, topic: "Kedvencek", qEn: "What is your favorite animal?", qHu: "Mi a kedvenc állatod?", aEn: "My favorite animal is a dog.", aHu: "A kedvenc állatom a kutya.", tip: "Többes számban általánosítva is mondhatod: 'I love dogs because they are loyal.'" },
+    { id: 74, topic: "Szabadidő", qEn: "Do you like playing games?", qHu: "Szeretsz játszani (társas- vagy videojátékokat)?", aEn: "Yes, I like playing games.", aHu: "Igen, szeretek játszani.", tip: "Pontosíthatod: 'I like playing board games with my friends.'" },
+    { id: 75, topic: "Munka & Tanulás", qEn: "What do you want to learn in the future?", qHu: "Mit szeretnél tanulni a jövőben?", aEn: "I want to learn more English.", aHu: "Még jobban szeretnék megtanulni angolul.", tip: "A 'want to + ige' az egyik legfontosabb alapfokú szerkezet." },
+    { id: 76, topic: "Napi rutin", qEn: "Are you a morning person?", qHu: "Korán kelő (reggeli) típus vagy?", aEn: "Yes, I am a morning person.", aHu: "Igen, reggeli típus vagyok.", tip: "Ellentéte: 'No, I am a night owl' (éjjeli bagoly vagyok)." },
+    { id: 77, topic: "Kedvencek", qEn: "Do you like beaches?", qHu: "Szereted a tengerpartokat / strandokat?", aEn: "Yes, I love beaches.", aHu: "Igen, imádom a tengerpartokat.", tip: "Nyári nyaralás témakörhöz tökéletes kezdőmondat." },
+    { id: 78, topic: "Munka & Tanulás", qEn: "What is your favorite subject?", qHu: "Mi a kedvenc tantárgyad?", aEn: "My favorite subject is English.", aHu: "A kedvenc tantárgyam az angol.", tip: "További tantárgyak: history (történelem), math (matek), biology (biológia)." },
+    { id: 79, topic: "Munka & Tanulás", qEn: "Can you use a computer?", qHu: "Tudsz számítógépet használni?", aEn: "Yes, I can use a computer.", aHu: "Igen, tudok számítógépet használni.", tip: "Bővítsd: 'Yes, I use a computer every day for work and studying.'" },
+    { id: 80, topic: "Szabadidő", qEn: "What are your hobbies?", qHu: "Mik a hobbijaid?", aEn: "My hobbies are reading, traveling and listening to music.", aHu: "A hobbijaim az olvasás, az utazás és a zenehallgatás.", tip: "Többes számú 'are' igét használj, ha egynél több hobbit sorolsz fel!" },
+
+    // --- 5. KÉP (81 - 100) ---
+    { id: 81, topic: "Mindennapi helyzetek", qEn: "What time is it now?", qHu: "Hány óra van most?", aEn: "It is 5 p.m. now.", aHu: "Most délután 5 óra van.", tip: "Óraidőnél mindig 'It is...' szerkezettel kezdjük a választ." },
+    { id: 82, topic: "Érzések & Kapcsolatok", qEn: "Can you tell me the truth?", qHu: "Meg tudod mondani nekem az igazat?", aEn: "Yes, I will tell you the truth.", aHu: "Igen, elmondom neked az igazat.", tip: "Kifejezés: 'tell the truth' (igazat mond) vs. 'tell a lie' (hazudik)." },
+    { id: 83, topic: "Munka & Tanulás", qEn: "Do you like your job?", qHu: "Szereted a munkádat?", aEn: "Yes, I like my job.", aHu: "Igen, szeretem a munkámat.", tip: "Indoklás: '...because my colleagues are nice and the work is interesting.'" },
+    { id: 84, topic: "Napi rutin", qEn: "What do you usually eat for breakfast?", qHu: "Mit szoktál enni reggelire?", aEn: "I usually eat eggs and toast for breakfast.", aHu: "Általában tojást és pirítóst eszem reggelire.", tip: "Étkezések előtt 'for' áll: for breakfast (reggelire), for lunch (ebédre), for dinner (vacsorára)." },
+    { id: 85, topic: "Napi rutin", qEn: "Do you exercise regularly?", qHu: "Szoktál rendszeresen edzeni / mozogni?", aEn: "Yes, I exercise regularly.", aHu: "Igen, rendszeresen mozgok.", tip: "Elmondhatod, hányszor: 'I go to the gym / go running twice a week.'" },
+    { id: 86, topic: "Érzések & Kapcsolatok", qEn: "Can we be friends?", qHu: "Lehetünk barátok?", aEn: "Yes, of course, we can be friends.", aHu: "Igen, természetesen, lehetünk barátok.", tip: "Az 'of course' (természetesen) nagyon barátságos megerősítés." },
+    { id: 87, topic: "Kedvencek", qEn: "What is your favorite drink?", qHu: "Mi a kedvenc italod?", aEn: "My favorite drink is juice.", aHu: "A kedvenc italom a gyümölcslé.", tip: "Lehet még: mineral water (ásványvíz), green tea (zöld tea), lemonade (limonádé)." },
+    { id: 88, topic: "Kedvencek", qEn: "Do you like cats or dogs?", qHu: "A macskákat vagy a kutyákat szereted?", aEn: "Yes, I like dogs.", aHu: "Igen, a kutyákat szeretem.", tip: "Ha mindkettőt: 'I like both cats and dogs!'" },
+    { id: 89, topic: "Szabadidő", qEn: "What do you do on holidays?", qHu: "Mit csinálsz a szünidőben / nyaraláskor?", aEn: "I travel and spend time with my family.", aHu: "Utazom és a családommal töltöm az időt.", tip: "Brit angolban 'on holiday', amerikaiban 'on vacation'." },
+    { id: 90, topic: "Munka & Tanulás", qEn: "Are you a student?", qHu: "Diák vagy?", aEn: "Yes, I am a student.", aHu: "Igen, diák vagyok.", tip: "Ha már dolgozol: 'No, I am not a student anymore, I work as a...'" },
+    { id: 91, topic: "Munka & Tanulás", qEn: "What language do you speak?", qHu: "Milyen nyelven beszélsz?", aEn: "I speak English.", aHu: "Angolul beszélek.", tip: "Több nyelvnél: 'I speak Hungarian natively and I speak English.'" },
+    { id: 92, topic: "Kedvencek", qEn: "Do you like spicy food?", qHu: "Szereted a fűszeres / csípős ételeket?", aEn: "Yes, I love spicy food.", aHu: "Igen, szeretem a csípős ételeket.", tip: "Gyakorold a 'spicy' (csípős) szó kiejtését: [szpáj-szi]." },
+    { id: 93, topic: "Bemutatkozás", qEn: "What is your phone number?", qHu: "Mi a telefonszámod?", aEn: "My phone number is 123-456-7890.", aHu: "A telefonszámom: 123-456-7890.", tip: "Angolban a telefonszámokat egyesével mondjuk ki, a 0-t pedig 'oh'-nak vagy 'zero'-nak ejtjük." },
+    { id: 94, topic: "Bemutatkozás", qEn: "Do you live with your family?", qHu: "A családoddal élsz együtt?", aEn: "Yes, I live with my family.", aHu: "Igen, a családommal élek.", tip: "Ha egyedül: 'No, I live alone in a flat / an apartment.'" },
+    { id: 95, topic: "Munka & Tanulás", qEn: "What do you want to be?", qHu: "Mi szeretnél lenni?", aEn: "I want to be a successful person.", aHu: "Sikeres ember szeretnék lenni.", tip: "Közvetlenül a foglalkozást is mondhatod: 'I want to be a doctor / programmer.'" },
+    { id: 96, topic: "Szabadidő", qEn: "Do you like traveling abroad?", qHu: "Szeretsz külföldre utazni?", aEn: "Yes, I love traveling abroad.", aHu: "Igen, szeretek külföldre utazni.", tip: "Az 'abroad' (külföldre/külföldön) előtt SOHA nincs 'to' vagy 'in' elöljárószó!" },
+    { id: 97, topic: "Kedvencek", qEn: "What is your favorite season?", qHu: "Mi a kedvenc évszakod?", aEn: "Summer is my favorite season.", aHu: "A nyár a kedvenc évszakom.", tip: "Tedd hozzá: '...because the weather is warm and the days are long.'" },
+    { id: 98, topic: "Szabadidő", qEn: "Do you watch TV?", qHu: "Szoktál tévét nézni?", aEn: "Yes, I watch TV sometimes.", aHu: "Igen, néha nézek tévét.", tip: "Gyakorisághatározók: always (mindig), often (gyakran), sometimes (néha), rarely (ritkán)." },
+    { id: 99, topic: "Érzések & Kapcsolatok", qEn: "Are you happy right now?", qHu: "Boldog vagy most?", aEn: "Yes, I am happy right now.", aHu: "Igen, most boldog vagyok.", tip: "A 'right now' jelentése: pont most, ebben a pillanatban." },
+    { id: 100, topic: "Érzések & Kapcsolatok", qEn: "What is the best thing about your life?", qHu: "Mi a legjobb dolog az életedben?", aEn: "The best thing about my life is my family.", aHu: "A legjobb dolog az életemben a családom.", tip: "Nagyon szép zárókérdés a személyes beszélgetés részben." },
+
+    // --- 6. KÉP (101 - 120) ---
+    { id: 101, topic: "Mindennapi helyzetek", qEn: "Can you come with me?", qHu: "El tudsz jönni velem?", aEn: "Yes, I can come with you.", aHu: "Igen, el tudok menni veled.", tip: "Elfogadásnál udvarias formula: 'Sure, I'd love to come with you.'" },
+    { id: 102, topic: "Munka & Tanulás", qEn: "What is the meaning of this word?", qHu: "Mi ennek a szónak a jelentése?", aEn: "It means the same as this word.", aHu: "Ugyanazt jelenti, mint ez a szó.", tip: "Vizsgán te is kérdezheted: 'Excuse me, what does this word mean?'" },
+    { id: 103, topic: "Mindennapi helyzetek", qEn: "Do you have time now?", qHu: "Van most időd?", aEn: "Yes, I have time now.", aHu: "Igen, most van időm.", tip: "Ha sietsz: 'Sorry, I don't have time right now, maybe later.'" },
+    { id: 104, topic: "Mindennapi helyzetek", qEn: "Can you wait for me?", qHu: "Tudsz várni rám?", aEn: "Yes, I can wait for you.", aHu: "Igen, tudok várni rád.", tip: "A 'wait' ige után mindig 'for' elöljárószó áll, ha valakire várunk (wait for me)." },
+    { id: 105, topic: "Érzések & Kapcsolatok", qEn: "What do you think about this?", qHu: "Mit gondolsz erről?", aEn: "I think it is a good idea.", aHu: "Szerintem ez egy jó ötlet.", tip: "Véleménynyilvánítás alapfokon: 'I think...', 'In my opinion...'" },
+    { id: 106, topic: "Érzések & Kapcsolatok", qEn: "Do you agree with me?", qHu: "Egyetértesz velem?", aEn: "Yes, I agree with you.", aHu: "Igen, egyetértek veled.", tip: "Figyelem! Az 'agree' önmagában ige, ezért NEM kell elé 'am' (helyesen: I agree, nem I am agree!)." },
+    { id: 107, topic: "Mindennapi helyzetek", qEn: "Can I ask you a question?", qHu: "Feltehetek neked egy kérdést?", aEn: "Yes, you can ask me a question.", aHu: "Igen, feltehetsz nekem egy kérdést.", tip: "Angolban a 'kérdést feltesz' = 'ask a question' (nem put a question!)." },
+    { id: 108, topic: "Mindennapi helyzetek", qEn: "Do you need any help?", qHu: "Szükséged van valamilyen segítségre?", aEn: "No, I don't need any help.", aHu: "Nem, nincs szükségem segítségre.", tip: "Udvarias visszautasítás: 'No, thank you, I'm fine.'" },
+    { id: 109, topic: "Mindennapi helyzetek", qEn: "What are you wearing today?", qHu: "Mi van rajtad ma? (Mit viselsz ma?)", aEn: "I am wearing a blue shirt.", aHu: "Egy kék inget viselek.", tip: "Ruházat leírásánál mindig folyamatos jelent használunk: 'I am wearing jeans and a T-shirt.'" },
+    { id: 110, topic: "Munka & Tanulás", qEn: "Do you like your school/work?", qHu: "Szereted az iskoládat / a munkahelyedet?", aEn: "Yes, I like my school/work.", aHu: "Igen, szeretem az iskolámat / a munkahelyemet.", tip: "Válassz a saját helyzetednek megfelelőt ('my school' vagy 'my workplace')." },
+    { id: 111, topic: "Napi rutin", qEn: "What time do you leave home?", qHu: "Hány órakor indulsz el otthonról?", aEn: "I leave home at 8 a.m.", aHu: "Reggel 8-kor indulok el otthonról.", tip: "A 'leave home' jelentése: elmegy otthonról (nincs 'from' elöljárószó)." },
+    { id: 112, topic: "Kedvencek", qEn: "Do you prefer the morning or evening?", qHu: "A reggelt vagy az estét szereted jobban?", aEn: "I prefer the morning.", aHu: "A reggelt szeretem jobban.", tip: "Indoklás: '...because I have more energy in the morning.'" },
+    { id: 113, topic: "Napi rutin", qEn: "What do you usually drink?", qHu: "Mit szoktál általában inni?", aEn: "I usually drink water.", aHu: "Általában vizet iszom.", tip: "Egyszerű, természetes mondat az egészséges életmód témakörhöz is." },
+    { id: 114, topic: "Mindennapi helyzetek", qEn: "Can you speak a little louder?", qHu: "Tudnál egy kicsit hangosabban beszélni?", aEn: "Yes, I can speak a little louder.", aHu: "Igen, tudok egy kicsit hangosabban beszélni.", tip: "Az 'a little louder' jelentése: egy kicsit hangosabban." },
+    { id: 115, topic: "Kedvencek", qEn: "What is your favorite book?", qHu: "Mi a kedvenc könyved?", aEn: "My favorite book is Harry Potter.", aHu: "A kedvenc könyvem a Harry Potter.", tip: "Mondd el, miről szól 1 mondatban: 'It is a fantasy story about magic and friendship.'" },
+    { id: 116, topic: "Bemutatkozás", qEn: "Do you like your hometown?", qHu: "Szereted a szülővárosodat?", aEn: "Yes, I love my hometown.", aHu: "Igen, szeretem a szülővárosomat.", tip: "A 'hometown' jelentése: szülőváros / lakóhely." },
+    { id: 117, topic: "Szabadidő", qEn: "What do you do on weekends?", qHu: "Mit csinálsz hétvégén?", aEn: "I usually relax and spend time with my family.", aHu: "Általában pihenek és a családommal töltöm az időt.", tip: "Összeköthetsz két igét az 'and' kötőszóval a folyamatosabb beszédért." },
+    { id: 118, topic: "Mindennapi helyzetek", qEn: "Can you show me how to do this?", qHu: "Meg tudod mutatni, hogyan kell ezt csinálni?", aEn: "Yes, I can show you how to do it.", aHu: "Igen, meg tudom mutatni, hogyan kell csinálni.", tip: "A 'how to do it' szerkezet jelentése: hogyan kell megcsinálni." },
+    { id: 119, topic: "Érzések & Kapcsolatok", qEn: "Do you like meeting new people?", qHu: "Szeretsz új emberekkel találkozni?", aEn: "Yes, I enjoy meeting new people.", aHu: "Igen, élvezem az új emberekkel való találkozást.", tip: "A szociális kapcsolatok témakörében gyakori kérdés." },
+    { id: 120, topic: "Érzések & Kapcsolatok", qEn: "What is your advice for me?", qHu: "Mi a tanácsod számomra?", aEn: "My advice is to stay positive and keep learning.", aHu: "Az a tanácsom, hogy maradj pozitív és tanulj továbbra is.", tip: "Az 'advice' megszámlálhatatlan főnév angolul (nincs többes száma: 'my advice is...', nem 'advices'!)." }
+];
+
+/* ==========================================================================
+   2. ALKALMAZÁS ÁLLAPOT (STATE)
+   ========================================================================== */
+const STORAGE_KEY = 'english_oral_120_learned_v2';
+
+let state = {
+    activeTab: 'flashcards',
+    accent: 'en-GB',
+    rate: 1.0,
+    showAnswers: true,
+    learnedIds: new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')),
+    // Tanulókártya állapot
+    fcList: [...QA_DATA],
+    fcIndex: 0,
+    // Aktuális élő felirat tétel
+    liveItem: QA_DATA[0],
+    // Automata lejátszás
+    autoPlay: false,
+    autoPlayTimer: null,
+    // Szimulátor állapot
+    simItem: QA_DATA[0],
+    simSecondsLeft: 25,
+    simTimerRunning: false,
+    simInterval: null,
+    // Kvíz állapot
+    quizMode: 'choice',
+    quizScore: 0,
+    quizTotal: 0,
+    quizCurrentItem: null,
+    quizAnswered: false
+};
+
+/* ==========================================================================
+   3. HANGSZINTÉZIS (WEB SPEECH API - HIBAMENTES KEZELÉS)
+   ========================================================================== */
+let cachedVoices = [];
+
+function initVoices() {
+    if ('speechSynthesis' in window) {
+        cachedVoices = window.speechSynthesis.getVoices();
+    }
+}
+
+if ('speechSynthesis' in window) {
+    initVoices();
+    window.speechSynthesis.onvoiceschanged = initVoices;
+}
+
+function getBestEnglishVoice(accentCode) {
+    if (!cachedVoices.length && 'speechSynthesis' in window) {
+        cachedVoices = window.speechSynthesis.getVoices();
+    }
+    // Pontos egyezés keresése (pl. en-GB vagy en-US)
+    let exact = cachedVoices.filter(v => v.lang.replace('_', '-').toLowerCase() === accentCode.toLowerCase());
+    if (exact.length > 0) {
+        return exact.find(v => v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Premium')) || exact[0];
+    }
+    // Bármilyen angol hang fallbackként
+    let anyEn = cachedVoices.filter(v => v.lang.toLowerCase().startsWith('en'));
+    return anyEn[0] || null;
+}
+
+function setLiveStatus(isSpeaking, labelText) {
+    const dot = document.getElementById('liveDot');
+    const lbl = document.getElementById('liveStatusLabel');
+    if (isSpeaking) {
+        dot.classList.add('speaking');
+    } else {
+        dot.classList.remove('speaking');
+    }
+    if (labelText) lbl.textContent = labelText;
+}
+
+function updateLiveBar(item, mode = 'both') {
+    state.liveItem = item;
+    const enEl = document.getElementById('liveEnText');
+    const huEl = document.getElementById('liveHuText');
+
+    if (mode === 'question') {
+        enEl.textContent = `❓ ${item.qEn}`;
+        huEl.textContent = `🇭🇺 ${item.qHu}`;
+    } else if (mode === 'answer') {
+        enEl.textContent = `💬 ${item.aEn}`;
+        huEl.textContent = `🇭🇺 ${item.aHu}`;
+    } else {
+        enEl.textContent = `${item.qEn}  →  ${item.aEn}`;
+        huEl.textContent = `🇭🇺 ${item.qHu}  →  ${item.aHu}`;
+    }
+}
+
+function speakUtterance(text, onEndCallback) {
+    if (!('speechSynthesis' in window)) {
+        if (onEndCallback) onEndCallback();
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = state.accent;
+    utter.rate = state.rate;
+
+    const voice = getBestEnglishVoice(state.accent);
+    if (voice) {
+        utter.voice = voice;
+    }
+
+    utter.onstart = () => setLiveStatus(true);
+    utter.onend = () => {
+        setLiveStatus(false);
+        if (onEndCallback) onEndCallback();
+    };
+    utter.onerror = () => {
+        setLiveStatus(false);
+        if (onEndCallback) onEndCallback();
+    };
+
+    window.speechSynthesis.speak(utter);
+}
+
+function playItemQuestion(item, onEnd) {
+    updateLiveBar(item, 'question');
+    setLiveStatus(true, `Kérdés lejátszása (#${item.id})...`);
+    speakUtterance(item.qEn, () => {
+        setLiveStatus(false, `Kérdés (#${item.id}) • Kész`);
+        if (onEnd) onEnd();
+    });
+}
+
+function playItemAnswer(item, onEnd) {
+    updateLiveBar(item, 'answer');
+    setLiveStatus(true, `Válasz lejátszása (#${item.id})...`);
+    speakUtterance(item.aEn, () => {
+        setLiveStatus(false, `Válasz (#${item.id}) • Kész`);
+        if (onEnd) onEnd();
+    });
+}
+
+function playItemDialogue(item, onEnd) {
+    updateLiveBar(item, 'question');
+    setLiveStatus(true, `1/2 Kérdés (#${item.id})...`);
+    speakUtterance(item.qEn, () => {
+        setTimeout(() => {
+            updateLiveBar(item, 'answer');
+            setLiveStatus(true, `2/2 Válasz (#${item.id})...`);
+            speakUtterance(item.aEn, () => {
+                updateLiveBar(item, 'both');
+                setLiveStatus(false, `Párbeszéd (#${item.id}) • Kész`);
+                if (onEnd) onEnd();
+            });
+        }, 450);
+    });
+}
+
+// Élő sáv gombjai
+function speakLiveQuestion() { playItemQuestion(state.liveItem); }
+function speakLiveAnswer() { playItemAnswer(state.liveItem); }
+function speakLiveDialogue() { playItemDialogue(state.liveItem); }
+
+// Fejléc hangbeállítások
+function setAccent(acc) {
+    state.accent = acc;
+    document.getElementById('btnUk').classList.toggle('active', acc === 'en-GB');
+    document.getElementById('btnUs').classList.toggle('active', acc === 'en-US');
+}
+
+function setRate(r) {
+    state.rate = r;
+    document.getElementById('btnRate10').classList.toggle('active', r === 1.0);
+    document.getElementById('btnRate08').classList.toggle('active', r === 0.8);
+    document.getElementById('btnRate065').classList.toggle('active', r === 0.65);
+}
+
+/* ==========================================================================
+   4. AUTOMATA LEJÁTSZÁS (HANGOSKÖNYV MÓD)
+   ========================================================================== */
+function toggleAutoPlay() {
+    if (state.autoPlay) {
+        stopAutoPlay();
+    } else {
+        startAutoPlay();
+    }
+}
+
+function startAutoPlay() {
+    if (state.fcList.length === 0) return;
+    state.autoPlay = true;
+    const btn = document.getElementById('btnAutoPlay');
+    btn.classList.add('playing');
+    btn.textContent = '⏹ Leállítás';
+
+    if (state.activeTab !== 'flashcards') {
+        switchTab('flashcards');
+    }
+    runAutoPlayStep();
+}
+
+function stopAutoPlay() {
+    state.autoPlay = false;
+    clearTimeout(state.autoPlayTimer);
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+    setLiveStatus(false, `Aktuális tétel (#${state.liveItem.id}) • Megállítva`);
+    const btn = document.getElementById('btnAutoPlay');
+    btn.classList.remove('playing');
+    btn.textContent = '▶ Automata lejátszás';
+}
+
+function runAutoPlayStep() {
+    if (!state.autoPlay || state.fcList.length === 0) return;
+    const current = state.fcList[state.fcIndex];
+    renderFlashcard();
+
+    playItemDialogue(current, () => {
+        if (!state.autoPlay) return;
+        state.autoPlayTimer = setTimeout(() => {
+            if (!state.autoPlay) return;
+            state.fcIndex = (state.fcIndex + 1) % state.fcList.length;
+            runAutoPlayStep();
+        }, 1200);
+    });
+}
+
+/* ==========================================================================
+   5. HALADÁS ÉS NAVIGÁCIÓ
+   ========================================================================== */
+function saveProgress() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...state.learnedIds]));
+    updateProgressUI();
+}
+
+function updateProgressUI() {
+    const count = state.learnedIds.size;
+    const total = QA_DATA.length;
+    const pct = Math.round((count / total) * 100);
+    document.getElementById('progressText').textContent = `Tudom: ${count} / ${total}`;
+    document.getElementById('progressFill').style.width = `${pct}%`;
+}
+
+function switchTab(tabName) {
+    if (state.autoPlay && tabName !== 'flashcards') {
+        stopAutoPlay();
+    }
+    if (tabName !== 'simulator') {
+        stopSimTimer();
+    }
+
+    state.activeTab = tabName;
+    const tabs = ['flashcards', 'list', 'simulator', 'quiz'];
+    tabs.forEach(t => {
+        document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tabName);
+        document.getElementById(`tabBtn-${t}`).classList.toggle('active', t === tabName);
+    });
+
+    if (tabName === 'list') {
+        renderFullList();
+    } else if (tabName === 'simulator') {
+        startNewSimQuestion(false);
+    } else if (tabName === 'quiz') {
+        if (!state.quizCurrentItem) generateQuizQuestion();
+    }
+}
+
+/* ==========================================================================
+   6. NÉZET 1: TANULÓKÁRTYÁK LOGIKA
+   ========================================================================== */
+function applyFlashcardFilters() {
+    const topic = document.getElementById('fcTopicSelect').value;
+    const status = document.getElementById('fcStatusSelect').value;
+
+    state.fcList = QA_DATA.filter(item => {
+        const topicOk = (topic === 'ALL' || item.topic === topic);
+        const isLearned = state.learnedIds.has(item.id);
+        const statusOk = (status === 'ALL') ||
+                         (status === 'LEARNED' && isLearned) ||
+                         (status === 'UNLEARNED' && !isLearned);
+        return topicOk && statusOk;
+    });
+
+    state.fcIndex = 0;
+    renderFlashcard();
+}
+
+function toggleShowAnswers() {
+    state.showAnswers = !state.showAnswers;
+    const btn = document.getElementById('btnToggleAnswers');
+    if (state.showAnswers) {
+        btn.classList.remove('off');
+        btn.textContent = '👁️ Válaszok mutatása: BE';
+    } else {
+        btn.classList.add('off');
+        btn.textContent = '🙈 Válaszok mutatása: KI';
+    }
+    renderFlashcard();
+}
+
+function revealSingleAnswer() {
+    document.getElementById('fcAnswerVisibleBox').classList.remove('hidden');
+    document.getElementById('fcAnswerHiddenBox').classList.add('hidden');
+}
+
+function renderFlashcard() {
+    if (state.fcList.length === 0) {
+        document.getElementById('fcNumBadge').textContent = '0 / 0';
+        document.getElementById('fcTopicBadge').textContent = 'Nincs találat';
+        document.getElementById('fcStatusBadge').textContent = 'Üres lista';
+        document.getElementById('fcQuestionEn').textContent = 'Nincs a szűrésnek megfelelő tétel.';
+        document.getElementById('fcQuestionHu').textContent = 'Válassz másik témakört vagy állapotot!';
+        document.getElementById('fcAnswerVisibleBox').classList.add('hidden');
+        document.getElementById('fcAnswerHiddenBox').classList.add('hidden');
+        return;
+    }
+
+    if (state.fcIndex >= state.fcList.length) state.fcIndex = 0;
+    const item = state.fcList[state.fcIndex];
+    const isLearned = state.learnedIds.has(item.id);
+
+    document.getElementById('fcNumBadge').textContent = `#${item.id} (${state.fcIndex + 1} / ${state.fcList.length})`;
+    document.getElementById('fcTopicBadge').textContent = item.topic;
+
+    const statusBadge = document.getElementById('fcStatusBadge');
+    if (isLearned) {
+        statusBadge.textContent = 'Tudom ✅';
+        statusBadge.className = 'badge-status learned';
+    } else {
+        statusBadge.textContent = 'Még gyakorlom';
+        statusBadge.className = 'badge-status unlearned';
+    }
+
+    document.getElementById('fcQuestionEn').textContent = item.qEn;
+    document.getElementById('fcQuestionHu').textContent = `🇭🇺 ${item.qHu}`;
+    document.getElementById('fcAnswerEn').textContent = item.aEn;
+    document.getElementById('fcAnswerHu').textContent = `🇭🇺 ${item.aHu}`;
+    document.getElementById('fcTipText').textContent = item.tip;
+
+    if (state.showAnswers) {
+        document.getElementById('fcAnswerVisibleBox').classList.remove('hidden');
+        document.getElementById('fcAnswerHiddenBox').classList.add('hidden');
+    } else {
+        document.getElementById('fcAnswerVisibleBox').classList.add('hidden');
+        document.getElementById('fcAnswerHiddenBox').classList.remove('hidden');
+    }
+
+    updateLiveBar(item, 'both');
+    setLiveStatus(false, `Aktuális tétel (#${item.id}) • Kattints a hallgatáshoz`);
+}
+
+function nextFlashcard() {
+    if (state.fcList.length === 0) return;
+    state.fcIndex = (state.fcIndex + 1) % state.fcList.length;
+    renderFlashcard();
+}
+
+function prevFlashcard() {
+    if (state.fcList.length === 0) return;
+    state.fcIndex = (state.fcIndex - 1 + state.fcList.length) % state.fcList.length;
+    renderFlashcard();
+}
+
+function markFlashcard(isKnown) {
+    if (state.fcList.length === 0) return;
+    const item = state.fcList[state.fcIndex];
+    if (isKnown) {
+        state.learnedIds.add(item.id);
+    } else {
+        state.learnedIds.delete(item.id);
+    }
+    saveProgress();
+
+    // Ha szűrt listában vagyunk és megváltozott az állapota, frissítsük, különben lépjünk tovább
+    const statusFilter = document.getElementById('fcStatusSelect').value;
+    if (statusFilter !== 'ALL') {
+        applyFlashcardFilters();
+    } else {
+        nextFlashcard();
+    }
+}
+
+function shuffleFlashcards() {
+    for (let i = state.fcList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [state.fcList[i], state.fcList[j]] = [state.fcList[j], state.fcList[i]];
+    }
+    state.fcIndex = 0;
+    renderFlashcard();
+}
+
+function resetFlashcardOrder() {
+    state.fcList.sort((a, b) => a.id - b.id);
+    state.fcIndex = 0;
+    renderFlashcard();
+}
+
+function speakCurrentFcQuestion() {
+    if (state.fcList.length > 0) playItemQuestion(state.fcList[state.fcIndex]);
+}
+
+function speakCurrentFcAnswer() {
+    if (state.fcList.length > 0) playItemAnswer(state.fcList[state.fcIndex]);
+}
+
+/* ==========================================================================
+   7. NÉZET 2: TELJES 120-AS LISTA
+   ========================================================================== */
+function renderFullList() {
+    const query = document.getElementById('listSearchInput').value.trim().toLowerCase();
+    const topic = document.getElementById('listTopicSelect').value;
+    const container = document.getElementById('fullListContainer');
+
+    const filtered = QA_DATA.filter(item => {
+        const topicMatch = (topic === 'ALL' || item.topic === topic);
+        if (!topicMatch) return false;
+        if (!query) return true;
+        return (
+            String(item.id) === query ||
+            item.qEn.toLowerCase().includes(query) ||
+            item.qHu.toLowerCase().includes(query) ||
+            item.aEn.toLowerCase().includes(query) ||
+            item.aHu.toLowerCase().includes(query)
+        );
+    });
+
+    document.getElementById('listCountLabel').textContent = `${filtered.length} tétel`;
+
+    container.innerHTML = filtered.map(item => {
+        const learned = state.learnedIds.has(item.id);
+        return `
+            <div class="list-item-card ${learned ? 'learned-row' : ''}">
+                <div class="list-item-num">#${item.id}</div>
+                <div class="list-item-content">
+                    <div class="list-col">
+                        <div class="list-en">${item.qEn}</div>
+                        <div class="list-hu">🇭🇺 ${item.qHu}</div>
+                    </div>
+                    <div class="list-col">
+                        <div class="list-en ans">${item.aEn}</div>
+                        <div class="list-hu">🇭🇺 ${item.aHu}</div>
+                    </div>
+                </div>
+                <div class="list-item-btns">
+                    <button class="audio-pill-btn" onclick="playItemById(${item.id}, 'q')" title="Kérdés">🔊 K</button>
+                    <button class="audio-pill-btn" onclick="playItemById(${item.id}, 'a')" title="Válasz">🔊 V</button>
+                    <button class="audio-pill-btn primary" onclick="playItemById(${item.id}, 'both')" title="Mindkettő">🔁</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function playItemById(id, mode) {
+    const item = QA_DATA.find(x => x.id === id);
+    if (!item) return;
+    if (mode === 'q') playItemQuestion(item);
+    else if (mode === 'a') playItemAnswer(item);
+    else playItemDialogue(item);
+}
+
+/* ==========================================================================
+   8. NÉZET 3: SZÓBELI SZIMULÁTOR
+   ========================================================================== */
+function startNewSimQuestion(autoSpeak = true) {
+    stopSimTimer();
+    const topic = document.getElementById('simTopicSelect').value;
+    const pool = topic === 'ALL' ? QA_DATA : QA_DATA.filter(i => i.topic === topic);
+    const chosen = pool[Math.floor(Math.random() * pool.length)] || QA_DATA[0];
+    state.simItem = chosen;
+
+    document.getElementById('simMetaLabel').textContent = `VIZSGÁZTATÓ KÉRDÉSE (#${chosen.id} • ${chosen.topic})`;
+    document.getElementById('simQuestionEn').textContent = chosen.qEn;
+    document.getElementById('simQuestionHu').textContent = `🇭🇺 ${chosen.qHu}`;
+    document.getElementById('simAnswerEn').textContent = chosen.aEn;
+    document.getElementById('simAnswerHu').textContent = `🇭🇺 ${chosen.aHu}`;
+    document.getElementById('simTipText').textContent = chosen.tip;
+
+    updateLiveBar(chosen, 'both');
+
+    state.simSecondsLeft = parseInt(document.getElementById('simTimeSelect').value, 10) || 25;
+    updateSimTimerDisplay();
+
+    if (autoSpeak) {
+        playItemQuestion(chosen, () => {
+            startSimTimer();
+        });
+    }
+}
+
+function startSimTimer() {
+    stopSimTimer();
+    state.simTimerRunning = true;
+    document.getElementById('simTimerBtn').textContent = '⏸ Szünet';
+    document.getElementById('simInstruction').textContent = 'Válaszolj hangosan angolul a visszaszámlálás alatt!';
+
+    state.simInterval = setInterval(() => {
+        if (!state.simTimerRunning) return;
+        state.simSecondsLeft--;
+        updateSimTimerDisplay();
+        if (state.simSecondsLeft <= 0) {
+            stopSimTimer();
+            document.getElementById('simInstruction').textContent = '⏰ Lejárt az idő! Hallgasd meg a mintaválaszt.';
+            playItemAnswer(state.simItem);
+        }
+    }, 1000);
+}
+
+function stopSimTimer() {
+    state.simTimerRunning = false;
+    clearInterval(state.simInterval);
+    document.getElementById('simTimerBtn').textContent = '▶ Folytatás';
+}
+
+function toggleSimTimer() {
+    if (state.simTimerRunning) {
+        stopSimTimer();
+    } else {
+        if (state.simSecondsLeft <= 0) {
+            state.simSecondsLeft = parseInt(document.getElementById('simTimeSelect').value, 10) || 25;
+        }
+        startSimTimer();
+    }
+}
+
+function updateSimTimerDisplay() {
+    const s = Math.max(0, state.simSecondsLeft);
+    const formatted = `00:${s < 10 ? '0' + s : s}`;
+    document.getElementById('simTimerText').textContent = formatted;
+}
+
+function speakSimQuestion() { playItemQuestion(state.simItem); }
+function speakSimAnswer() { playItemAnswer(state.simItem); }
+
+/* ==========================================================================
+   9. NÉZET 4: KVÍZ & HALLÁSÉRTÉS
+   ========================================================================== */
+function setQuizMode(mode) {
+    state.quizMode = mode;
+    ['choice', 'listening', 'match'].forEach(m => {
+        document.getElementById(`qMode-${m}`).classList.toggle('active', m === mode);
+    });
+    generateQuizQuestion();
+}
+
+function generateQuizQuestion() {
+    state.quizAnswered = false;
+    const fb = document.getElementById('quizFeedbackBox');
+    fb.classList.add('hidden');
+
+    // Véletlenszerű célpont és 3 eltérő zavaró válasz
+    const shuffled = [...QA_DATA].sort(() => Math.random() - 0.5);
+    const target = shuffled[0];
+    const distractors = [];
+    for (let i = 1; i < shuffled.length && distractors.length < 3; i++) {
+        if (shuffled[i].aEn !== target.aEn && shuffled[i].qHu !== target.qHu) {
+            distractors.push(shuffled[i]);
+        }
+    }
+
+    state.quizCurrentItem = target;
+    const options = [target, ...distractors].sort(() => Math.random() - 0.5);
+    const optionsContainer = document.getElementById('quizOptionsContainer');
+
+    if (state.quizMode === 'choice') {
+        document.getElementById('quizModeBadge').textContent = '📝 Válaszválasztó kvíz';
+        document.getElementById('quizPromptLabel').textContent = `VIZSGAKÉRDÉS (#${target.id})`;
+        document.getElementById('quizPromptEn').textContent = target.qEn;
+        document.getElementById('quizPromptHu').textContent = `🇭🇺 ${target.qHu} — Melyik a helyes angol válasz?`;
+
+        optionsContainer.innerHTML = options.map(opt => `
+            <button class="quiz-option" onclick="handleQuizAnswer(${opt.id}, this)">
+                <span>${opt.aEn}</span>
+                <span style="font-size:0.82rem; font-weight:400; color:var(--text-secondary);">🇭🇺 ${opt.aHu}</span>
+            </button>
+        `).join('');
+    } else if (state.quizMode === 'listening') {
+        document.getElementById('quizModeBadge').textContent = '🎧 Hallásértés teszt';
+        document.getElementById('quizPromptLabel').textContent = 'HALLGASD MEG A MONDATOT';
+        document.getElementById('quizPromptEn').textContent = '🔊 Hallgasd meg a kérdést, és válaszd ki a magyar jelentését!';
+        document.getElementById('quizPromptHu').textContent = 'Kattints a „Hang lejátszása” gombra, ha újra hallanád.';
+
+        optionsContainer.innerHTML = options.map(opt => `
+            <button class="quiz-option" onclick="handleQuizAnswer(${opt.id}, this)">
+                <span>🇭🇺 ${opt.qHu}</span>
+            </button>
+        `).join('');
+
+        playItemQuestion(target);
+    } else {
+        document.getElementById('quizModeBadge').textContent = '🇭🇺 Magyar–Angol párosító';
+        document.getElementById('quizPromptLabel').textContent = 'FORDÍTSD ANGOLRA';
+        document.getElementById('quizPromptEn').textContent = `🇭🇺 ${target.aHu}`;
+        document.getElementById('quizPromptHu').textContent = `Kérdés kontextus: ${target.qEn} (${target.qHu})`;
+
+        optionsContainer.innerHTML = options.map(opt => `
+            <button class="quiz-option" onclick="handleQuizAnswer(${opt.id}, this)">
+                <span>${opt.aEn}</span>
+            </button>
+        `).join('');
+    }
+}
+
+function speakQuizAudio() {
+    if (!state.quizCurrentItem) return;
+    if (state.quizMode === 'match') {
+        playItemAnswer(state.quizCurrentItem);
+    } else {
+        playItemQuestion(state.quizCurrentItem);
+    }
+}
+
+function handleQuizAnswer(selectedId, btnEl) {
+    if (state.quizAnswered) return;
+    state.quizAnswered = true;
+    state.quizTotal++;
+
+    const target = state.quizCurrentItem;
+    const isCorrect = (selectedId === target.id);
+    if (isCorrect) state.quizScore++;
+
+    document.getElementById('quizScoreBadge').textContent = `Pontszám: ${state.quizScore} / ${state.quizTotal}`;
+
+    const allBtns = document.querySelectorAll('#quizOptionsContainer .quiz-option');
+    allBtns.forEach((b, idx) => {
+        b.disabled = true;
+    });
+
+    const fb = document.getElementById('quizFeedbackBox');
+    fb.classList.remove('hidden');
+
+    if (isCorrect) {
+        btnEl.classList.add('correct');
+        fb.className = 'quiz-feedback success';
+        fb.textContent = `✅ Helyes! ${target.qEn} → ${target.aEn} (${target.aHu})`;
+    } else {
+        btnEl.classList.add('wrong');
+        fb.className = 'quiz-feedback error';
+        fb.textContent = `❌ Nem egészen. A helyes pár: ${target.qEn} → ${target.aEn} (${target.aHu})`;
+    }
+
+    playItemDialogue(target);
+}
+
+/* ==========================================================================
+   10. BILLENTYŰZET NAVIGÁCIÓ ÉS INDÍTÁS
+   ========================================================================== */
+document.addEventListener('keydown', (e) => {
+    if (state.activeTab !== 'flashcards') return;
+    if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+    if (e.key === 'ArrowRight') nextFlashcard();
+    else if (e.key === 'ArrowLeft') prevFlashcard();
+    else if (e.key === ' ') {
+        e.preventDefault();
+        speakLiveDialogue();
+    }
+});
+
+window.onload = () => {
+    initVoices();
+    updateProgressUI();
+    renderFlashcard();
+};
+</script>
+</body>
+</html>
