@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angol Igeidők – Alapfokú (B1) Nyelvvizsga Felkészítő v4</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --present: #10b981;
+      --present-bg: #ecfdf5;
+      --past: #f59e0b;
+      --past-bg: #fffbeb;
+      --future: #3b82f6;
+      --future-bg: #eff6ff;
+      --border: #e2e8f0;
+      --b1-badge: #7c3aed;
+      --success: #16a34a;
+      --error: #dc2626;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+    }
+
+    header h1 { font-size: 1.75rem; margin-bottom: 8px; color: #0f172a; }
+    header p { color: var(--muted); font-size: 0.95rem; }
+
+    .voice-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.85rem;
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: #0f172a;
+      color: #fff;
+      border-color: #0f172a;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: #f8fafc; transform: translateY(-1px); }
+    .btn.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+    .btn.b1-toggle.active { background: var(--b1-badge); border-color: var(--b1-badge); color: #fff; }
+    .btn.primary-action { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .btn.primary-action:hover { background: #1d4ed8; }
+    .btn.retry-btn { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+    .btn.retry-btn:hover { background: #fee2e2; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .card.present .card-header { background: var(--present-bg); border-left: 5px solid var(--present); }
+    .card.past .card-header { background: var(--past-bg); border-left: 5px solid var(--past); }
+    .card.future .card-header { background: var(--future-bg); border-left: 5px solid var(--future); }
+
+    .tense-en { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+    .tense-hu { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .badge.b1 { background: #ede9fe; color: var(--b1-badge); }
+    .badge.b2 { background: #f1f5f9; color: #475569; }
+
+    .card-body { padding: 16px 20px; flex-grow: 1; }
+
+    .usage {
+      font-size: 0.9rem;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .formula {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #334155;
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .examples { display: flex; flex-direction: column; gap: 10px; }
+
+    .example-item {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .en-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .en-text { font-weight: 600; font-size: 0.95rem; color: #0f172a; }
+    .hu-text { font-size: 0.88rem; color: var(--muted); }
+
+    .hidden-text { filter: blur(5px); user-select: none; cursor: pointer; }
+    .hidden-text:hover { filter: none; }
+
+    .audio-btns { display: flex; gap: 4px; flex-shrink: 0; }
+
+    .speak-btn {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .speak-btn:hover { background: #e2e8f0; }
+
+    /* Signal words table */
+    .table-wrap {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+    th { background: #f8fafc; font-weight: 700; color: #0f172a; }
+    .tag {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      margin: 2px;
+    }
+
+    /* Quiz styles */
+    .quiz-box {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .quiz-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .score-pill {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #7c3aed);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .round-summary {
+      display: none;
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .round-summary h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .percent-big {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 6px 0;
+    }
+
+    .percent-good { color: var(--success); }
+    .percent-mid { color: #d97706; }
+    .percent-low { color: var(--error); }
+
+    .summary-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .q-item {
+      margin-bottom: 18px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fcfcfd;
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .q-cat {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .q-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 4px; }
+    .q-hu { font-size: 0.88rem; color: var(--muted); margin-bottom: 12px; }
+
+    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+
+    .opt-btn {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      text-align: left;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .opt-btn:hover:not(:disabled) { background: #f1f5f9; }
+    .opt-btn.correct { background: #dcfce7; border-color: var(--success); color: #14532d; }
+    .opt-btn.wrong { background: #fee2e2; border-color: var(--error); color: #7f1d1d; }
+
+    .explanation {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      display: none;
+    }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer { text-align: center; margin-top: 30px; font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🇬🇧 Angol Igeidők – Alapfokú (B1) Nyelvvizsga Felkészítő 🇭🇺</h1>
+    <p>12 igeidő kártya, vizsgás időhatározók és 10 kérdéses véletlenszerű B1 tesztkörök százalékos értékeléssel.</p>
+  </header>
+
+  <div class="voice-bar">
+    <label for="voiceSelect">Angol hang kiválasztása:</label>
+    <select id="voiceSelect"></select>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('cardsSec', this)">📚 1. Igeidő Kártyák</button>
+    <button class="tab-btn" onclick="switchTab('signalsSec', this)">🔑 2. Időhatározók (B1)</button>
+    <button class="tab-btn" onclick="switchTab('quizSec', this)">✍️ 3. B1 Gyakorló Teszt (10-es körök)</button>
+  </div>
+
+  <!-- 1. KÁRTYÁK -->
+  <div id="cardsSec" class="section active">
+    <div class="controls">
+      <button class="btn active" onclick="filterTime('all', this)">Összes (12)</button>
+      <button class="btn" onclick="filterTime('present', this)">🟢 Jelen (Present)</button>
+      <button class="btn" onclick="filterTime('past', this)">🟡 Múlt (Past)</button>
+      <button class="btn" onclick="filterTime('future', this)">🔵 Jövő (Future)</button>
+      <button class="btn b1-toggle" onclick="toggleB1(this)">🎯 Csak B1 alapfokú vizsgaanyag</button>
+      <button class="btn" onclick="toggleHideHu(this)">👁️ Magyar elrejtése (Teszt)</button>
+    </div>
+    <div class="grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- 2. IDŐHATÁROZÓK -->
+  <div id="signalsSec" class="section">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Igeidő (B1 Alapfok)</th>
+            <th>Tipikus jelzőszavak / időhatározók</th>
+            <th>Példamondat (kattints a hallgatáshoz)</th>
+          </tr>
+        </thead>
+        <tbody id="signalsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. KVÍZ -->
+  <div id="quizSec" class="section">
+    <div class="quiz-box">
+      <div class="quiz-topbar">
+        <div>
+          <strong style="font-size:1.1rem;">B1 Gyakorló Teszt (10 véletlenszerű kérdés / kör)</strong>
+          <div style="font-size:0.84rem; color:var(--muted);" id="poolInfo">Teljes kérdésbank: 45 feladat</div>
+        </div>
+        <div class="score-pill" id="scoreDisplay">0 / 10 (0%)</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="controls" style="margin-bottom: 16px;">
+        <button class="btn active" onclick="setQuizTopic('all', this)">🎲 Összes témakör (45)</button>
+        <button class="btn" onclick="setQuizTopic('present', this)">🟢 Jelen idők (12)</button>
+        <button class="btn" onclick="setQuizTopic('past', this)">🟡 Múlt idők (12)</button>
+        <button class="btn" onclick="setQuizTopic('future', this)">🔵 Jövő idők (9)</button>
+        <button class="btn" onclick="setQuizTopic('traps', this)">⚡ B1 Vizsgacsapdák (12)</button>
+      </div>
+
+      <div class="round-summary" id="roundSummary">
+        <h3>Kör eredménye</h3>
+        <div class="percent-big" id="summaryPercent">0%</div>
+        <div id="summaryText" style="color:var(--text); font-weight:600;"></div>
+        <div class="summary-actions">
+          <button class="btn primary-action" onclick="startNewRound()">➡️ Újabb 10 véletlenszerű kérdés</button>
+          <button class="btn retry-btn" id="summaryRetryBtn" onclick="retryWrongOnly()">🎯 Csak a hibásak újrapróbálása</button>
+        </div>
+      </div>
+
+      <div id="quizContainer"></div>
+
+      <div class="bottom-bar">
+        <button class="btn primary-action" onclick="startNewRound()">🔄 Újabb 10 véletlenszerű kérdés</button>
+        <button class="btn retry-btn" id="bottomRetryBtn" onclick="retryWrongOnly()">🎯 Hibásak újrapróbálása (0)</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Tipp: A 🔊 gomb normál sebességgel, a 🐢 gomb lassítva olvassa fel az angol mondatokat.
+  </footer>
+</div>
+
+<script>
+const tensesData = [
+  {
+    category: "present", level: "b1", enName: "Present Simple", huName: "Egyszerű jelen",
+    formula: "Alany + Ige (E/3: -s)",
+    usage: "Szokás, rendszeres cselekvés, általános tény. Jövő: menetrendek, órarendek.",
+    examples: [
+      { en: "I study English every day.", hu: "Minden nap angolt tanulok." },
+      { en: "My train leaves at six tomorrow.", hu: "A vonatom holnap hatkor indul. (menetrend)" },
+      { en: "I write books.", hu: "Könyveket írok." },
+      { en: "She drinks coffee every morning.", hu: "Minden reggel kávét iszik." }
+    ]
+  },
+  {
+    category: "present", level: "b1", enName: "Present Continuous", huName: "Folyamatos jelen",
+    formula: "am / is / are + Ige-ing",
+    usage: "Most zajlik vagy átmenetileg tart. Jövő: előre egyeztetett programok.",
+    examples: [
+      { en: "I am studying English now.", hu: "Most éppen angolt tanulok." },
+      { en: "I am meeting Tom tomorrow.", hu: "Holnap találkozom Tommal. (egyeztetett program)" },
+      { en: "I am writing a book now.", hu: "Most írok egy könyvet." },
+      { en: "They are watching TV at the moment.", hu: "Éppen tévét néznek." }
+    ]
+  },
+  {
+    category: "present", level: "b1", enName: "Present Perfect", huName: "Befejezett jelen",
+    formula: "have / has + Ige 3. alakja",
+    usage: "Múltbeli esemény jelenbeli kapcsolattal vagy eredménnyel. A pontos időpont nem lényeges.",
+    examples: [
+      { en: "I have finished my homework.", hu: "Elkészítettem a házi feladatomat." },
+      { en: "I have written a book.", hu: "Megírtam egy könyvet." },
+      { en: "We have lived here for five years.", hu: "Öt éve élünk itt." }
+    ]
+  },
+  {
+    category: "present", level: "b2", enName: "Present Perfect Continuous", huName: "Folyamatos befejezett jelen",
+    formula: "have / has been + Ige-ing",
+    usage: "Korábban kezdődött cselekvés, amely még tart, vagy épp most ért véget (tartam hangsúlyos).",
+    examples: [
+      { en: "I have been studying English for two hours.", hu: "Két órája tanulok angolt." },
+      { en: "I have been writing a book since morning.", hu: "Reggel óta írok egy könyvet." },
+      { en: "It has been raining all day.", hu: "Egész nap esik az eső." }
+    ]
+  },
+  {
+    category: "past", level: "b1", enName: "Past Simple", huName: "Egyszerű múlt",
+    formula: "Ige 2. alakja (-ed / rendhagyó)",
+    usage: "Lezárt múltbeli esemény. A mondatból vagy szövegkörnyezetből kiderül, mikor történt.",
+    examples: [
+      { en: "I studied English yesterday.", hu: "Tegnap angolt tanultam." },
+      { en: "I wrote a book yesterday.", hu: "Tegnap írtam egy könyvet." },
+      { en: "She visited London last year.", hu: "Tavaly meglátogatta Londont." }
+    ]
+  },
+  {
+    category: "past", level: "b1", enName: "Past Continuous", huName: "Folyamatos múlt",
+    formula: "was / were + Ige-ing",
+    usage: "Egy adott múltbeli pillanatban éppen zajló cselekvés, vagy háttércselekvés.",
+    examples: [
+      { en: "I was studying English at eight last night.", hu: "Tegnap este nyolckor éppen angolt tanultam." },
+      { en: "I was writing a book all day.", hu: "Egész nap egy könyvet írtam." },
+      { en: "It was raining when I woke up.", hu: "Eső esett, amikor felébredtem." }
+    ]
+  },
+  {
+    category: "past", level: "b2", enName: "Past Perfect", huName: "Befejezett múlt",
+    formula: "had + Ige 3. alakja",
+    usage: "Egy másik múltbeli esemény előtt már megtörtént cselekvés (előidejűség).",
+    examples: [
+      { en: "I had finished my homework before dinner.", hu: "Vacsora előtt már elkészítettem a házi feladatomat." },
+      { en: "I had written a book before he arrived.", hu: "Megírtam egy könyvet, mielőtt megérkezett." },
+      { en: "They had already left.", hu: "Már elmentek." }
+    ]
+  },
+  {
+    category: "past", level: "b2", enName: "Past Perfect Continuous", huName: "Folyamatos befejezett múlt",
+    formula: "had been + Ige-ing",
+    usage: "Egy múltbeli időpontig már egy ideje folyamatosan tartó cselekvés.",
+    examples: [
+      { en: "I had been studying for two hours when you called.", hu: "Már két órája tanultam, amikor felhívtál." },
+      { en: "I had been writing a book for two hours.", hu: "Már két órája írtam egy könyvet." },
+      { en: "He had been running all morning.", hu: "Egész reggel futott." }
+    ]
+  },
+  {
+    category: "future", level: "b1", enName: "Future Simple", huName: "Egyszerű jövő",
+    formula: "will + Ige 1. alakja",
+    usage: "Jóslat, ígéret, felajánlás vagy a beszéd pillanatában hozott spontán döntés.",
+    examples: [
+      { en: "I will help you.", hu: "Segítek neked." },
+      { en: "I will write a book.", hu: "Írni fogok egy könyvet." },
+      { en: "She will call you tomorrow.", hu: "Holnap fel fog hívni." }
+    ]
+  },
+  {
+    category: "future", level: "b2", enName: "Future Continuous", huName: "Folyamatos jövő",
+    formula: "will be + Ige-ing",
+    usage: "Egy jövőbeli adott pillanatban éppen folyamatban lévő cselekvés.",
+    examples: [
+      { en: "I will be studying English at eight tomorrow.", hu: "Holnap nyolckor éppen angolt fogok tanulni." },
+      { en: "I will be writing a book.", hu: "Éppen egy könyvet fogok írni." },
+      { en: "Tomorrow at 5, we will be flying.", hu: "Holnap 5-kor éppen repülni fogunk." }
+    ]
+  },
+  {
+    category: "future", level: "b2", enName: "Future Perfect", huName: "Befejezett jövő",
+    formula: "will have + Ige 3. alakja",
+    usage: "Egy jövőbeli időpontig már befejeződő, megtörténő cselekvés.",
+    examples: [
+      { en: "I will have finished my homework by six.", hu: "Hat órára már elkészítem a házi feladatomat." },
+      { en: "I will have written a book by the end of the week.", hu: "A hét végére meg fogom írni a könyvet." },
+      { en: "They will have arrived by 6 PM.", hu: "Este 6-ra meg fognak érkezni." }
+    ]
+  },
+  {
+    category: "future", level: "b2", enName: "Future Perfect Continuous", huName: "Folyamatos befejezett jövő",
+    formula: "will have been + Ige-ing",
+    usage: "Egy jövőbeli időpontig már egy bizonyos ideje folyamatosan tartó cselekvés.",
+    examples: [
+      { en: "I will have been studying for two hours by six.", hu: "Hat órakor már két órája fogok tanulni." },
+      { en: "I will have been writing a book for two hours.", hu: "Már két órája írni fogom a könyvet." },
+      { en: "By next year, he will have been working here for ten years.", hu: "Jövőre már tíz éve itt fog dolgozni." }
+    ]
+  }
+];
+
+const signalsData = [
+  {
+    tense: "Present Simple (Egyszerű jelen)",
+    words: ["always", "usually", "often", "sometimes", "never", "every day / week", "on Mondays"],
+    exampleEn: "She usually drinks tea in the morning.",
+    exampleHu: "Általában teát iszik reggel."
+  },
+  {
+    tense: "Present Continuous (Folyamatos jelen)",
+    words: ["now", "right now", "at the moment", "Look!", "Listen!", "today", "this week"],
+    exampleEn: "Look! It is snowing outside.",
+    exampleHu: "Nézd! Kint esik a hó."
+  },
+  {
+    tense: "Present Perfect (Befejezett jelen)",
+    words: ["already", "just", "yet", "ever", "never", "since", "for", "so far", "recently"],
+    exampleEn: "Have you ever been to London?",
+    exampleHu: "Voltál már valaha Londonban?"
+  },
+  {
+    tense: "Past Simple (Egyszerű múlt)",
+    words: ["yesterday", "last night / week / year", "two days ago", "in 2020", "when I was a child"],
+    exampleEn: "We moved to this city three years ago.",
+    exampleHu: "Három éve költöztünk ebbe a városba."
+  },
+  {
+    tense: "Past Continuous (Folyamatos múlt)",
+    words: ["while", "when", "at 5 o'clock yesterday", "all day yesterday"],
+    exampleEn: "I was cooking when the phone rang.",
+    exampleHu: "Éppen főztem, amikor megcsörrent a telefon."
+  },
+  {
+    tense: "Future Simple (Egyszerű jövő)",
+    words: ["tomorrow", "next week / month", "I think", "probably", "I promise", "in the future"],
+    exampleEn: "I think it will rain tomorrow.",
+    exampleHu: "Szerintem holnap esni fog az eső."
+  }
+];
+
+const fullQuizPool = [
+  // PRESENT (12)
+  { topic: "present", label: "Jelen idők", q: "She ______ coffee every morning before work.", hu: "Minden reggel kávét iszik munka előtt.", options: ["drinks", "is drinking", "has drunk", "drank"], answer: 0, exp: "Az 'every morning' rendszeres szokást jelöl -> Present Simple (E/3: -s)." },
+  { topic: "present", label: "Jelen idők", q: "Be quiet! The baby ______.", hu: "Maradj csendben! A baba alszik.", options: ["sleeps", "is sleeping", "slept", "will sleep"], answer: 1, exp: "A 'Be quiet!' jelzi, hogy most, a beszéd pillanatában zajlik -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "I ______ my homework yet.", hu: "Még nem fejeztem be a házi feladatomat.", options: ["didn't finish", "don't finish", "haven't finished", "am not finishing"], answer: 2, exp: "A 'yet' (még) tagadó mondatban a Present Perfect tipikus jelzőszava." },
+  { topic: "present", label: "Jelen idők", q: "They ______ in Kaposvár since 2018.", hu: "2018 óta Kaposváron élnek.", options: ["live", "lived", "are living", "have lived"], answer: 3, exp: "A 'since' (óta) múltban kezdődött, de máig tartó állapotot jelöl -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "How long ______ English?", hu: "Mióta tanulsz angolul?", options: ["do you learn", "did you learn", "have you studied", "are you studying"], answer: 2, exp: "A 'How long' (mióta / mennyi ideje) a jelenig tartó időtartamra kérdez -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "Water ______ at 100 degrees Celsius.", hu: "A víz 100 Celsius-fokon forr.", options: ["boils", "is boiling", "boiled", "has boiled"], answer: 0, exp: "Általános természeti törvényekhez mindig Present Simple szükséges." },
+  { topic: "present", label: "Jelen idők", q: "Look! It ______ outside.", hu: "Nézd! Kint esik a hó.", options: ["snows", "is snowing", "has snowed", "snowed"], answer: 1, exp: "A 'Look!' felkiáltás az éppen most zajló eseményre hívja fel a figyelmet -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "______ you ever ______ sushi?", hu: "Ettél már valaha szusit?", options: ["Did / eat", "Do / eat", "Have / eaten", "Are / eating"], answer: 2, exp: "Az 'ever' (valaha) élettapasztalatra kérdez rá -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "My brother ______ in a bank, he is an accountant.", hu: "A bátyám egy bankban dolgozik, könyvelő.", options: ["works", "is working", "worked", "has worked"], answer: 0, exp: "Állandó munkahely és foglalkozás kifejezésére Present Simple-t használunk." },
+  { topic: "present", label: "Jelen idők", q: "I can't talk right now, I ______ dinner.", hu: "Most nem tudok beszélni, éppen vacsorát főzök.", options: ["cook", "am cooking", "cooked", "have cooked"], answer: 1, exp: "A 'right now' (épp most) folyamatos jelent (Present Continuous) igényel." },
+  { topic: "present", label: "Jelen idők", q: "We ______ already ______ that film twice.", hu: "Már kétszer láttuk azt a filmet.", options: ["did / see", "are / seeing", "have / seen", "do / see"], answer: 2, exp: "Az 'already' (már) és az ismétlődés száma Present Perfect-et kíván." },
+  { topic: "present", label: "Jelen idők", q: "How often ______ your grandparents?", hu: "Milyen gyakran látogatod meg a nagyszüleidet?", options: ["do you visit", "are you visiting", "have you visited", "did you visit"], answer: 0, exp: "A 'How often' rendszerességre kérdez rá -> Present Simple." },
+
+  // PAST (12)
+  { topic: "past", label: "Múlt idők", q: "We ______ to Spain last summer.", hu: "Tavaly nyáron Spanyolországba utaztunk.", options: ["have gone", "go", "went", "were going"], answer: 2, exp: "A 'last summer' lezárt múltbeli időpont -> Past Simple (went)." },
+  { topic: "past", label: "Múlt idők", q: "What ______ at 8 PM yesterday?", hu: "Mit csináltál tegnap este 8-kor?", options: ["did you do", "were you doing", "have you done", "do you do"], answer: 1, exp: "Adott múltbeli pillanatban zajló folyamat -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "I was walking home when I ______ an old friend.", hu: "Éppen hazafelé sétáltam, amikor találkoztam egy régi barátommal.", options: ["was meeting", "met", "have met", "meet"], answer: 1, exp: "A folyamatot megszakító rövid cselekvés Past Simple-ben áll (met)." },
+  { topic: "past", label: "Múlt idők", q: "They ______ a new car two weeks ago.", hu: "Két hete vettek egy új autót.", options: ["bought", "have bought", "buy", "were buying"], answer: 0, exp: "Az 'ago' (ezelőtt) mindig Past Simple-t vonz." },
+  { topic: "past", label: "Múlt idők", q: "While I ______, my sister was listening to music.", hu: "Miközben én tanultam, a húgom zenét hallgatott.", options: ["studied", "was studying", "have studied", "study"], answer: 1, exp: "Két párhuzamosan zajló múltbeli folyamatnál ('while') mindkettő Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "Shakespeare ______ many famous plays.", hu: "Shakespeare sok híres színdarabot írt.", options: ["has written", "wrote", "writes", "was writing"], answer: 1, exp: "Már nem élő személy alkotásainál lezárt múltat (Past Simple) használunk." },
+  { topic: "past", label: "Múlt idők", q: "______ you ______ the football match last night?", hu: "Nézted a focimeccset tegnap este?", options: ["Have / watched", "Did / watch", "Were / watching", "Do / watch"], answer: 1, exp: "A 'last night' lezárt múlt -> Past Simple kérdés (Did + 1. alak)." },
+  { topic: "past", label: "Múlt idők", q: "It ______ heavily when we left the cinema.", hu: "Erősen esett az eső, amikor kijöttünk a moziból.", options: ["rained", "was raining", "has rained", "rains"], answer: 1, exp: "Háttércselekvés a múltban -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "I ______ my keys yesterday, so I couldn't open the door.", hu: "Tegnap elvesztettem a kulcsaimat, így nem tudtam kinyitni az ajtót.", options: ["lost", "have lost", "was losing", "lose"], answer: 0, exp: "A 'yesterday' egyértelművé teszi a lezárt múltat (Past Simple)." },
+  { topic: "past", label: "Múlt idők", q: "When I was a child, I ______ cartoons every afternoon.", hu: "Gyerekkoromban minden délután rajzfilmeket néztem.", options: ["have watched", "watched", "am watching", "watch"], answer: 1, exp: "Múltbeli szokás ('When I was a child') -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "She ______ her leg while she was skiing.", hu: "Eltörte a lábát síelés közben.", options: ["was breaking", "broke", "has broken", "breaks"], answer: 1, exp: "A síelés (folyamat) közben bekövetkező hirtelen baleset -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "We ______ at the hotel at midnight.", hu: "Éjfélkor érkeztünk meg a szállodába.", options: ["arrived", "have arrived", "arrive", "were arriving"], answer: 0, exp: "Konkrét múltbeli időpont ('at midnight') -> Past Simple." },
+
+  // FUTURE (9)
+  { topic: "future", label: "Jövő idők", q: "Oh, you have heavy bags! I ______ you.", hu: "Ó, nehezek a táskáid! Segítek neked.", options: ["help", "am helping", "will help", "helped"], answer: 2, exp: "Spontán felajánlás a beszéd pillanatában -> Future Simple (will)." },
+  { topic: "future", label: "Jövő idők", q: "I think our team ______ the match tomorrow.", hu: "Szerintem a csapatunk megnyeri a holnapi meccset.", options: ["wins", "will win", "won", "has won"], answer: 1, exp: "Személyes vélemény, jóslat ('I think') -> Future Simple (will)." },
+  { topic: "future", label: "Jövő idők", q: "I promise I ______ anyone your secret.", hu: "Ígérem, senkinek nem mondom el a titkodat.", options: ["don't tell", "won't tell", "am not telling", "didn't tell"], answer: 1, exp: "Ígéretekhez ('I promise') mindig 'will / won't' használatos." },
+  { topic: "future", label: "Jövő idők", q: "Look at those dark clouds! It ______ soon.", hu: "Nézd azokat a sötét felhőket! Hamarosan esni fog.", options: ["will rain", "is going to rain", "rains", "rained"], answer: 1, exp: "Látható jelenlegi jelből (sötét felhők) következtetünk a jövőre -> going to." },
+  { topic: "future", label: "Jövő idők", q: "We ______ to Italy next summer, we already have the tickets.", hu: "Jövő nyáron Olaszországba utazunk, már megvannak a jegyeink.", options: ["will fly", "are flying", "flew", "fly"], answer: 1, exp: "Már leszervezett, jegyekkel biztosított program -> Present Continuous jövő időre." },
+  { topic: "future", label: "Jövő idők", q: "What ______ you ______ after university?", hu: "Mit tervezel csinálni az egyetem után?", options: ["do / do", "are / going to do", "did / do", "have / done"], answer: 1, exp: "Jövőbeli szándékokra, tervekre 'be going to'-val kérdezünk rá." },
+  { topic: "future", label: "Jövő idők", q: "I'm thirsty. I think I ______ a glass of water.", hu: "Szomjas vagyok. Azt hiszem, iszom egy pohár vizet.", options: ["will drink", "am drinking", "drink", "drank"], answer: 0, exp: "Hirtelen jött döntés a beszéd pillanatában -> will." },
+  { topic: "future", label: "Jövő idők", q: "Don't worry, everything ______ fine.", hu: "Ne aggódj, minden rendben lesz.", options: ["is", "will be", "was", "has been"], answer: 1, exp: "Megnyugtatás, jövőre vonatkozó biztatás -> will be." },
+  { topic: "future", label: "Jövő idők", q: "They ______ a new house next year, they are saving money for it.", hu: "Jövőre új házat fognak venni, már gyűjtik rá a pénzt.", options: ["are going to buy", "bought", "buy", "have bought"], answer: 0, exp: "Előre elhatározott szándék ('saving money for it') -> going to." },
+
+  // TRAPS (12)
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "My train ______ at 7:15 tomorrow morning.", hu: "A vonatom holnap reggel 7:15-kor indul.", options: ["leaves", "will leave", "left", "has left"], answer: 0, exp: "Csapda! Menetrendekhez jövő idő helyett is Present Simple-t használunk." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ Tom tomorrow at 5 PM, we arranged it yesterday.", hu: "Holnap délután 5-kor találkozom Tommal, tegnap beszéltük meg.", options: ["meet", "am meeting", "met", "have met"], answer: 1, exp: "Előre egyeztetett személyes találkozóhoz Present Continuous kell." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ this car for five years.", hu: "Öt éve van meg ez az autóm.", options: ["have", "am having", "have had", "had"], answer: 2, exp: "Csapda! A 'have' (birtokol) állapotige, nem állhat folyamatosban, és 'for' miatt Present Perfect kell (have had)." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "She ______ the answer right now.", hu: "Most tudja a választ.", options: ["knows", "is knowing", "has known", "knew"], answer: 0, exp: "Csapda! A 'know' (tudni) állapotige, még 'right now' mellett sem tehető folyamatos alakba!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I'll call you as soon as I ______ home.", hu: "Felhívlak, amint hazaérek.", options: ["will get", "get", "got", "am getting"], answer: 1, exp: "Csapda! Az 'as soon as' (amint) időhatározói mellékmondatban jövő idő helyett Present Simple áll!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "He has worked here ______ ten years.", hu: "Tíz éve dolgozik itt.", options: ["since", "for", "ago", "during"], answer: 1, exp: "Időtartam ('ten years') előtt 'for', kezdőpont (pl. 2016) előtt 'since' áll." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "My sister ______ to Paris twice, she loves it.", hu: "A nővérem kétszer járt Párizsban, imádja.", options: ["has gone", "has been", "went", "was"], answer: 1, exp: "Csapda! A 'has been to' azt jelenti, megjárta és már visszajött; a 'has gone to' pedig azt, hogy még most is ott van." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "This soup ______ delicious!", hu: "Ennek a levesnek isteni íze van!", options: ["tastes", "is tasting", "has tasted", "tasted"], answer: 0, exp: "Érzékelést kifejező állapotige ('taste' = valamilyen íze van) -> Present Simple." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "When ______ you ______ your new phone?", hu: "Mikor vetted az új telefonodat?", options: ["have / bought", "did / buy", "do / buy", "were / buying"], answer: 1, exp: "Csapda! A 'When' (Mikor?) konkrét múltbeli időpontra kérdez -> mindig Past Simple, soha nem Present Perfect!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "If it ______ tomorrow, we will stay at home.", hu: "Ha holnap esik az eső, otthon maradunk.", options: ["will rain", "rains", "rained", "is raining"], answer: 1, exp: "1. típusú feltételes mondatban az 'If' után jelen idő (Present Simple) áll, nem 'will'!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ to understand what you are saying.", hu: "Próbálom megérteni, amit mondasz.", options: ["try", "am trying", "tried", "have tried"], answer: 1, exp: "A 'try' cselekvő ige (most próbálkozom -> am trying), az 'understand' viszont állapotige." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "We haven't seen each other ______ last Christmas.", hu: "Tavaly karácsony óta nem láttuk egymást.", options: ["for", "since", "from", "ago"], answer: 1, exp: "A 'last Christmas' egy konkrét múltbeli kezdőpont, ezért 'since' kell elé." }
+];
+
+let currentCategory = 'all';
+let onlyB1 = false;
+let hideHu = false;
+let englishVoices = [];
+
+// Quiz state
+let quizTopic = 'all';
+let currentRoundQuestions = [];
+let wrongQuestions = [];
+let roundScore = 0;
+let answeredCount = 0;
+const ROUND_SIZE = 10;
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function loadVoices() {
+  const allVoices = window.speechSynthesis.getVoices();
+  englishVoices = allVoices.filter(v => v.lang.startsWith('en'));
+  const select = document.getElementById('voiceSelect');
+  select.innerHTML = '';
+
+  if (englishVoices.length === 0) {
+    const opt = document.createElement('option');
+    opt.textContent = 'Alapértelmezett angol hang';
+    select.appendChild(opt);
+    return;
+  }
+
+  englishVoices.forEach((voice, idx) => {
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = `${voice.name} (${voice.lang})`;
+    if (voice.lang === 'en-GB' || voice.lang === 'en-US') {
+      opt.selected = true;
+    }
+    select.appendChild(opt);
+  });
+}
+
+window.speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+
+function speak(text, rate = 1.0) {
+  window.speechSynthesis.cancel();
+  const cleanText = text.replace(/______/g, 'blank');
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.lang = 'en-GB';
+  utterance.rate = rate;
+
+  const select = document.getElementById('voiceSelect');
+  if (englishVoices.length > 0 && select.value !== '') {
+    utterance.voice = englishVoices[select.value];
+  }
+  window.speechSynthesis.speak(utterance);
+}
+
+function switchTab(secId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(secId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function renderCards() {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+
+  const filtered = tensesData.filter(item => {
+    const catMatch = currentCategory === 'all' || item.category === currentCategory;
+    const levelMatch = !onlyB1 || item.level === 'b1';
+    return catMatch && levelMatch;
+  });
+
+  filtered.forEach(tense => {
+    const card = document.createElement('div');
+    card.className = `card ${tense.category}`;
+
+    const badgeText = tense.level === 'b1' ? 'B1 Alapfok (Fontos)' : 'B2+ Kiegészítő';
+    const badgeClass = tense.level === 'b1' ? 'b1' : 'b2';
+
+    const examplesHTML = tense.examples.map(ex => `
+      <div class="example-item">
+        <div class="en-row">
+          <span class="en-text">${ex.en}</span>
+          <div class="audio-btns">
+            <button class="speak-btn" title="Normál tempó" onclick="speak('${ex.en.replace(/'/g, "\'")}', 1.0)">🔊</button>
+            <button class="speak-btn" title="Lassított kiejtés" onclick="speak('${ex.en.replace(/'/g, "\'")}', 0.7)">🐢</button>
+          </div>
+        </div>
+        <div class="hu-text ${hideHu ? 'hidden-text' : ''}">${ex.hu}</div>
+      </div>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="tense-en">${tense.enName}</div>
+          <div class="tense-hu">${tense.huName}</div>
+        </div>
+        <span class="badge ${badgeClass}">${badgeText}</span>
+      </div>
+      <div class="card-body">
+        <div class="formula">📐 ${tense.formula}</div>
+        <div class="usage">💡 ${tense.usage}</div>
+        <div class="examples">${examplesHTML}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderSignals() {
+  const tbody = document.getElementById('signalsBody');
+  tbody.innerHTML = signalsData.map(row => `
+    <tr>
+      <td><strong>${row.tense}</strong></td>
+      <td>${row.words.map(w => `<span class="tag">${w}</span>`).join('')}</td>
+      <td>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-weight:600; color:#0f172a;">${row.exampleEn}</div>
+            <div style="font-size:0.84rem; color:#64748b;">${row.exampleHu}</div>
+          </div>
+          <div class="audio-btns">
+            <button class="speak-btn" onclick="speak('${row.exampleEn.replace(/'/g, "\'")}', 1.0)">🔊</button>
+            <button class="speak-btn" onclick="speak('${row.exampleEn.replace(/'/g, "\'")}', 0.7)">🐢</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function updateScoreUI() {
+  const total = currentRoundQuestions.length;
+  const pct = total > 0 ? Math.round((roundScore / total) * 100) : 0;
+  document.getElementById('scoreDisplay').textContent = `${roundScore} / ${total} (${pct}%)`;
+  const progressPct = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = `${progressPct}%`;
+  document.getElementById('bottomRetryBtn').textContent = `🎯 Hibásak újrapróbálása (${wrongQuestions.length})`;
+}
+
+function setQuizTopic(topic, btn) {
+  quizTopic = topic;
+  document.querySelectorAll('#quizSec .controls .btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  startNewRound();
+}
+
+function startNewRound() {
+  const pool = quizTopic === 'all'
+    ? fullQuizPool
+    : fullQuizPool.filter(item => item.topic === quizTopic);
+
+  document.getElementById('poolInfo').textContent = `Kiválasztott témakör kérdésbankja: ${pool.length} feladat`;
+  const shuffled = shuffleArray(pool);
+  currentRoundQuestions = shuffled.slice(0, Math.min(ROUND_SIZE, shuffled.length));
+  wrongQuestions = [];
+  roundScore = 0;
+  answeredCount = 0;
+  document.getElementById('roundSummary').style.display = 'none';
+  renderQuizRound();
+}
+
+function retryWrongOnly() {
+  if (wrongQuestions.length === 0) {
+    alert("Ebben a körben nincs elrontott kérdésed!");
+    return;
+  }
+  currentRoundQuestions = shuffleArray(wrongQuestions);
+  wrongQuestions = [];
+  roundScore = 0;
+  answeredCount = 0;
+  document.getElementById('roundSummary').style.display = 'none';
+  renderQuizRound();
+}
+
+function renderQuizRound() {
+  updateScoreUI();
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = currentRoundQuestions.map((item, qIdx) => {
+    const completedSentence = item.q.replace('______', item.options[item.answer]).replace(/'/g, "\'");
+    return `
+      <div class="q-item" id="q-${qIdx}">
+        <div class="q-meta">
+          <span class="q-cat">${item.label}</span>
+          <button class="speak-btn" title="Helyes mondat meghallgatása" onclick="speak('${completedSentence}', 1.0)">🔊 Hallgatás</button>
+        </div>
+        <div class="q-title">${qIdx + 1}. ${item.q}</div>
+        <div class="q-hu">${item.hu}</div>
+        <div class="options">
+          ${item.options.map((opt, oIdx) => `
+            <button class="opt-btn" onclick="checkAnswer(${qIdx}, ${oIdx}, this)">${opt}</button>
+          `).join('')}
+        </div>
+        <div class="explanation" id="exp-${qIdx}">💡 ${item.exp}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function checkAnswer(qIdx, oIdx, btn) {
+  const qItem = document.getElementById(`q-${qIdx}`);
+  const buttons = qItem.querySelectorAll('.opt-btn');
+  const questionObj = currentRoundQuestions[qIdx];
+  const correctIdx = questionObj.answer;
+
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === correctIdx) b.classList.add('correct');
+  });
+
+  answeredCount++;
+
+  if (oIdx === correctIdx) {
+    roundScore++;
+  } else {
+    btn.classList.add('wrong');
+    wrongQuestions.push(questionObj);
+  }
+
+  document.getElementById(`exp-${qIdx}`).style.display = 'block';
+  updateScoreUI();
+
+  if (answeredCount === currentRoundQuestions.length) {
+    showRoundSummary();
+  }
+}
+
+function showRoundSummary() {
+  const total = currentRoundQuestions.length;
+  const pct = Math.round((roundScore / total) * 100);
+  const summaryBox = document.getElementById('roundSummary');
+  const pctEl = document.getElementById('summaryPercent');
+  const textEl = document.getElementById('summaryText');
+  const retryBtn = document.getElementById('summaryRetryBtn');
+
+  pctEl.textContent = `${pct}% (${roundScore} / ${total} helyes)`;
+  pctEl.className = 'percent-big ' + (pct >= 80 ? 'percent-good' : pct >= 60 ? 'percent-mid' : 'percent-low');
+
+  if (pct >= 80) {
+    textEl.textContent = "Kiváló eredmény! Ez már biztos B1 alapfokú nyelvvizsga szint.";
+  } else if (pct >= 60) {
+    textEl.textContent = "Jó úton jársz! A B1 vizsgán a 60% általában már sikeres, de érdemes még gyakorolni.";
+  } else {
+    textEl.textContent = "Érdemes átnézni a magyarázatokat és újrapróbálni a hibás kérdéseket!";
+  }
+
+  retryBtn.style.display = wrongQuestions.length > 0 ? 'inline-block' : 'none';
+  summaryBox.style.display = 'block';
+  summaryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function filterTime(cat, btnElement) {
+  currentCategory = cat;
+  document.querySelectorAll('#cardsSec .controls .btn:not(.b1-toggle):not(:last-child)').forEach(b => b.classList.remove('active'));
+  btnElement.classList.add('active');
+  renderCards();
+}
+
+function toggleB1(btnElement) {
+  onlyB1 = !onlyB1;
+  btnElement.classList.toggle('active', onlyB1);
+  renderCards();
+}
+
+function toggleHideHu(btnElement) {
+  hideHu = !hideHu;
+  btnElement.classList.toggle('active', hideHu);
+  renderCards();
+}
+
+renderCards();
+renderSignals();
+startNewRound();
+</script>
+</body>
+</html>
