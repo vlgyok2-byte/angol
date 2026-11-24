@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angol Igeidők – Alapfokú (B1) Nyelvvizsga Felkészítő v7 (150 kérdés)</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --present: #10b981;
+      --present-bg: #ecfdf5;
+      --past: #f59e0b;
+      --past-bg: #fffbeb;
+      --future: #3b82f6;
+      --future-bg: #eff6ff;
+      --border: #e2e8f0;
+      --b1-badge: #7c3aed;
+      --success: #16a34a;
+      --error: #dc2626;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+    }
+
+    header h1 { font-size: 1.75rem; margin-bottom: 8px; color: #0f172a; }
+    header p { color: var(--muted); font-size: 0.95rem; }
+
+    .voice-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.85rem;
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: #0f172a;
+      color: #fff;
+      border-color: #0f172a;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: #f8fafc; transform: translateY(-1px); }
+    .btn.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+    .btn.b1-toggle.active { background: var(--b1-badge); border-color: var(--b1-badge); color: #fff; }
+    .btn.primary-action { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .btn.primary-action:hover { background: #1d4ed8; }
+    .btn.retry-btn { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+    .btn.retry-btn:hover { background: #fee2e2; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .card.present .card-header { background: var(--present-bg); border-left: 5px solid var(--present); }
+    .card.past .card-header { background: var(--past-bg); border-left: 5px solid var(--past); }
+    .card.future .card-header { background: var(--future-bg); border-left: 5px solid var(--future); }
+
+    .tense-en { font-size: 1.15rem; font-weight: 700; color: #0f172a; }
+    .tense-hu { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .badge.b1 { background: #ede9fe; color: var(--b1-badge); }
+    .badge.b2 { background: #f1f5f9; color: #475569; }
+
+    .card-body { padding: 16px 20px; flex-grow: 1; }
+
+    .usage {
+      font-size: 0.9rem;
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .formula {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #334155;
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .examples { display: flex; flex-direction: column; gap: 10px; }
+
+    .example-item {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .en-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .en-text { font-weight: 600; font-size: 0.95rem; color: #0f172a; }
+    .hu-text { font-size: 0.88rem; color: var(--muted); }
+
+    .hidden-text { filter: blur(5px); user-select: none; cursor: pointer; }
+    .hidden-text:hover { filter: none; }
+
+    .audio-btns { display: flex; gap: 4px; flex-shrink: 0; }
+
+    .speak-btn {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .speak-btn:hover { background: #e2e8f0; }
+
+    /* Signal words table */
+    .table-wrap {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+    th { background: #f8fafc; font-weight: 700; color: #0f172a; }
+    .tag {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      margin: 2px;
+    }
+
+    /* Quiz styles */
+    .quiz-box {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    .quiz-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .score-pill {
+      background: #0f172a;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #7c3aed);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .round-summary {
+      display: none;
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .round-summary h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .percent-big {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 6px 0;
+    }
+
+    .percent-good { color: var(--success); }
+    .percent-mid { color: #d97706; }
+    .percent-low { color: var(--error); }
+
+    .summary-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .q-item {
+      margin-bottom: 18px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fcfcfd;
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .q-cat {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .q-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 4px; }
+    .q-hu { font-size: 0.88rem; color: var(--muted); margin-bottom: 12px; }
+
+    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+
+    .opt-btn {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      text-align: left;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .opt-btn:hover:not(:disabled) { background: #f1f5f9; }
+    .opt-btn.correct { background: #dcfce7; border-color: var(--success); color: #14532d; }
+    .opt-btn.wrong { background: #fee2e2; border-color: var(--error); color: #7f1d1d; }
+
+    .explanation {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      display: none;
+    }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer { text-align: center; margin-top: 30px; font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🇬🇧 Angol Igeidők – Alapfokú (B1) Nyelvvizsga Felkészítő 🇭🇺</h1>
+    <p>12 igeidő kártya, vizsgás időhatározók és 10 kérdéses véletlenszerű B1 tesztkörök százalékos értékeléssel.</p>
+  </header>
+
+  <div class="voice-bar" style="flex-wrap: wrap;">
+    <label for="voiceSelect">Angol hang:</label>
+    <select id="voiceSelect"></select>
+    <label for="voiceProfile">Hangszín / stílus:</label>
+    <select id="voiceProfile" title="Módosítja a hangmagasságot és a tempót">
+      <option value="normal">🎙️ Alapértelmezett (Normál)</option>
+      <option value="deep">🧔 Mélyebb férfias hangszín</option>
+      <option value="high">👩 Magasabb nőies hangszín</option>
+      <option value="exam">🎧 Vizsgáztató (tisztán, tagoltan)</option>
+      <option value="fast">⚡ Gyors (anyanyelvi tempó)</option>
+    </select>
+    <button class="speak-btn" id="testVoiceBtn" type="button" title="Kiválasztott hang kipróbálása">▶️ Próba</button>
+    <label style="display:flex; align-items:center; gap:4px; cursor:pointer; font-size:0.8rem;">
+      <input type="checkbox" id="showAllVoices"> Minden telepített hang mutatása
+    </label>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('cardsSec', this)">📚 1. Igeidő Kártyák</button>
+    <button class="tab-btn" onclick="switchTab('signalsSec', this)">🔑 2. Időhatározók (B1)</button>
+    <button class="tab-btn" onclick="switchTab('quizSec', this)">✍️ 3. B1 Gyakorló Teszt (10-es körök)</button>
+  </div>
+
+  <!-- 1. KÁRTYÁK -->
+  <div id="cardsSec" class="section active">
+    <div class="controls">
+      <button class="btn active" onclick="filterTime('all', this)">Összes (12)</button>
+      <button class="btn" onclick="filterTime('present', this)">🟢 Jelen (Present)</button>
+      <button class="btn" onclick="filterTime('past', this)">🟡 Múlt (Past)</button>
+      <button class="btn" onclick="filterTime('future', this)">🔵 Jövő (Future)</button>
+      <button class="btn b1-toggle" onclick="toggleB1(this)">🎯 Csak B1 alapfokú vizsgaanyag</button>
+      <button class="btn" onclick="toggleHideHu(this)">👁️ Magyar elrejtése (Teszt)</button>
+    </div>
+    <div class="grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- 2. IDŐHATÁROZÓK -->
+  <div id="signalsSec" class="section">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Igeidő (B1 Alapfok)</th>
+            <th>Tipikus jelzőszavak / időhatározók</th>
+            <th>Példamondat (kattints a hallgatáshoz)</th>
+          </tr>
+        </thead>
+        <tbody id="signalsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. KVÍZ -->
+  <div id="quizSec" class="section">
+    <div class="quiz-box">
+      <div class="quiz-topbar">
+        <div>
+          <strong style="font-size:1.1rem;">B1 Gyakorló Teszt (10 véletlenszerű kérdés / kör)</strong>
+          <div style="font-size:0.84rem; color:var(--muted);" id="poolInfo">Teljes kérdésbank: 150 feladat</div>
+        </div>
+        <div class="score-pill" id="scoreDisplay">0 / 10 (0%)</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="controls" style="margin-bottom: 16px;">
+        <button class="btn active" onclick="setQuizTopic('all', this)">🎲 Összes témakör (150)</button>
+        <button class="btn" onclick="setQuizTopic('present', this)">🟢 Jelen idők (38)</button>
+        <button class="btn" onclick="setQuizTopic('past', this)">🟡 Múlt idők (38)</button>
+        <button class="btn" onclick="setQuizTopic('future', this)">🔵 Jövő idők (36)</button>
+        <button class="btn" onclick="setQuizTopic('traps', this)">⚡ B1 Vizsgacsapdák (38)</button>
+      </div>
+
+      <div class="round-summary" id="roundSummary">
+        <h3>Kör eredménye</h3>
+        <div class="percent-big" id="summaryPercent">0%</div>
+        <div id="summaryText" style="color:var(--text); font-weight:600;"></div>
+        <div class="summary-actions">
+          <button class="btn primary-action" onclick="startNewRound()">➡️ Újabb 10 véletlenszerű kérdés</button>
+          <button class="btn retry-btn" id="summaryRetryBtn" onclick="retryWrongOnly()">🎯 Csak a hibásak újrapróbálása</button>
+        </div>
+      </div>
+
+      <div id="quizContainer"></div>
+
+      <div class="bottom-bar">
+        <button class="btn primary-action" onclick="startNewRound()">🔄 Újabb 10 véletlenszerű kérdés</button>
+        <button class="btn retry-btn" id="bottomRetryBtn" onclick="retryWrongOnly()">🎯 Hibásak újrapróbálása (0)</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Tipp: A 🔊 gomb normál sebességgel, a 🐢 gomb lassítva olvassa fel az angol mondatokat.
+  </footer>
+</div>
+
+<script>
+const tensesData = [
+  {
+    category: "present", level: "b1", enName: "Present Simple", huName: "Egyszerű jelen",
+    formula: "Alany + Ige (E/3: -s)",
+    usage: "Szokás, rendszeres cselekvés, általános tény. Jövő: menetrendek, órarendek.",
+    examples: [
+      { en: "I study English every day.", hu: "Minden nap angolt tanulok." },
+      { en: "My train leaves at six tomorrow.", hu: "A vonatom holnap hatkor indul. (menetrend)" },
+      { en: "I write books.", hu: "Könyveket írok." },
+      { en: "She drinks coffee every morning.", hu: "Minden reggel kávét iszik." }
+    ]
+  },
+  {
+    category: "present", level: "b1", enName: "Present Continuous", huName: "Folyamatos jelen",
+    formula: "am / is / are + Ige-ing",
+    usage: "Most zajlik vagy átmenetileg tart. Jövő: előre egyeztetett programok.",
+    examples: [
+      { en: "I am studying English now.", hu: "Most éppen angolt tanulok." },
+      { en: "I am meeting Tom tomorrow.", hu: "Holnap találkozom Tommal. (egyeztetett program)" },
+      { en: "I am writing a book now.", hu: "Most írok egy könyvet." },
+      { en: "They are watching TV at the moment.", hu: "Éppen tévét néznek." }
+    ]
+  },
+  {
+    category: "present", level: "b1", enName: "Present Perfect", huName: "Befejezett jelen",
+    formula: "have / has + Ige 3. alakja",
+    usage: "Múltbeli esemény jelenbeli kapcsolattal vagy eredménnyel. A pontos időpont nem lényeges.",
+    examples: [
+      { en: "I have finished my homework.", hu: "Elkészítettem a házi feladatomat." },
+      { en: "I have written a book.", hu: "Megírtam egy könyvet." },
+      { en: "We have lived here for five years.", hu: "Öt éve élünk itt." }
+    ]
+  },
+  {
+    category: "present", level: "b2", enName: "Present Perfect Continuous", huName: "Folyamatos befejezett jelen",
+    formula: "have / has been + Ige-ing",
+    usage: "Korábban kezdődött cselekvés, amely még tart, vagy épp most ért véget (tartam hangsúlyos).",
+    examples: [
+      { en: "I have been studying English for two hours.", hu: "Két órája tanulok angolt." },
+      { en: "I have been writing a book since morning.", hu: "Reggel óta írok egy könyvet." },
+      { en: "It has been raining all day.", hu: "Egész nap esik az eső." }
+    ]
+  },
+  {
+    category: "past", level: "b1", enName: "Past Simple", huName: "Egyszerű múlt",
+    formula: "Ige 2. alakja (-ed / rendhagyó)",
+    usage: "Lezárt múltbeli esemény. A mondatból vagy szövegkörnyezetből kiderül, mikor történt.",
+    examples: [
+      { en: "I studied English yesterday.", hu: "Tegnap angolt tanultam." },
+      { en: "I wrote a book yesterday.", hu: "Tegnap írtam egy könyvet." },
+      { en: "She visited London last year.", hu: "Tavaly meglátogatta Londont." }
+    ]
+  },
+  {
+    category: "past", level: "b1", enName: "Past Continuous", huName: "Folyamatos múlt",
+    formula: "was / were + Ige-ing",
+    usage: "Egy adott múltbeli pillanatban éppen zajló cselekvés, vagy háttércselekvés.",
+    examples: [
+      { en: "I was studying English at eight last night.", hu: "Tegnap este nyolckor éppen angolt tanultam." },
+      { en: "I was writing a book all day.", hu: "Egész nap egy könyvet írtam." },
+      { en: "It was raining when I woke up.", hu: "Eső esett, amikor felébredtem." }
+    ]
+  },
+  {
+    category: "past", level: "b2", enName: "Past Perfect", huName: "Befejezett múlt",
+    formula: "had + Ige 3. alakja",
+    usage: "Egy másik múltbeli esemény előtt már megtörtént cselekvés (előidejűség).",
+    examples: [
+      { en: "I had finished my homework before dinner.", hu: "Vacsora előtt már elkészítettem a házi feladatomat." },
+      { en: "I had written a book before he arrived.", hu: "Megírtam egy könyvet, mielőtt megérkezett." },
+      { en: "They had already left.", hu: "Már elmentek." }
+    ]
+  },
+  {
+    category: "past", level: "b2", enName: "Past Perfect Continuous", huName: "Folyamatos befejezett múlt",
+    formula: "had been + Ige-ing",
+    usage: "Egy múltbeli időpontig már egy ideje folyamatosan tartó cselekvés.",
+    examples: [
+      { en: "I had been studying for two hours when you called.", hu: "Már két órája tanultam, amikor felhívtál." },
+      { en: "I had been writing a book for two hours.", hu: "Már két órája írtam egy könyvet." },
+      { en: "He had been running all morning.", hu: "Egész reggel futott." }
+    ]
+  },
+  {
+    category: "future", level: "b1", enName: "Future Simple", huName: "Egyszerű jövő",
+    formula: "will + Ige 1. alakja",
+    usage: "Jóslat, ígéret, felajánlás vagy a beszéd pillanatában hozott spontán döntés.",
+    examples: [
+      { en: "I will help you.", hu: "Segítek neked." },
+      { en: "I will write a book.", hu: "Írni fogok egy könyvet." },
+      { en: "She will call you tomorrow.", hu: "Holnap fel fog hívni." }
+    ]
+  },
+  {
+    category: "future", level: "b2", enName: "Future Continuous", huName: "Folyamatos jövő",
+    formula: "will be + Ige-ing",
+    usage: "Egy jövőbeli adott pillanatban éppen folyamatban lévő cselekvés.",
+    examples: [
+      { en: "I will be studying English at eight tomorrow.", hu: "Holnap nyolckor éppen angolt fogok tanulni." },
+      { en: "I will be writing a book.", hu: "Éppen egy könyvet fogok írni." },
+      { en: "Tomorrow at 5, we will be flying.", hu: "Holnap 5-kor éppen repülni fogunk." }
+    ]
+  },
+  {
+    category: "future", level: "b2", enName: "Future Perfect", huName: "Befejezett jövő",
+    formula: "will have + Ige 3. alakja",
+    usage: "Egy jövőbeli időpontig már befejeződő, megtörténő cselekvés.",
+    examples: [
+      { en: "I will have finished my homework by six.", hu: "Hat órára már elkészítem a házi feladatomat." },
+      { en: "I will have written a book by the end of the week.", hu: "A hét végére meg fogom írni a könyvet." },
+      { en: "They will have arrived by 6 PM.", hu: "Este 6-ra meg fognak érkezni." }
+    ]
+  },
+  {
+    category: "future", level: "b2", enName: "Future Perfect Continuous", huName: "Folyamatos befejezett jövő",
+    formula: "will have been + Ige-ing",
+    usage: "Egy jövőbeli időpontig már egy bizonyos ideje folyamatosan tartó cselekvés.",
+    examples: [
+      { en: "I will have been studying for two hours by six.", hu: "Hat órakor már két órája fogok tanulni." },
+      { en: "I will have been writing a book for two hours.", hu: "Már két órája írni fogom a könyvet." },
+      { en: "By next year, he will have been working here for ten years.", hu: "Jövőre már tíz éve itt fog dolgozni." }
+    ]
+  }
+];
+
+const signalsData = [
+  {
+    tense: "Present Simple (Egyszerű jelen)",
+    words: ["always", "usually", "often", "sometimes", "never", "every day / week", "on Mondays"],
+    exampleEn: "She usually drinks tea in the morning.",
+    exampleHu: "Általában teát iszik reggel."
+  },
+  {
+    tense: "Present Continuous (Folyamatos jelen)",
+    words: ["now", "right now", "at the moment", "Look!", "Listen!", "today", "this week"],
+    exampleEn: "Look! It is snowing outside.",
+    exampleHu: "Nézd! Kint esik a hó."
+  },
+  {
+    tense: "Present Perfect (Befejezett jelen)",
+    words: ["already", "just", "yet", "ever", "never", "since", "for", "so far", "recently"],
+    exampleEn: "Have you ever been to London?",
+    exampleHu: "Voltál már valaha Londonban?"
+  },
+  {
+    tense: "Past Simple (Egyszerű múlt)",
+    words: ["yesterday", "last night / week / year", "two days ago", "in 2020", "when I was a child"],
+    exampleEn: "We moved to this city three years ago.",
+    exampleHu: "Három éve költöztünk ebbe a városba."
+  },
+  {
+    tense: "Past Continuous (Folyamatos múlt)",
+    words: ["while", "when", "at 5 o'clock yesterday", "all day yesterday"],
+    exampleEn: "I was cooking when the phone rang.",
+    exampleHu: "Éppen főztem, amikor megcsörrent a telefon."
+  },
+  {
+    tense: "Future Simple (Egyszerű jövő)",
+    words: ["tomorrow", "next week / month", "I think", "probably", "I promise", "in the future"],
+    exampleEn: "I think it will rain tomorrow.",
+    exampleHu: "Szerintem holnap esni fog az eső."
+  }
+];
+
+const fullQuizPool = [
+  // PRESENT (12)
+  { topic: "present", label: "Jelen idők", q: "She ______ coffee every morning before work.", hu: "Minden reggel kávét iszik munka előtt.", options: ["drinks", "is drinking", "has drunk", "drank"], answer: 0, exp: "Az 'every morning' rendszeres szokást jelöl -> Present Simple (E/3: -s)." },
+  { topic: "present", label: "Jelen idők", q: "Be quiet! The baby ______.", hu: "Maradj csendben! A baba alszik.", options: ["sleeps", "is sleeping", "slept", "will sleep"], answer: 1, exp: "A 'Be quiet!' jelzi, hogy most, a beszéd pillanatában zajlik -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "I ______ my homework yet.", hu: "Még nem fejeztem be a házi feladatomat.", options: ["didn't finish", "don't finish", "haven't finished", "am not finishing"], answer: 2, exp: "A 'yet' (még) tagadó mondatban a Present Perfect tipikus jelzőszava." },
+  { topic: "present", label: "Jelen idők", q: "They ______ in Kaposvár since 2018.", hu: "2018 óta Kaposváron élnek.", options: ["live", "lived", "are living", "have lived"], answer: 3, exp: "A 'since' (óta) múltban kezdődött, de máig tartó állapotot jelöl -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "How long ______ English?", hu: "Mióta tanulsz angolul?", options: ["do you learn", "did you learn", "have you studied", "are you studying"], answer: 2, exp: "A 'How long' (mióta / mennyi ideje) a jelenig tartó időtartamra kérdez -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "Water ______ at 100 degrees Celsius.", hu: "A víz 100 Celsius-fokon forr.", options: ["boils", "is boiling", "boiled", "has boiled"], answer: 0, exp: "Általános természeti törvényekhez mindig Present Simple szükséges." },
+  { topic: "present", label: "Jelen idők", q: "Look! It ______ outside.", hu: "Nézd! Kint esik a hó.", options: ["snows", "is snowing", "has snowed", "snowed"], answer: 1, exp: "A 'Look!' felkiáltás az éppen most zajló eseményre hívja fel a figyelmet -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "______ you ever ______ sushi?", hu: "Ettél már valaha szusit?", options: ["Did / eat", "Do / eat", "Have / eaten", "Are / eating"], answer: 2, exp: "Az 'ever' (valaha) élettapasztalatra kérdez rá -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "My brother ______ in a bank, he is an accountant.", hu: "A bátyám egy bankban dolgozik, könyvelő.", options: ["works", "is working", "worked", "has worked"], answer: 0, exp: "Állandó munkahely és foglalkozás kifejezésére Present Simple-t használunk." },
+  { topic: "present", label: "Jelen idők", q: "I can't talk right now, I ______ dinner.", hu: "Most nem tudok beszélni, éppen vacsorát főzök.", options: ["cook", "am cooking", "cooked", "have cooked"], answer: 1, exp: "A 'right now' (épp most) folyamatos jelent (Present Continuous) igényel." },
+  { topic: "present", label: "Jelen idők", q: "We ______ already ______ that film twice.", hu: "Már kétszer láttuk azt a filmet.", options: ["did / see", "are / seeing", "have / seen", "do / see"], answer: 2, exp: "Az 'already' (már) és az ismétlődés száma Present Perfect-et kíván." },
+  { topic: "present", label: "Jelen idők", q: "How often ______ your grandparents?", hu: "Milyen gyakran látogatod meg a nagyszüleidet?", options: ["do you visit", "are you visiting", "have you visited", "did you visit"], answer: 0, exp: "A 'How often' rendszerességre kérdez rá -> Present Simple." },
+
+  // PAST (12)
+  { topic: "past", label: "Múlt idők", q: "We ______ to Spain last summer.", hu: "Tavaly nyáron Spanyolországba utaztunk.", options: ["have gone", "go", "went", "were going"], answer: 2, exp: "A 'last summer' lezárt múltbeli időpont -> Past Simple (went)." },
+  { topic: "past", label: "Múlt idők", q: "What ______ at 8 PM yesterday?", hu: "Mit csináltál tegnap este 8-kor?", options: ["did you do", "were you doing", "have you done", "do you do"], answer: 1, exp: "Adott múltbeli pillanatban zajló folyamat -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "I was walking home when I ______ an old friend.", hu: "Éppen hazafelé sétáltam, amikor találkoztam egy régi barátommal.", options: ["was meeting", "met", "have met", "meet"], answer: 1, exp: "A folyamatot megszakító rövid cselekvés Past Simple-ben áll (met)." },
+  { topic: "past", label: "Múlt idők", q: "They ______ a new car two weeks ago.", hu: "Két hete vettek egy új autót.", options: ["bought", "have bought", "buy", "were buying"], answer: 0, exp: "Az 'ago' (ezelőtt) mindig Past Simple-t vonz." },
+  { topic: "past", label: "Múlt idők", q: "While I ______, my sister was listening to music.", hu: "Miközben én tanultam, a húgom zenét hallgatott.", options: ["studied", "was studying", "have studied", "study"], answer: 1, exp: "Két párhuzamosan zajló múltbeli folyamatnál ('while') mindkettő Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "Shakespeare ______ many famous plays.", hu: "Shakespeare sok híres színdarabot írt.", options: ["has written", "wrote", "writes", "was writing"], answer: 1, exp: "Már nem élő személy alkotásainál lezárt múltat (Past Simple) használunk." },
+  { topic: "past", label: "Múlt idők", q: "______ you ______ the football match last night?", hu: "Nézted a focimeccset tegnap este?", options: ["Have / watched", "Did / watch", "Were / watching", "Do / watch"], answer: 1, exp: "A 'last night' lezárt múlt -> Past Simple kérdés (Did + 1. alak)." },
+  { topic: "past", label: "Múlt idők", q: "It ______ heavily when we left the cinema.", hu: "Erősen esett az eső, amikor kijöttünk a moziból.", options: ["rained", "was raining", "has rained", "rains"], answer: 1, exp: "Háttércselekvés a múltban -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "I ______ my keys yesterday, so I couldn't open the door.", hu: "Tegnap elvesztettem a kulcsaimat, így nem tudtam kinyitni az ajtót.", options: ["lost", "have lost", "was losing", "lose"], answer: 0, exp: "A 'yesterday' egyértelművé teszi a lezárt múltat (Past Simple)." },
+  { topic: "past", label: "Múlt idők", q: "When I was a child, I ______ cartoons every afternoon.", hu: "Gyerekkoromban minden délután rajzfilmeket néztem.", options: ["have watched", "watched", "am watching", "watch"], answer: 1, exp: "Múltbeli szokás ('When I was a child') -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "She ______ her leg while she was skiing.", hu: "Eltörte a lábát síelés közben.", options: ["was breaking", "broke", "has broken", "breaks"], answer: 1, exp: "A síelés (folyamat) közben bekövetkező hirtelen baleset -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "We ______ at the hotel at midnight.", hu: "Éjfélkor érkeztünk meg a szállodába.", options: ["arrived", "have arrived", "arrive", "were arriving"], answer: 0, exp: "Konkrét múltbeli időpont ('at midnight') -> Past Simple." },
+
+  // FUTURE (9)
+  { topic: "future", label: "Jövő idők", q: "Oh, you have heavy bags! I ______ you.", hu: "Ó, nehezek a táskáid! Segítek neked.", options: ["help", "am helping", "will help", "helped"], answer: 2, exp: "Spontán felajánlás a beszéd pillanatában -> Future Simple (will)." },
+  { topic: "future", label: "Jövő idők", q: "I think our team ______ the match tomorrow.", hu: "Szerintem a csapatunk megnyeri a holnapi meccset.", options: ["wins", "will win", "won", "has won"], answer: 1, exp: "Személyes vélemény, jóslat ('I think') -> Future Simple (will)." },
+  { topic: "future", label: "Jövő idők", q: "I promise I ______ anyone your secret.", hu: "Ígérem, senkinek nem mondom el a titkodat.", options: ["don't tell", "won't tell", "am not telling", "didn't tell"], answer: 1, exp: "Ígéretekhez ('I promise') mindig 'will / won't' használatos." },
+  { topic: "future", label: "Jövő idők", q: "Look at those dark clouds! It ______ soon.", hu: "Nézd azokat a sötét felhőket! Hamarosan esni fog.", options: ["will rain", "is going to rain", "rains", "rained"], answer: 1, exp: "Látható jelenlegi jelből (sötét felhők) következtetünk a jövőre -> going to." },
+  { topic: "future", label: "Jövő idők", q: "We ______ to Italy next summer, we already have the tickets.", hu: "Jövő nyáron Olaszországba utazunk, már megvannak a jegyeink.", options: ["will fly", "are flying", "flew", "fly"], answer: 1, exp: "Már leszervezett, jegyekkel biztosított program -> Present Continuous jövő időre." },
+  { topic: "future", label: "Jövő idők", q: "What ______ you ______ after university?", hu: "Mit tervezel csinálni az egyetem után?", options: ["do / do", "are / going to do", "did / do", "have / done"], answer: 1, exp: "Jövőbeli szándékokra, tervekre 'be going to'-val kérdezünk rá." },
+  { topic: "future", label: "Jövő idők", q: "I'm thirsty. I think I ______ a glass of water.", hu: "Szomjas vagyok. Azt hiszem, iszom egy pohár vizet.", options: ["will drink", "am drinking", "drink", "drank"], answer: 0, exp: "Hirtelen jött döntés a beszéd pillanatában -> will." },
+  { topic: "future", label: "Jövő idők", q: "Don't worry, everything ______ fine.", hu: "Ne aggódj, minden rendben lesz.", options: ["is", "will be", "was", "has been"], answer: 1, exp: "Megnyugtatás, jövőre vonatkozó biztatás -> will be." },
+  { topic: "future", label: "Jövő idők", q: "They ______ a new house next year, they are saving money for it.", hu: "Jövőre új házat fognak venni, már gyűjtik rá a pénzt.", options: ["are going to buy", "bought", "buy", "have bought"], answer: 0, exp: "Előre elhatározott szándék ('saving money for it') -> going to." },
+
+  // TRAPS (12)
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "My train ______ at 7:15 tomorrow morning.", hu: "A vonatom holnap reggel 7:15-kor indul.", options: ["leaves", "will leave", "left", "has left"], answer: 0, exp: "Csapda! Menetrendekhez jövő idő helyett is Present Simple-t használunk." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ Tom tomorrow at 5 PM, we arranged it yesterday.", hu: "Holnap délután 5-kor találkozom Tommal, tegnap beszéltük meg.", options: ["meet", "am meeting", "met", "have met"], answer: 1, exp: "Előre egyeztetett személyes találkozóhoz Present Continuous kell." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ this car for five years.", hu: "Öt éve van meg ez az autóm.", options: ["have", "am having", "have had", "had"], answer: 2, exp: "Csapda! A 'have' (birtokol) állapotige, nem állhat folyamatosban, és 'for' miatt Present Perfect kell (have had)." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "She ______ the answer right now.", hu: "Most tudja a választ.", options: ["knows", "is knowing", "has known", "knew"], answer: 0, exp: "Csapda! A 'know' (tudni) állapotige, még 'right now' mellett sem tehető folyamatos alakba!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I'll call you as soon as I ______ home.", hu: "Felhívlak, amint hazaérek.", options: ["will get", "get", "got", "am getting"], answer: 1, exp: "Csapda! Az 'as soon as' (amint) időhatározói mellékmondatban jövő idő helyett Present Simple áll!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "He has worked here ______ ten years.", hu: "Tíz éve dolgozik itt.", options: ["since", "for", "ago", "during"], answer: 1, exp: "Időtartam ('ten years') előtt 'for', kezdőpont (pl. 2016) előtt 'since' áll." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "My sister ______ to Paris twice, she loves it.", hu: "A nővérem kétszer járt Párizsban, imádja.", options: ["has gone", "has been", "went", "was"], answer: 1, exp: "Csapda! A 'has been to' azt jelenti, megjárta és már visszajött; a 'has gone to' pedig azt, hogy még most is ott van." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "This soup ______ delicious!", hu: "Ennek a levesnek isteni íze van!", options: ["tastes", "is tasting", "has tasted", "tasted"], answer: 0, exp: "Érzékelést kifejező állapotige ('taste' = valamilyen íze van) -> Present Simple." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "When ______ you ______ your new phone?", hu: "Mikor vetted az új telefonodat?", options: ["have / bought", "did / buy", "do / buy", "were / buying"], answer: 1, exp: "Csapda! A 'When' (Mikor?) konkrét múltbeli időpontra kérdez -> mindig Past Simple, soha nem Present Perfect!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "If it ______ tomorrow, we will stay at home.", hu: "Ha holnap esik az eső, otthon maradunk.", options: ["will rain", "rains", "rained", "is raining"], answer: 1, exp: "1. típusú feltételes mondatban az 'If' után jelen idő (Present Simple) áll, nem 'will'!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ to understand what you are saying.", hu: "Próbálom megérteni, amit mondasz.", options: ["try", "am trying", "tried", "have tried"], answer: 1, exp: "A 'try' cselekvő ige (most próbálkozom -> am trying), az 'understand' viszont állapotige." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "We haven't seen each other ______ last Christmas.", hu: "Tavaly karácsony óta nem láttuk egymást.", options: ["for", "since", "from", "ago"], answer: 1, exp: "A 'last Christmas' egy konkrét múltbeli kezdőpont, ezért 'since' kell elé." },
+
+  // --- BŐVÍTETT B1 KÉRDÉSBANK (+55 ÚJ FELADAT -> ÖSSZESEN 100) ---
+  { topic: "present", label: "Jelen idők", q: "My parents ______ in a small village near Lake Balaton.", hu: "A szüleim egy kis faluban élnek a Balaton közelében.", options: ["live", "are living", "have lived", "lived"], answer: 0, exp: "Állandó lakhely kifejezésére Present Simple-t használunk." },
+  { topic: "present", label: "Jelen idők", q: "Why ______ you ______ a coat? It's warm today!", hu: "Miért viselsz kabátot? Ma meleg van!", options: ["do / wear", "are / wearing", "did / wear", "have / worn"], answer: 1, exp: "A jelen pillanatban, átmenetileg fennálló helyzetre kérdezünk rá -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "She ______ her keys, so she can't get into her flat.", hu: "Elvesztette a kulcsait, ezért nem tud bemenni a lakásába.", options: ["loses", "lost", "has lost", "is losing"], answer: 2, exp: "Múltbeli cselekvés, amelynek jelenbeli következménye van (nem tud bemenni) -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "The sun ______ in the east and sets in the west.", hu: "A nap keleten kel és nyugaton nyugszik.", options: ["rises", "is rising", "has risen", "rose"], answer: 0, exp: "Általános érvényű természeti igazság -> Present Simple." },
+  { topic: "present", label: "Jelen idők", q: "This week I ______ at the main office instead of working from home.", hu: "Ezen a héten a központi irodában dolgozom otthoni munka helyett.", options: ["work", "am working", "worked", "have worked"], answer: 1, exp: "A 'this week' átmeneti, a megszokottól eltérő helyzetet jelöl -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "I ______ never ______ a horse before.", hu: "Még sosem lovagoltam ezelőtt.", options: ["did / ride", "am / riding", "have / ridden", "do / ride"], answer: 2, exp: "A 'never' (soha) és a 'before' (ezelőtt) élettapasztalatra utal -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "What time ______ the supermarket usually ______?", hu: "Hánykor nyit általában a szupermarket?", options: ["is / opening", "does / open", "has / opened", "did / open"], answer: 1, exp: "Az 'usually' rendszeres nyitvatartásra kérdez rá -> Present Simple." },
+  { topic: "present", label: "Jelen idők", q: "Listen! Somebody ______ the piano upstairs.", hu: "Hallgasd! Valaki zongorázik az emeleten.", options: ["plays", "is playing", "has played", "played"], answer: 1, exp: "A 'Listen!' felkiáltás az éppen most hallható cselekvésre utal -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "We ______ each other for more than ten years.", hu: "Több mint tíz éve ismerjük egymást.", options: ["know", "are knowing", "have known", "knew"], answer: 2, exp: "Múltban kezdődött és máig tartó állapot ('for + időtartam') -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "He ______ just ______ back from his holiday in Greece.", hu: "Épp most ért vissza a görögországi nyaralásából.", options: ["has / come", "is / coming", "did / come", "does / come"], answer: 0, exp: "A 'just' (épp most) frissen befejezett cselekvést jelöl -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "My sister ______ meat; she is a vegetarian.", hu: "A húgom nem eszik húst; vegetáriánus.", options: ["isn't eating", "doesn't eat", "hasn't eaten", "didn't eat"], answer: 1, exp: "Állandó szokás, életmód kifejezése -> Present Simple." },
+  { topic: "present", label: "Jelen idők", q: "More and more people ______ electric cars nowadays.", hu: "Manapság egyre több ember vásárol elektromos autót.", options: ["buy", "are buying", "bought", "have bought"], answer: 1, exp: "Folyamatban lévő változás, tendencia ('nowadays') -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "______ you ______ your lunch yet? We can go for a walk.", hu: "Megebédeltél már? Elmehetünk sétálni.", options: ["Did / finish", "Do / finish", "Have / finished", "Are / finishing"], answer: 2, exp: "A 'yet' kérdő mondatban ('már') Present Perfect-tel áll." },
+  { topic: "present", label: "Jelen idők", q: "Every Sunday, my father ______ pancakes for breakfast.", hu: "Minden vasárnap édesapám palacsintát süt reggelire.", options: ["makes", "is making", "has made", "made"], answer: 0, exp: "Az 'Every Sunday' rendszeresen ismétlődő cselekvés -> Present Simple." },
+  { topic: "past", label: "Múlt idők", q: "I ______ a very interesting documentary on TV last night.", hu: "Tegnap este egy nagyon érdekes dokumentumfilmet néztem a tévében.", options: ["have watched", "watched", "was watching", "watch"], answer: 1, exp: "A 'last night' lezárt múltbeli időpont -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "Sorry I didn't answer the phone, I ______ a shower.", hu: "Bocs, hogy nem vettem fel a telefont, éppen zuhanyoztam.", options: ["took", "was taking", "have taken", "take"], answer: 1, exp: "A telefon csörgésekor éppen folyamatban lévő háttércselekvés -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "Where ______ you ______ on holiday in 2022?", hu: "Hová mentél nyaralni 2022-ben?", options: ["have / gone", "did / go", "were / going", "do / go"], answer: 1, exp: "Konkrét múltbeli évszám ('in 2022') -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "The children ______ in the garden when it suddenly started to rain.", hu: "A gyerekek a kertben játszottak, amikor hirtelen elkezdett esni az eső.", options: ["played", "were playing", "have played", "play"], answer: 1, exp: "Hosszabb, folyamatban lévő cselekvés a múltban -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "He ______ his driving test on the first try!", hu: "Első próbálkozásra átment a forgalmi vizsgáján!", options: ["passed", "has passed", "was passing", "passes"], answer: 0, exp: "Egy konkrét, lezárt múltbeli esemény elbeszélése -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "What ______ you ______ between 6 and 7 yesterday evening?", hu: "Mit csináltál tegnap este 6 és 7 között?", options: ["did / do", "were / doing", "have / done", "do / do"], answer: 1, exp: "Meghatározott múltbeli időintervallumban zajló folyamat -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "Mozart ______ more than 600 pieces of music.", hu: "Mozart több mint 600 zeneművet szerzett.", options: ["has composed", "composed", "was composing", "composes"], answer: 1, exp: "Történelmi személy lezárt életműve -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "I ______ to buy milk on my way home yesterday.", hu: "Tegnap hazafelé elfelejtettem tejet venni.", options: ["forgot", "have forgotten", "was forgetting", "forget"], answer: 0, exp: "A 'yesterday' lezárt múltat jelöl -> Past Simple (forgot)." },
+  { topic: "past", label: "Múlt idők", q: "As I ______ the street, I saw a wallet on the pavement.", hu: "Miközben átkeltem az utcán, megláttam egy pénztárcát a járdán.", options: ["crossed", "was crossing", "have crossed", "cross"], answer: 1, exp: "Az 'As' (miközben) folyamatban lévő háttércselekvést vezet be -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "We ______ any bread yesterday because the bakery was closed.", hu: "Tegnap nem vettünk kenyeret, mert zárva volt a pékség.", options: ["didn't buy", "haven't bought", "weren't buying", "don't buy"], answer: 0, exp: "Múlt idejű tagadás ('yesterday') -> didn't + ige 1. alakja." },
+  { topic: "past", label: "Múlt idők", q: "My phone ______ while I was sitting in the dentist's waiting room.", hu: "Megcsörrent a telefonom, miközben a fogorvosi váróban ültem.", options: ["was ringing", "rang", "has rung", "rings"], answer: 1, exp: "A várakozást megszakító rövid, hirtelen cselekvés -> Past Simple (rang)." },
+  { topic: "past", label: "Múlt idők", q: "How much ______ your new laptop ______?", hu: "Mennyibe került az új laptopod?", options: ["did / cost", "has / cost", "was / costing", "does / cost"], answer: 0, exp: "A vásárlás lezárt múltbeli eseményére kérdezünk rá -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "Yesterday at noon, we ______ lunch in a nice restaurant.", hu: "Tegnap délben egy hangulatos étteremben ebédeltünk.", options: ["had", "were having", "have had", "have"], answer: 1, exp: "Pontos múltbeli időpontban ('Yesterday at noon') folyamatban lévő cselekvés -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "She ______ very tired after the long journey, so she went straight to bed.", hu: "Nagyon fáradt volt a hosszú út után, ezért egyenesen lefeküdt aludni.", options: ["was", "has been", "were", "is"], answer: 0, exp: "Múltbeli állapot leírása ('be' múlt ideje E/3-ban: was)." },
+  { topic: "future", label: "Jövő idők", q: "It's cold in here. I ______ the window.", hu: "Hideg van idebent. Becsukom az ablakot.", options: ["close", "am closing", "will close", "closed"], answer: 2, exp: "A beszéd pillanatában hozott spontán döntés -> will." },
+  { topic: "future", label: "Jövő idők", q: "We ______ a party this Saturday. Would you like to come?", hu: "Bulit tartunk ezen a szombaton. Szeretnél eljönni?", options: ["will have", "are having", "had", "have had"], answer: 1, exp: "Előre leszervezett program, esemény -> Present Continuous jövő időre." },
+  { topic: "future", label: "Jövő idők", q: "Watch out! You ______ that glass!", hu: "Vigyázz! Le fogod ejteni azt a poharat!", options: ["will drop", "are going to drop", "drop", "dropped"], answer: 1, exp: "Közvetlen, látható jelből adódó következtetés -> be going to." },
+  { topic: "future", label: "Jövő idők", q: "I'm sure you ______ the B1 English exam!", hu: "Biztos vagyok benne, hogy átmész az angol B1 nyelvvizsgán!", options: ["pass", "will pass", "are passing", "passed"], answer: 1, exp: "Az 'I'm sure' (biztos vagyok benne) kifejezés után 'will' áll." },
+  { topic: "future", label: "Jövő idők", q: "She ______ medicine at university next autumn; she has already applied.", hu: "Jövő ősszel orvosit fog tanulni az egyetemen; már jelentkezett is.", options: ["will study", "is going to study", "studied", "studies"], answer: 1, exp: "Már eldöntött, előkészített terv, szándék -> be going to." },
+  { topic: "future", label: "Jövő idők", q: "Maybe we ______ to the cinema tonight, we haven't decided yet.", hu: "Talán elmegyünk moziba ma este, még nem döntöttük el.", options: ["are going", "will go", "went", "go"], answer: 1, exp: "Bizonytalanságot kifejező szavak ('Maybe', 'perhaps') mellett 'will'-t használunk." },
+  { topic: "future", label: "Jövő idők", q: "I ______ the dentist tomorrow at 10 AM.", hu: "Holnap délelőtt 10-kor megyek a fogorvoshoz.", options: ["will see", "am seeing", "saw", "see"], answer: 1, exp: "Időpontra egyeztetett orvosi vizit -> Present Continuous." },
+  { topic: "future", label: "Jövő idők", q: "Wait a minute, I ______ you my umbrella.", hu: "Várj egy percet, kölcsönadom az esernyőmet.", options: ["lend", "am lending", "will lend", "lent"], answer: 2, exp: "Azonnali felajánlás -> Future Simple (will)." },
+  { topic: "future", label: "Jövő idők", q: "Look at the traffic! We ______ late for the meeting.", hu: "Nézd ezt a dugót! El fogunk késni a megbeszélésről.", options: ["will be", "are going to be", "are", "were"], answer: 1, exp: "A jelenlegi helyzetből (dugó) egyértelműen következő jövőbeli esemény -> going to." },
+  { topic: "future", label: "Jövő idők", q: "In 2050, more people ______ in big cities.", hu: "2050-ben több ember fog nagyvárosokban élni.", options: ["live", "will live", "are living", "lived"], answer: 1, exp: "Távoli jövőre vonatkozó általános jóslat -> will." },
+  { topic: "future", label: "Jövő idők", q: "I've bought some paint because I ______ my bedroom this weekend.", hu: "Vettem festéket, mert a hétvégén ki fogom festeni a hálószobámat.", options: ["will paint", "am going to paint", "paint", "painted"], answer: 1, exp: "Előre eltervezett szándék (már a festéket is megvette) -> be going to." },
+  { topic: "future", label: "Jövő idők", q: "______ you ______ me with this math problem, please?", hu: "Segítenél nekem ezzel a matekfeladattal, kérlek?", options: ["Do / help", "Will / help", "Are / helping", "Did / help"], answer: 1, exp: "Udvarias kérés megfogalmazására a 'Will you...?' szerkezetet használjuk." },
+  { topic: "future", label: "Jövő idők", q: "I promise I ______ late again.", hu: "Ígérem, nem fogok többé elkésni.", options: ["am not", "won't be", "am not going to be", "wasn't"], answer: 1, exp: "Ígéret ('I promise') -> will / won't." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "What time ______ your flight ______ tomorrow?", hu: "Hánykor indul a repülőgéped holnap?", options: ["will / take off", "does / take off", "is / taking off", "did / take off"], answer: 1, exp: "Csapda! Repülőgépek, vonatok, buszok menetrendjéhez jövő időben is Present Simple kell!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ what you mean, you don't have to explain it again.", hu: "Értem, mire gondolsz, nem kell újra elmagyaráznod.", options: ["understand", "am understanding", "have understood", "understood"], answer: 0, exp: "Csapda! Az 'understand' (érteni) állapotige, nem használható folyamatos alakban!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "We will start dinner as soon as Dad ______ home.", hu: "Elkezdjük a vacsorát, amint apa hazaér.", options: ["will arrive", "arrives", "arrived", "is arriving"], answer: 1, exp: "Csapda! Időhatározói mellékmondatban ('as soon as', 'when', 'until') jövő idő helyett Present Simple áll!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "She ______ in Budapest for three years, and she still loves it there.", hu: "Három éve Budapesten él, és még mindig imád ott lakni.", options: ["lived", "has lived", "is living", "lives"], answer: 1, exp: "Mivel még mindig ott él ('still loves it'), a cselekvés nem zárult le -> Present Perfect." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "She ______ in Budapest for three years, then she moved to Vienna.", hu: "Három évig Budapesten élt, aztán Bécsbe költözött.", options: ["has lived", "lived", "is living", "lives"], answer: 1, exp: "Csapda! Itt a 'for three years' már egy lezárt múltbeli időszak (elköltözött) -> Past Simple!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "Where is Peter? – He ______ to the post office, he'll be back soon.", hu: "Hol van Péter? – Elment a postára, hamarosan visszajön.", options: ["has been", "has gone", "went", "was"], answer: 1, exp: "Csapda! Mivel még nincs itt ('he'll be back soon'), 'has gone to' (elment és még ott van) a helyes." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "This perfume ______ wonderful! What is it?", hu: "Ennek a parfümnek csodás illata van! Mi ez?", options: ["smells", "is smelling", "has smelled", "smelled"], answer: 0, exp: "Csapda! A 'smell' (valamilyen illata van) érzékelést jelölő állapotige -> Present Simple." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ a new bike yesterday.", hu: "Tegnap vettem egy új biciklit.", options: ["have bought", "bought", "buy", "was buying"], answer: 1, exp: "Csapda! Bár a bicikli még megvan, a 'yesterday' konkrét múltbeli időpont miatt tilos a Present Perfect -> Past Simple!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "Don't call me until you ______ your homework.", hu: "Ne hívj fel, amíg el nem készítetted a házi feladatodat!", options: ["will finish", "finish", "finished", "are finishing"], answer: 1, exp: "Csapda! Az 'until' (amíg) kötőszó után jövő idő helyett Present Simple áll." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ you are right about this.", hu: "Azt hiszem, igazad van ebben.", options: ["think", "am thinking", "thought", "have thought"], answer: 0, exp: "Csapda! A 'think' véleménynyilvánításkor ('azt hiszem') állapotige, nem folyamatos!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "Be quiet! I ______ about the answer to this question.", hu: "Maradj csendben! Éppen ezen a kérdésen gondolkodom.", options: ["think", "am thinking", "thought", "have thought"], answer: 1, exp: "Csapda! Itt a 'think' cselekvést ('gondolkodik valamin') jelent, így folyamatosban áll (am thinking)!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "They have been married ______ 2015.", hu: "2015 óta házasok.", options: ["for", "since", "ago", "in"], answer: 1, exp: "Csapda! Konkrét kezdőpont (évszám: 2015) előtt mindig 'since' áll, nem 'for'." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "Who ______ this window? It's freezing in here!", hu: "Ki nyitotta ki ezt az ablakot? Meg lehet fagyni idebent!", options: ["did open", "opened", "has opened", "opens"], answer: 2, exp: "A nyitott ablak jelenbeli eredménye ('It's freezing') miatt Present Perfect ('has opened') a legtermészetesebb." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "If she ______ hard, she will pass the exam.", hu: "Ha szorgalmasan tanul, át fog menni a vizsgán.", options: ["will study", "studies", "studied", "is studying"], answer: 1, exp: "Csapda! Az 'If' tagmondatban 1. típusú feltételes módban jelen idő (studies) áll, nem 'will'!" },
+
+  // --- TOVÁBBI B1 KÉRDÉSEK (+50 ÚJ FELADAT -> ÖSSZESEN 150) ---
+  { topic: "present", label: "Jelen idők", q: "How many languages ______ your cousin ______?", hu: "Hány nyelven beszél az unokatestvéred?", options: ["does / speak", "is / speaking", "has / spoken", "did / speak"], answer: 0, exp: "Állandó nyelvtudásra, képességre kérdezünk rá -> Present Simple (does + ige 1. alakja)." },
+  { topic: "present", label: "Jelen idők", q: "Please don't make so much noise, I ______ to concentrate.", hu: "Kérlek, ne csapj ekkora zajt, próbálok koncentrálni.", options: ["try", "am trying", "have tried", "tried"], answer: 1, exp: "A jelen pillanatban zajló erőfeszítésre utal -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "I ______ three cups of coffee today, so I don't want another one.", hu: "Ma már három csésze kávét ittam, úgyhogy nem kérek többet.", options: ["drink", "drank", "have drunk", "am drinking"], answer: 2, exp: "A 'today' még nem zárult le, és az eddigi mennyiség van hangsúlyozva -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "Our English teacher always ______ us useful vocabulary tips.", hu: "Az angoltanárunk mindig hasznos szókincsfejlesztő tippeket ad nekünk.", options: ["gives", "is giving", "has given", "gave"], answer: 0, exp: "Az 'always' rendszeresen ismétlődő cselekvést jelöl -> Present Simple." },
+  { topic: "present", label: "Jelen idők", q: "Why ______ Anna ______? Did something bad happen?", hu: "Miért sír Anna? Történt valami rossz?", options: ["does / cry", "is / crying", "has / cried", "did / cry"], answer: 1, exp: "Most, a szemünk láttára történő cselekvés -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "We ______ in this neighbourhood since we got married.", hu: "Amióta összeházasodtunk, ezen a környéken élünk.", options: ["live", "are living", "have lived", "lived"], answer: 2, exp: "A 'since' (óta) múltbeli kezdőponttól máig tartó állapotot jelöl -> Present Perfect." },
+  { topic: "present", label: "Jelen idők", q: "Banks in Hungary usually ______ at 8 AM on weekdays.", hu: "A magyarországi bankok hétköznap általában reggel 8-kor nyitnak.", options: ["open", "are opening", "have opened", "opened"], answer: 0, exp: "Általános nyitvatartási rend, szokás ('usually', 'on weekdays') -> Present Simple." },
+  { topic: "present", label: "Jelen idők", q: "Have you seen my glasses? I ______ for them everywhere!", hu: "Láttad a szemüvegemet? Mindenhol azt keresem!", options: ["look", "am looking", "looked", "have looked"], answer: 1, exp: "Éppen most folyamatban lévő keresés -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "This is the best pizza I ______ ever ______!", hu: "Ez a legjobb pizza, amit valaha ettem!", options: ["did / eat", "am / eating", "have / eaten", "do / eat"], answer: 2, exp: "Felsőfokú melléknév ('the best') és 'ever' után mindig Present Perfect áll." },
+  { topic: "present", label: "Jelen idők", q: "My husband ______ the grass in the garden at the moment.", hu: "A férjem éppen füvet nyír a kertben.", options: ["cuts", "is cutting", "has cut", "cut"], answer: 1, exp: "Az 'at the moment' (épp most) folyamatos jelent kíván -> Present Continuous." },
+  { topic: "present", label: "Jelen idők", q: "She ______ her room every Saturday morning.", hu: "Minden szombat reggel kitakarítja a szobáját.", options: ["tidies", "is tidying", "has tidied", "tidied"], answer: 0, exp: "Rendszeres heti rutin ('every Saturday morning') -> Present Simple (-y -> -ies)." },
+  { topic: "present", label: "Jelen idők", q: "We ______ any news from David recently.", hu: "Mostanában nem hallottunk semmi hírt Dávidról.", options: ["didn't hear", "don't hear", "haven't heard", "aren't hearing"], answer: 2, exp: "A 'recently' (mostanában) a jelenig tartó időszakra utal -> Present Perfect." },
+  { topic: "past", label: "Múlt idők", q: "When I opened the curtains this morning, the sun ______ brightly.", hu: "Amikor ma reggel elhúztam a függönyt, hétágra sütött a nap.", options: ["shone", "was shining", "has shone", "shines"], answer: 1, exp: "Háttérben zajló időjárási jelenség egy múltbeli pillanatban -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "Did you ______ the email I sent you yesterday afternoon?", hu: "Megkaptad az e-mailt, amit tegnap délután küldtem neked?", options: ["received", "receive", "receiving", "have received"], answer: 1, exp: "A 'Did' segédige után mindig az ige szótári (1.) alakja áll -> receive." },
+  { topic: "past", label: "Múlt idők", q: "He ______ off his bike and hurt his knee two days ago.", hu: "Két napja leesett a biciklijéről, és megütötte a térdét.", options: ["falls", "fell", "has fallen", "was falling"], answer: 1, exp: "A 'two days ago' lezárt múltbeli eseményt jelöl -> Past Simple (fell)." },
+  { topic: "past", label: "Múlt idők", q: "While the teacher ______ the grammar rules, some students were chatting.", hu: "Miközben a tanár a nyelvtani szabályokat magyarázta, néhány diák beszélgetett.", options: ["explained", "was explaining", "has explained", "explains"], answer: 1, exp: "Párhuzamosan zajló múltbeli folyamat ('While') -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "We ______ very happy when we heard the good news.", hu: "Nagyon boldogok voltunk, amikor meghallottuk a jó hírt.", options: ["was", "were", "have been", "are"], answer: 1, exp: "A 'we' többes számú alanyhoz a 'be' múlt ideje 'were'." },
+  { topic: "past", label: "Múlt idők", q: "My grandfather ______ in a factory for forty years before he retired.", hu: "A nagyapám negyven évig egy gyárban dolgozott, mielőtt nyugdíjba ment.", options: ["has worked", "worked", "was working", "works"], answer: 1, exp: "Lezárt múltbeli életszakasz (már nyugdíjas) -> Past Simple." },
+  { topic: "past", label: "Múlt idők", q: "What ______ you ______ when the earthquake started?", hu: "Mit csináltál, amikor elkezdődött a földrengés?", options: ["did / do", "were / doing", "have / done", "do / do"], answer: 1, exp: "A hirtelen esemény bekövetkeztekor éppen zajló cselekvésre kérdezünk -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "I ______ my umbrella on the bus last Tuesday.", hu: "Múlt kedden a buszon felejtettem az esernyőmet.", options: ["leave", "left", "have left", "was leaving"], answer: 1, exp: "Konkrét múltbeli időpont ('last Tuesday') -> Past Simple (left)." },
+  { topic: "past", label: "Múlt idők", q: "They ______ at home yesterday evening; they went to a concert.", hu: "Tegnap este nem voltak otthon; koncertre mentek.", options: ["wasn't", "weren't", "haven't been", "didn't be"], answer: 1, exp: "A 'be' ige többes számú tagadása múlt időben -> weren't (soha nem 'didn't be')." },
+  { topic: "past", label: "Múlt idők", q: "She ______ a letter when the lights suddenly went out.", hu: "Éppen levelet írt, amikor hirtelen elment az áram.", options: ["wrote", "was writing", "has written", "writes"], answer: 1, exp: "Folyamatban lévő cselekvés ('was writing'), amit megszakított az áramszünet -> Past Continuous." },
+  { topic: "past", label: "Múlt idők", q: "How long ago ______ you ______ to this town?", hu: "Mennyi ideje költöztetek ebbe a városba?", options: ["have / moved", "did / move", "were / moving", "do / move"], answer: 1, exp: "Az 'ago' (ezelőtt) kérdésben is mindig Past Simple-t követel -> did / move." },
+  { topic: "past", label: "Múlt idők", q: "The police ______ the thief near the train station last night.", hu: "A rendőrség tegnap este elfogta a tolvajt a vasútállomás közelében.", options: ["catches", "caught", "has caught", "was catching"], answer: 1, exp: "Lezárt múltbeli esemény ('last night') -> Past Simple (caught)." },
+  { topic: "future", label: "Jövő idők", q: "The phone is ringing! – Don't get up, I ______ it.", hu: "Csörög a telefon! – Ne kelj fel, felveszem.", options: ["answer", "am answering", "will answer", "answered"], answer: 2, exp: "A beszéd pillanatában hozott spontán döntés, felajánlás -> will." },
+  { topic: "future", label: "Jövő idők", q: "We ______ dinner with my parents tonight; we booked a table yesterday.", hu: "Ma este a szüleimmel vacsorázunk; tegnap foglaltunk asztalt.", options: ["will have", "are having", "had", "have had"], answer: 1, exp: "Előre leszervezett, asztalfoglalással megerősített program -> Present Continuous." },
+  { topic: "future", label: "Jövő idők", q: "Slow down! You ______ an accident if you drive so fast!", hu: "Lassíts! Balesetet fogsz okozni, ha ilyen gyorsan vezetsz!", options: ["will have", "are going to have", "have", "had"], answer: 1, exp: "Jelenlegi veszélyes helyzetből (túl gyors vezetés) levont következtetés -> going to." },
+  { topic: "future", label: "Jövő idők", q: "I hope the weather ______ nice for our weekend trip.", hu: "Remélem, szép lesz az idő a hétvégi kirándulásunkhoz.", options: ["is", "will be", "was", "has been"], answer: 1, exp: "Remény, jókívánság kifejezése ('I hope') -> Future Simple (will)." },
+  { topic: "future", label: "Jövő idők", q: "What ______ you ______ wear to the wedding next month?", hu: "Mit tervezel felvenni az esküvőre jövő hónapban?", options: ["will / to", "are / going to", "do / to", "did / to"], answer: 1, exp: "Előre elgondolt szándékra, tervekre 'be going to'-val kérdezünk rá." },
+  { topic: "future", label: "Jövő idők", q: "I'm too tired to cook tonight. I think I ______ a pizza.", hu: "Túl fáradt vagyok ma este főzni. Azt hiszem, rendelek egy pizzát.", options: ["order", "am ordering", "will order", "ordered"], answer: 2, exp: "A pillanatnyi állapotból adódó döntés ('I think I...') -> will." },
+  { topic: "future", label: "Jövő idők", q: "Our team ______ against the champions next Friday at 6 PM.", hu: "A csapatunk jövő pénteken este 6-kor játszik a bajnokok ellen.", options: ["will play", "is playing", "played", "has played"], answer: 1, exp: "Fix időpontra kiírt esemény, mérkőzés -> Present Continuous jövő időre." },
+  { topic: "future", label: "Jövő idők", q: "Do you think people ______ on Mars one day?", hu: "Szerinted fognak az emberek egy napon a Marson élni?", options: ["live", "will live", "are living", "lived"], answer: 1, exp: "Véleménykérés a távoli jövőről ('Do you think...?') -> will." },
+  { topic: "future", label: "Jövő idők", q: "She has bought a plane ticket because she ______ her friend in London.", hu: "Vett egy repülőjegyet, mert meg fogja látogatni a barátját Londonban.", options: ["will visit", "is going to visit", "visits", "visited"], answer: 1, exp: "Már előkészített terv, szándék (megvette a jegyet) -> be going to." },
+  { topic: "future", label: "Jövő idők", q: "Don't tell Mum about the broken vase, or she ______ angry!", hu: "Ne mondd el anyának az eltört vázát, különben mérges lesz!", options: ["is", "will be", "was", "has been"], answer: 1, exp: "Figyelmeztetés, jövőbeli következmény -> will be." },
+  { topic: "future", label: "Jövő idők", q: "I ______ you the money back next week, I promise.", hu: "Jövő héten visszaadom neked a pénzt, ígérem.", options: ["pay", "am paying", "will pay", "paid"], answer: 2, exp: "Ígéret ('I promise') kifejezésére 'will' használatos." },
+  { topic: "future", label: "Jövő idők", q: "Look at that little boy on the wall! He ______!", hu: "Nézd azt a kisfiút a falon! Le fog esni!", options: ["will fall", "is going to fall", "falls", "fell"], answer: 1, exp: "Közvetlen, látható veszélyhelyzetből adódó jóslat -> is going to fall." },
+  { topic: "future", label: "Jövő idők", q: "I ______ my driving test tomorrow morning at 9 o'clock.", hu: "Holnap reggel 9 órakor lesz a forgalmi vizsgám.", options: ["will take", "am taking", "took", "take"], answer: 1, exp: "Előre bejegyzett, hivatalos időpont -> Present Continuous." },
+  { topic: "future", label: "Jövő idők", q: "Probably I ______ at home all weekend and rest.", hu: "Valószínűleg egész hétvégén otthon maradok és pihenek.", options: ["stay", "am staying", "will stay", "stayed"], answer: 2, exp: "A 'Probably' (valószínűleg) határozószó mellett 'will' áll." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "The concert ______ at 8 PM tonight, so let's meet at 7:30.", hu: "A koncert ma este 8-kor kezdődik, úgyhogy találkozzunk 7:30-kor.", options: ["will start", "starts", "is starting", "started"], answer: 1, exp: "Csapda! Rendezvények, előadások, mozik hivatalos kezdési időpontjához Present Simple kell!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ a new pair of shoes, they are really comfortable.", hu: "Vettem egy új pár cipőt, nagyon kényelmes.", options: ["bought", "have bought", "buy", "was buying"], answer: 1, exp: "Nincs megadva konkrét múltbeli időpont, és a jelenbeli eredmény számít -> Present Perfect." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "We'll go for a picnic tomorrow unless it ______.", hu: "Holnap elmegyünk piknikezni, hacsak nem esik az eső.", options: ["will rain", "rains", "rained", "is raining"], answer: 1, exp: "Csapda! Az 'unless' (= if not) feltételes kötőszó után is jelen idő (rains) áll jövő idő helyett!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "She ______ to be a doctor since she was a little girl.", hu: "Kislány kora óta orvos szeretne lenni.", options: ["wants", "is wanting", "has wanted", "wanted"], answer: 2, exp: "Csapda! A 'want' (akarni) állapotige (nem áll folyamatosban), és a 'since' miatt Present Perfect kell!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "Wait here until the rain ______.", hu: "Várj itt, amíg eláll az eső!", options: ["will stop", "stops", "stopped", "is stopping"], answer: 1, exp: "Csapda! Az 'until' (amíg) időhatározói mellékmondatban jelen időt használunk jövő helyett." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "How long ______ you ______ your best friend?", hu: "Mióta ismered a legjobb barátodat?", options: ["do / know", "are / knowing", "have / known", "did / know"], answer: 2, exp: "Csapda! A 'know' állapotige, és a 'How long' miatt Present Perfect (have known) a helyes." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "This bag ______ to me, it's Sarah's.", hu: "Ez a táska nem az enyém, hanem Sáráé.", options: ["doesn't belong", "isn't belonging", "hasn't belonged", "didn't belong"], answer: 0, exp: "Csapda! A 'belong' (valakihez tartozik) birtoklást jelölő állapotige -> Present Simple." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I'll text you before I ______ on the plane.", hu: "Írok neked egy üzenetet, mielőtt felszállok a repülőre.", options: ["will get", "get", "got", "am getting"], answer: 1, exp: "Csapda! A 'before' (mielőtt) időhatározói mellékmondatban jövő idő helyett Present Simple áll." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "My parents ______ to Italy three times, and they want to go again.", hu: "A szüleim háromszor jártak Olaszországban, és újra el akarnak menni.", options: ["have gone", "have been", "went", "were going"], answer: 1, exp: "Csapda! Megjárták és visszatértek (élettapasztalat) -> 'have been to' (nem 'have gone to')." },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "What time ______ you ______ home last night?", hu: "Hánykor értél haza tegnap este?", options: ["have / got", "did / get", "were / getting", "do / get"], answer: 1, exp: "Csapda! A 'What time... last night?' konkrét múltbeli időpontra kérdez -> Past Simple!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "I ______ dinner right now, can I call you back in 20 minutes?", hu: "Éppen vacsorázom, visszahívhatlak 20 perc múlva?", options: ["have", "am having", "have had", "had"], answer: 1, exp: "Csapda! A 'have' itt cselekvést ('vacsorázik', nem birtokol) jelent, ezért állhat folyamatosban!" },
+  { topic: "traps", label: "B1 Vizsgacsapdák", q: "He hasn't eaten anything ______ six hours.", hu: "Hat órája nem evett semmit.", options: ["since", "for", "ago", "from"], answer: 1, exp: "Csapda! A 'six hours' időtartam (mennyi ideje?), ezért 'for' áll előtte, nem 'since'." }
+];
+
+let currentCategory = 'all';
+let onlyB1 = false;
+let hideHu = false;
+let englishVoices = [];
+
+// Quiz state
+let quizTopic = 'all';
+let currentRoundQuestions = [];
+let wrongQuestions = [];
+let roundScore = 0;
+let answeredCount = 0;
+const ROUND_SIZE = 10;
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+let currentUtterance = null;
+
+function loadVoices() {
+  if (!('speechSynthesis' in window)) return;
+  const allVoices = window.speechSynthesis.getVoices();
+  const showAll = document.getElementById('showAllVoices')?.checked;
+  englishVoices = showAll
+    ? allVoices
+    : allVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+
+  const select = document.getElementById('voiceSelect');
+  const prevName = select.options[select.selectedIndex]?.dataset?.voiceName || '';
+  select.innerHTML = '';
+
+  if (englishVoices.length === 0) {
+    const opt = document.createElement('option');
+    opt.value = '';
+    opt.textContent = 'Alapértelmezett angol hang';
+    select.appendChild(opt);
+    return;
+  }
+
+  let selectedIdx = 0;
+  englishVoices.forEach((voice, idx) => {
+    const opt = document.createElement('option');
+    opt.value = String(idx);
+    opt.dataset.voiceName = voice.name;
+    const isNatural = voice.name.includes('Natural') || voice.name.includes('Google');
+    opt.textContent = `${isNatural ? '⭐ ' : ''}${voice.name} (${voice.lang})`;
+    if (prevName && voice.name === prevName) {
+      selectedIdx = idx;
+    } else if (!prevName && (voice.lang === 'en-GB' || voice.lang === 'en-US')) {
+      selectedIdx = idx;
+    }
+    select.appendChild(opt);
+  });
+  select.selectedIndex = selectedIdx;
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+  setTimeout(loadVoices, 300);
+  setTimeout(loadVoices, 1200);
+}
+
+document.getElementById('showAllVoices').addEventListener('change', loadVoices);
+document.getElementById('testVoiceBtn').addEventListener('click', () => {
+  speak('Hello! Good luck with your B1 English exam!', 1.0);
+});
+
+function fillQuestionSentence(qText, correctOption) {
+  const parts = correctOption.split(' / ').map(s => s.trim());
+  let partIdx = 0;
+  return qText.replace(/_{2,}/g, () => {
+    const replacement = parts[partIdx] !== undefined ? parts[partIdx] : parts[parts.length - 1];
+    partIdx++;
+    return replacement;
+  });
+}
+
+function escapeAttr(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function speak(text, baseRate = 1.0) {
+  if (!('speechSynthesis' in window)) {
+    alert('A böngésződ sajnos nem támogatja a hangos felolvasást.');
+    return;
+  }
+
+  if (englishVoices.length === 0) {
+    loadVoices();
+  }
+
+  window.speechSynthesis.cancel();
+  if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+  }
+
+  const profile = document.getElementById('voiceProfile')?.value || 'normal';
+  let pitch = 1.0;
+  let rateMultiplier = 1.0;
+
+  if (profile === 'deep') {
+    pitch = 0.78;
+    rateMultiplier = 0.96;
+  } else if (profile === 'high') {
+    pitch = 1.22;
+    rateMultiplier = 1.02;
+  } else if (profile === 'exam') {
+    pitch = 0.98;
+    rateMultiplier = 0.85;
+  } else if (profile === 'fast') {
+    pitch = 1.02;
+    rateMultiplier = 1.18;
+  }
+
+  const cleanText = String(text).replace(/_{2,}/g, 'blank').trim();
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  currentUtterance = utterance;
+  utterance.lang = 'en-GB';
+  utterance.pitch = pitch;
+  utterance.rate = Math.max(0.5, Math.min(2.0, baseRate * rateMultiplier));
+
+  const select = document.getElementById('voiceSelect');
+  const voiceIdx = parseInt(select.value, 10);
+  if (!isNaN(voiceIdx) && englishVoices[voiceIdx]) {
+    utterance.voice = englishVoices[voiceIdx];
+    utterance.lang = englishVoices[voiceIdx].lang || 'en-GB';
+  }
+
+  utterance.onend = () => { currentUtterance = null; };
+  utterance.onerror = () => { currentUtterance = null; };
+
+  setTimeout(() => {
+    window.speechSynthesis.speak(utterance);
+  }, 40);
+}
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-speak]');
+  if (!btn) return;
+  const text = btn.getAttribute('data-speak');
+  const rate = parseFloat(btn.getAttribute('data-rate') || '1.0');
+  if (text) {
+    speak(text, rate);
+  }
+});
+
+function switchTab(secId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(secId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function renderCards() {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+
+  const filtered = tensesData.filter(item => {
+    const catMatch = currentCategory === 'all' || item.category === currentCategory;
+    const levelMatch = !onlyB1 || item.level === 'b1';
+    return catMatch && levelMatch;
+  });
+
+  filtered.forEach(tense => {
+    const card = document.createElement('div');
+    card.className = `card ${tense.category}`;
+
+    const badgeText = tense.level === 'b1' ? 'B1 Alapfok (Fontos)' : 'B2+ Kiegészítő';
+    const badgeClass = tense.level === 'b1' ? 'b1' : 'b2';
+
+    const examplesHTML = tense.examples.map(ex => `
+      <div class="example-item">
+        <div class="en-row">
+          <span class="en-text">${ex.en}</span>
+          <div class="audio-btns">
+            <button class="speak-btn" title="Normál tempó" data-speak="${escapeAttr(ex.en)}" data-rate="1.0">🔊</button>
+            <button class="speak-btn" title="Lassított kiejtés" data-speak="${escapeAttr(ex.en)}" data-rate="0.7">🐢</button>
+          </div>
+        </div>
+        <div class="hu-text ${hideHu ? 'hidden-text' : ''}">${ex.hu}</div>
+      </div>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="tense-en">${tense.enName}</div>
+          <div class="tense-hu">${tense.huName}</div>
+        </div>
+        <span class="badge ${badgeClass}">${badgeText}</span>
+      </div>
+      <div class="card-body">
+        <div class="formula">📐 ${tense.formula}</div>
+        <div class="usage">💡 ${tense.usage}</div>
+        <div class="examples">${examplesHTML}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderSignals() {
+  const tbody = document.getElementById('signalsBody');
+  tbody.innerHTML = signalsData.map(row => `
+    <tr>
+      <td><strong>${row.tense}</strong></td>
+      <td>${row.words.map(w => `<span class="tag">${w}</span>`).join('')}</td>
+      <td>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-weight:600; color:#0f172a;">${row.exampleEn}</div>
+            <div style="font-size:0.84rem; color:#64748b;">${row.exampleHu}</div>
+          </div>
+          <div class="audio-btns">
+            <button class="speak-btn" title="Normál tempó" data-speak="${escapeAttr(row.exampleEn)}" data-rate="1.0">🔊</button>
+            <button class="speak-btn" title="Lassított kiejtés" data-speak="${escapeAttr(row.exampleEn)}" data-rate="0.7">🐢</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function updateScoreUI() {
+  const total = currentRoundQuestions.length;
+  const pct = total > 0 ? Math.round((roundScore / total) * 100) : 0;
+  document.getElementById('scoreDisplay').textContent = `${roundScore} / ${total} (${pct}%)`;
+  const progressPct = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = `${progressPct}%`;
+  document.getElementById('bottomRetryBtn').textContent = `🎯 Hibásak újrapróbálása (${wrongQuestions.length})`;
+}
+
+function setQuizTopic(topic, btn) {
+  quizTopic = topic;
+  document.querySelectorAll('#quizSec .controls .btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  startNewRound();
+}
+
+function startNewRound() {
+  const pool = quizTopic === 'all'
+    ? fullQuizPool
+    : fullQuizPool.filter(item => item.topic === quizTopic);
+
+  document.getElementById('poolInfo').textContent = `Kiválasztott témakör kérdésbankja: ${pool.length} feladat`;
+  const shuffled = shuffleArray(pool);
+  currentRoundQuestions = shuffled.slice(0, Math.min(ROUND_SIZE, shuffled.length));
+  wrongQuestions = [];
+  roundScore = 0;
+  answeredCount = 0;
+  document.getElementById('roundSummary').style.display = 'none';
+  renderQuizRound();
+}
+
+function retryWrongOnly() {
+  if (wrongQuestions.length === 0) {
+    alert("Ebben a körben nincs elrontott kérdésed!");
+    return;
+  }
+  currentRoundQuestions = shuffleArray(wrongQuestions);
+  wrongQuestions = [];
+  roundScore = 0;
+  answeredCount = 0;
+  document.getElementById('roundSummary').style.display = 'none';
+  renderQuizRound();
+}
+
+function renderQuizRound() {
+  updateScoreUI();
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = currentRoundQuestions.map((item, qIdx) => {
+    const completedSentence = fillQuestionSentence(item.q, item.options[item.answer]);
+    return `
+      <div class="q-item" id="q-${qIdx}">
+        <div class="q-meta">
+          <span class="q-cat">${item.label}</span>
+          <div class="audio-btns">
+            <button class="speak-btn" title="Helyes mondat meghallgatása" data-speak="${escapeAttr(completedSentence)}" data-rate="1.0">🔊 Hallgatás</button>
+            <button class="speak-btn" title="Lassított kiejtés" data-speak="${escapeAttr(completedSentence)}" data-rate="0.7">🐢</button>
+          </div>
+        </div>
+        <div class="q-title">${qIdx + 1}. ${item.q}</div>
+        <div class="q-hu">${item.hu}</div>
+        <div class="options">
+          ${item.options.map((opt, oIdx) => `
+            <button class="opt-btn" onclick="checkAnswer(${qIdx}, ${oIdx}, this)">${opt}</button>
+          `).join('')}
+        </div>
+        <div class="explanation" id="exp-${qIdx}">💡 ${item.exp}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function checkAnswer(qIdx, oIdx, btn) {
+  const qItem = document.getElementById(`q-${qIdx}`);
+  const buttons = qItem.querySelectorAll('.opt-btn');
+  const questionObj = currentRoundQuestions[qIdx];
+  const correctIdx = questionObj.answer;
+
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === correctIdx) b.classList.add('correct');
+  });
+
+  answeredCount++;
+
+  if (oIdx === correctIdx) {
+    roundScore++;
+  } else {
+    btn.classList.add('wrong');
+    wrongQuestions.push(questionObj);
+  }
+
+  document.getElementById(`exp-${qIdx}`).style.display = 'block';
+  updateScoreUI();
+
+  if (answeredCount === currentRoundQuestions.length) {
+    showRoundSummary();
+  }
+}
+
+function showRoundSummary() {
+  const total = currentRoundQuestions.length;
+  const pct = Math.round((roundScore / total) * 100);
+  const summaryBox = document.getElementById('roundSummary');
+  const pctEl = document.getElementById('summaryPercent');
+  const textEl = document.getElementById('summaryText');
+  const retryBtn = document.getElementById('summaryRetryBtn');
+
+  pctEl.textContent = `${pct}% (${roundScore} / ${total} helyes)`;
+  pctEl.className = 'percent-big ' + (pct >= 80 ? 'percent-good' : pct >= 60 ? 'percent-mid' : 'percent-low');
+
+  if (pct >= 80) {
+    textEl.textContent = "Kiváló eredmény! Ez már biztos B1 alapfokú nyelvvizsga szint.";
+  } else if (pct >= 60) {
+    textEl.textContent = "Jó úton jársz! A B1 vizsgán a 60% általában már sikeres, de érdemes még gyakorolni.";
+  } else {
+    textEl.textContent = "Érdemes átnézni a magyarázatokat és újrapróbálni a hibás kérdéseket!";
+  }
+
+  retryBtn.style.display = wrongQuestions.length > 0 ? 'inline-block' : 'none';
+  summaryBox.style.display = 'block';
+  summaryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function filterTime(cat, btnElement) {
+  currentCategory = cat;
+  document.querySelectorAll('#cardsSec .controls .btn:not(.b1-toggle):not(:last-child)').forEach(b => b.classList.remove('active'));
+  btnElement.classList.add('active');
+  renderCards();
+}
+
+function toggleB1(btnElement) {
+  onlyB1 = !onlyB1;
+  btnElement.classList.toggle('active', onlyB1);
+  renderCards();
+}
+
+function toggleHideHu(btnElement) {
+  hideHu = !hideHu;
+  btnElement.classList.toggle('active', hideHu);
+  renderCards();
+}
+
+renderCards();
+renderSignals();
+startNewRound();
+</script>
+</body>
+</html>
